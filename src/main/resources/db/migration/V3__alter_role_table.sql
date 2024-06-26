@@ -1,0 +1,3 @@
+Alter TABLE role (
+   
+);
