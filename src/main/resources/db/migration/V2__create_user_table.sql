@@ -5,5 +5,5 @@ create table user (
     role_id int,
     PRIMARY KEY (user_id),
     CONSTRAINT fk_role_id FOREIGN KEY (role_id) REFERENCES role(id),
-    CONSTRAINT uc_uname UNIQUE (username)
+    CONSTRAINT unique_uname UNIQUE (username)
 );
