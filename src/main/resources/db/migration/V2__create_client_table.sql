@@ -5,3 +5,6 @@ CREATE TABLE Client(
     PhoneNumber varchar(20),
     Address varchar(255)
 );
+
+INSERT INTO Client(fName, lName, PhoneNumber, Address)
+VALUES('Bob', 'Lorenzo', '07123456789', '12 Made-up Street, Belfast');
