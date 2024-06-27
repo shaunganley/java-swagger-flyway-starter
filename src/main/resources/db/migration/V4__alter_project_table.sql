@@ -1,5 +1,5 @@
 
-Drop table project;
+
 
 CREATE TABLE project (
     projectID smallint PRIMARY KEY AUTO_INCREMENT NOT NULL,
