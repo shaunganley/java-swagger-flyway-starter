@@ -6,5 +6,5 @@ CREATE TABLE Client(
     Address varchar(255)
 );
 
-INSERT INTO Client(fName, lName, PhoneNumber, Address)
-VALUES('Bob', 'Lorenzo', '07123456789', '12 Made-up Street, Belfast');
+INSERT INTO Client(ClientIDfName, lName, PhoneNumber, Address)
+VALUES('1', Bob', 'Lorenzo', '07123456789', '12 Made-up Street, Belfast');
