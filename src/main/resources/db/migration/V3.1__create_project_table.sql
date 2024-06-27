@@ -1,4 +1,4 @@
---Create Project Table
+
 
 CREATE TABLE `Project` (
 `Project_ID` smallint NOT NULL Primary Key,
