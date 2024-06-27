@@ -1,14 +1,13 @@
-INSERT INTO SalesEmployee(firstName, LastName, salary, bankAccountNumber, nationalInsuranceNumber, commissionRate)
-    VALUES (Adam,Bowman,100000, 1234567812345678, 123456781234, 10),
-    VALUES (John,Smith,50000, 2234567812345671, 223456781234, 10),
-    VALUES (Andrew,Brown,200000, 3234567812345672, 223456781234, 10),
-    VALUES (Thomas,Yellow,30000, 4234567812345673, 223456781234, 10);
+INSERT INTO salesEmployee (firstName, LastName, salary, bankAccountNumber, nationalInsuranceNumber, commissionRate)
+    VALUES ('Adam','Bowman',100000.00, 12345678, 11111111, 10),
+     ('John','Smith',50000.00, 22345678, 22222222, 10),
+     ('Andrew','Brown',200000.00, 3245678, 33333333, 10),
+     ('Thomas','Yellow',30000.00, 42345678, 44444444, 10);
 
 INSERT INTO Project(ProjectID, ProjectName, Value, Technologies)
-    VALUES (1,'Database Project',5155.00,'mySQL'),(2,'Programming Project',4120.30,'Java'),
-    (3,'API Project',11545.89,'Maven'),(4,'Website Creation',2400.50,'JavaScript'),
-    (5,'Embedding API', 800.44,'Google Map API')
-    );
+       VALUES (1,'Database Project',5155.00,'mySQL'),(2,'Programming Project',4120.30,'Java'),
+       (3,'API Project',11545.89,'Maven'),(4,'Website Creation',2400.50,'JavaScript'),
+       (5,'Embedding API', 800.44,'Google Map API');
 
 INSERT INTO deliveryEmployee(fname,lname,salary,bankAccountNum,nationalInsureNum) Values ('Bob','Smith',22000,'1234567890','ABCD56TD');
 INSERT INTO deliveryEmployee(fname,lname,salary,bankAccountNum,nationalInsureNum) Values ('Sam','Smith',36000,'0987654321','LKJK56TA');
@@ -27,3 +26,4 @@ VALUES ('ThirdClient', '3 Church Hill, Ballygowan', '07812375835');
 
 INSERT INTO client (name, address, phoneNumber)
 VALUES ('FourthClient', '4 Hanwood Drive Street, Belfast', '07812379268');
+
