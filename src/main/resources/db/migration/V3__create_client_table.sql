@@ -7,6 +7,6 @@ create table Client (
     city VARCHAR(100) not null,
     county VARCHAR(50),
     country VARCHAR(50),
-    phone_number VARCHAR(10), -- Assume this is for UK numbers only!
+    phone_number VARCHAR(11), -- Assume this is for UK numbers only!
     PRIMARY KEY (client_id)
 );
