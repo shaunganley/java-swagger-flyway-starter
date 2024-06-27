@@ -3,5 +3,4 @@ create table clients(
     client_name varchar(30),
     client_address varchar(60),
     client_phoneNumber char(11),
-    project_ID smallint
 )
