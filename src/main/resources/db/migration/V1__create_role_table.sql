@@ -1,4 +1,5 @@
-CREATE TABLE role (
-    id int PRIMARY KEY AUTO_INCREMENT NOT NULL,
-    title varchar(100) NOT NULL
+create table Role (
+	role_id int auto_increment not null,
+    role_type VARCHAR(50),
+    PRIMARY KEY (role_id)
 );
