@@ -14,10 +14,10 @@ public final class DatabaseConnector {
         }
 
         try {
-            String username = System.getenv().get("DB_USERNAME");
-            String password = System.getenv().get("DB_PASSWORD");
-            String host = System.getenv().get("DB_HOST");
-            String name = System.getenv().get("DB_NAME");
+            String username = System.getenv().get("RachaelMcK");
+            String password = System.getenv().get("Potatohead324DB/");
+            String host = System.getenv().get("jdbc:mysql:'//'academy2020.cpc8rvmbbd9k.eu-west-2.rds.amazonaws.com");
+            String name = System.getenv().get("Flyway_Test_RachaelMcK");
 
             if (username == null || password == null || host == null
                     || name == null) {
