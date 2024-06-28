@@ -4,7 +4,7 @@ CREATE TABLE `Project` (
 `Project_ID` smallint NOT NULL Primary Key,
 `Name` varchar(100) NOT NULL,
 `Value` Decimal (11,2) NOT NULL,
-`Tech_type_ID` smallint NOT NULL,
+`Technology_type_ID` smallint NOT NULL,
 `Client_ID` smallint NOT NULL,
 `Employee_ID` smallint NOT NULL,
 `Open_closed` boolean NOT NULL
@@ -13,8 +13,8 @@ CREATE TABLE `Project` (
 
 ALTER TABLE `Project`
 ADD CONSTRAINT fk_project_Tech_type_ID
-FOREIGN KEY(Tech_type_ID)
-REFERENCES Tech_project(Tech_type_ID)
+FOREIGN KEY(Technology_type_ID)
+REFERENCES Tech_project(Technology_type_ID)
 ;
 
 ALTER TABLE `Project`
