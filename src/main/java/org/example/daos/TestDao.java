@@ -11,15 +11,17 @@ public class TestDao {
         try (Connection connection = DatabaseConnector.getConnection()) {
             Statement statement = connection.createStatement();
 
+            long start = System.currentTimeMillis();
+
             ResultSet resultSet = statement.executeQuery(
                     "SHOW DATABASES;");
 
-            System.out.println("003 merge trest");
+            long end = System.currentTimeMillis();
+
+            System.out.println("test time: " + (end -start));
             while (resultSet.next()) {
-                System.out.println("003 merge trest");
                 databases.add(resultSet.getString("Database"));
             }
-            System.out.println("003 merge trest");
         }
 
         return databases;
