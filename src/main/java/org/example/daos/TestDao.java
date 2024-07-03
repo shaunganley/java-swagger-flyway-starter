@@ -1,9 +1,6 @@
 package org.example.daos;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,9 +14,12 @@ public class TestDao {
             ResultSet resultSet = statement.executeQuery(
                     "SHOW DATABASES;");
 
+            System.out.println("003 merge trest");
             while (resultSet.next()) {
+                System.out.println("003 merge trest");
                 databases.add(resultSet.getString("Database"));
             }
+            System.out.println("003 merge trest");
         }
 
         return databases;
