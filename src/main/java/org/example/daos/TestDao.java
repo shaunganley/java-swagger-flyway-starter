@@ -21,8 +21,8 @@ public class TestDao {
 
             long end = System.currentTimeMillis();
 
-            System.out.println("total time to execute " +
-                    "query in milliseconds: "
+            System.out.println("total time to execute "
+                    + "query in milliseconds: "
                     + (end - start));
 
             while (resultSet.next()) {
