@@ -16,6 +16,7 @@ public class TestDao {
 
             ResultSet resultSet = statement.executeQuery(
                     "SHOW DATABASES;");
+            long end = System.currentTimeMillis();
 
             while (resultSet.next()) {
                 databases.add(resultSet.getString("Database"));
