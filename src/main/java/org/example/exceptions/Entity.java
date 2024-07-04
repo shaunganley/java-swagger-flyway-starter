@@ -11,8 +11,8 @@ public enum Entity {
 
     private final String entity;
 
-    Entity (String entity) {
-        this.entity = entity;
+    Entity(final String ent) {
+        this.entity = ent;
     }
 
     public String getEntity() {

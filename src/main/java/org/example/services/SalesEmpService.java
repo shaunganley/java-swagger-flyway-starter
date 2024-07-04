@@ -8,15 +8,14 @@ import org.example.models.SalesEmpRequest;
 import java.sql.SQLException;
 
 public class SalesEmpService {
-    SalesEmpDao salesEmpDao;
+    private final SalesEmpDao salesEmpDao;
 
-    public SalesEmpService(SalesEmpDao salesEmpDao) {
-        this.salesEmpDao = salesEmpDao;
+    public SalesEmpService(final SalesEmpDao dao) {
+        this.salesEmpDao = dao;
     }
 
-    public int createSalesEmployee(SalesEmpRequest salesEmpRequest)
-            throws SQLException, FailedToCreateException
-    {
+    public int createSalesEmployee(final SalesEmpRequest salesEmpRequest)
+            throws SQLException, FailedToCreateException {
         int id = salesEmpDao.createSalesEmployee(salesEmpRequest);
         if (id == -1) {
             throw new FailedToCreateException(Entity.SALES_EMPLOYEE);

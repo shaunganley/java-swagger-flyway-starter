@@ -2,18 +2,27 @@ package org.example.daos;
 
 import org.example.models.SalesEmpRequest;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
 
 public class SalesEmpDao {
-    public int createSalesEmployee(SalesEmpRequest salesEmpRequest)
+    public int createSalesEmployee(final SalesEmpRequest salesEmpRequest)
             throws SQLException {
         try (Connection connection = DatabaseConnector.getConnection()) {
 
-            String insertStatement = "INSERT INTO `SalesEmployee`(Name, BankAcctNum, NINO, Salary, CommissionRate)" +
-                    "VALUES (?, ?, ?, ?, ?);";
+            String insertStatement = "INSERT INTO `SalesEmployee`("
+                    + "Name, BankAcctNum, NINO, Salary, CommissionRate"
+                    + ")"
+                    + "VALUES (?, ?, ?, ?, ?);";
 
             assert connection != null;
-            PreparedStatement statement = connection.prepareStatement(insertStatement, Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement statement = connection.prepareStatement(
+                    insertStatement, Statement.RETURN_GENERATED_KEYS
+            );
 
             statement.setString(1, salesEmpRequest.getName());
             statement.setInt(2, salesEmpRequest.getBankAccountNo());

@@ -1,7 +1,7 @@
 package org.example.exceptions;
 
 public class FailedToCreateException extends Throwable {
-    public FailedToCreateException(Entity entity) {
+    public FailedToCreateException(final Entity entity) {
         super(entity.getEntity() + "could not be created!");
     }
 }

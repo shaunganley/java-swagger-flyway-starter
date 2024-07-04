@@ -12,47 +12,47 @@ public class SalesEmpRequest {
 
     @JsonCreator
     public SalesEmpRequest(
-            @JsonProperty String name,
-            @JsonProperty String nationalInsurance,
-            @JsonProperty int bankAccountNo,
-            @JsonProperty double salary,
-            @JsonProperty double commissionRate) {
-        this.name = name;
-        this.nationalInsurance = nationalInsurance;
-        this.bankAccountNo = bankAccountNo;
-        this.salary = salary;
-        this.commissionRate = commissionRate;
+            @JsonProperty final String empName,
+            @JsonProperty final String nino,
+            @JsonProperty final int bankAcct,
+            @JsonProperty final double sal,
+            @JsonProperty final double commRate) {
+        this.name = empName;
+        this.nationalInsurance = nino;
+        this.bankAccountNo = bankAcct;
+        this.salary = sal;
+        this.commissionRate = commRate;
     }
 
     public double getSalary() {
         return salary;
     }
 
-    public void setSalary(double salary) {
-        this.salary = salary;
+    public void setSalary(final double sal) {
+        this.salary = sal;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setName(final String empName) {
+        this.name = empName;
     }
 
     public String getNationalInsurance() {
         return nationalInsurance;
     }
 
-    public void setNationalInsurance(String nationalInsurance) {
-        this.nationalInsurance = nationalInsurance;
+    public void setNationalInsurance(final String nino) {
+        this.nationalInsurance = nino;
     }
 
     public int getBankAccountNo() {
         return bankAccountNo;
     }
 
-    public void setBankAccountNo(int bankAccountNo) {
+    public void setBankAccountNo(final int bankAcct) {
         this.bankAccountNo = bankAccountNo;
     }
 
@@ -60,7 +60,7 @@ public class SalesEmpRequest {
         return commissionRate;
     }
 
-    public void setCommissionRate(double commissionRate) {
-        this.commissionRate = commissionRate;
+    public void setCommissionRate(final double commRate) {
+        this.commissionRate = commRate;
     }
 }

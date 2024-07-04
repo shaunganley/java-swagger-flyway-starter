@@ -15,19 +15,21 @@ import java.sql.SQLException;
 @Api("Engineering Academy - Group Challenge 2 - Team 3 - Sales Employee API")
 @Path("/api/sales-employee")
 public class SalesEmpController {
-    SalesEmpService salesEmpService;
+    private final SalesEmpService salesEmpService;
 
-    public SalesEmpController(SalesEmpService salesEmpService) {
-        this.salesEmpService = salesEmpService;
+    public SalesEmpController(final SalesEmpService salesEmpServ) {
+        this.salesEmpService = salesEmpServ;
     }
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public Response createSalesEmployee(SalesEmpRequest salesEmpRequest) {
+    public Response createSalesEmployee(final SalesEmpRequest salesEmpRequest) {
         try {
             return Response
                     .status(Response.Status.CREATED)
-                    .entity(salesEmpService.createSalesEmployee(salesEmpRequest))
+                    .entity(
+                            salesEmpService.createSalesEmployee(salesEmpRequest)
+                    )
                     .build();
         } catch (FailedToCreateException | SQLException e) {
             return Response.serverError().build();
