@@ -23,23 +23,23 @@ public class Project {
         return projectName;
     }
 
-    public void setProjectName(final String projectName1) {
-        this.projectName = projectName1;
+    public void setProjectName(final String projName) {
+        this.projectName = projName;
     }
 
     public double getProjectValue() {
         return projectValue;
     }
 
-    public void setProjectValue(final double projectValue1) {
-        this.projectValue = projectValue1;
+    public void setProjectValue(final double projValue) {
+        this.projectValue = projValue;
     }
 
     public int getClientID() {
         return clientID;
     }
 
-    public void setClientID(final int clientID1) {
-        this.clientID = clientID1;
+    public void setClientID(final int cliID) {
+        this.clientID = cliID;
     }
 }
