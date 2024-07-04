@@ -13,10 +13,23 @@ import java.sql.SQLException;
 @Api("Test API")
 @Path("/api/test")
 public class TestController {
-    TestService testService;
-    public TestController(final TestService testService) {
-        this.testService = testService;
+    /**
+     * TestService.
+     */
+    private final TestService testService;
+
+    /**
+     * Constructor for TestController.
+     * @param testServ
+     */
+    public TestController(final TestService testServ) {
+        this.testService = testServ;
     }
+
+    /**
+     * Endpoint to test the DB connection.
+     * @return OK if connection is solid.
+     */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response testConnection() {

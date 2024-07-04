@@ -5,8 +5,18 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public final class DatabaseConnector {
+    /**
+     * Database connection.
+     */
     private static Connection conn;
     private DatabaseConnector() { }
+
+    /**
+     * Attempts to establish a connection with the database specified in
+     * environment variables.
+     * @return a database Connection object.
+     * @throws SQLException if connection fails.
+     */
     public static Connection getConnection() throws SQLException {
 
         if (conn != null && !conn.isClosed()) {
