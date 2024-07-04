@@ -33,7 +33,8 @@ public class SalesEmpController {
     /**
      * POST request endpoint to create a new SalesEmployee.
      * @param salesEmpRequest
-     * @return a response with CREATED status if successful. Server error otherwise.
+     * @return a response with CREATED status if successful.
+     * Server error otherwise.
      */
     @POST
     @Produces(MediaType.APPLICATION_JSON)

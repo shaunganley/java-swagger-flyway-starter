@@ -73,7 +73,7 @@ public class SalesEmployee extends Employee {
         return salary;
     }
 
-    public void setSalary(double sal) {
+    public void setSalary(final double sal) {
         this.salary = sal;
     }
 }
