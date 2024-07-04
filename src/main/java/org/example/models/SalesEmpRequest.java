@@ -12,11 +12,11 @@ public class SalesEmpRequest {
 
     @JsonCreator
     public SalesEmpRequest(
-            @JsonProperty final String empName,
-            @JsonProperty final String nino,
-            @JsonProperty final int bankAcct,
-            @JsonProperty final double sal,
-            @JsonProperty final double commRate) {
+            @JsonProperty("SalesEmployeeName") final String empName,
+            @JsonProperty("NationalInsuranceNo") final String nino,
+            @JsonProperty("AccountNo") final int bankAcct,
+            @JsonProperty("Salary") final double sal,
+            @JsonProperty("CommissionRate") final double commRate) {
         this.name = empName;
         this.nationalInsurance = nino;
         this.bankAccountNo = bankAcct;
