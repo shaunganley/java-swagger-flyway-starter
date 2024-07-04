@@ -11,35 +11,35 @@ public class ProjectRequest {
 
     @JsonCreator
     public ProjectRequest(
-            @JsonProperty("projectName") String projectName,
-            @JsonProperty("projectValue") double projectValue,
-            @JsonProperty("clientID") int clientID) {
-        this.projectName = projectName;
-        this.projectValue = projectValue;
-        this.clientID = clientID;
+            @JsonProperty("projName") final String projName,
+            @JsonProperty("projValue") final double projValue,
+            @JsonProperty("clientID1") final int clientID1) {
+        this.projectName = projName;
+        this.projectValue = projValue;
+        this.clientID = clientID1;
     }
 
     public String getProjectName() {
         return projectName;
     }
 
-    public void setProjectName(String projectName) {
-        this.projectName = projectName;
+    public void setProjectName(final String projName) {
+        this.projectName = projName;
     }
 
     public double getProjectValue() {
         return projectValue;
     }
 
-    public void setProjectValue(double projectValue) {
-        this.projectValue = projectValue;
+    public void setProjectValue(final double projValue) {
+        this.projectValue = projValue;
     }
 
     public int getClientID() {
         return clientID;
     }
 
-    public void setClientID(int clientID) {
-        this.clientID = clientID;
+    public void setClientID(final int clientID1) {
+        this.clientID = clientID1;
     }
 }

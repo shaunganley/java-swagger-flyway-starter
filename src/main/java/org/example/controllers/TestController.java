@@ -13,9 +13,9 @@ import java.sql.SQLException;
 @Api("Test API")
 @Path("/api/test")
 public class TestController {
-    TestService testService;
-    public TestController(final TestService testService) {
-        this.testService = testService;
+    private TestService testService;
+    public TestController(final TestService tService) {
+        this.testService = tService;
     }
     @GET
     @Produces(MediaType.APPLICATION_JSON)

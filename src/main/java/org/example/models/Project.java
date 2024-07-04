@@ -11,35 +11,35 @@ public class Project {
 
     @JsonCreator
     public Project(
-            @JsonProperty("projectName") String projectName,
-            @JsonProperty("projectValue") double projectValue,
-            @JsonProperty("clientID") int clientID) {
-        this.projectName = projectName;
-        this.projectValue = projectValue;
-        this.clientID = clientID;
+            @JsonProperty("projectName1") final String projectName1,
+            @JsonProperty("projectValue1") final double projectValue1,
+            @JsonProperty("clientID1") final int clientID1) {
+        this.projectName = projectName1;
+        this.projectValue = projectValue1;
+        this.clientID = clientID1;
     }
 
     public String getProjectName() {
         return projectName;
     }
 
-    public void setProjectName(String projectName) {
-        this.projectName = projectName;
+    public void setProjectName(final String projectName1) {
+        this.projectName = projectName1;
     }
 
     public double getProjectValue() {
         return projectValue;
     }
 
-    public void setProjectValue(double projectValue) {
-        this.projectValue = projectValue;
+    public void setProjectValue(final double projectValue1) {
+        this.projectValue = projectValue1;
     }
 
     public int getClientID() {
         return clientID;
     }
 
-    public void setClientID(int clientID) {
-        this.clientID = clientID;
+    public void setClientID(final int clientID1) {
+        this.clientID = clientID1;
     }
 }

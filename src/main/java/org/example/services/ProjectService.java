@@ -9,14 +9,14 @@ import java.sql.SQLException;
 
 public class ProjectService {
 
-    ProjectDao projectDao;
+    private ProjectDao projectDao;
 
-    public ProjectService(ProjectDao ProjectDao) {
+    public ProjectService(final ProjectDao projectDao){
 
             this.projectDao = projectDao;
         }
 
-        public int createProject (ProjectRequest projectRequest) throws
+        public int createProject(final ProjectRequest projectRequest) throws
                 SQLException, FailedToCreateException {
             int id = projectDao.createProject(projectRequest);
             if (id == -1) {

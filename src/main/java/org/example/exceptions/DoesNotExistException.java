@@ -1,7 +1,7 @@
 package org.example.exceptions;
 
 public class DoesNotExistException extends Throwable {
-    public DoesNotExistException(Entity entity) {
+    public DoesNotExistException(final Entity entity) {
         super(entity.getEntity() + "does not exist");
     }
 }
