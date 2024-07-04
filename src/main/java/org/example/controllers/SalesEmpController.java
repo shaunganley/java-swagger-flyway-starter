@@ -2,8 +2,8 @@ package org.example.controllers;
 
 import io.swagger.annotations.Api;
 import org.example.exceptions.FailedToCreateException;
-import org.example.models.SalesEmployeeRequest;
-import org.example.services.SalesEmployeeService;
+import org.example.models.SalesEmpRequest;
+import org.example.services.SalesEmpService;
 
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -14,20 +14,20 @@ import java.sql.SQLException;
 
 @Api("Engineering Academy - Group Challenge 2 - Team 3 - Sales Employee API")
 @Path("/api/sales-employee")
-public class SalesEmployeeController {
-    SalesEmployeeService salesEmployeeService;
+public class SalesEmpController {
+    SalesEmpService salesEmpService;
 
-    public SalesEmployeeController(SalesEmployeeService salesEmployeeService) {
-        this.salesEmployeeService = salesEmployeeService;
+    public SalesEmpController(SalesEmpService salesEmpService) {
+        this.salesEmpService = salesEmpService;
     }
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public Response createSalesEmployee(SalesEmployeeRequest salesEmployeeRequest) {
+    public Response createSalesEmployee(SalesEmpRequest salesEmpRequest) {
         try {
             return Response
                     .status(Response.Status.CREATED)
-                    .entity(salesEmployeeService.createSalesEmployee(salesEmployeeRequest))
+                    .entity(salesEmpService.createSalesEmployee(salesEmpRequest))
                     .build();
         } catch (FailedToCreateException | SQLException e) {
             return Response.serverError().build();

@@ -3,7 +3,7 @@ package org.example.models;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class SalesEmployeeRequest {
+public class SalesEmpRequest {
     private String name;
     private String nationalInsurance;
     private int bankAccountNo;
@@ -11,7 +11,7 @@ public class SalesEmployeeRequest {
     private double commissionRate;
 
     @JsonCreator
-    public SalesEmployeeRequest(
+    public SalesEmpRequest(
             @JsonProperty String name,
             @JsonProperty String nationalInsurance,
             @JsonProperty int bankAccountNo,
