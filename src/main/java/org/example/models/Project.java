@@ -3,14 +3,14 @@ package org.example.models;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class ProjectRequest {
+public class Project {
 
     private String projectName;
     private double projectValue;
     private int clientID;
 
     @JsonCreator
-    public ProjectRequest(
+    public Project(
             @JsonProperty("projectName") String projectName,
             @JsonProperty("projectValue") double projectValue,
             @JsonProperty("clientID") int clientID) {
