@@ -5,7 +5,8 @@ import org.example.models.SalesEmpRequest;
 import java.sql.*;
 
 public class SalesEmpDao {
-    public int createSalesEmployee(SalesEmpRequest salesEmpRequest) throws SQLException {
+    public int createSalesEmployee(SalesEmpRequest salesEmpRequest)
+            throws SQLException {
         try (Connection connection = DatabaseConnector.getConnection()) {
 
             String insertStatement = "INSERT INTO `SalesEmployee`(Name, BankAcctNum, NINO, Salary, CommissionRate)" +

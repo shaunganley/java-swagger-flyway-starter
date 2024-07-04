@@ -14,7 +14,9 @@ public class SalesEmpService {
         this.salesEmpDao = salesEmpDao;
     }
 
-    public int createSalesEmployee(SalesEmpRequest salesEmpRequest) throws SQLException, FailedToCreateException {
+    public int createSalesEmployee(SalesEmpRequest salesEmpRequest)
+            throws SQLException, FailedToCreateException
+    {
         int id = salesEmpDao.createSalesEmployee(salesEmpRequest);
         if (id == -1) {
             throw new FailedToCreateException(Entity.SALES_EMPLOYEE);

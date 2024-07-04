@@ -14,7 +14,12 @@ public class SalesEmployee extends Employee {
     @JsonProperty
     private double commissionRate;
 
-    public SalesEmployee(String name, String nationalInsurance, int bankAccountNo, double salary, double commissionRate) {
+    public SalesEmployee(
+            String name,
+            String nationalInsurance,
+            int bankAccountNo,
+            double salary,
+            double commissionRate) {
         this.name = name;
         this.nationalInsurance = nationalInsurance;
         this.bankAccountNo = bankAccountNo;
