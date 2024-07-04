@@ -11,7 +11,7 @@ public class ProjectService {
 
     private ProjectDao projectDao;
 
-    public ProjectService(final ProjectDao projectDao){
+    public ProjectService(final ProjectDao projectDao) {
 
             this.projectDao = projectDao;
         }
