@@ -10,6 +10,9 @@ import org.example.controllers.TestController;
 import org.example.daos.ProjectDao;
 import org.example.daos.TestDao;
 import org.example.services.ProjectService;
+import org.example.controllers.SalesEmpController;
+import org.example.daos.SalesEmpDao;
+import org.example.services.SalesEmpService;
 import org.example.services.TestService;
 
 public class TestApplication extends Application<TestConfiguration> {
@@ -20,6 +23,7 @@ public class TestApplication extends Application<TestConfiguration> {
     public String getName() {
         return "Test";
     }
+
     @Override
     public void initialize(final Bootstrap<TestConfiguration> bootstrap) {
         bootstrap.addBundle(new SwaggerBundle<>() {
@@ -30,15 +34,20 @@ public class TestApplication extends Application<TestConfiguration> {
             }
         });
     }
+
     @Override
     public void run(final TestConfiguration configuration,
                     final Environment environment) {
         environment.jersey()
                 .register(new TestController(new TestService(new TestDao())));
+
         environment.jersey()
                 .register(new ProjectController(
                         new ProjectService(
                                 new ProjectDao())));
+        environment.jersey().register(
+                new SalesEmpController(new SalesEmpService(new SalesEmpDao()))
+        );
     }
 
 }
