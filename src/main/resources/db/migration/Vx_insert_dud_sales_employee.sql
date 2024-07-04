@@ -11,4 +11,4 @@ INSERT INTO `SalesEmployee`(
         "AB123456C",
         65000.00,
         25.00
-    )
+    );
