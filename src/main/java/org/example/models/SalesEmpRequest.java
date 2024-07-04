@@ -53,7 +53,7 @@ public class SalesEmpRequest {
     }
 
     public void setBankAccountNo(final int bankAcct) {
-        this.bankAccountNo = bankAccountNo;
+        this.bankAccountNo = bankAcct;
     }
 
     public double getCommissionRate() {

@@ -10,6 +10,13 @@ import java.sql.Statement;
 
 
 public class SalesEmpDao {
+
+    /**
+     * DAO method to insert a SalesEmployee record into the database.
+     * @param salesEmpRequest is an object containing the data to be inserted.
+     * @return an integer status code from the SQL execution.
+     * @throws SQLException if insert fails.
+     */
     public int createSalesEmployee(final SalesEmpRequest salesEmpRequest)
             throws SQLException {
         try (Connection connection = DatabaseConnector.getConnection()) {

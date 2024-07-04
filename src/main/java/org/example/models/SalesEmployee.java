@@ -3,10 +3,20 @@ package org.example.models;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class SalesEmployee extends Employee {
+
+    /**
+     * Name JSON element.
+     */
     @JsonProperty
     private String name;
+    /**
+     * NI Number JSON element.
+     */
     @JsonProperty
     private String nationalInsurance;
+    /**
+     * Bank Account Number.
+     */
     @JsonProperty
     private int bankAccountNo;
     @JsonProperty
@@ -20,7 +30,7 @@ public class SalesEmployee extends Employee {
             final int bankAcct,
             final double sal,
             final double commRate) {
-        this.name = name;
+        this.name = empName;
         this.nationalInsurance = nino;
         this.bankAccountNo = bankAcct;
         this.salary = sal;
