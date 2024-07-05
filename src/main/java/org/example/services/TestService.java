@@ -6,9 +6,9 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class TestService {
-    TestDao testDao;
-    public TestService(final TestDao testDao) {
-        this.testDao = testDao;
+    private TestDao testDao;
+    public TestService(final TestDao tDao) {
+        this.testDao = tDao;
     }
     public List<String> testConnection() throws SQLException {
         return testDao.testConnection();
