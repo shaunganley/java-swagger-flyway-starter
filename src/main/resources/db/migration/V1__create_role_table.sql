@@ -1,4 +1,7 @@
-CREATE TABLE role (
-    id int PRIMARY KEY AUTO_INCREMENT NOT NULL,
-    title varchar(100) NOT NULL
+CREATE TABLE Role (
+    ID int PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    Title varchar(100) NOT NULL
 );
+
+INSERT INTO Role (Title)
+VALUES('Admin'),('User');
