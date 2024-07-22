@@ -1,7 +1,8 @@
 package org.example.services;
 
 import org.example.daos.JobRoleDao;
-import org.example.models.JobRole;
+import org.example.models.JobRoles;
+
 
 import java.sql.SQLException;
 import java.util.List;
@@ -14,7 +15,7 @@ public class JobRoleService {
         this.roleDao = roleDao;
     }
 
-    public List<JobRole> getAllRoles() throws SQLException{
+    public List<JobRoles> getAllRoles() throws SQLException{
         return roleDao.getAllJobRoles();
     }
 }
