@@ -33,8 +33,8 @@ public class TestApplication extends Application<TestConfiguration> {
     @Override
     public void run(final TestConfiguration configuration,
                     final Environment environment) {
-//        environment.jersey()
-//                .register(new TestController(new TestService(new TestDao())));
+       environment.jersey()
+                .register(new TestController(new TestService(new TestDao())));
         environment.jersey()
                 .register(new JobRoleController(new JobRoleService(new JobRoleDao())));
     }
