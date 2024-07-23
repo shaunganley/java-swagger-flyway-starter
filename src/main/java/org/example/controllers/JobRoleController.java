@@ -1,7 +1,6 @@
 package org.example.controllers;
 
 import io.swagger.annotations.Api;
-import org.example.exceptions.DoesNotExistException;
 import org.example.models.JobRole;
 import org.example.models.JobRoleResponse;
 import org.example.services.JobRoleService;
