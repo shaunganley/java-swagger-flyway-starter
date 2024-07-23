@@ -53,8 +53,6 @@ How to start the test application
 3. You can start application via:
     1. Terminal: `java -jar target/java-swagger-flyway-starter-org.kainos.ea.jar server config.yml`
     2. IDE: Edit run configuration -> Add `server` to program arguments -> Run
-4. To check that your application is running enter url `http://localhost:3000/jobRoles`
-
 
 
 Project Description
@@ -66,9 +64,7 @@ The application allows the user to perform tasks such as checking job roles and 
 Technology Stack
 ---
 Backend: IntelliJ, Docker, AWS, MySQL
-Frontend: Bootstrap
-Testing: Selenium, WAVE & PA11Y
-
+Testing: Selenium
 
 
 Health Check
