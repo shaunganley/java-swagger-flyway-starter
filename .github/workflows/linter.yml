@@ -1,4 +1,4 @@
-name: Linter Check
+name: Maven Linter Check
 
 on:
   push:
@@ -21,6 +21,14 @@ jobs:
         with:
           distribution: 'adopt'
           java-version: '11'
+
+      - name: Cache Maven repository
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
 
       - name: Build and Lint
         run: mvn clean validate
