@@ -1,38 +1,3 @@
-CREATE TABLE role (
-    id int PRIMARY KEY AUTO_INCREMENT NOT NULL,
-    name varchar(100) NOT NULL
-);
-
-CREATE TABLE location (
-    id int PRIMARY KEY AUTO_INCREMENT NOT NULL,
-    name varchar(100) NOT NULL,
-    address varchar(250) NOT NULL,
-    phone varchar(20) NOT NULL
-    );
-
-CREATE TABLE capability (
-    id int PRIMARY KEY AUTO_INCREMENT NOT NULL,
-    name varchar(100) NOT NULL
-);
-
-CREATE TABLE band (
-    id int PRIMARY KEY AUTO_INCREMENT NOT NULL,
-    name char(1) NOT NULL
-);
-
-CREATE TABLE jobRoles (
-    id int PRIMARY KEY AUTO_INCREMENT NOT NULL,
-    role_id INT NOT NULL,
-    location_id INT NOT NULL,
-    capability_id INT NOT NULL,
-    band_id INT NOT NULL,
-    closing_date DATE NOT NULL,
-    status ENUM('open','closed'),
-    FOREIGN KEY (role_id) REFERENCES role(id),
-    FOREIGN KEY (location_id) REFERENCES location(id),
-    FOREIGN KEY (capability_id) REFERENCES capability(id),
-    FOREIGN KEY (band_id) REFERENCES band(id)
-);
 
 INSERT INTO role (name) VALUES
 ('Manager'),
@@ -83,4 +48,3 @@ INSERT INTO jobRoles (role_id, location_id, capability_id, band_id, closing_date
 (3, 4, 3, 4, '2023-07-31', 'closed'),
 (4, 4, 4, 5, '2023-06-30', 'closed'),
 (5, 4, 5, 4, '2023-05-31', 'closed');
-
