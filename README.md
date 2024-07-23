@@ -1,4 +1,4 @@
-# Java DropWizard Flyway Starter
+# Agile and Fragile Group 3 Sprint
 
 Database Migration - Local
 ---
@@ -49,13 +49,40 @@ How to start the test application
     2. DB_PASSWORD
     3. DB_HOST
     4. DB_NAME
-1. Run `mvn clean install` to build your application
-1. You can start application via:
+2. Run `mvn clean install` to build your application
+3. You can start application via:
     1. Terminal: `java -jar target/java-swagger-flyway-starter-org.kainos.ea.jar server config.yml`
     2. IDE: Edit run configuration -> Add `server` to program arguments -> Run
-1. To check that your application is running enter url `http://localhost:8080/api/test`
+4. To check that your application is running enter url `http://localhost:8080/api/test`
+
+
+
+Project Description
+---
+The application allows the user to perform tasks such as checking job roles and adding and deleting job roles.
+
+
+
+Technology Stack
+---
+Backend: IntelliJ, Docker, AWS, MySQL
+Frontend: Bootstrap
+Testing: Selenium, WAVE & PA11Y
+
+
 
 Health Check
 ---
 
 To see your applications health enter url `http://localhost:8081/healthcheck`
+
+Project Credits
+---
+
+Joel Anderson
+Benjamin Brashaw
+Ashleigh Brennan
+Katie McAllister
+Reanna McEldowney
+Anne Moore
+Joshua Noble
