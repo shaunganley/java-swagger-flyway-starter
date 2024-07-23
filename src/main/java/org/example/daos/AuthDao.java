@@ -2,6 +2,7 @@ package org.example.daos;
 
 import org.example.models.LoginRequest;
 import org.example.models.User;
+import org.mindrot.jbcrypt.BCrypt;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,22 +13,63 @@ public class AuthDao {
 
     public User getUser(final LoginRequest loginRequest) throws SQLException {
         try (Connection connection = DatabaseConnector.getConnection()) {
-            String query = "SELECT Email, Password, RoleId FROM `User` "
-                  +  "WHERE Email = ? and Password = ?;";
+            String query = "SELECT * FROM `User` "
+                  +  "WHERE Email = ?";
             PreparedStatement statement = connection.prepareStatement(query);
 
             statement.setString(1, loginRequest.getEmail());
-            statement.setString(2, loginRequest.getPassword());
 
             ResultSet resultSet = statement.executeQuery();
 
             while (resultSet.next()) {
-                return new User(
-                        resultSet.getString("Email"),
-                        resultSet.getString("Password"),
-                        resultSet.getInt("RoleId"));
+                if (BCrypt.checkpw(loginRequest.getPassword(),
+                        resultSet.getString("Hash"))) {
+                    return new User(
+                            resultSet.getString("Email"),
+                            resultSet.getString("Salt"),
+                            resultSet.getString("Hash"),
+                            resultSet.getInt("RoleId"));
+                }
             }
         }
         return null;
+    }
+
+    public void generateUsers() throws SQLException {
+        Connection c = DatabaseConnector.getConnection();
+
+        String insertStatement =
+                "INSERT INTO `User` (Email, Salt, Hash, RoleId) "
+                        + "VALUES (?,?,?,?)";
+
+        PreparedStatement st = c.prepareStatement(insertStatement);
+
+        String email1 = "eoghan@random.com";
+        String salt1 = BCrypt.gensalt();
+        String password1 = "password321";
+        String hashedAndSaltedPassword1 = BCrypt.hashpw(password1, salt1);
+        int roleId1 = 1;
+
+        st.setString(1, email1);
+        st.setString(2, salt1);
+        st.setString(3, hashedAndSaltedPassword1);
+        st.setInt(4, roleId1);
+
+        st.executeUpdate();
+
+        st = c.prepareStatement(insertStatement);
+
+        String email2 = "adam@random.com";
+        String salt2 = BCrypt.gensalt();
+        String password2 = "pass123";
+        String hashedAndSaltedPassword2 = BCrypt.hashpw(password2, salt2);
+        int roleId2 = 2;
+
+        st.setString(1, email2);
+        st.setString(2, salt2);
+        st.setString(3, hashedAndSaltedPassword2);
+        st.setInt(4, roleId2);
+
+        st.executeUpdate();
     }
 }

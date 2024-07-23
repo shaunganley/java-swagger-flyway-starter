@@ -38,4 +38,16 @@ public class AuthController {
                     .entity(e.getMessage()).build();
         }
     }
+
+    @POST
+    @Path("/generateUsers")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response generateUsers() {
+        try {
+            return Response.ok().entity(authService.generateUsers()).build();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return Response.serverError().build();
+        }
+    }
 }

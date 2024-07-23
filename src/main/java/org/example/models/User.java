@@ -3,14 +3,18 @@ package org.example.models;
 public class User {
 
      String email;
-     String password;
+     String salt;
+     String hash;
      int roleId;
 
-    public User(final String password, final String email, final int roleId) {
-        this.password = password;
+    public User(final String email, final String salt, final String hash,
+                final int roleId) {
         this.email = email;
+        this.salt = salt;
+        this.hash = hash;
         this.roleId = roleId;
     }
+
     public String getEmail() {
         return email;
     }
@@ -19,12 +23,20 @@ public class User {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
+    public String getSalt() {
+        return salt;
     }
 
-    public void setPassword(final String password) {
-        this.password = password;
+    public void setSalt(final String salt) {
+        this.salt = salt;
+    }
+
+    public String getHash() {
+        return hash;
+    }
+
+    public void setHash(final String hash) {
+        this.hash = hash;
     }
 
     public int getRoleId() {

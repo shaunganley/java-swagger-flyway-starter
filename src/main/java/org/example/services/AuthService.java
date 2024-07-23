@@ -29,6 +29,11 @@ public class AuthService {
         return generateJwtToken(user);
     }
 
+    public String generateUsers() throws SQLException {
+        authDao.generateUsers();
+        return "generated two users.";
+    }
+
     private String generateJwtToken(final User user)  {
         return Jwts.builder()
                 .issuedAt(new Date(System.currentTimeMillis()))
