@@ -39,7 +39,6 @@ class JobRoleServiceTest {
 
     @Test
     void getAllRoles_ShouldThrowSQLExceptionWhenDaoThrowsSQLException() throws SQLException {
-        List<JobRoles> jobRolesList = new ArrayList<JobRoles>();
 
         Mockito.when(mockDatabaseConnector.getConnection()).thenReturn(conn);
         Mockito.when(mockJobRoleDao.getAllJobRoles(conn)).thenThrow(SQLException.class);
