@@ -11,3 +11,25 @@ CREATE TABLE jobRoles (
     FOREIGN KEY (capability_id) REFERENCES capability(id),
     FOREIGN KEY (band_id) REFERENCES band(id)
 );
+
+INSERT INTO jobRoles (role_id, location_id, capability_id, band_id, closing_date, status) VALUES
+(1, 1, 1, 1, '2024-12-31', 'open'),
+(1, 2, 1, 2, '2024-11-30', 'open'),
+(1, 3, 1, 3, '2024-10-31', 'open'),
+(2, 1, 2, 1, '2024-09-30', 'closed'),
+(2, 2, 2, 2, '2024-08-31', 'closed'),
+(2, 3, 2, 3, '2024-07-31', 'closed'),
+(3, 1, 3, 1, '2024-06-30', 'open'),
+(3, 2, 3, 2, '2024-05-31', 'open'),
+(3, 3, 3, 3, '2024-04-30', 'open'),
+(4, 1, 4, 1, '2024-03-31', 'closed'),
+(4, 2, 4, 2, '2024-02-29', 'closed'),
+(4, 3, 4, 3, '2024-01-31', 'closed'),
+(5, 1, 5, 1, '2023-12-31', 'closed'),
+(5, 2, 5, 2, '2023-11-30', 'closed'),
+(5, 3, 5, 3, '2023-10-31', 'closed'),
+(1, 4, 1, 4, '2023-09-30', 'closed'),
+(2, 4, 2, 5, '2023-08-31', 'closed'),
+(3, 4, 3, 4, '2023-07-31', 'closed'),
+(4, 4, 4, 5, '2023-06-30', 'closed'),
+(5, 4, 5, 4, '2023-05-31', 'closed');
