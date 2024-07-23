@@ -1,7 +1,6 @@
 package org.example.daos;
 
 import org.example.models.JobRoles;
-import org.example.models.JobRoles;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -18,7 +17,8 @@ public class JobRoleDao {
             Statement statement = connection.createStatement();
 
             ResultSet resultSet = statement.executeQuery(
-                    "SELECT roleName, location, capability, band, closingDate, status FROM `Role` where status='open';");
+                    "SELECT roleName, location, capability, band, " +
+                            "closingDate, status FROM `Role` where status='open';");
             while (resultSet.next()) {
                  JobRoles role = new JobRoles(
                         resultSet.getString("roleName"),

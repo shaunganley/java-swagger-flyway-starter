@@ -24,8 +24,8 @@ public class JobRoles {
     @JsonProperty
     private String status;
 
-    public JobRoles(String roleName, String location, String capability,
-                   String band, Date closingDate, String status) {
+    public JobRoles(final String roleName, final String location, final String capability,
+                  final String band, final Date closingDate, final String status) {
         this.roleName = roleName;
         this.location = location;
         this.capability = capability;

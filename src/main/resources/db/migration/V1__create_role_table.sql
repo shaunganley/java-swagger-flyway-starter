@@ -1,5 +1,3 @@
-use test_JoelA;
-
 CREATE TABLE Role (
     id int PRIMARY KEY AUTO_INCREMENT NOT NULL,
     `roleName` varchar(100),
