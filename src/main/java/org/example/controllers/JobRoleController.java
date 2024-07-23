@@ -11,7 +11,7 @@ import javax.ws.rs.core.Response;
 import java.sql.SQLException;
 
 @Api("Job Roles API")
-@Path("/api/job-roles")
+@Path("/api/")
 
 public class JobRoleController {
     final JobRoleService jobRoleService;
@@ -22,6 +22,7 @@ public class JobRoleController {
 
 
     @GET
+    @Path("/jobRoles")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllJobRoles() throws SQLException {
         return Response.ok().entity(jobRoleService.getAllRoles()).build();

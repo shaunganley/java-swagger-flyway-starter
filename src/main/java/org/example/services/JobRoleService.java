@@ -1,5 +1,6 @@
 package org.example.services;
 
+import org.example.daos.DatabaseConnector;
 import org.example.daos.JobRoleDao;
 import org.example.models.JobRoles;
 
@@ -9,13 +10,15 @@ import java.util.List;
 
 public class JobRoleService {
 
-    JobRoleDao roleDao;
+    private final JobRoleDao roleDao;
+    private final DatabaseConnector databaseConnector;
 
-    public JobRoleService(final JobRoleDao roleDao) {
+    public JobRoleService(final JobRoleDao roleDao, DatabaseConnector databaseConnector) {
         this.roleDao = roleDao;
+        this.databaseConnector = databaseConnector;
     }
 
     public List<JobRoles> getAllRoles() throws SQLException {
-        return roleDao.getAllJobRoles();
+        return roleDao.getAllJobRoles(databaseConnector.getConnection());
     }
 }
