@@ -79,10 +79,10 @@ To see your applications health enter url `http://localhost:8081/healthcheck`
 Project Credits
 ---
 
-Joel Anderson
-Benjamin Brashaw
-Ashleigh Brennan
-Katie McAllister
-Reanna McEldowney
-Anne Moore
+Joel Anderson,
+Benjamin Brashaw,
+Ashleigh Brennan,
+Katie McAllister,
+Reanna McEldowney,
+Anne Moore,
 Joshua Noble
