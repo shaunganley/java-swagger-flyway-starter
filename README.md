@@ -63,9 +63,9 @@ and their relevant information and applicants to apply for roles.
 
 Technology Stack
 ---
-Front-End: IntelliJ, HTML, Docker, swagger, Css, Javascript
+Front-End: HTML, Docker, swagger, Css, Javascript
 
-Back-End: IntelliJ, Docker, AWS, MySQL Testing: unit tests using Mockito, Jupiter
+Back-End:  Docker, AWS, MySQL Testing: unit tests using Mockito, Jupiter
 
 Health Check
 ---
