@@ -13,7 +13,7 @@ public class JobRoleService {
         this.jobRoleDao = jobRoleDao;
     }
 
-    public List<JobRole> getAllJobRoles() throws SQLException {
+    public List<JobRole> getJobRoles() throws SQLException {
         return jobRoleDao.getAllJobRoles();
     }
 }

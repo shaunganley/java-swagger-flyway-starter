@@ -9,19 +9,22 @@ public class JobRole {
     private String capability;
     private String band;
     private Date closingDate;
+    private String status;
 
     public JobRole(final int id,
                    final String roleName,
                    final String location,
                    final String capability,
                    final String band,
-                   final Date closingDate) {
+                   final Date closingDate,
+                   final String status) {
         this.id = id;
         this.roleName = roleName;
         this.location = location;
         this.capability = capability;
         this.band = band;
         this.closingDate = closingDate;
+        this.status = status;
     }
 
     public Date getClosingDate() {
@@ -71,6 +74,12 @@ public class JobRole {
     public void setId(final int id) {
         this.id = id;
     }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(final String status) {
+        this.status = status;
+    }
 }
-
-

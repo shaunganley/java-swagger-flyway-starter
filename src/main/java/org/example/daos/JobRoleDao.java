@@ -43,7 +43,9 @@ public class JobRoleDao {
                             +
                             "ON jr.capability_id = c.id\n"
                             +
-                            "INNER JOIN band b ON jr.band_id = b.id;"
+                            "INNER JOIN band b ON jr.band_id = b.id\n"
+                            +
+                            "WHERE jr.status = 'open';"
             );
 
             while (resultSet.next()) {
@@ -53,7 +55,8 @@ public class JobRoleDao {
                         resultSet.getString("Location"),
                         resultSet.getString("Capability"),
                         resultSet.getString("Band"),
-                        resultSet.getDate("ClosingDate")
+                        resultSet.getDate("ClosingDate"),
+                        "open"
                 );
 
                 jobRoles.add(jobRole);

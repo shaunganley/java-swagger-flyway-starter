@@ -28,7 +28,7 @@ public class JobRoleController {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getJobRoles() {
         try {
-            List<JobRole> jobRoles = jobRoleService.getAllJobRoles();
+            List<JobRole> jobRoles = jobRoleService.getJobRoles();
             List<JobRoleResponse> response = jobRoles.stream()
                     .map(jobRole -> new JobRoleResponse(
                             jobRole.getId(),
