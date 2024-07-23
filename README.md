@@ -64,7 +64,7 @@ The application allows the user to perform tasks such as checking job roles and 
 Technology Stack
 ---
 Backend: IntelliJ, Docker, AWS, MySQL
-Testing: unit tests using Mockito
+Testing: unit tests using Mockito, Jupiter
 
 
 Health Check
