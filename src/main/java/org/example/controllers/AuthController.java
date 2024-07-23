@@ -1,6 +1,7 @@
 package org.example.controllers;
 
 import io.swagger.annotations.Api;
+import org.example.exceptions.DatabaseConnectionException;
 import org.example.exceptions.InvalidException;
 import org.example.models.LoginRequest;
 import org.example.services.AuthService;
@@ -29,7 +30,7 @@ public class AuthController {
         try {
             return Response.ok().entity(authService.login(loginRequest))
                     .build();
-        } catch (SQLException e) {
+        } catch (SQLException | DatabaseConnectionException e) {
             System.out.println(e.getMessage());
             return Response.serverError().build();
         } catch (InvalidException e) {
@@ -46,6 +47,9 @@ public class AuthController {
         try {
             return Response.ok().entity(authService.generateUsers()).build();
         } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return Response.serverError().build();
+        } catch (DatabaseConnectionException e) {
             System.out.println(e.getMessage());
             return Response.serverError().build();
         }

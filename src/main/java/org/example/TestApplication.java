@@ -7,11 +7,9 @@ import io.federecio.dropwizard.swagger.SwaggerBundle;
 import io.federecio.dropwizard.swagger.SwaggerBundleConfiguration;
 import io.jsonwebtoken.Jwts;
 import org.example.controllers.AuthController;
-import org.example.controllers.TestController;
 import org.example.daos.AuthDao;
-import org.example.daos.TestDao;
+import org.example.daos.DatabaseConnector;
 import org.example.services.AuthService;
-import org.example.services.TestService;
 
 import java.security.Key;
 import java.sql.SQLException;
@@ -38,11 +36,10 @@ public class TestApplication extends Application<TestConfiguration> {
     public void run(final TestConfiguration configuration,
                     final Environment environment) throws SQLException {
         Key jwtKey = Jwts.SIG.HS256.key().build();
-        environment.jersey()
-                .register(new TestController(new TestService(new TestDao())));
+        DatabaseConnector databaseConnector = new DatabaseConnector();
         environment.jersey()
                 .register(new AuthController(new AuthService(
-                        jwtKey, new AuthDao())));
+                        jwtKey, new AuthDao(), databaseConnector)));
     }
 
 }

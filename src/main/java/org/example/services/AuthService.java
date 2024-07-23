@@ -2,6 +2,8 @@ package org.example.services;
 
 import io.jsonwebtoken.Jwts;
 import org.example.daos.AuthDao;
+import org.example.daos.DatabaseConnector;
+import org.example.exceptions.DatabaseConnectionException;
 import org.example.exceptions.Entity;
 import org.example.exceptions.InvalidException;
 import org.example.models.LoginRequest;
@@ -13,15 +15,20 @@ import java.util.Date;
 
 public class AuthService {
     private final AuthDao authDao;
+    private final DatabaseConnector databaseConnector;
     private final Key key;
-    public AuthService(final Key key, final AuthDao authDao) {
-        this.authDao = authDao;
+
+    public AuthService(final Key key, final AuthDao authDao,
+                       final DatabaseConnector databaseConnector) {
         this.key = key;
+        this.authDao = authDao;
+        this.databaseConnector = databaseConnector;
     }
 
     public String login(final LoginRequest loginRequest) throws SQLException,
-            InvalidException {
-        User user = authDao.getUser(loginRequest);
+            InvalidException, DatabaseConnectionException {
+        User user = authDao.getUser(loginRequest, databaseConnector
+                .getConnection());
 
         if (user == null) {
             throw new InvalidException(Entity.USER, "Invalid Credentials");
@@ -29,8 +36,9 @@ public class AuthService {
         return generateJwtToken(user);
     }
 
-    public String generateUsers() throws SQLException {
-        authDao.generateUsers();
+    public String generateUsers()
+            throws SQLException, DatabaseConnectionException {
+        authDao.generateUsers(databaseConnector.getConnection());
         return "generated two users.";
     }
 

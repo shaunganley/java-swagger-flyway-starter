@@ -1,5 +1,6 @@
 package org.example.daos;
 
+import org.example.exceptions.DatabaseConnectionException;
 import org.example.models.LoginRequest;
 import org.example.models.User;
 import org.mindrot.jbcrypt.BCrypt;
@@ -11,11 +12,11 @@ import java.sql.SQLException;
 
 public class AuthDao {
 
-    public User getUser(final LoginRequest loginRequest) throws SQLException {
-        try (Connection connection = DatabaseConnector.getConnection()) {
+    public User getUser(final LoginRequest loginRequest, final Connection c)
+            throws SQLException, DatabaseConnectionException {
             String query = "SELECT * FROM `User` "
                   +  "WHERE Email = ?";
-            PreparedStatement statement = connection.prepareStatement(query);
+            PreparedStatement statement = c.prepareStatement(query);
 
             statement.setString(1, loginRequest.getEmail());
 
@@ -31,12 +32,11 @@ public class AuthDao {
                             resultSet.getInt("RoleId"));
                 }
             }
-        }
         return null;
     }
 
-    public void generateUsers() throws SQLException {
-        Connection c = DatabaseConnector.getConnection();
+    public void generateUsers(final Connection c) throws SQLException,
+            DatabaseConnectionException {
 
         String insertStatement =
                 "INSERT INTO `User` (Email, Salt, Hash, RoleId) "
