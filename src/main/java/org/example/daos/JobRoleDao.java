@@ -1,5 +1,6 @@
 package org.example.daos;
 
+import org.example.exceptions.DatabaseConnectionException;
 import org.example.models.JobRole;
 
 import java.sql.Connection;
@@ -10,11 +11,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class JobRoleDao {
-    public List<JobRole> getAllJobRoles() throws SQLException {
+    public List<JobRole> getAllJobRoles(final Connection c)
+            throws SQLException, DatabaseConnectionException {
         List<JobRole> jobRoles = new ArrayList<>();
 
-        try (Connection connection = DatabaseConnector.getConnection()) {
-            Statement statement = connection.createStatement();
+            Statement statement = c.createStatement();
 
             ResultSet resultSet = statement.executeQuery(
                     "SELECT\n"
@@ -60,9 +61,6 @@ public class JobRoleDao {
                 );
 
                 jobRoles.add(jobRole);
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
         }
 
         return jobRoles;

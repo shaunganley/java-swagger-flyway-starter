@@ -6,6 +6,7 @@ import io.dropwizard.setup.Environment;
 import io.federecio.dropwizard.swagger.SwaggerBundle;
 import io.federecio.dropwizard.swagger.SwaggerBundleConfiguration;
 import org.example.controllers.JobRoleController;
+import org.example.daos.DatabaseConnector;
 import org.example.daos.JobRoleDao;
 import org.example.services.JobRoleService;
 
@@ -30,11 +31,12 @@ public class JDDApplication extends Application<JDDConfiguration> {
     @Override
     public void run(final JDDConfiguration configuration,
                     final Environment environment) {
+        DatabaseConnector databaseConnector = new DatabaseConnector();
         environment.jersey()
                 .register(
                         new JobRoleController(
                                 new JobRoleService(
-                                        new JobRoleDao())));
+                                        new JobRoleDao(), databaseConnector)));
     }
 
 }

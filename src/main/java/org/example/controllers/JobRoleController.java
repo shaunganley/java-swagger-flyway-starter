@@ -1,6 +1,7 @@
 package org.example.controllers;
 
 import io.swagger.annotations.Api;
+import org.example.exceptions.DatabaseConnectionException;
 import org.example.models.JobRole;
 import org.example.models.JobRoleResponse;
 import org.example.services.JobRoleService;
@@ -14,7 +15,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Api
+@Api ("Job Roles")
 @Path("/api/JobRoles")
 public class JobRoleController {
 
@@ -39,7 +40,8 @@ public class JobRoleController {
                             jobRole.getClosingDate()))
                     .collect(Collectors.toList());
             return Response.ok().entity(response).build();
-        } catch (SQLException e) {
+        } catch (SQLException | DatabaseConnectionException e) {
+            System.out.println(e.getMessage());
             return Response.serverError().build();
         }
     }
