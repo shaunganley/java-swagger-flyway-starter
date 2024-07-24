@@ -18,6 +18,11 @@ public final class DatabaseConnector {
         String host = System.getenv().get("DB_HOST");
         String name = System.getenv().get("DB_NAME");
 
+        System.err.println(username);
+        System.err.println(password);
+        System.err.println(host);
+        System.err.println(name);
+
         try {
 
             if (username == null || password == null || host == null
@@ -32,11 +37,6 @@ public final class DatabaseConnector {
 
         } catch (Exception e) {
             System.err.println(e.getMessage());
-
-            System.err.println(username);
-            System.err.println(password);
-            System.err.println(host);
-            System.err.println(name);
 
         }
 
