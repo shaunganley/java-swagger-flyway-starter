@@ -14,7 +14,7 @@ public class JobRoleService {
     private final DatabaseConnector databaseConnector;
 
     public JobRoleService(final JobRoleDao roleDao,
-                          DatabaseConnector databaseConnector) {
+                          final DatabaseConnector databaseConnector) {
         this.roleDao = roleDao;
         this.databaseConnector = databaseConnector;
     }
