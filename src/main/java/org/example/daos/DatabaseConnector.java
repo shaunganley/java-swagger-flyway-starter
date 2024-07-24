@@ -4,9 +4,10 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class DatabaseConnector {
+public final class DatabaseConnector {
     private static Connection conn;
-    public Connection getConnection() throws SQLException {
+    private DatabaseConnector() { }
+    public static Connection getConnection() throws SQLException {
 
         if (conn != null && !conn.isClosed()) {
             return conn;
