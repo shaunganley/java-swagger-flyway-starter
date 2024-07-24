@@ -33,9 +33,11 @@ public class AuthDao {
                             resultSet.getString("Salt"),
                             resultSet.getString("Hash"),
                             resultSet.getInt("RoleId"));
+                } else {
+                    return null;  //user found but wrong password
                 }
             }
-        throw new DoesNotExistException(Entity.USER);
+        throw new DoesNotExistException(Entity.USER); //user not found
     }
 
     public void generateUsers(final Connection c) throws SQLException,
