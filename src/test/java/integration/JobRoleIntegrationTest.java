@@ -4,7 +4,7 @@ import io.dropwizard.testing.junit5.DropwizardAppExtension;
 import io.dropwizard.testing.junit5.DropwizardExtensionsSupport;
 import org.example.TestApplication;
 import org.example.TestConfiguration;
-import org.example.models.JobRoles;
+import org.example.models.JobRole;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -21,8 +21,8 @@ public class JobRoleIntegrationTest {
     void getJobRoles_ShouldReturnListOfJobRoles() {
         Client client = APP.client();
 
-        List<JobRoles> response = client
-                .target("http://localhost:8080/api/jobRoles")
+        List<JobRole> response = client
+                .target("http://localhost:8080/api/job-roles")
                 .request()
                 .get(List.class);
 

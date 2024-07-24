@@ -4,7 +4,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Date;
 
-public class JobRoles {
+public class JobRole {
+
+    @JsonProperty
+    private int id;
 
     @JsonProperty
     private String roleName;
@@ -24,14 +27,23 @@ public class JobRoles {
     @JsonProperty
     private String status;
 
-    public JobRoles(final String roleName, final String location, final String capability,
+    public JobRole(final int id, final String roleName, final String location, final String capability,
                   final String band, final Date closingDate, final String status) {
+        this.id = id;
         this.roleName = roleName;
         this.location = location;
         this.capability = capability;
         this.band = band;
         this.closingDate = closingDate;
         this.status = status;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getRoleName() {

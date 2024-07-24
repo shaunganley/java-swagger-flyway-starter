@@ -2,7 +2,7 @@ package org.example.services;
 
 import org.example.daos.DatabaseConnector;
 import org.example.daos.JobRoleDao;
-import org.example.models.JobRoles;
+import org.example.models.JobRole;
 
 
 import java.sql.SQLException;
@@ -18,7 +18,7 @@ public class JobRoleService {
         this.databaseConnector = databaseConnector;
     }
 
-    public List<JobRoles> getAllRoles() throws SQLException {
+    public List<JobRole> getAllRoles() throws SQLException {
         return roleDao.getAllJobRoles(databaseConnector.getConnection());
     }
 }
