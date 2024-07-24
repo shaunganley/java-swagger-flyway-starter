@@ -1,6 +1,7 @@
 package org.example.daos;
 
 import org.example.exceptions.DatabaseConnectionException;
+import org.example.exceptions.DoesNotExistException;
 import org.example.models.LoginRequest;
 import org.example.models.User;
 import org.mindrot.jbcrypt.BCrypt;
@@ -13,7 +14,8 @@ import java.sql.SQLException;
 public class AuthDao {
 
     public User getUser(final LoginRequest loginRequest, final Connection c)
-            throws SQLException, DatabaseConnectionException {
+            throws SQLException, DatabaseConnectionException,
+            DoesNotExistException {
             String query = "SELECT * FROM `User` "
                   +  "WHERE Email = ?";
             PreparedStatement statement = c.prepareStatement(query);

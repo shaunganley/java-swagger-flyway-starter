@@ -4,6 +4,7 @@ import io.jsonwebtoken.Jwts;
 import org.example.daos.AuthDao;
 import org.example.daos.DatabaseConnector;
 import org.example.exceptions.DatabaseConnectionException;
+import org.example.exceptions.DoesNotExistException;
 import org.example.exceptions.Entity;
 import org.example.exceptions.InvalidException;
 import org.example.models.LoginRequest;
@@ -26,7 +27,8 @@ public class AuthService {
     }
 
     public String login(final LoginRequest loginRequest) throws SQLException,
-            InvalidException, DatabaseConnectionException {
+            InvalidException, DatabaseConnectionException,
+            DoesNotExistException {
         User user = authDao.getUser(loginRequest, databaseConnector
                 .getConnection());
 

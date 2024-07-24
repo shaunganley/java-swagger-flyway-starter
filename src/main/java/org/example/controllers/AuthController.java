@@ -2,6 +2,7 @@ package org.example.controllers;
 
 import io.swagger.annotations.Api;
 import org.example.exceptions.DatabaseConnectionException;
+import org.example.exceptions.DoesNotExistException;
 import org.example.exceptions.InvalidException;
 import org.example.models.LoginRequest;
 import org.example.services.AuthService;
@@ -37,6 +38,10 @@ public class AuthController {
             System.out.println(e.getMessage());
             return Response.status(Response.Status.BAD_REQUEST)
                     .entity(e.getMessage()).build();
+        } catch (DoesNotExistException e) {
+            System.out.println(e.getMessage());
+            return Response.status(Response.Status.NOT_FOUND)
+                    .entity(e.getMessage()).build();
         }
     }
 
@@ -46,10 +51,7 @@ public class AuthController {
     public Response generateUsers() {
         try {
             return Response.ok().entity(authService.generateUsers()).build();
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            return Response.serverError().build();
-        } catch (DatabaseConnectionException e) {
+        } catch (SQLException | DatabaseConnectionException e) {
             System.out.println(e.getMessage());
             return Response.serverError().build();
         }
