@@ -53,7 +53,7 @@ How to start the test application
 3. You can start application via:
     1. Terminal: `java -jar target/java-swagger-flyway-starter-org.kainos.ea.jar server config.yml`
     2. IDE: Edit run configuration -> Add `server` to program arguments -> Run
-4. To check that your application is running enter url `http://localhost:3000/loginForm`
+4. To check that your application is running enter url `http://localhost:8080/api/auth/login`
 
 Project Description
 ---
@@ -63,8 +63,6 @@ and their relevant information and applicants to apply for roles.
 
 Technology Stack
 ---
-Front-End: HTML, Docker, swagger, Css, Javascript
-
 Back-End:  Docker, AWS, MySQL Testing: unit tests using Mockito, Jupiter
 
 Health Check
