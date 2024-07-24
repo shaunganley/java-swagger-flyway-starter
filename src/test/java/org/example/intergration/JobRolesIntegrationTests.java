@@ -18,13 +18,15 @@ public class JobRolesIntegrationTests {
             new DropwizardAppExtension<>(JDDApplication.class);
 
     @Test
-    void getJobRoles_shouldReturnListOfJobRoles(){}
-    Client client = APP.client();
+    void getJobRoles_shouldReturnListOfJobRoles() {
+        Client client = APP.client();
 
-    List<JobRole> response = client
-            .target("http://localhost:8080/api/JobRoles")
-            .request()
-            .get(List.class);
+        List<JobRole> response = client
+                .target("http://localhost:8080/api/JobRoles")
+                .request()
+                .get(List.class);
 
-    Assertions.assertFalse(response.isEmpty());
+        Assertions.assertFalse(response.isEmpty());
+
+    }
 }
