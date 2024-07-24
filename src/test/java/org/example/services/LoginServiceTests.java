@@ -6,13 +6,16 @@ import org.example.daos.AuthDao;
 import org.example.daos.DatabaseConnector;
 import org.example.exceptions.DatabaseConnectionException;
 import org.example.exceptions.DoesNotExistException;
+import org.example.exceptions.InvalidException;
 import org.example.models.LoginRequest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import javax.ws.rs.core.Response;
+import javax.xml.crypto.Data;
 import java.security.Key;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -64,6 +67,14 @@ class LoginServiceTests {
         assertThrows(DoesNotExistException.class,
                 () -> authService.login(loginRequest));
 
+    }
+    @Test
+    void login_ReturnInvalidException() throws SQLException,
+            DatabaseConnectionException, DoesNotExistException{
+        Mockito.when(databaseConnector.getConnection()).thenReturn(conn);
+        Mockito.when(authDao.getUser(loginRequest,conn)).thenReturn(null);
+        assertThrows(InvalidException.class,
+                () ->authService.login(loginRequest));
     }
 
 

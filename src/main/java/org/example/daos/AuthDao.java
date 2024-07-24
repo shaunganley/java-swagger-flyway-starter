@@ -2,6 +2,7 @@ package org.example.daos;
 
 import org.example.exceptions.DatabaseConnectionException;
 import org.example.exceptions.DoesNotExistException;
+import org.example.exceptions.Entity;
 import org.example.models.LoginRequest;
 import org.example.models.User;
 import org.mindrot.jbcrypt.BCrypt;
@@ -34,7 +35,7 @@ public class AuthDao {
                             resultSet.getInt("RoleId"));
                 }
             }
-        return null;
+        throw new DoesNotExistException(Entity.USER);
     }
 
     public void generateUsers(final Connection c) throws SQLException,

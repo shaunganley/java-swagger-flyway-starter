@@ -34,7 +34,7 @@ public class AuthIntegrationTest {
     }
 
     @Test
-    void login_Return400Error(){
+    void login_Return404Error(){
         LoginRequest loginRequest = new LoginRequest(
                 "notreal@random.com",
                 "password321"
@@ -44,6 +44,6 @@ public class AuthIntegrationTest {
                 .target("http://localhost:8080/api/auth/login")
                 .request().post(Entity.json(loginRequest))
                 .getStatus();
-        Assertions.assertEquals(400, status);
+        Assertions.assertEquals(404, status);
     }
 }
