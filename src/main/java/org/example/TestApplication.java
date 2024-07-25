@@ -12,7 +12,6 @@ import org.example.daos.DatabaseConnector;
 import org.example.services.AuthService;
 
 import java.security.Key;
-import java.sql.SQLException;
 
 public class TestApplication extends Application<TestConfiguration> {
     public static void main(final String[] args) throws Exception {
