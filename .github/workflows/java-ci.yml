@@ -42,13 +42,15 @@ jobs:
         env:
           DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
           DB_USER: ${{ secrets.DB_USERNAME }}
-          DB_URL: jdbc:mysql://${{ secrets.DB_HOST }}/${{ secrets.DB_INT_NAME }}
+          DB_NAME: ${{ secrets.DB_NAME }}
+          DB_HOST: ${{ secrets.DB_HOST }}
         run: mvn -B clean install
 
       - name: Run tests
         env:
           DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
           DB_USER: ${{ secrets.DB_USERNAME }}
-          DB_URL: jdbc:mysql://${{ secrets.DB_HOST }}/${{ secrets.DB_INT_NAME }}
+          DB_NAME: ${{ secrets.DB_NAME }}
+          DB_HOST: ${{ secrets.DB_HOST }}
           FLYWAY_BASELINE_ON_MIGRATE: true
         run: mvn test
