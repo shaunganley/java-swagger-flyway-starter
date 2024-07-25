@@ -46,4 +46,18 @@ public class AuthIntegrationTest {
                 .getStatus();
         Assertions.assertEquals(404, status);
     }
+
+    @Test
+    void login_Return400Error(){
+        LoginRequest loginRequest = new LoginRequest(
+                "adam@random.com",
+                "invalidPassword"
+        );
+        Client client = APP.client();
+        int status = client
+                .target("http://localhost:8080/api/auth/login")
+                .request().post(Entity.json(loginRequest))
+                .getStatus();
+        Assertions.assertEquals(400, status);
+    }
 }
