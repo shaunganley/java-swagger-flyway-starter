@@ -6,8 +6,8 @@ CREATE TABLE location (
     );
 
 INSERT INTO location (name, address, phone) VALUES
-('New York', '123 5th Ave, New York, NY 10001', '212-555-1234'),
-('San Francisco', '456 Market St, San Francisco, CA 94103', '415-555-5678'),
-('Chicago', '789 Wacker Dr, Chicago, IL 60601', '312-555-9012'),
-('Los Angeles', '101 Hollywood Blvd, Los Angeles, CA 90028', '323-555-3456'),
-('Boston', '202 Beacon St, Boston, MA 02116', '617-555-7890');
+('Belfast', '4-6 Upper Cres, Belfast, BT7 1NT', '028 9057 1100'),
+('Birmingham', '5th Floor, Cornerblock, 2 Cornwall St, Birmingham, B3 2DX, United Kingdom', '+44 28 9057 1100'),
+('Derry', '5th Floor Timber Quay, Strand Road, BT48 7NR, United Kingdom', '+44 28 9057 1100'),
+('Buenos Aires', 'Charcas 5150, C1425 BOE, Buenos Aires, Argentina', '+1 470 467 8596'),
+('Toronto', 'Suite 2200, Commerce Court North, 25 King Street West, Toronto, M5L 2A1', '+1 647 931 0589');
