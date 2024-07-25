@@ -32,7 +32,7 @@ jobs:
       env:
         FLYWAY_PASSWORD: ${{ secrets.TEST_DB_PASSWORD }}
         FLYWAY_USER: ${{ secrets.TEST_DB_USERNAME }}
-        FLYWAY_URL: jdbc:mysql://${{ secrets.DB_HOST }}
+        FLYWAY_URL: jdbc:mysql://${{ secrets.TEST_DB_HOST }}
         FLYWAY_BASELINE_ON_MIGRATE: true
       run: mvn flyway:clean && mvn flyway:migrate
     - name: Build with Maven
