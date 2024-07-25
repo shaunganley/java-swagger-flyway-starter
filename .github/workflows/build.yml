@@ -30,10 +30,15 @@ jobs:
 
     - name: flyway migrations
       env:
-        FLYWAY_PASSWORD: ${{ secrets.TEST_DB_PASSWORD }}
-        FLYWAY_USER: ${{ secrets.TEST_DB_USER }}
-        FLYWAY_URL: ${{ secrets.TEST_DB_URL }}
+        FLYWAY_PASSWORD: ${{ secrets.DB_PASSWORD }}
+        FLYWAY_USER: ${{ secrets.DB_USER }}
+        FLYWAY_URL: jdbc:mysql://${{ secrets.DB_HOST }}/${{ secrets.DB_INTEGRATION_NAME }}
         FLYWAY_BASELINE_ON_MIGRATE: true
       run: mvn flyway:clean && mvn flyway:migrate
     - name: Build with Maven
+      env:
+        DB_NAME: ${{ secrets.DB_INTEGRATION_NAME }}
+        DB_HOST: ${{ secrets.DB_HOST }}
+        DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+        DB_USERNAME: ${{ secrets.DB_USERNAME }}
       run: mvn -B package --file pom.xml
