@@ -2,8 +2,6 @@ package org.example.controllers;
 
 import io.swagger.annotations.Api;
 import org.example.exceptions.DatabaseConnectionException;
-import org.example.models.JobRole;
-import org.example.models.JobRoleResponse;
 import org.example.services.JobRoleService;
 
 import javax.ws.rs.GET;
@@ -12,8 +10,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.sql.SQLException;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Api ("Job Roles")
 @Path("/api/JobRoles")
