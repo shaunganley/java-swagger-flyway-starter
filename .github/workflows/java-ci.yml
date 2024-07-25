@@ -30,14 +30,6 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-maven
 
-      - name: Run migrations
-        env:
-          FLYWAY_PASSWORD: ${{ secrets.DB_PASSWORD }}
-          FLYWAY_USER: ${{ secrets.DB_USERNAME }}
-          FLYWAY_URL: jdbc:mysql://${{ secrets.DB_HOST }}/${{ secrets.DB_INT_NAME }}
-          FLYWAY_BASELINE_ON_MIGRATE: true
-        run: mvn flyway:migrate
-
       - name: Build with Maven
         env:
           DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
