@@ -49,7 +49,8 @@ How to start the test application
     2. DB_PASSWORD
     3. DB_HOST
     4. DB_NAME
-1. Run `mvn clean install` to build your application
+2. Run `mvn clean install` to build your application
+3. Run `npm test` to run unit and integration tests.
 1. You can start application via:
     1. Terminal: `java -jar target/java-swagger-flyway-starter-org.kainos.ea.jar server config.yml`
     2. IDE: Edit run configuration -> Add `server` to program arguments -> Run
