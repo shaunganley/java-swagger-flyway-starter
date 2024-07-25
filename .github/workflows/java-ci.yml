@@ -34,7 +34,7 @@ jobs:
         env:
           FLYWAY_PASSWORD: ${{ secrets.DB_PASSWORD }}
           FLYWAY_USER: ${{ secrets.DB_USERNAME }}
-          FLYWAY_URL: jdbc:mysql://${{ secrets.DB_HOST }}/${{ secrets.DB_NAME }}
+          FLYWAY_URL: jdbc:mysql://${{ secrets.DB_HOST }}/${{ secrets.DB_INT_NAME }}
           FLYWAY_BASELINE_ON_MIGRATE: true
         run: mvn -B clean install
 
@@ -42,6 +42,6 @@ jobs:
         env:
           FLYWAY_PASSWORD: ${{ secrets.DB_PASSWORD }}
           FLYWAY_USER: ${{ secrets.DB_USERNAME }}
-          FLYWAY_URL: jdbc:mysql://${{ secrets.DB_HOST }}/${{ secrets.DB_NAME }}
+          FLYWAY_URL: jdbc:mysql://${{ secrets.DB_HOST }}/${{ secrets.DB_INT_NAME }}
           FLYWAY_BASELINE_ON_MIGRATE: true
         run: mvn test
