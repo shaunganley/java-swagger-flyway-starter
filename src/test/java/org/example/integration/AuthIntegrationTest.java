@@ -21,8 +21,8 @@ public class AuthIntegrationTest {
     @Test
     void login_shouldLogUserIn() {
         LoginRequest loginRequest = new LoginRequest(
-                "eoghan@random.com",
-                "password321"
+                "adam@random.com",
+                "pass123"
         );
         Client client = APP.client();
         int status = client
