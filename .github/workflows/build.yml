@@ -28,13 +28,22 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
-      - name: flyway migrations
+      - name: flyway migration clean
         env:
           FLYWAY_PASSWORD: ${{ secrets.DB_PASSWORD }}
           FLYWAY_USER: ${{ secrets.DB_USERNAME }}
           FLYWAY_URL: jdbc:mysql://${{ secrets.DB_HOST }}/${{ secrets.DB_INTEGRATION_NAME }}
           FLYWAY_BASELINE_ON_MIGRATE: true
-        run: mvn flyway:clean && mvn flyway:migrate
+        run: mvn flyway:clean
+
+      - name: flyway migration clean
+        env:
+            FLYWAY_PASSWORD: ${{ secrets.DB_PASSWORD }}
+            FLYWAY_USER: ${{ secrets.DB_USERNAME }}
+            FLYWAY_URL: jdbc:mysql://${{ secrets.DB_HOST }}/${{ secrets.DB_INTEGRATION_NAME }}
+            FLYWAY_BASELINE_ON_MIGRATE: true
+        run: mvn flyway:migrate
+
       - name: Build with Maven
         env:
           DB_NAME: ${{ secrets.DB_INTEGRATION_NAME }}
