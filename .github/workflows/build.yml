@@ -27,15 +27,13 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
         cache: maven
+
+    - name: flyway migrations
+      env:
+        FLYWAY_PASSWORD: ${{ secrets.TEST_DB_PASSWORD }}
+        FLYWAY_USER: ${{ secrets.TEST_DB_USERNAME }}
+        FLYWAY_URL: jdbc:mysql://${{ secrets.DB_HOST }}
+        FLYWAY_BASELINE_ON_MIGRATE: true
+      run: mvn flyway:clean && mvn flyway:migrate
     - name: Build with Maven
       run: mvn -B package --file pom.xml
-
-    - name: Flyway Migrate
-      env:
-        DB_URL: ${{ secrets.TEST_DB_URL }}
-        DB_USER: ${{ secrets.TEST_DB_USER }}
-        DB_PASSWORD: ${{ secrets.TEST_DB_PASSWORD }}
-      run: mvn flyway:migrate -Dflyway.url=$DB_URL -Dflyway.user=$DB_USER -Dflyway.password=$DB_PASSWORD
-
-    - name: Run integration tests
-      run: mvn clean integration-test
