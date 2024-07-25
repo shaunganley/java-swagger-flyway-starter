@@ -34,7 +34,7 @@ public class TestApplication extends Application<TestConfiguration> {
     }
     @Override
     public void run(final TestConfiguration configuration,
-                    final Environment environment) throws SQLException {
+                    final Environment environment) {
         Key jwtKey = Jwts.SIG.HS256.key().build();
         DatabaseConnector databaseConnector = new DatabaseConnector();
         environment.jersey()
