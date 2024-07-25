@@ -18,35 +18,20 @@ public class JobRoleDao {
             Statement statement = c.createStatement();
 
             ResultSet resultSet = statement.executeQuery(
-                    "SELECT\n"
-                            +
-                            "    jr.id,\n"
-                            +
-                            "    r.name AS `RoleName`,\n"
-                            +
-                            "    l.name AS `Location`,\n"
-                            +
-                            "    c.name AS `Capability`,\n"
-                            +
-                            "    b.name AS `Band`,\n"
-                            +
-                            "    jr.closing_date AS `ClosingDate`\n"
-                            +
-                            "FROM\n"
-                            +
-                            "    jobRoles jr\n"
-                            +
-                            "INNER JOIN role r ON jr.role_id = r.id\n"
-                            +
-                            "INNER JOIN location l ON jr.location_id = l.id\n"
-                            +
-                            "INNER JOIN capability c "
-                            +
-                            "ON jr.capability_id = c.id\n"
-                            +
-                            "INNER JOIN band b ON jr.band_id = b.id\n"
-                            +
-                            "WHERE jr.status = 'open';"
+                    "SELECT "
+                            + "jr.id, "
+                            + "r.name AS `RoleName`, "
+                            + "l.name AS `Location`, "
+                            + "c.name AS `Capability`, "
+                            + "b.name AS `Band`, "
+                            + "jr.closing_date AS `ClosingDate` "
+                            + "FROM jobRoles jr "
+                            + "INNER JOIN role r ON jr.role_id = r.id "
+                            + "INNER JOIN location l ON jr.location_id = l.id "
+                            + "INNER JOIN capability c "
+                            + "ON jr.capability_id = c.id "
+                            + "INNER JOIN band b ON jr.band_id = b.id "
+                            + "WHERE jr.status = 'open';"
             );
 
             while (resultSet.next()) {

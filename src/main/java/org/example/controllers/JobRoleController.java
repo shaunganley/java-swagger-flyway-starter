@@ -29,19 +29,8 @@ public class JobRoleController {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getJobRoles() {
         try {
-            List<JobRole> jobRoles = jobRoleService.getJobRoles();
-            List<JobRoleResponse> response = jobRoles.stream()
-                    .map(jobRole -> new JobRoleResponse(
-                            jobRole.getId(),
-                            jobRole.getRoleName(),
-                            jobRole.getLocation(),
-                            jobRole.getCapability(),
-                            jobRole.getBand(),
-                            jobRole.getClosingDate()))
-                    .collect(Collectors.toList());
-            return Response.ok().entity(response).build();
+            return Response.ok().entity(jobRoleService.getJobRoles()).build();
         } catch (SQLException | DatabaseConnectionException e) {
-            System.out.println(e.getMessage());
             return Response.serverError().build();
         }
     }
