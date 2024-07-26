@@ -95,7 +95,6 @@
 
         <!-- Checks for Naming Conventions.                  -->
         <!-- See https://checkstyle.org/checks/naming/index.html -->
-        <module name="ConstantName"/>
         <module name="LocalFinalVariableName"/>
         <module name="LocalVariableName"/>
         <module name="MemberName"/>
@@ -155,14 +154,11 @@
         </module>
         <module name="IllegalInstantiation"/>
         <module name="InnerAssignment"/>
-        <module name="MagicNumber"/>
         <module name="MissingSwitchDefault"/>
         <module name="MultipleVariableDeclarations"/>
         <module name="SimplifyBooleanExpression"/>
         <module name="SimplifyBooleanReturn"/>
 
-        <module name="FinalClass"/>
-        <module name="HideUtilityClassConstructor"/>
         <module name="InterfaceIsType"/>
 
         <!-- Miscellaneous other checks.                   -->
