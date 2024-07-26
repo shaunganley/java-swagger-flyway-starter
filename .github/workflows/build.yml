@@ -41,4 +41,8 @@ jobs:
         DB_HOST: ${{ secrets.DB_HOST }}
         DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
         DB_USERNAME: ${{ secrets.DB_USERNAME }}
+        LOGIN_EMAIL_1: ${{ secrets.LOGIN_EMAIL_1}}
+        LOGIN_EMAIL_2: ${{ secrets.LOGIN_EMAIL_2}}
+        LOGIN_PASSWORD_1: ${{secrets.LOGIN_PASSWORD_1}}
+        LOGIN_PASSWORD_2: ${{secrets.LOGIN_PASSWORD_2}}
       run: mvn -B package --file pom.xml
