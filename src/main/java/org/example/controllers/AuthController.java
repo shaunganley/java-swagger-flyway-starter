@@ -20,6 +20,7 @@ import java.sql.SQLException;
 public class AuthController {
     AuthService authService;
 
+
     public AuthController(final AuthService authService) {
         this.authService = authService;
     }
