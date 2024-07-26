@@ -10,26 +10,26 @@ import org.example.daos.DatabaseConnector;
 import org.example.daos.JobRoleDao;
 import org.example.services.JobRoleService;
 
-public class JDDApplication extends Application<JDDConfiguration> {
+public class TestApplication extends Application<TestConfiguration> {
     public static void main(final String[] args) throws Exception {
-        new JDDApplication().run(args);
+        new TestApplication().run(args);
     }
     @Override
     public String getName() {
-        return "JDD";
+        return "Test";
     }
     @Override
-    public void initialize(final Bootstrap<JDDConfiguration> bootstrap) {
+    public void initialize(final Bootstrap<TestConfiguration> bootstrap) {
         bootstrap.addBundle(new SwaggerBundle<>() {
             @Override
             protected SwaggerBundleConfiguration getSwaggerBundleConfiguration(
-                    final JDDConfiguration configuration) {
+                    final TestConfiguration configuration) {
                 return configuration.getSwagger();
             }
         });
     }
     @Override
-    public void run(final JDDConfiguration configuration,
+    public void run(final TestConfiguration configuration,
                     final Environment environment) {
         DatabaseConnector databaseConnector = new DatabaseConnector();
         environment.jersey()
