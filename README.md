@@ -50,13 +50,15 @@ How to start the test application
     3. DB_HOST
     4. DB_NAME
 2. Run `mvn clean install` to build your application
-3. Run `npm test` to run unit and integration tests.
+3. Run `nvm test` to run unit and integration tests.
 1. You can start application via:
-    1. Terminal: `java -jar target/java-swagger-flyway-starter-org.kainos.ea.jar server config.yml`
+    1. IDE: Control + R
     2. IDE: Edit run configuration -> Add `server` to program arguments -> Run
-1. To check that your application is running enter url `http://localhost:8080/api/test`
+1. To check that your application is running enter url `http://localhost:8080/swagger`
 
 Health Check
 ---
 
 To see your applications health enter url `http://localhost:8081/healthcheck`
+
+To see how to run the Front end <a href="https://github.com/jackpollinsK/team_4_Frontend" target="_blank">here</a>
