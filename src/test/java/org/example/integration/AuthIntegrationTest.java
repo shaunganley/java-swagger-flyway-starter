@@ -2,21 +2,19 @@ package org.example.integration;
 
 import io.dropwizard.testing.junit5.DropwizardAppExtension;
 import io.dropwizard.testing.junit5.DropwizardExtensionsSupport;
-import org.example.TestApplication;
-import org.example.TestConfiguration;
+import org.example.JDDApplication;
+import org.example.JDDConfiguration;
 import org.example.models.LoginRequest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.extension.ExtendWith;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.Entity;
-import javax.ws.rs.core.Response;
-import java.util.List;
 
 @ExtendWith(DropwizardExtensionsSupport.class)
 public class AuthIntegrationTest {
-    private static final DropwizardAppExtension<TestConfiguration> APP =
-            new DropwizardAppExtension<>(TestApplication.class);
+    private static final DropwizardAppExtension<JDDConfiguration> APP =
+            new DropwizardAppExtension<>(JDDApplication.class);
 
     private static final String EMAIL   = System.getenv("LOGIN_EMAIL_1");
     private static final String PASSWORD  = System.getenv("LOGIN_PASSWORD_1");

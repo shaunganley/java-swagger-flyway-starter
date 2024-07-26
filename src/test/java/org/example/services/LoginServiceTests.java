@@ -32,8 +32,8 @@ class LoginServiceTests {
     DatabaseConnector databaseConnector = Mockito.mock(DatabaseConnector.class);
     AuthService authService = new AuthService(jwtKey, authDao, databaseConnector);
 
-    private static final String EMAIL   = System.getenv("LOGIN_EMAIL");
-    private static final String PASSWORD  = System.getenv("LOGIN_PASSWORD");
+    private static final String EMAIL   = System.getenv("LOGIN_EMAIL_1");
+    private static final String PASSWORD  = System.getenv("LOGIN_PASSWORD_1");
 
     LoginRequest loginRequest = new LoginRequest(
             EMAIL,

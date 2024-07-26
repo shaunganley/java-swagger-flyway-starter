@@ -7,38 +7,44 @@ import io.federecio.dropwizard.swagger.SwaggerBundle;
 import io.federecio.dropwizard.swagger.SwaggerBundleConfiguration;
 import io.jsonwebtoken.Jwts;
 import org.example.controllers.AuthController;
+import org.example.controllers.JobRoleController;
 import org.example.daos.AuthDao;
 import org.example.daos.DatabaseConnector;
+import org.example.daos.JobRoleDao;
 import org.example.services.AuthService;
+import org.example.services.JobRoleService;
 
 import java.security.Key;
 
-public class TestApplication extends Application<TestConfiguration> {
+public class JDDApplication extends Application<JDDConfiguration> {
     public static void main(final String[] args) throws Exception {
-        new TestApplication().run(args);
+        new JDDApplication().run(args);
     }
     @Override
     public String getName() {
-        return "Test";
+        return "JDD";
     }
     @Override
-    public void initialize(final Bootstrap<TestConfiguration> bootstrap) {
+    public void initialize(final Bootstrap<JDDConfiguration> bootstrap) {
         bootstrap.addBundle(new SwaggerBundle<>() {
             @Override
             protected SwaggerBundleConfiguration getSwaggerBundleConfiguration(
-                    final TestConfiguration configuration) {
+                    final JDDConfiguration configuration) {
                 return configuration.getSwagger();
             }
         });
     }
     @Override
-    public void run(final TestConfiguration configuration,
+    public void run(final JDDConfiguration configuration,
                     final Environment environment) {
         Key jwtKey = Jwts.SIG.HS256.key().build();
         DatabaseConnector databaseConnector = new DatabaseConnector();
         environment.jersey()
                 .register(new AuthController(new AuthService(
                         jwtKey, new AuthDao(), databaseConnector)));
+        environment.jersey()
+                .register(new JobRoleController(new JobRoleService(
+                        new JobRoleDao(), databaseConnector)));
     }
 
 }

@@ -11,13 +11,13 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>Test</name>
+    <name>JDD</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <dropwizard.version>2.0.23</dropwizard.version>
-        <mainClass>org.example.TestApplication</mainClass>
+        <dropwizard.version>2.0.3</dropwizard.version>
+        <mainClass>org.example.JDDApplication</mainClass>
     </properties>
 
     <dependencyManagement>
@@ -36,7 +36,6 @@
         <dependency>
             <groupId>io.dropwizard</groupId>
             <artifactId>dropwizard-core</artifactId>
-
         </dependency>
         <dependency>
             <groupId>org.flywaydb</groupId>
@@ -105,6 +104,7 @@
             <artifactId>jbcrypt</artifactId>
             <version>0.4</version>
         </dependency>
+
         <dependency>
             <groupId>io.dropwizard</groupId>
             <artifactId>dropwizard-testing</artifactId>
@@ -127,6 +127,7 @@
             <version>1.9.3</version>
             <scope>test</scope>
         </dependency>
+
 
     </dependencies>
 
