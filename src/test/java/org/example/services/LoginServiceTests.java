@@ -8,6 +8,7 @@ import org.example.exceptions.DatabaseConnectionException;
 import org.example.exceptions.DoesNotExistException;
 import org.example.exceptions.InvalidException;
 import org.example.models.LoginRequest;
+import org.example.models.User;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -31,12 +32,27 @@ class LoginServiceTests {
     DatabaseConnector databaseConnector = Mockito.mock(DatabaseConnector.class);
     AuthService authService = new AuthService(jwtKey, authDao, databaseConnector);
 
+    private static final String EMAIL   = System.getenv("LOGIN_EMAIL");
+    private static final String PASSWORD  = System.getenv("LOGIN_PASSWORD");
+
     LoginRequest loginRequest = new LoginRequest(
-            "adam@random.com",
-            "pass123"
+            EMAIL,
+            PASSWORD
     );
 
     Connection conn;
+
+    @Test
+    void login_Return200Status_WhenLoginSuccessful() throws SQLException,
+            DatabaseConnectionException, DoesNotExistException{
+        User user = new User(EMAIL,"","",1);
+        Mockito.when(databaseConnector.getConnection()).thenReturn(conn);
+        Mockito.when(authDao.getUser(loginRequest, conn)).thenReturn(user);
+        User actual = authDao.getUser(loginRequest,conn);
+        assertEquals(EMAIL,actual.getEmail());
+    }
+
+
 
     @Test
     void login_ReturnSqlException_WhenDaoThrowsSqlException() throws

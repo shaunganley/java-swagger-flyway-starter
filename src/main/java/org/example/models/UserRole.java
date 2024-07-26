@@ -3,7 +3,7 @@ package org.example.models;
 import java.util.Map;
 
 public class UserRole {
-    public static final String ADMIN = "admin";
+    public static final String ADMIN = "ADMIN";
     public static final String USER = "USER";
     int roleId;
 
