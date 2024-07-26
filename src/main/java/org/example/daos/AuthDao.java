@@ -14,6 +14,10 @@ import java.sql.SQLException;
 
 public class AuthDao {
 
+    private static final String EMAIL1   = System.getenv("LOGIN_EMAIL_1");
+    private static final String PASSWORD1  = System.getenv("LOGIN_PASSWORD_1");
+    private static final String EMAIL2   = System.getenv("LOGIN_EMAIL_2");
+    private static final String PASSWORD2  = System.getenv("LOGIN_PASSWORD_2");
     public User getUser(final LoginRequest loginRequest, final Connection c)
             throws SQLException, DatabaseConnectionException,
             DoesNotExistException {
@@ -40,6 +44,7 @@ public class AuthDao {
         throw new DoesNotExistException(Entity.USER); //user not found
     }
 
+    @SuppressWarnings("checkstyle:EmptyStatement")
     public void generateUsers(final Connection c) throws SQLException,
             DatabaseConnectionException {
 
@@ -48,14 +53,11 @@ public class AuthDao {
                         + "VALUES (?,?,?,?)";
 
         PreparedStatement st = c.prepareStatement(insertStatement);
-
-        String email1 = "eoghan@random.com";
         String salt1 = BCrypt.gensalt();
-        String password1 = "password321";
-        String hashedAndSaltedPassword1 = BCrypt.hashpw(password1, salt1);
+        String hashedAndSaltedPassword1 = BCrypt.hashpw(PASSWORD1, salt1);
         int roleId1 = 1;
 
-        st.setString(1, email1);
+        st.setString(1, EMAIL1);
         st.setString(2, salt1);
         st.setString(3, hashedAndSaltedPassword1);
         st.setInt(4, roleId1);
@@ -64,13 +66,11 @@ public class AuthDao {
 
         st = c.prepareStatement(insertStatement);
 
-        String email2 = "adam@random.com";
         String salt2 = BCrypt.gensalt();
-        String password2 = "pass123";
-        String hashedAndSaltedPassword2 = BCrypt.hashpw(password2, salt2);
+        String hashedAndSaltedPassword2 = BCrypt.hashpw(PASSWORD2, salt2);
         int roleId2 = 2;
 
-        st.setString(1, email2);
+        st.setString(1, EMAIL2);
         st.setString(2, salt2);
         st.setString(3, hashedAndSaltedPassword2);
         st.setInt(4, roleId2);

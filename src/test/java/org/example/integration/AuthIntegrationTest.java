@@ -18,14 +18,18 @@ public class AuthIntegrationTest {
     private static final DropwizardAppExtension<TestConfiguration> APP =
             new DropwizardAppExtension<>(TestApplication.class);
 
-    private static final String EMAIL   = System.getenv("LOGIN_EMAIL");
-    private static final String PASSWORD  = System.getenv("LOGIN_PASSWORD");
+    private static final String EMAIL   = System.getenv("LOGIN_EMAIL_1");
+    private static final String PASSWORD  = System.getenv("LOGIN_PASSWORD_1");
 
     @Test
     void login_shouldLogUserIn() {
         LoginRequest loginRequest = new LoginRequest(
                 EMAIL,
                 PASSWORD
+        );
+        LoginRequest loginRequest2 = new LoginRequest(
+                "notreal@random.com",
+                "password321"
         );
         Client client = APP.client();
         int status = client
