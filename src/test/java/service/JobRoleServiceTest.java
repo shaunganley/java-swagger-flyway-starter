@@ -3,6 +3,7 @@ package service;
 import org.example.daos.DatabaseConnector;
 import org.example.daos.JobRoleDao;
 import org.example.models.JobRole;
+import org.example.models.JobRoleResponse;
 import org.example.services.JobRoleService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -29,7 +30,7 @@ class JobRoleServiceTest {
 
     @Test
     void getAllRoles_ShouldReturnRoles() throws SQLException {
-        List<JobRole> jobRolesList = new ArrayList<JobRole>();
+        List<JobRoleResponse> jobRolesList = new ArrayList<>();
 
         Mockito.when(mockDatabaseConnector.getConnection()).thenReturn(conn);
         Mockito.when(mockJobRoleDao.getAllJobRoles(conn)).thenReturn(jobRolesList);

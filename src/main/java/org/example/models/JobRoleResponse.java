@@ -1,50 +1,29 @@
 package org.example.models;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import java.util.Date;
 
-public class JobRole {
+public class JobRoleResponse {
 
-    @JsonProperty
     private int id;
 
-    @JsonProperty
     private String roleName;
 
-    @JsonProperty
     private String location;
 
-    @JsonProperty
     private String capability;
 
-    @JsonProperty
     private String band;
 
-    @JsonProperty
     private Date closingDate;
 
-    @JsonProperty
     private String status;
 
-    @JsonProperty
-    private String description;
-
-    @JsonProperty
-    private String responsibilities;
-
-    @JsonProperty
-    private String jobSpec;
-
-    public JobRole(final int id, final String roleName,
+    public JobRoleResponse(final int id, final String roleName,
                    final String location,
                    final String capability,
                    final String band,
                    final Date closingDate,
-                   final String status,
-                   final String description,
-                   final String responsibilities,
-                   final String jobSpec) {
+                   final String status) {
         this.id = id;
         this.roleName = roleName;
         this.location = location;
@@ -52,9 +31,6 @@ public class JobRole {
         this.band = band;
         this.closingDate = closingDate;
         this.status = status;
-        this.description = description;
-        this.responsibilities = responsibilities;
-        this.jobSpec = jobSpec;
     }
 
     public int getId() {
@@ -111,29 +87,5 @@ public class JobRole {
 
     public void setStatus(final String status) {
         this.status = status;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(final String description) {
-        this.description = description;
-    }
-
-    public String getResponsibilities() {
-        return responsibilities;
-    }
-
-    public void setResponsibilities(final String responsibilities) {
-        this.responsibilities = responsibilities;
-    }
-
-    public String getJobSpec() {
-        return jobSpec;
-    }
-
-    public void setJobSpec(final String jobSpec) {
-        this.jobSpec = jobSpec;
     }
 }

@@ -2,6 +2,7 @@ package controller;
 
 import org.example.controllers.JobRoleController;
 import org.example.models.JobRole;
+import org.example.models.JobRoleResponse;
 import org.example.services.JobRoleService;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -23,7 +24,7 @@ public class JobRoleControllerTest {
 
     @Test
     void GetJobRolesShouldReturnJobRoles() throws SQLException {
-        List<JobRole> jobRolesList = new ArrayList<>();
+        List<JobRoleResponse> jobRolesList = new ArrayList<>();
 
         when(jobRoleService.getAllRoles()).thenReturn(jobRolesList);
 
