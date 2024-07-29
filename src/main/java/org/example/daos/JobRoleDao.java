@@ -64,7 +64,7 @@ public class JobRoleDao {
                 + "jr.closing_date AS ClosingDate, "
                 + "jr.description AS Description, "
                 + "jr.responsibilities AS Responsibilities, "
-                + "jr.job_spec AS JobSpecLink "
+                + "jr.job_spec AS JobSpec "
                 + "FROM jobRoles jr "
                 + "INNER JOIN location l ON jr.location_id = l.id "
                 + "INNER JOIN capability c ON jr.capability_id = c.id "
@@ -86,7 +86,7 @@ public class JobRoleDao {
                             "open",
                             resultSet.getString("Description"),
                             resultSet.getString("Responsibilities"),
-                            resultSet.getString("JobSpecLink")
+                            resultSet.getString("JobSpec")
                     );
                 }
             }
