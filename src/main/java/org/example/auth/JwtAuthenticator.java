@@ -11,14 +11,15 @@ import java.util.Optional;
 
 public class JwtAuthenticator implements Authenticator<String, JwtToken> {
 
-    Key key;
+    final Key key;
 
     public JwtAuthenticator(final Key key) {
         this.key = key;
     }
 
-    public Optional<JwtToken> authenticate(final String token) throws
-            AuthenticationException {
+    @Override
+    public Optional<JwtToken> authenticate(final String  token)
+            throws AuthenticationException {
         try {
             Integer roleId = Jwts.parser()
                     .setSigningKey(key)
@@ -26,6 +27,7 @@ public class JwtAuthenticator implements Authenticator<String, JwtToken> {
                     .parseSignedClaims(token)
                     .getPayload()
                     .get("Role", Integer.class);
+
             JwtToken jwtToken = new JwtToken(new UserRole(roleId));
 
             return Optional.of(jwtToken);

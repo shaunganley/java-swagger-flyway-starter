@@ -21,7 +21,6 @@ import org.example.services.AuthService;
 import org.example.services.JobRoleService;
 import org.glassfish.jersey.server.filter.RolesAllowedDynamicFeature;
 
-import javax.management.relation.Role;
 import java.security.Key;
 
 public class JDDApplication extends Application<JDDConfiguration> {
@@ -50,13 +49,14 @@ public class JDDApplication extends Application<JDDConfiguration> {
 
         environment.jersey().register(new AuthDynamicFeature(
                 new OAuthCredentialAuthFilter.Builder<JwtToken>()
-                .setAuthenticator(new JwtAuthenticator(jwtKey))
-                .setAuthorizer(new RoleAuthoriser())
-                .setPrefix("Bearer")
-                .buildAuthFilter()));
+                        .setAuthenticator(new JwtAuthenticator(jwtKey))
+                        .setAuthorizer(new RoleAuthoriser())
+                        .setPrefix("Bearer")
+                        .buildAuthFilter()));
         environment.jersey().register(RolesAllowedDynamicFeature.class);
-        environment.jersey().register(new AuthValueFactoryProvider.Binder<>(
-                JwtToken.class));
+        environment.jersey()
+                .register(new AuthValueFactoryProvider
+                        .Binder<>(JwtToken.class));
 
         environment.jersey()
                 .register(new AuthController(new AuthService(
