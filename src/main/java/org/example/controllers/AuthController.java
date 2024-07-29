@@ -39,18 +39,5 @@ public class AuthController {
         }
     }
 
-    @POST
-    @Path("/register")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response register(User user) {
-        try {
-            return Response.ok().entity(authService.register(user))
-                    .build();
-        } catch (SQLException e) {
-            return Response.serverError().build();
-        } catch (FailedToCreateException e) {
-            return Response.status(Response.Status.BAD_REQUEST)
-                    .entity(e.getMessage()).build();
-        }
-    }
+
 }

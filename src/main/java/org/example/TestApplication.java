@@ -18,6 +18,9 @@ import org.example.services.JobRoleService;
 
 import java.security.Key;
 
+import static org.example.PasswordUtils.checkPassword;
+import static org.example.PasswordUtils.hashPassword;
+
 
 public class TestApplication extends Application<TestConfiguration> {
     public static void main(final String[] args) throws Exception {

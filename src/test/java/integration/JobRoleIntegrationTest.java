@@ -22,7 +22,7 @@ public class JobRoleIntegrationTest {
         Client client = APP.client();
 
         List<JobRole> response = client
-                .target("http://localhost:8080/api/job-roles")
+                .target("http://localhost:8080/api/job-roles/get-all")
                 .request()
                 .get(List.class);
 

@@ -30,7 +30,7 @@ public class AuthService {
         User user = authDao.getUser(loginRequest);
 
         if (user == null) {
-            throw new InvalidException(Entity.USER, "Invalid Credentials");
+            throw new InvalidException(Entity.USER, ": Invalid Credentials");
         }
 
         return generateJwtToken(user);
@@ -47,13 +47,4 @@ public class AuthService {
                 .compact();
     }
 
-    public String register(final User user)
-            throws SQLException, FailedToCreateException {
-        String username = authDao.registerUser(user);
-
-        if (username == null) {
-            throw new FailedToCreateException(Entity.USER);
-        }
-        return username;
-    }
 }
