@@ -66,7 +66,7 @@ public class JobRoleControllerTest {
     void getJobRoleById_ShouldReturnJobRole()
             throws SQLException, DoesNotExistException,
             InvalidException, FormatException {
-        String id = "3";
+        int id = 3;
         when(jobRoleService.getJobRoleById(id)).thenReturn(jobRole);
 
         Response re = jobRoleController.getJobRoleById(id);
@@ -75,23 +75,23 @@ public class JobRoleControllerTest {
         assertEquals(jobRole, re.getEntity());
     }
 
-    @Test
+   /* @Test
     void getJobRoleById_ShouldReturn400WhenServiceThrowsFormatException()
             throws SQLException, DoesNotExistException,
             InvalidException, FormatException {
-        String id = "sdfhkjsd";
+        int id = sdfhkjsd;
         when(jobRoleService.getJobRoleById(id)).thenThrow(FormatException.class);
 
         Response re = jobRoleController.getJobRoleById(id);
 
         assertEquals(400, re.getStatus());
-    }
+    */
 
     @Test
     void getJobRoleById_ShouldReturn400WhenServiceThrowsInvalidException()
             throws SQLException, DoesNotExistException,
             InvalidException, FormatException {
-        String id = "-6";
+        int id = -6;
         when(jobRoleService.getJobRoleById(id)).thenThrow(InvalidException.class);
 
         Response re = jobRoleController.getJobRoleById(id);
@@ -103,7 +103,7 @@ public class JobRoleControllerTest {
     void getJobRoleById_ShouldReturn404WhenServiceThrowsDoesNotExistException()
             throws SQLException, DoesNotExistException,
             InvalidException, FormatException {
-        String id = "2000";
+        int id = 2000;
         when(jobRoleService.getJobRoleById(id)).thenThrow(DoesNotExistException.class);
 
         Response re = jobRoleController.getJobRoleById(id);
@@ -115,7 +115,7 @@ public class JobRoleControllerTest {
     void getJobRoleById_ShouldReturn500WhenServiceThrowsSQLException()
             throws SQLException, DoesNotExistException,
             InvalidException, FormatException {
-        String id = "1";
+        int id = 1;
         when(jobRoleService.getJobRoleById(id)).thenThrow(SQLException.class);
 
         Response re = jobRoleController.getJobRoleById(id);

@@ -40,7 +40,7 @@ public class JobRoleController {
     @GET
     @Path("/job-roles/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getJobRoleById(@PathParam("id") final String id) {
+    public Response getJobRoleById(@PathParam("id") final int id) {
         try {
             return Response.ok().entity(
                     jobRoleService.getJobRoleById(id)).build();

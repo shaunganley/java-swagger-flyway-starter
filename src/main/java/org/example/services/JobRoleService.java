@@ -30,20 +30,18 @@ public class JobRoleService {
                 roleDao.getAllJobRoles(databaseConnector.getConnection()));
     }
 
-    public JobRole getJobRoleById(final String detailId)
+    public JobRole getJobRoleById(final int detailId)
             throws SQLException, FormatException,
             DoesNotExistException, InvalidException {
-        try {
-            int testDetailId = Integer.parseInt(detailId);
+        try {;
         } catch (java.lang.NumberFormatException e) {
             throw new FormatException(Entity.ROLEDETAIL);
         }
 
-        int finalDetailId = Integer.parseInt(detailId);
-        JobRole jobRole = roleDao.getJobRoleById(finalDetailId,
+        JobRole jobRole = roleDao.getJobRoleById(detailId,
                 databaseConnector.getConnection());
 
-        if (finalDetailId <= 0) {
+        if (detailId == 0) {
             throw new InvalidException(Entity.ROLEDETAIL);
         } else if (jobRole == null) {
             throw new DoesNotExistException(Entity.ROLEDETAIL);
