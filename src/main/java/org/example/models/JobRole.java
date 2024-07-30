@@ -4,7 +4,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Date;
 
-public final class JobRole {
+public class JobRole {
+
+    public JobRole() {
+    };
 
     @JsonProperty
     private int id;
