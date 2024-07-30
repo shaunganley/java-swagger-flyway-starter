@@ -2,7 +2,7 @@ package org.example.exceptions;
 
 public class InvalidException extends Throwable {
 
-    public InvalidException(Entity entity, String reason) {
+    public InvalidException(final Entity entity, final String reason) {
         super(entity.getEntity() + " is not valid" + reason);
     }
 }

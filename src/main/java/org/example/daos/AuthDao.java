@@ -11,11 +11,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class AuthDao {
-    DatabaseConnector databaseConnector = new DatabaseConnector();
+    private DatabaseConnector databaseConnector = new DatabaseConnector();
 
-    public User getUser(LoginRequest loginRequest) throws SQLException {
+    public User getUser(final LoginRequest loginRequest) throws SQLException {
         try (Connection connection = databaseConnector.getConnection()) {
-            String query = "SELECT username, password, loginID FROM User WHERE username = ?;";
+            String query = "SELECT username, password, "
+            + "loginID FROM User WHERE username = ?;";
             PreparedStatement statement = connection.prepareStatement(query);
 
             statement.setString(1, loginRequest.getUsername());
@@ -25,7 +26,8 @@ public class AuthDao {
             if (resultSet.next()) {
                 String storedPasswordHash = resultSet.getString("password");
 
-                System.out.println("hash from db: " + storedPasswordHash);
+                System.out.println("hash from db: "
+                        + storedPasswordHash);
 
                 if (BCrypt.checkpw(loginRequest.getPassword(), storedPasswordHash)) {
 

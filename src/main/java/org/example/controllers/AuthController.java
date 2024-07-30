@@ -1,10 +1,8 @@
 package org.example.controllers;
 
 import io.swagger.annotations.Api;
-import org.example.exceptions.FailedToCreateException;
 import org.example.exceptions.InvalidException;
 import org.example.models.LoginRequest;
-import org.example.models.User;
 import org.example.services.AuthService;
 
 import javax.ws.rs.POST;
@@ -18,16 +16,16 @@ import java.sql.SQLException;
 @Path("/api/auth")
 public class AuthController {
 
-    AuthService authService;
+   private AuthService authService;
 
-    public AuthController(AuthService authService) {
+    public AuthController(final AuthService authService) {
         this.authService = authService;
     }
 
     @POST
     @Path("/login")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response login(LoginRequest loginRequest) {
+    public Response login(final LoginRequest loginRequest) {
         try {
             return Response.ok().entity(authService.login(loginRequest))
                     .build();
