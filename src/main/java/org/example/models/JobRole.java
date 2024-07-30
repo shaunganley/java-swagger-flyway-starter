@@ -27,7 +27,8 @@ public class JobRole {
     @JsonProperty
     private String status;
 
-    public JobRole(final int id, final String roleName,
+    public JobRole(final int id,
+                   final String roleName,
                    final String location,
                    final String capability,
                    final String band,
