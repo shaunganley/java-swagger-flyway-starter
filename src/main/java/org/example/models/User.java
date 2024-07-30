@@ -11,7 +11,8 @@ public class User {
     public User() {
     }
 
-    public User(final String username, final String password, final int loginID) {
+    public User(final String username, final String password,
+                final int loginID) {
         this.username = username;
         this.password = password;
         this.loginID = loginID;
