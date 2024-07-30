@@ -2,7 +2,6 @@ package org.example.controllers;
 
 import io.swagger.annotations.Api;
 import org.example.exceptions.DoesNotExistException;
-import org.example.exceptions.FormatException;
 import org.example.exceptions.InvalidException;
 import org.example.services.JobRoleService;
 
@@ -44,9 +43,6 @@ public class JobRoleController {
         try {
             return Response.ok().entity(
                     jobRoleService.getJobRoleById(id)).build();
-        } catch (FormatException e) {
-            return Response.status(
-                    Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
         } catch (InvalidException e) {
             return Response.status(
                     Response.Status.BAD_REQUEST).entity(e.getMessage()).build();

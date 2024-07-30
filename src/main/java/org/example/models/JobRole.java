@@ -57,6 +57,9 @@ public class JobRole {
         this.jobSpec = jobSpec;
     }
 
+    public JobRole() {
+    };
+
     public int getId() {
         return id;
     }
@@ -135,5 +138,9 @@ public class JobRole {
 
     public void setJobSpec(final String jobSpec) {
         this.jobSpec = jobSpec;
+    }
+
+    public int compareTo(JobRole o) {
+        return 0;
     }
 }

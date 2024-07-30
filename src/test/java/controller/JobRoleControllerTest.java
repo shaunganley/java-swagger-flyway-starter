@@ -2,7 +2,6 @@ package controller;
 
 import org.example.controllers.JobRoleController;
 import org.example.exceptions.DoesNotExistException;
-import org.example.exceptions.FormatException;
 import org.example.exceptions.InvalidException;
 import org.example.models.JobRole;
 import org.example.models.JobRoleResponse;
@@ -65,7 +64,7 @@ public class JobRoleControllerTest {
     @Test
     void getJobRoleById_ShouldReturnJobRole()
             throws SQLException, DoesNotExistException,
-            InvalidException, FormatException {
+            InvalidException {
         int id = 3;
         when(jobRoleService.getJobRoleById(id)).thenReturn(jobRole);
 
@@ -75,22 +74,10 @@ public class JobRoleControllerTest {
         assertEquals(jobRole, re.getEntity());
     }
 
-   /* @Test
-    void getJobRoleById_ShouldReturn400WhenServiceThrowsFormatException()
-            throws SQLException, DoesNotExistException,
-            InvalidException, FormatException {
-        int id = sdfhkjsd;
-        when(jobRoleService.getJobRoleById(id)).thenThrow(FormatException.class);
-
-        Response re = jobRoleController.getJobRoleById(id);
-
-        assertEquals(400, re.getStatus());
-    */
-
     @Test
     void getJobRoleById_ShouldReturn400WhenServiceThrowsInvalidException()
             throws SQLException, DoesNotExistException,
-            InvalidException, FormatException {
+            InvalidException {
         int id = -6;
         when(jobRoleService.getJobRoleById(id)).thenThrow(InvalidException.class);
 
@@ -102,7 +89,7 @@ public class JobRoleControllerTest {
     @Test
     void getJobRoleById_ShouldReturn404WhenServiceThrowsDoesNotExistException()
             throws SQLException, DoesNotExistException,
-            InvalidException, FormatException {
+            InvalidException {
         int id = 2000;
         when(jobRoleService.getJobRoleById(id)).thenThrow(DoesNotExistException.class);
 
@@ -114,7 +101,7 @@ public class JobRoleControllerTest {
     @Test
     void getJobRoleById_ShouldReturn500WhenServiceThrowsSQLException()
             throws SQLException, DoesNotExistException,
-            InvalidException, FormatException {
+            InvalidException {
         int id = 1;
         when(jobRoleService.getJobRoleById(id)).thenThrow(SQLException.class);
 

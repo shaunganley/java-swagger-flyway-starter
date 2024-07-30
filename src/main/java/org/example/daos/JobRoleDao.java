@@ -2,7 +2,6 @@
 package org.example.daos;
 
 import org.example.exceptions.DoesNotExistException;
-import org.example.exceptions.FormatException;
 import org.example.exceptions.InvalidException;
 import org.example.models.JobRole;
 
@@ -47,8 +46,7 @@ public class JobRoleDao {
     }
     public JobRole getJobRoleById(final int id,
                                   final Connection connection)
-        throws SQLException, DoesNotExistException, InvalidException,
-            FormatException {
+        throws SQLException, DoesNotExistException, InvalidException {
         String query =
                 "SELECT id, roleName, location, "
                         + "capability, band, "

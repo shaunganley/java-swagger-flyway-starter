@@ -4,7 +4,6 @@ import org.example.daos.DatabaseConnector;
 import org.example.daos.JobRoleDao;
 import org.example.exceptions.DoesNotExistException;
 import org.example.exceptions.Entity;
-import org.example.exceptions.FormatException;
 import org.example.exceptions.InvalidException;
 import org.example.mappers.JobRoleMapper;
 import org.example.models.JobRole;
@@ -31,12 +30,8 @@ public class JobRoleService {
     }
 
     public JobRole getJobRoleById(final int detailId)
-            throws SQLException, FormatException,
-            DoesNotExistException, InvalidException {
-        try {;
-        } catch (java.lang.NumberFormatException e) {
-            throw new FormatException(Entity.ROLEDETAIL);
-        }
+            throws SQLException, DoesNotExistException,
+            InvalidException {
 
         JobRole jobRole = roleDao.getJobRoleById(detailId,
                 databaseConnector.getConnection());

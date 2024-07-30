@@ -3,7 +3,6 @@ package service;
 import org.example.daos.DatabaseConnector;
 import org.example.daos.JobRoleDao;
 import org.example.exceptions.DoesNotExistException;
-import org.example.exceptions.FormatException;
 import org.example.exceptions.InvalidException;
 import org.example.models.JobRole;
 import org.example.services.JobRoleService;
@@ -33,8 +32,7 @@ class JobRoleServiceTest {
     Connection conn;
 
     @Test
-    void getAllRoles_ShouldReturnRoles()
-            throws SQLException {
+    void getAllRoles_ShouldReturnRoles() throws SQLException {
         List<JobRole> jobRolesList = new ArrayList<JobRole>();
 
         Mockito.when(mockDatabaseConnector.getConnection()).thenReturn(conn);
@@ -71,7 +69,7 @@ class JobRoleServiceTest {
     @Test
     void getJobRoleById_ShouldReturnJobRole()
             throws SQLException, DoesNotExistException,
-            InvalidException, FormatException {
+            InvalidException {
         int id = 3;
         Mockito.when(mockDatabaseConnector.getConnection()).thenReturn(conn);
         Mockito.when(mockJobRoleDao.getJobRoleById(id, conn)).thenReturn(jobRole);
@@ -81,8 +79,7 @@ class JobRoleServiceTest {
 
     @Test
     void getJobRoleById_ShouldThrowInvalidExceptionWhenDaoThrowsInvalidException()
-            throws SQLException, InvalidException, DoesNotExistException,
-            FormatException {
+            throws SQLException, InvalidException, DoesNotExistException {
         int id = -6;
         Mockito.when(mockDatabaseConnector.getConnection()).thenReturn(conn);
         Mockito.when(mockJobRoleDao.getJobRoleById(id, conn)).thenThrow(InvalidException.class);
@@ -93,8 +90,7 @@ class JobRoleServiceTest {
 
     @Test
     void getJobRoleById_ShouldThrowDoesNotExistExceptionWhenDaoThrowsDoesNotExistException()
-            throws SQLException, DoesNotExistException, InvalidException,
-            FormatException {
+            throws SQLException, DoesNotExistException, InvalidException {
         int id = 1000;
         Mockito.when(mockDatabaseConnector.getConnection()).thenReturn(conn);
         Mockito.when(mockJobRoleDao.getJobRoleById(id, conn)).thenReturn(null);
@@ -105,8 +101,7 @@ class JobRoleServiceTest {
 
     @Test
     void getJobRoleById_ShouldThrowSQLExceptionWhenDaoThrowsSQLException()
-            throws SQLException, DoesNotExistException, InvalidException,
-            FormatException {
+            throws SQLException, DoesNotExistException, InvalidException {
         int id = 1;
         Mockito.when(mockDatabaseConnector.getConnection()).thenReturn(conn);
         Mockito.when(mockJobRoleDao.getJobRoleById(id, conn)).thenThrow(SQLException.class);
