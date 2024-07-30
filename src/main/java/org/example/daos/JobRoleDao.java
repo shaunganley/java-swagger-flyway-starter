@@ -18,8 +18,10 @@ public class JobRoleDao {
             Statement statement = connection.createStatement();
 
             ResultSet resultSet = statement.executeQuery(
-                    "SELECT id, roleName, location, capability, band, "
-                            + "closingDate, status FROM `Role` where status='open';");
+                    "SELECT id, roleName, location, "
+                            + "capability, band, "
+                            + "closingDate, status FROM `Role` "
+                            + "where status='open';");
             while (resultSet.next()) {
                 JobRole role = new JobRole(
                         resultSet.getInt("id"),

@@ -1,6 +1,5 @@
 package org.example;
 
-
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
@@ -44,9 +43,11 @@ public class TestApplication extends Application<TestConfiguration> {
         DatabaseConnector databaseConnector = new DatabaseConnector();
         environment.jersey()
                 .register(new JobRoleController(
-                        new JobRoleService(new JobRoleDao(), databaseConnector)));
+                            new JobRoleService(
+                                new JobRoleDao(), databaseConnector)));
         environment.jersey()
-                .register(new AuthController(new AuthService(new AuthDao(), jwtKey)));
+                .register(new AuthController(
+                            new AuthService(
+                                    new AuthDao(), jwtKey)));
     }
-
 }

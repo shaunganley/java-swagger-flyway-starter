@@ -28,8 +28,10 @@ public class JobRole {
     private String status;
 
     public JobRole(final int id, final String roleName,
-                   final String location, final String capability,
-                   final String band, final Date closingDate,
+                   final String location,
+                   final String capability,
+                   final String band,
+                   final Date closingDate,
                    final String status) {
         this.id = id;
         this.roleName = roleName;
@@ -44,7 +46,7 @@ public class JobRole {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(final int id) {
         this.id = id;
     }
 
@@ -52,7 +54,7 @@ public class JobRole {
         return roleName;
     }
 
-    public void setRoleName(String roleName) {
+    public void setRoleName(final String roleName) {
         this.roleName = roleName;
     }
 
@@ -60,7 +62,7 @@ public class JobRole {
         return capability;
     }
 
-    public void setCapability(String capability) {
+    public void setCapability(final String capability) {
         this.capability = capability;
     }
 
@@ -68,7 +70,7 @@ public class JobRole {
         return location;
     }
 
-    public void setLocation(String location) {
+    public void setLocation(final String location) {
         this.location = location;
     }
 
@@ -76,7 +78,7 @@ public class JobRole {
         return band;
     }
 
-    public void setBand(String band) {
+    public void setBand(final String band) {
         this.band = band;
     }
 
@@ -84,7 +86,7 @@ public class JobRole {
         return closingDate;
     }
 
-    public void setClosingDate(Date closingDate) {
+    public void setClosingDate(final Date closingDate) {
         this.closingDate = closingDate;
     }
 
@@ -92,7 +94,7 @@ public class JobRole {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(final String status) {
         this.status = status;
     }
 }

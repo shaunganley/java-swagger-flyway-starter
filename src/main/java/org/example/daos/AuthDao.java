@@ -29,7 +29,8 @@ public class AuthDao {
                 System.out.println("hash from db: "
                         + storedPasswordHash);
 
-                if (BCrypt.checkpw(loginRequest.getPassword(), storedPasswordHash)) {
+                if (BCrypt.checkpw(loginRequest.getPassword(),
+                        storedPasswordHash)) {
 
                     return new User(
                             resultSet.getString("username"),

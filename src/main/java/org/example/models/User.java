@@ -11,7 +11,7 @@ public class User {
     public User() {
     }
 
-    public User(String username, String password, int loginID) {
+    public User(final String username, final String password, final int loginID) {
         this.username = username;
         this.password = password;
         this.loginID = loginID;
@@ -21,7 +21,7 @@ public class User {
         return username;
     }
 
-    public void setUsername(String username) {
+    public void setUsername(final String username) {
         this.username = username;
     }
 
@@ -29,7 +29,7 @@ public class User {
         return password;
     }
 
-    public void setPassword(String password) {
+    public void setPassword(final String password) {
         this.password = password;
     }
 
@@ -37,7 +37,7 @@ public class User {
         return loginID;
     }
 
-    public void setLoginID(int loginID) {
+    public void setLoginID(final int loginID) {
         this.loginID = loginID;
     }
 }

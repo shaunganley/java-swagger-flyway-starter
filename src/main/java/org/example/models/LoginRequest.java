@@ -10,8 +10,8 @@ public class LoginRequest {
 
     @JsonCreator
     public LoginRequest(
-            @JsonProperty("username") String username,
-            @JsonProperty("password") String password) {
+            @JsonProperty("username") final String username,
+            @JsonProperty("password") final String password) {
         this.username = username;
         this.password = password;
     }
@@ -20,15 +20,14 @@ public class LoginRequest {
         return username;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUsername(final String username) {this.username = username;
     }
 
     public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
+    public void setPassword(final String password) {
         this.password = password;
     }
 }
