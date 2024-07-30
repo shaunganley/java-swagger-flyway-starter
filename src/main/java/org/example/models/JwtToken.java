@@ -1,6 +1,5 @@
 package org.example.models;
 
-
 import javax.security.auth.Subject;
 import java.security.Principal;
 

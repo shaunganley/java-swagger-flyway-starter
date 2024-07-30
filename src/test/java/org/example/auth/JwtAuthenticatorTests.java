@@ -7,14 +7,8 @@ import org.example.models.JwtToken;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
-import org.mockito.Mockito;
 
 import javax.crypto.spec.SecretKeySpec;
-import javax.swing.text.html.Option;
-import javax.ws.rs.client.Client;
-import javax.ws.rs.client.Entity;
-import javax.ws.rs.core.Response;
 import java.security.Key;
 import java.util.Date;
 import java.util.Optional;
@@ -36,18 +30,19 @@ public class JwtAuthenticatorTests {
         // Create a JWT token with the correct key
         String token = Jwts.builder()
                 .claim("Role", 1)
-                .setSubject("User")
+                .setSubject("user")
                 .setIssuedAt(new Date())
-                .signWith(key, SignatureAlgorithm.HS256) // Specify the algorithm here
+                .signWith(key, SignatureAlgorithm.HS256)
                 .compact();
 
         try {
             Optional<JwtToken> result = jwtAuthenticator.authenticate(token);
             Assertions.assertTrue(result.isPresent());
-             Assertions.assertEquals(1,
+            Assertions.assertEquals(1,
                      result.get().getUserRole().getRoleId());
         } catch (AuthenticationException e) {
-            Assertions.fail("AuthenticationException should not be thrown for valid token");
+            Assertions.fail("AuthenticationException should not be thrown "
+                    + "for valid token");
         }
     }
 
