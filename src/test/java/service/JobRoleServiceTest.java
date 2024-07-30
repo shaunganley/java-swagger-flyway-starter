@@ -81,7 +81,8 @@ class JobRoleServiceTest {
 
     @Test
     void getJobRoleById_ShouldThrowFormatExceptionWhenDaoThrowsFormatException()
-            throws SQLException, FormatException {
+            throws SQLException, FormatException, DoesNotExistException,
+            InvalidException {
         String id = "jksfhk";
         Mockito.when(mockDatabaseConnector.getConnection()).thenReturn(conn);
         Mockito.when(mockJobRoleDao.getJobRoleById(Integer.parseInt(id), conn)).thenThrow(FormatException.class);
@@ -92,7 +93,8 @@ class JobRoleServiceTest {
 
     @Test
     void getJobRoleById_ShouldThrowInvalidExceptionWhenDaoThrowsInvalidException()
-            throws SQLException, InvalidException {
+            throws SQLException, InvalidException, DoesNotExistException,
+            FormatException {
         int id = -6;
         Mockito.when(mockDatabaseConnector.getConnection()).thenReturn(conn);
         Mockito.when(mockJobRoleDao.getJobRoleById(id, conn)).thenThrow(InvalidException.class);
@@ -103,11 +105,11 @@ class JobRoleServiceTest {
 
     @Test
     void getJobRoleById_ShouldThrowDoesNotExistExceptionWhenDaoThrowsDoesNotExistException()
-            throws SQLException {
+            throws SQLException, DoesNotExistException, InvalidException,
+            FormatException {
         String id = "1000";
         Mockito.when(mockDatabaseConnector.getConnection()).thenReturn(conn);
         Mockito.when(mockJobRoleDao.getJobRoleById(Integer.parseInt(id), conn)).thenReturn(null);
-        System.out.println(e.ge);
 
         assertThrows(DoesNotExistException.class,
                 () -> jobRoleService.getJobRoleById(id));
@@ -115,7 +117,8 @@ class JobRoleServiceTest {
 
     @Test
     void getJobRoleById_ShouldThrowSQLExceptionWhenDaoThrowsSQLException()
-            throws SQLException {
+            throws SQLException, DoesNotExistException, InvalidException,
+            FormatException {
         String id = "1";
         Mockito.when(mockDatabaseConnector.getConnection()).thenReturn(conn);
         Mockito.when(mockJobRoleDao.getJobRoleById(Integer.parseInt(id), conn)).thenThrow(SQLException.class);
