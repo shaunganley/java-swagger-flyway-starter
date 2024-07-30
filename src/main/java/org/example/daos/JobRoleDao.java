@@ -1,6 +1,7 @@
 
 package org.example.daos;
 
+import org.example.exceptions.DoesNotExistException;
 import org.example.models.JobRole;
 
 import java.sql.Connection;
@@ -44,31 +45,31 @@ public class JobRoleDao {
     }
     public JobRole getJobRoleById(final int id,
                                   final Connection connection)
-            throws SQLException {
-            String query =
-                    "SELECT id, roleName, location, "
-                            + "capability, band, "
-                            + "closingDate, status, description, "
-                            + "responsibilities, jobSpec FROM `Role` "
-                            + "WHERE id=?;";
-            PreparedStatement statement = connection.prepareStatement(query);
+        throws SQLException {
+        String query =
+                "SELECT id, roleName, location, "
+                        + "capability, band, "
+                        + "closingDate, status, description, "
+                        + "responsibilities, jobSpec FROM `Role` "
+                        + "WHERE id=?;";
+        PreparedStatement statement = connection.prepareStatement(query);
 
-            statement.setInt(1, id);
+        statement.setInt(1, id);
 
-            ResultSet resultSet = statement.executeQuery();
+        ResultSet resultSet = statement.executeQuery();
 
-            while (resultSet.next()) {
-                return new JobRole(resultSet.getInt("id"),
-                        resultSet.getString("roleName"),
-                        resultSet.getString("location"),
-                        resultSet.getString("capability"),
-                        resultSet.getString("band"),
-                        resultSet.getDate("closingDate"),
-                        resultSet.getString("status"),
-                        resultSet.getString("description"),
-                        resultSet.getString("responsibilities"),
-                        resultSet.getString("jobSpec"));
-            }
+        while (resultSet.next()) {
+            return new JobRole(resultSet.getInt("id"),
+                    resultSet.getString("roleName"),
+                    resultSet.getString("location"),
+                    resultSet.getString("capability"),
+                    resultSet.getString("band"),
+                    resultSet.getDate("closingDate"),
+                    resultSet.getString("status"),
+                    resultSet.getString("description"),
+                    resultSet.getString("responsibilities"),
+                    resultSet.getString("jobSpec"));
+        }
         return null;
     }
 }

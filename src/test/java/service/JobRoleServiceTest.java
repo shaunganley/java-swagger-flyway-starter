@@ -2,8 +2,10 @@ package service;
 
 import org.example.daos.DatabaseConnector;
 import org.example.daos.JobRoleDao;
+import org.example.exceptions.DoesNotExistException;
+import org.example.exceptions.FormatException;
+import org.example.exceptions.InvalidException;
 import org.example.models.JobRole;
-import org.example.models.JobRoleResponse;
 import org.example.services.JobRoleService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -11,7 +13,9 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.SQLException;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,8 +33,9 @@ class JobRoleServiceTest {
     Connection conn;
 
     @Test
-    void getAllRoles_ShouldReturnRoles() throws SQLException {
-        List<JobRoleResponse> jobRolesList = new ArrayList<>();
+    void getAllRoles_ShouldReturnRoles()
+            throws SQLException {
+        List<JobRole> jobRolesList = new ArrayList<JobRole>();
 
         Mockito.when(mockDatabaseConnector.getConnection()).thenReturn(conn);
         Mockito.when(mockJobRoleDao.getAllJobRoles(conn)).thenReturn(jobRolesList);
@@ -39,12 +44,83 @@ class JobRoleServiceTest {
     }
 
     @Test
-    void getAllRoles_ShouldThrowSQLExceptionWhenDaoThrowsSQLException() throws SQLException {
+    void getAllRoles_ShouldThrowSQLExceptionWhenDaoThrowsSQLException()
+            throws SQLException {
 
         Mockito.when(mockDatabaseConnector.getConnection()).thenReturn(conn);
         Mockito.when(mockJobRoleDao.getAllJobRoles(conn)).thenThrow(SQLException.class);
 
         assertThrows(SQLException.class,
                 () -> jobRoleService.getAllRoles());
+    }
+
+
+    JobRole jobRole = new JobRole(
+            3,
+            "Farmer",
+            "higgensburgh",
+            "medium",
+            "20,000",
+            Date.from(Instant.parse("2000-01-01T00:00:00.000Z")),
+            "open",
+            "farm items",
+            "make sure corn picked",
+            "very specific"
+    );
+
+    @Test
+    void getJobRoleById_ShouldReturnJobRole()
+            throws SQLException, DoesNotExistException,
+            InvalidException, FormatException {
+        String id = "3";
+        Mockito.when(mockDatabaseConnector.getConnection()).thenReturn(conn);
+        Mockito.when(mockJobRoleDao.getJobRoleById(Integer.parseInt(id), conn)).thenReturn(jobRole);
+
+        assertEquals(jobRole, jobRoleService.getJobRoleById(id));
+    }
+
+    @Test
+    void getJobRoleById_ShouldThrowFormatExceptionWhenDaoThrowsFormatException()
+            throws SQLException, FormatException {
+        String id = "jksfhk";
+        Mockito.when(mockDatabaseConnector.getConnection()).thenReturn(conn);
+        Mockito.when(mockJobRoleDao.getJobRoleById(Integer.parseInt(id), conn)).thenThrow(FormatException.class);
+
+        assertThrows(FormatException.class,
+                () -> jobRoleService.getJobRoleById(id));
+    }
+
+    @Test
+    void getJobRoleById_ShouldThrowInvalidExceptionWhenDaoThrowsInvalidException()
+            throws SQLException, InvalidException {
+        int id = -6;
+        Mockito.when(mockDatabaseConnector.getConnection()).thenReturn(conn);
+        Mockito.when(mockJobRoleDao.getJobRoleById(id, conn)).thenThrow(InvalidException.class);
+
+        assertThrows(InvalidException.class,
+                () -> jobRoleService.getJobRoleById(String.valueOf(id)));
+    }
+
+    @Test
+    void getJobRoleById_ShouldThrowDoesNotExistExceptionWhenDaoThrowsDoesNotExistException()
+            throws SQLException {
+        String id = "1000";
+        Mockito.when(mockDatabaseConnector.getConnection()).thenReturn(conn);
+        Mockito.when(mockJobRoleDao.getJobRoleById(Integer.parseInt(id), conn)).thenReturn(null);
+        System.out.println(e.ge);
+
+        assertThrows(DoesNotExistException.class,
+                () -> jobRoleService.getJobRoleById(id));
+    }
+
+    @Test
+    void getJobRoleById_ShouldThrowSQLExceptionWhenDaoThrowsSQLException()
+            throws SQLException {
+        String id = "1";
+        Mockito.when(mockDatabaseConnector.getConnection()).thenReturn(conn);
+        Mockito.when(mockJobRoleDao.getJobRoleById(Integer.parseInt(id), conn)).thenThrow(SQLException.class);
+
+        assertThrows(SQLException.class,
+                () -> jobRoleService.getJobRoleById(id));
     }
 }
