@@ -21,7 +21,8 @@ import java.util.logging.Logger;
 @Path("/api/JobRoles")
 public class JobRoleController {
 
-    private static final Logger LOGGER = Logger.getLogger(JobRoleController.class.getName());
+    private static final Logger LOGGER = Logger
+            .getLogger(JobRoleController.class.getName());
 
     final JobRoleService jobRoleService;
 

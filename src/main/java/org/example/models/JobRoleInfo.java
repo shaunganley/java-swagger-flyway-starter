@@ -1,5 +1,8 @@
 package org.example.models;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.Date;
 
 public class JobRoleInfo {
@@ -14,16 +17,18 @@ public class JobRoleInfo {
     private String responsibilities;
     private String jobSpec;
 
-    public JobRoleInfo(final int id,
-                       final String roleName,
-                       final String location,
-                       final String capability,
-                       final String band,
-                       final Date closingDate,
-                       final String status,
-                       final String description,
-                       final String responsibilities,
-                       final String jobSpec) {
+    @JsonCreator
+    public JobRoleInfo(@JsonProperty("id") final int id,
+                       @JsonProperty("roleName") final String roleName,
+                       @JsonProperty("location") final String location,
+                       @JsonProperty("capability") final String capability,
+                       @JsonProperty("band") final String band,
+                       @JsonProperty("closingDate") final Date closingDate,
+                       @JsonProperty("status") final String status,
+                       @JsonProperty("description") final String description,
+                       @JsonProperty("responsibilities")
+                           final String responsibilities,
+                       @JsonProperty("jobSpec") final String jobSpec) {
         this.id = id;
         this.roleName = roleName;
         this.location = location;

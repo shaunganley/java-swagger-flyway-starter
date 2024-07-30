@@ -3,6 +3,7 @@ import org.example.daos.DatabaseConnector;
 import org.example.daos.JobRoleDao;
 import org.example.exceptions.DatabaseConnectionException;
 import org.example.models.JobRole;
+import org.example.models.JobRoleInfo;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
@@ -10,7 +11,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -29,7 +30,14 @@ class JobRolesServiceTests {
         throws SQLException, DatabaseConnectionException {
         Mockito.when(databaseConnector.getConnection()).thenReturn(conn);
 
-        List<JobRole> expected = new ArrayList<JobRole>();
+        List<JobRole> expected = List.of(new JobRole(1,
+                "Open Test Role",
+                "Belfast",
+                "Eng",
+                "A",
+                new Date(),
+                "open"));
+
         Mockito.when(jobRoleDao.getAllJobRoles(conn)).thenReturn(expected);
 
         List<JobRole> result = jobRoleService.getJobRoles();
@@ -55,5 +63,56 @@ class JobRolesServiceTests {
         Mockito.when(jobRoleDao.getAllJobRoles(conn)).thenThrow(DatabaseConnectionException.class);
 
         assertThrows(DatabaseConnectionException.class, () -> jobRoleService.getJobRoles());
+    }
+
+    @Test
+    void getJobRolesById_shouldReturnJobRolesInfo_whenDaoReturnsJobRolesInfo()
+            throws SQLException, DatabaseConnectionException {
+        Mockito.when(databaseConnector.getConnection()).thenReturn(conn);
+
+        JobRoleInfo expected = new JobRoleInfo(1,
+                "Open Test Role",
+                "Belfast",
+                "Eng",
+                "A",
+                new Date(),
+                "open",
+                "Test Description",
+                "Test Responsibilities",
+                "Test Job Spec");
+
+        Mockito.when(jobRoleDao.getJobRoleById(1,conn)).thenReturn(expected);
+
+        JobRoleInfo result = jobRoleService.getJobRoleById(1);
+        assertEquals(expected, result);
+    }
+    @Test
+    void getJobRolesById_shouldReturnNull_whenDaoReturnsNull()
+            throws SQLException, DatabaseConnectionException {
+        Mockito.when(databaseConnector.getConnection()).thenReturn(conn);
+        Mockito.when(jobRoleDao.getJobRoleById(1,conn)).thenReturn(null);
+
+        JobRoleInfo result = jobRoleService.getJobRoleById(1);
+
+        assertEquals(null, result);
+    }
+    @Test
+    void getJobRoleById_shouldThrowSQLException_whenDaoThrowsSqlException()
+            throws SQLException, DatabaseConnectionException{
+        Mockito.when(databaseConnector.getConnection()).thenReturn(conn);
+
+        Mockito.when(jobRoleDao.getJobRoleById(1,conn)).thenThrow(SQLException.class);
+
+        assertThrows(SQLException.class, () -> jobRoleService.getJobRoleById(1));
+    }
+
+    @Test
+    void getJobRoleById_shouldThrowDatabaseConnectionException_whenDaoThrowsDatabaseConnectionException()
+            throws SQLException, DatabaseConnectionException{
+        Mockito.when(databaseConnector.getConnection()).thenReturn(conn);
+
+        Mockito.when(jobRoleDao.getJobRoleById(1, conn)).thenThrow(DatabaseConnectionException.class);
+
+        assertThrows(DatabaseConnectionException.class, () -> jobRoleService.getJobRoleById(1));
     }
 }

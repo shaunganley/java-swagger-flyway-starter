@@ -46,7 +46,7 @@ public class JobRolesControllerTests {
     }
 
     @Test
-    void getJobRolesShould500WhenServiceThrowsSQLException()
+    void getJobRolesShouldReturn500WhenServiceThrowsSQLException()
             throws SQLException, DatabaseConnectionException {
         when(jobRoleService.getJobRoles()).thenThrow(SQLException.class);
 
@@ -58,7 +58,7 @@ public class JobRolesControllerTests {
     }
 
     @Test
-    void getJobRolesShould500WhenServiceThrowsDatabaseConnectionException()
+    void getJobRolesShouldReturn500WhenServiceThrowsDatabaseConnectionException()
             throws SQLException, DatabaseConnectionException {
         when(jobRoleService.getJobRoles()).thenThrow(DatabaseConnectionException.class);
 
@@ -107,7 +107,7 @@ public class JobRolesControllerTests {
     }
 
     @Test
-    void getJobRoleByIdShould500WhenServiceThrowsSQLException()
+    void getJobRoleByIdShouldReturn500WhenServiceThrowsSQLException()
             throws SQLException, DatabaseConnectionException {
         when(jobRoleService.getJobRoleById(1)).thenThrow(SQLException.class);
 
@@ -119,7 +119,7 @@ public class JobRolesControllerTests {
     }
 
     @Test
-    void getJobRoleByIdShould500WhenServiceThrowsDatabaseConnectionException()
+    void getJobRoleByIdShouldReturn500WhenServiceThrowsDatabaseConnectionException()
             throws SQLException, DatabaseConnectionException {
         when(jobRoleService.getJobRoleById(1))
                 .thenThrow(DatabaseConnectionException.class);

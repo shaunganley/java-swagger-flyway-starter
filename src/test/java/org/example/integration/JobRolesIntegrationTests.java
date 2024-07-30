@@ -5,11 +5,13 @@ import io.dropwizard.testing.junit5.DropwizardExtensionsSupport;
 import org.example.JDDApplication;
 import org.example.JDDConfiguration;
 import org.example.models.JobRole;
+import org.example.models.JobRoleInfo;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 import javax.ws.rs.client.Client;
+import javax.ws.rs.core.Response;
 import java.util.List;
 
 @ExtendWith(DropwizardExtensionsSupport.class)
@@ -28,5 +30,28 @@ public class JobRolesIntegrationTests {
 
         Assertions.assertFalse(response.isEmpty());
 
+    }
+    @Test
+    void getJobRoleById_shouldReturnJobRoleInfo_whenJobRoleInfoDoesExist(){
+        Client client = APP.client();
+        Response response = client
+                .target("http://localhost:8080/api/JobRoles/1")
+                .request()
+                .get();
+
+        JobRoleInfo jobRoleInfo = response.readEntity(JobRoleInfo.class);
+
+        Assertions.assertEquals(200, response.getStatus());
+        Assertions.assertEquals(1, jobRoleInfo.getId());
+    }
+    @Test
+    void getJobRoleById_shouldReturn404_whenJobRoleInfoDoesNotExist(){
+        Client client = APP.client();
+        Response response = client
+                .target("http://localhost:8080/api/JobRoles/99999")
+                .request()
+                .get();
+
+        Assertions.assertEquals(404, response.getStatus());
     }
 }
