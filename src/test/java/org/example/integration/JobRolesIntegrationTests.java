@@ -4,21 +4,25 @@ import io.dropwizard.testing.junit5.DropwizardAppExtension;
 import io.dropwizard.testing.junit5.DropwizardExtensionsSupport;
 import org.example.JDDApplication;
 import org.example.JDDConfiguration;
-import org.example.models.JobRole;
 import org.example.models.LoginRequest;
+
+import org.example.services.AuthService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mockito;
+
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.Entity;
-import java.util.List;
+import javax.ws.rs.core.Response;
+
 
 @ExtendWith(DropwizardExtensionsSupport.class)
 public class JobRolesIntegrationTests {
     public static final DropwizardAppExtension<JDDConfiguration> APP =
             new DropwizardAppExtension<>(JDDApplication.class);
-
+    AuthService authService = Mockito.mock(AuthService.class);
     private static final String EMAIL   = System.getenv("LOGIN_EMAIL_1");
     private static final String PASSWORD  = System.getenv("LOGIN_PASSWORD_1");
 
@@ -26,6 +30,7 @@ public class JobRolesIntegrationTests {
             EMAIL,
             PASSWORD
     );
+
 
     @Test
     void getJobRoles_shouldReturn401Unauthorised_WhenUserNotLoggedIn() {
@@ -43,9 +48,15 @@ public class JobRolesIntegrationTests {
     @Test
     void getJobRoles_shouldReturn200_WhenUserIsAuthorised() {
         Client client = APP.client();
+
+        Response key = client
+                .target("http://localhost:8080/api/auth/login")
+                .request().post(Entity.json(loginRequest));
+
         int response = client
                 .target("http://localhost:8080/api/JobRoles")
-                .request().post(Entity.json(loginRequest))
+                .request().header("Authorization", "Bearer "
+                        + key.readEntity(String.class)).get()
                 .getStatus();
         Assertions.assertEquals(200,response);
     }
