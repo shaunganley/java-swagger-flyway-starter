@@ -48,18 +48,18 @@ public class JobRoleControllerTest {
         assertEquals(500, re.getStatus());
     }
 
-    JobRole jobRole = new JobRole(
-            3,
-            "Farmer",
-            "higgensburgh",
-            "medium",
-            "20,000",
-            Date.from(Instant.parse("2000-01-01T00:00:00.000Z")),
-            "open",
-            "farm items",
-            "make sure corn picked",
-            "very specific"
-    );
+    JobRole jobRole = new JobRole.Builder()
+            .id(3)
+            .roleName("Farmer")
+            .location("higgensburgh")
+            .capability("medium")
+            .band("20,000")
+            .closingDate(Date.from(Instant.parse("2000-01-01T00:00:00.000Z")))
+            .status("open")
+            .description("farm items")
+            .responsibilities("make sure corn picked")
+            .jobSpec("very specific")
+            .build();
 
     @Test
     void getJobRoleById_ShouldReturnJobRole()

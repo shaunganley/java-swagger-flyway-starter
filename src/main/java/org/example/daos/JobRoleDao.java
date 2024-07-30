@@ -27,17 +27,19 @@ public class JobRoleDao {
                             + "responsibilities, jobSpec FROM `Role` "
                             + "where status='open';");
             while (resultSet.next()) {
-                JobRole role = new JobRole(
-                        resultSet.getInt("id"),
-                        resultSet.getString("roleName"),
-                        resultSet.getString("location"),
-                        resultSet.getString("capability"),
-                        resultSet.getString("band"),
-                        resultSet.getDate("closingDate"),
-                        resultSet.getString("status"),
-                        resultSet.getString("description"),
-                        resultSet.getString("responsibilities"),
-                        resultSet.getString("jobSpec"));
+                JobRole role = new JobRole.Builder()
+                        .id(resultSet.getInt("id"))
+                        .roleName(resultSet.getString("roleName"))
+                        .location(resultSet.getString("location"))
+                        .capability(resultSet.getString("capability"))
+                        .band(resultSet.getString("band"))
+                        .closingDate(resultSet.getDate("closingDate"))
+                        .status(resultSet.getString("status"))
+                        .description(resultSet.getString("description"))
+                        .responsibilities(
+                                resultSet.getString("responsibilities"))
+                        .jobSpec(resultSet.getString("jobSpec"))
+                        .build();
 
                 jobRolesList.add(role);
             }
@@ -60,16 +62,19 @@ public class JobRoleDao {
         ResultSet resultSet = statement.executeQuery();
 
         while (resultSet.next()) {
-            return new JobRole(resultSet.getInt("id"),
-                    resultSet.getString("roleName"),
-                    resultSet.getString("location"),
-                    resultSet.getString("capability"),
-                    resultSet.getString("band"),
-                    resultSet.getDate("closingDate"),
-                    resultSet.getString("status"),
-                    resultSet.getString("description"),
-                    resultSet.getString("responsibilities"),
-                    resultSet.getString("jobSpec"));
+            return new JobRole.Builder()
+                    .id(resultSet.getInt("id"))
+                    .roleName(resultSet.getString("roleName"))
+                    .location(resultSet.getString("location"))
+                    .capability(resultSet.getString("capability"))
+                    .band(resultSet.getString("band"))
+                    .closingDate(resultSet.getDate("closingDate"))
+                    .status(resultSet.getString("status"))
+                    .description(resultSet.getString("description"))
+                    .responsibilities(
+                            resultSet.getString("responsibilities"))
+                    .jobSpec(resultSet.getString("jobSpec"))
+                    .build();
         }
         return null;
     }
