@@ -49,14 +49,14 @@ public class JobRolesIntegrationTests {
     void getJobRoles_shouldReturn200_WhenUserIsAuthorised() {
         Client client = APP.client();
 
-        Response key = client
+        Response token = client
                 .target("http://localhost:8080/api/auth/login")
                 .request().post(Entity.json(loginRequest));
 
         int response = client
                 .target("http://localhost:8080/api/JobRoles")
                 .request().header("Authorization", "Bearer "
-                        + key.readEntity(String.class)).get()
+                        + token.readEntity(String.class)).get()
                 .getStatus();
         Assertions.assertEquals(200,response);
     }
