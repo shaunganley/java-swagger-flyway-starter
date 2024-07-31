@@ -1,5 +1,7 @@
 package service;
 
+import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.security.Keys;
 import org.example.daos.AuthDao;
 import org.example.daos.DatabaseConnector;
 import org.example.exceptions.InvalidException;
@@ -11,6 +13,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import javax.crypto.SecretKey;
 import java.security.Key;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -26,14 +29,9 @@ import static org.mockito.Mockito.when;
 class AuthServiceTest {
 
     AuthDao authDao = Mockito.mock(AuthDao.class);
-    Key key = Mockito.mock(Key.class);
-    LoginRequest loginRequest = Mockito.mock(LoginRequest.class);
-    User user = Mockito.mock(User.class);
+    Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
 
     AuthService authService = new AuthService(authDao, key);
-
-    String username = "admin";
-    String password = "admin";
 
 
     @Test

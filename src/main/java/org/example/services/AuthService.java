@@ -22,10 +22,6 @@ public class AuthService {
     private final AuthDao authDao;
     private final Key key;
 
-    private static final SecretKey SECRET_KEY = Keys.secretKeyFor(
-            SignatureAlgorithm.HS256); // Ensure proper key size and type
-
-
     public AuthService(final AuthDao authDao, final Key key) {
         this.authDao = authDao;
         this.key = key;
@@ -49,7 +45,7 @@ public class AuthService {
                 .claim("Role", user.getLoginID())
                 .subject(user.getUsername())
                 .issuer("Agile and Fragile")
-                .signWith(SECRET_KEY, SignatureAlgorithm.HS256)
+                .signWith(key, SignatureAlgorithm.HS256)
                 .compact();
     }
 

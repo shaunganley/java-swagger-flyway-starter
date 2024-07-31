@@ -26,9 +26,6 @@ public class AuthDao {
             if (resultSet.next()) {
                 String storedPasswordHash = resultSet.getString("password");
 
-                System.out.println("hash from db: "
-                        + storedPasswordHash);
-
                 if (BCrypt.checkpw(loginRequest.getPassword(),
                         storedPasswordHash)) {
 
@@ -43,12 +40,6 @@ public class AuthDao {
             } else {
                 System.err.println("User not found");
             }
-        } catch (SQLException e) {
-            System.out.println("SQLException");
-            e.printStackTrace();
-        } catch (Exception e) {
-            System.out.println("Exception");
-            e.printStackTrace();
         }
         return null;
     }

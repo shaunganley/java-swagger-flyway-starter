@@ -19,11 +19,23 @@ public class AuthenticationIntegrationTest {
     private static final DropwizardAppExtension<TestConfiguration> APP =
             new DropwizardAppExtension<>(TestApplication.class);
 
+    private static String adminUsername;
+    private static String adminPassword;
+
+    public static void setup() {
+        adminUsername = System.getenv("ADMIN_USERNAME");
+        adminPassword = System.getenv("ADMIN_PASSWORD");
+
+        if (adminUsername == null || adminPassword == null) {
+            throw new IllegalStateException("Environment variables ADMIN_USERNAME and ADMIN_PASSWORD must be set");
+        }
+    }
+
     @Test
     void loginShouldReturnJWTToken() {
         Client client = APP.client();
 
-        LoginRequest loginRequest = new LoginRequest("admin", "admin");
+        LoginRequest loginRequest = new LoginRequest(adminUsername, adminPassword);
 
         Response response = client
                 .target("http://localhost:8080/api/auth/login")
