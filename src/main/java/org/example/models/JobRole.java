@@ -16,10 +16,10 @@ public class JobRole {
     private String location;
 
     @JsonProperty
-    private String capability;
+    private int capabilityID;
 
     @JsonProperty
-    private String band;
+    private int bandID;
 
     @JsonProperty
     private Date closingDate;
@@ -30,15 +30,15 @@ public class JobRole {
     public JobRole(final int id,
                    final String roleName,
                    final String location,
-                   final String capability,
-                   final String band,
+                   final int capabilityID,
+                   final int bandID,
                    final Date closingDate,
                    final String status) {
         this.id = id;
         this.roleName = roleName;
         this.location = location;
-        this.capability = capability;
-        this.band = band;
+        this.capabilityID = capabilityID;
+        this.bandID = bandID;
         this.closingDate = closingDate;
         this.status = status;
     }
@@ -59,13 +59,11 @@ public class JobRole {
         this.roleName = roleName;
     }
 
-    public String getCapability() {
-        return capability;
+    public int getCapabilityID() {
+        return capabilityID;
     }
 
-    public void setCapability(final String capability) {
-        this.capability = capability;
-    }
+    public void setCapability(final int capabilityID) { this.capabilityID = capabilityID; }
 
     public String getLocation() {
         return location;
@@ -75,13 +73,11 @@ public class JobRole {
         this.location = location;
     }
 
-    public String getBand() {
-        return band;
+    public int getBandID() {
+        return bandID;
     }
 
-    public void setBand(final String band) {
-        this.band = band;
-    }
+    public void setBandID(final int bandID) { this.bandID = bandID; }
 
     public Date getClosingDate() {
         return closingDate;

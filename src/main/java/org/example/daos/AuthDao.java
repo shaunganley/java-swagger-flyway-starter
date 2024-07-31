@@ -32,7 +32,7 @@ public class AuthDao {
                     return new User(
                             resultSet.getString("username"),
                             storedPasswordHash,
-                            resultSet.getInt("loginID")
+                            resultSet.getInt("UserRoleID")
                     );
                 } else {
                     System.err.println("Password verification failed");

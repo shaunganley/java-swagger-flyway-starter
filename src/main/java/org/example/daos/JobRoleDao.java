@@ -19,7 +19,7 @@ public class JobRoleDao {
 
             ResultSet resultSet = statement.executeQuery(
                     "SELECT id, roleName, location, "
-                            + "capability, band, "
+                            + "capabilityID, bandID, "
                             + "closingDate, status FROM `Role` "
                             + "where status='open';");
             while (resultSet.next()) {
@@ -27,8 +27,8 @@ public class JobRoleDao {
                         resultSet.getInt("id"),
                         resultSet.getString("roleName"),
                         resultSet.getString("location"),
-                        resultSet.getString("capability"),
-                        resultSet.getString("band"),
+                        resultSet.getInt("capabilityID"),
+                        resultSet.getInt("bandID"),
                         resultSet.getDate("closingDate"),
                         resultSet.getString("status")
                 );

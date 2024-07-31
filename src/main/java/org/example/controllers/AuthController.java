@@ -29,13 +29,13 @@ public class AuthController {
         try {
             return Response.ok().entity(authService.login(loginRequest))
                     .build();
-        } catch (SQLException e) {
-            return Response.serverError().build();
+
         } catch (InvalidException e) {
             return Response.status(Response.Status.BAD_REQUEST)
                     .entity(e.getMessage()).build();
+        } catch (SQLException e) {
+            return Response.serverError().build();
         }
+
     }
-
-
 }

@@ -6,16 +6,16 @@ public class User {
 
     String password;
 
-    int loginID;
+    int UserRoleID;
 
     public User() {
     }
 
     public User(final String username, final String password,
-                final int loginID) {
+                final int UserRoleID) {
         this.username = username;
         this.password = password;
-        this.loginID = loginID;
+        this.UserRoleID = UserRoleID;
     }
 
     public String getUsername() {
@@ -34,11 +34,11 @@ public class User {
         this.password = password;
     }
 
-    public int getLoginID() {
-        return loginID;
+    public int getUserRoleID() {
+        return UserRoleID;
     }
 
-    public void setLoginID(final int loginID) {
-        this.loginID = loginID;
+    public void setUserRoleID(final int UserRoleID) {
+        this.UserRoleID = UserRoleID;
     }
 }
