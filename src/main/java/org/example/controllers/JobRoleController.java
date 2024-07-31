@@ -48,6 +48,11 @@ public class JobRoleController {
     @GET
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
+    @RolesAllowed({UserRole.USER, UserRole.ADMIN})
+    @ApiOperation(
+         value = "Returns Job Roles By Id",
+            authorizations = @Authorization(value = HttpHeaders.AUTHORIZATION),
+            response = JobRole.class)
     public Response getJobRoleById(final @PathParam("id") int id) {
         try {
             JobRoleInfo jobRoleInfo = jobRoleService.getJobRoleById(id);
