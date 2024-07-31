@@ -1,0 +1,2 @@
+create database Flyway_Test_MohammedH;
+USE Flyway_Test_MohammedH;
