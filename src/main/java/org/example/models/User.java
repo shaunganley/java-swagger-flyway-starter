@@ -8,9 +8,6 @@ public class User {
 
     int UserRoleID;
 
-    public User() {
-    }
-
     public User(final String username, final String password,
                 final int UserRoleID) {
         this.username = username;
