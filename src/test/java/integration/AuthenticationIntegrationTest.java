@@ -22,18 +22,14 @@ public class AuthenticationIntegrationTest {
     private static String adminUsername;
     private static String adminPassword;
 
-    public static void setup() {
-        adminUsername = System.getenv("ADMIN_USERNAME");
-        adminPassword = System.getenv("ADMIN_PASSWORD");
 
-        if (adminUsername == null || adminPassword == null) {
-            throw new IllegalStateException("Environment variables ADMIN_USERNAME and ADMIN_PASSWORD must be set");
-        }
-    }
 
     @Test
     void loginShouldReturnJWTToken() {
         Client client = APP.client();
+
+        adminUsername = "admin"; //System.getenv("ADMIN_USERNAME");
+        adminPassword = "admin"; //System.getenv("ADMIN_PASSWORD");
 
         LoginRequest loginRequest = new LoginRequest(adminUsername, adminPassword);
 

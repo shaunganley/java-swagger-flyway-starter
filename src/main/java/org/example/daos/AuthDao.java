@@ -16,7 +16,7 @@ public class AuthDao {
     public User getUser(final LoginRequest loginRequest) throws SQLException {
         try (Connection connection = databaseConnector.getConnection()) {
             String query = "SELECT username, password, "
-            + "loginID FROM User WHERE username = ?;";
+            + "userRoleID FROM User WHERE username = ?;";
             PreparedStatement statement = connection.prepareStatement(query);
 
             statement.setString(1, loginRequest.getUsername());
@@ -32,7 +32,7 @@ public class AuthDao {
                     return new User(
                             resultSet.getString("username"),
                             storedPasswordHash,
-                            resultSet.getInt("UserRoleID")
+                            resultSet.getInt("userRoleID")
                     );
                 } else {
                     System.err.println("Password verification failed");
