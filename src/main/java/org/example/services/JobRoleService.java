@@ -4,7 +4,7 @@ import org.example.daos.DatabaseConnector;
 import org.example.daos.JobRoleDao;
 import org.example.exceptions.DoesNotExistException;
 import org.example.exceptions.Entity;
-import org.example.exceptions.InvalidException;
+import org.example.exceptions.IllegalArgumentException;
 import org.example.mappers.JobRoleMapper;
 import org.example.models.JobRole;
 import org.example.models.JobRoleResponse;
@@ -31,13 +31,13 @@ public class JobRoleService {
 
     public JobRole getJobRoleById(final int detailId)
             throws SQLException, DoesNotExistException,
-            InvalidException {
+            IllegalArgumentException {
 
         JobRole jobRole = roleDao.getJobRoleById(detailId,
                 databaseConnector.getConnection());
 
-        if (detailId == 0) {
-            throw new InvalidException(Entity.ROLEDETAIL);
+        if (detailId <= 0) {
+            throw new IllegalArgumentException(Entity.ROLEDETAIL);
         } else if (jobRole == null) {
             throw new DoesNotExistException(Entity.ROLEDETAIL);
         } else {

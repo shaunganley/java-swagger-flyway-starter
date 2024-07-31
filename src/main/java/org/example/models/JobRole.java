@@ -39,7 +39,6 @@ public class JobRole {
     @JsonProperty
     private String jobSpec;
 
-    // Private constructor to enforce the use of the Builder
     private JobRole(final Builder builder) {
         this.id = builder.id;
         this.roleName = builder.roleName;
@@ -53,7 +52,6 @@ public class JobRole {
         this.jobSpec = builder.jobSpec;
     }
 
-    // Static nested Builder class
     public static class Builder {
         private int id;
         private String roleName;
@@ -199,9 +197,5 @@ public class JobRole {
 
     public void setJobSpec(final String jobSpec) {
         this.jobSpec = jobSpec;
-    }
-
-    public int compareTo(final JobRole o) {
-        return 0;
     }
 }

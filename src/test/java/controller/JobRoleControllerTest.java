@@ -2,7 +2,7 @@ package controller;
 
 import org.example.controllers.JobRoleController;
 import org.example.exceptions.DoesNotExistException;
-import org.example.exceptions.InvalidException;
+import org.example.exceptions.IllegalArgumentException;
 import org.example.models.JobRole;
 import org.example.models.JobRoleResponse;
 import org.example.services.JobRoleService;
@@ -64,7 +64,7 @@ public class JobRoleControllerTest {
     @Test
     void getJobRoleById_ShouldReturnJobRole()
             throws SQLException, DoesNotExistException,
-            InvalidException {
+            IllegalArgumentException {
         int id = 3;
         when(jobRoleService.getJobRoleById(id)).thenReturn(jobRole);
 
@@ -77,9 +77,10 @@ public class JobRoleControllerTest {
     @Test
     void getJobRoleById_ShouldReturn400WhenServiceThrowsInvalidException()
             throws SQLException, DoesNotExistException,
-            InvalidException {
+            IllegalArgumentException {
         int id = -6;
-        when(jobRoleService.getJobRoleById(id)).thenThrow(InvalidException.class);
+        when(jobRoleService.getJobRoleById(id)).thenThrow(
+                IllegalArgumentException.class);
 
         Response re = jobRoleController.getJobRoleById(id);
 
@@ -89,7 +90,7 @@ public class JobRoleControllerTest {
     @Test
     void getJobRoleById_ShouldReturn404WhenServiceThrowsDoesNotExistException()
             throws SQLException, DoesNotExistException,
-            InvalidException {
+            IllegalArgumentException {
         int id = 2000;
         when(jobRoleService.getJobRoleById(id)).thenThrow(DoesNotExistException.class);
 
@@ -101,7 +102,7 @@ public class JobRoleControllerTest {
     @Test
     void getJobRoleById_ShouldReturn500WhenServiceThrowsSQLException()
             throws SQLException, DoesNotExistException,
-            InvalidException {
+            IllegalArgumentException {
         int id = 1;
         when(jobRoleService.getJobRoleById(id)).thenThrow(SQLException.class);
 

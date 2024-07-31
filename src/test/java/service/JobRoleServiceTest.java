@@ -3,7 +3,7 @@ package service;
 import org.example.daos.DatabaseConnector;
 import org.example.daos.JobRoleDao;
 import org.example.exceptions.DoesNotExistException;
-import org.example.exceptions.InvalidException;
+import org.example.exceptions.IllegalArgumentException;
 import org.example.models.JobRole;
 import org.example.services.JobRoleService;
 import org.junit.jupiter.api.Test;
@@ -69,7 +69,7 @@ class JobRoleServiceTest {
     @Test
     void getJobRoleById_ShouldReturnJobRole()
             throws SQLException, DoesNotExistException,
-            InvalidException {
+            IllegalArgumentException {
         int id = 3;
         Mockito.when(mockDatabaseConnector.getConnection()).thenReturn(conn);
         Mockito.when(mockJobRoleDao.getJobRoleById(id, conn)).thenReturn(jobRole);
@@ -79,18 +79,20 @@ class JobRoleServiceTest {
 
     @Test
     void getJobRoleById_ShouldThrowInvalidExceptionWhenDaoThrowsInvalidException()
-            throws SQLException, InvalidException, DoesNotExistException {
+            throws SQLException, IllegalArgumentException, DoesNotExistException {
         int id = -6;
         Mockito.when(mockDatabaseConnector.getConnection()).thenReturn(conn);
-        Mockito.when(mockJobRoleDao.getJobRoleById(id, conn)).thenThrow(InvalidException.class);
+        Mockito.when(mockJobRoleDao.getJobRoleById(id, conn)).thenThrow(
+                IllegalArgumentException.class);
 
-        assertThrows(InvalidException.class,
+        assertThrows(IllegalArgumentException.class,
                 () -> jobRoleService.getJobRoleById(id));
     }
 
     @Test
     void getJobRoleById_ShouldThrowDoesNotExistExceptionWhenDaoThrowsDoesNotExistException()
-            throws SQLException, DoesNotExistException, InvalidException {
+            throws SQLException, DoesNotExistException,
+            IllegalArgumentException {
         int id = 1000;
         Mockito.when(mockDatabaseConnector.getConnection()).thenReturn(conn);
         Mockito.when(mockJobRoleDao.getJobRoleById(id, conn)).thenReturn(null);
@@ -101,7 +103,8 @@ class JobRoleServiceTest {
 
     @Test
     void getJobRoleById_ShouldThrowSQLExceptionWhenDaoThrowsSQLException()
-            throws SQLException, DoesNotExistException, InvalidException {
+            throws SQLException, DoesNotExistException,
+            IllegalArgumentException {
         int id = 1;
         Mockito.when(mockDatabaseConnector.getConnection()).thenReturn(conn);
         Mockito.when(mockJobRoleDao.getJobRoleById(id, conn)).thenThrow(SQLException.class);

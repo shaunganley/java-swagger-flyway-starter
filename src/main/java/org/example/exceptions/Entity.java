@@ -1,7 +1,7 @@
 package org.example.exceptions;
 
 public enum Entity {
-    ROLEDETAIL("ID");
+    ROLEDETAIL("Role");
 
     private final String entity;
 
