@@ -37,9 +37,9 @@ public class JobRoleService {
                 databaseConnector.getConnection());
 
         if (detailId <= 0) {
-            throw new IllegalArgumentException(Entity.ROLEDETAIL);
+            throw new IllegalArgumentException(Entity.ROLE);
         } else if (jobRole == null) {
-            throw new DoesNotExistException(Entity.ROLEDETAIL);
+            throw new DoesNotExistException(Entity.ROLE);
         } else {
             return jobRole;
         }

@@ -75,7 +75,7 @@ public class JobRoleControllerTest {
     }
 
     @Test
-    void getJobRoleById_ShouldReturn400WhenServiceThrowsInvalidException()
+    void getJobRoleById_ShouldReturn400WhenServiceThrowsIllegalArgumentException()
             throws SQLException, DoesNotExistException,
             IllegalArgumentException {
         int id = -6;

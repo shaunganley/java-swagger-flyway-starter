@@ -78,12 +78,10 @@ class JobRoleServiceTest {
     }
 
     @Test
-    void getJobRoleById_ShouldThrowInvalidExceptionWhenDaoThrowsInvalidException()
+    void getJobRoleById_ShouldThrowIllegalArgumentExceptionWhenDaoThrowsIllegalArgumentException()
             throws SQLException, IllegalArgumentException, DoesNotExistException {
         int id = -6;
         Mockito.when(mockDatabaseConnector.getConnection()).thenReturn(conn);
-        Mockito.when(mockJobRoleDao.getJobRoleById(id, conn)).thenThrow(
-                IllegalArgumentException.class);
 
         assertThrows(IllegalArgumentException.class,
                 () -> jobRoleService.getJobRoleById(id));
