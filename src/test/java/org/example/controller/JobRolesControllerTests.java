@@ -1,7 +1,9 @@
 package org.example.controller;
 
 import org.example.controllers.JobRoleController;
+import org.example.daos.JobRoleDao;
 import org.example.exceptions.DatabaseConnectionException;
+import org.example.exceptions.DoesNotExistException;
 import org.example.models.JobRole;
 import org.example.models.JobRoleInfo;
 import org.example.services.JobRoleService;
@@ -18,6 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
 public class JobRolesControllerTests {
+    private final JobRoleDao jobRoleDao = Mockito.mock(JobRoleDao.class);
     private final JobRoleService jobRoleService = Mockito.mock(JobRoleService.class);
     private final JobRoleController jobRoleController = new JobRoleController(jobRoleService);
 
@@ -71,7 +74,8 @@ public class JobRolesControllerTests {
 
     @Test
     void getJobRoleByIdShouldReturnJobRoleInfoWhenServiceReturnsJobRoleInfo()
-            throws SQLException, DatabaseConnectionException {
+            throws SQLException, DatabaseConnectionException,
+            DoesNotExistException {
         JobRoleInfo jobRoleInfo = new JobRoleInfo(1,
                 "Open Test Role",
                 "Belfast",
@@ -87,46 +91,38 @@ public class JobRolesControllerTests {
 
         Response response = jobRoleController.getJobRoleById(1);
 
-        System.out.println("Expected JobRoleInfo: " + jobRoleInfo);
-        System.out.println("Actual JobRoleInfo: " + response.getEntity());
-
         assertEquals(200, response.getStatus());
         assertEquals(jobRoleInfo, response.getEntity());
     }
 
     @Test
     void getJobRoleByIdShouldReturn404WhenServiceReturnsNull()
-            throws SQLException, DatabaseConnectionException {
-        when(jobRoleService.getJobRoleById(1)).thenReturn(null);
-
+            throws SQLException, DatabaseConnectionException,
+            DoesNotExistException {
+        when(jobRoleService.getJobRoleById(1)).thenThrow(DoesNotExistException.class);
         Response response = jobRoleController.getJobRoleById(1);
-
-        System.out.println("Response Status: " + response.getStatus());
-
         assertEquals(404, response.getStatus());
     }
 
     @Test
     void getJobRoleByIdShouldReturn500WhenServiceThrowsSQLException()
-            throws SQLException, DatabaseConnectionException {
+            throws SQLException, DatabaseConnectionException,
+            DoesNotExistException {
         when(jobRoleService.getJobRoleById(1)).thenThrow(SQLException.class);
 
         Response response = jobRoleController.getJobRoleById(1);
-
-        System.out.println("Response Status: " + response.getStatus());
 
         assertEquals(500, response.getStatus());
     }
 
     @Test
     void getJobRoleByIdShouldReturn500WhenServiceThrowsDatabaseConnectionException()
-            throws SQLException, DatabaseConnectionException {
+            throws SQLException, DatabaseConnectionException,
+            DoesNotExistException {
         when(jobRoleService.getJobRoleById(1))
                 .thenThrow(DatabaseConnectionException.class);
 
         Response response = jobRoleController.getJobRoleById(1);
-
-        System.out.println("Response Status: " + response.getStatus());
 
         assertEquals(500, response.getStatus());
     }

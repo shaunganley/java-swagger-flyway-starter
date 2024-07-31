@@ -2,6 +2,7 @@ package org.example.services;
 import org.example.daos.DatabaseConnector;
 import org.example.daos.JobRoleDao;
 import org.example.exceptions.DatabaseConnectionException;
+import org.example.exceptions.DoesNotExistException;
 import org.example.models.JobRole;
 import org.example.models.JobRoleInfo;
 import org.junit.jupiter.api.Test;
@@ -67,7 +68,8 @@ class JobRolesServiceTests {
 
     @Test
     void getJobRolesById_shouldReturnJobRolesInfo_whenDaoReturnsJobRolesInfo()
-            throws SQLException, DatabaseConnectionException {
+            throws SQLException, DatabaseConnectionException,
+            DoesNotExistException {
         Mockito.when(databaseConnector.getConnection()).thenReturn(conn);
 
         JobRoleInfo expected = new JobRoleInfo(1,
@@ -87,14 +89,12 @@ class JobRolesServiceTests {
         assertEquals(expected, result);
     }
     @Test
-    void getJobRolesById_shouldReturnNull_whenDaoReturnsNull()
+    void getJobRolesById_shouldReturnDoesNotExistException_whenDaoReturnsNull()
             throws SQLException, DatabaseConnectionException {
         Mockito.when(databaseConnector.getConnection()).thenReturn(conn);
-        Mockito.when(jobRoleDao.getJobRoleById(1,conn)).thenReturn(null);
+        Mockito.when(jobRoleDao.getJobRoleById(1, conn)).thenReturn(null);
 
-        JobRoleInfo result = jobRoleService.getJobRoleById(1);
-
-        assertEquals(null, result);
+        assertThrows(DoesNotExistException.class, () -> jobRoleService.getJobRoleById(1));
     }
     @Test
     void getJobRoleById_shouldThrowSQLException_whenDaoThrowsSqlException()

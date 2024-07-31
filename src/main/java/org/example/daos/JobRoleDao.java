@@ -10,12 +10,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class JobRoleDao {
-    private static final Logger LOGGER = Logger
-            .getLogger(JobRoleDao.class.getName());
 
     public List<JobRole> getAllJobRoles(final Connection c)
             throws SQLException, DatabaseConnectionException {
@@ -46,11 +42,7 @@ public class JobRoleDao {
                 );
                 jobRoles.add(jobRole);
             }
-        } catch (SQLException e) {
-            LOGGER.log(Level.SEVERE, "Error fetching all job roles", e);
-            throw e;
         }
-
         return jobRoles;
     }
 
@@ -90,12 +82,7 @@ public class JobRoleDao {
                     );
                 }
             }
-        } catch (SQLException e) {
-            LOGGER.log(Level.
-                    SEVERE, "Error fetching job role by id: " + id, e);
-            throw e;
         }
-
         return null;
     }
 }

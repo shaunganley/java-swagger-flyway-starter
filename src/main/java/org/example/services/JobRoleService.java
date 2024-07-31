@@ -3,6 +3,8 @@ package org.example.services;
 import org.example.daos.DatabaseConnector;
 import org.example.daos.JobRoleDao;
 import org.example.exceptions.DatabaseConnectionException;
+import org.example.exceptions.DoesNotExistException;
+import org.example.exceptions.Entity;
 import org.example.models.JobRole;
 import org.example.models.JobRoleInfo;
 
@@ -23,8 +25,14 @@ public class JobRoleService {
             DatabaseConnectionException {
         return jobRoleDao.getAllJobRoles(databaseConnector.getConnection());
     }
+
     public JobRoleInfo getJobRoleById(final int id) throws SQLException,
-            DatabaseConnectionException {
-        return jobRoleDao.getJobRoleById(id, databaseConnector.getConnection());
+            DatabaseConnectionException, DoesNotExistException {
+        JobRoleInfo jobRoleInfo = jobRoleDao.getJobRoleById(id,
+                databaseConnector.getConnection());
+        if (jobRoleInfo == null) {
+            throw new DoesNotExistException(Entity.JOBROLES);
+        }
+            return jobRoleInfo;
     }
 }
