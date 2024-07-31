@@ -4,4 +4,6 @@ CREATE TABLE user (
     password varchar(100) NOT NULL,
     roleId int NOT NULL,
     FOREIGN KEY (roleId) REFERENCES role(id)
+
+    /* User table */
 );
