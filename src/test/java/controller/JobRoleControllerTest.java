@@ -2,7 +2,6 @@ package controller;
 
 import org.example.controllers.JobRoleController;
 import org.example.exceptions.DoesNotExistException;
-import org.example.exceptions.IllegalArgumentException;
 import org.example.models.JobRole;
 import org.example.models.JobRoleResponse;
 import org.example.services.JobRoleService;
@@ -72,19 +71,6 @@ public class JobRoleControllerTest {
 
         assertEquals(200, re.getStatus());
         assertEquals(jobRole, re.getEntity());
-    }
-
-    @Test
-    void getJobRoleById_ShouldReturn400WhenServiceThrowsIllegalArgumentException()
-            throws SQLException, DoesNotExistException,
-            IllegalArgumentException {
-        int id = -6;
-        when(jobRoleService.getJobRoleById(id)).thenThrow(
-                IllegalArgumentException.class);
-
-        Response re = jobRoleController.getJobRoleById(id);
-
-        assertEquals(400, re.getStatus());
     }
 
     @Test

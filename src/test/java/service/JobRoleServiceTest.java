@@ -3,7 +3,6 @@ package service;
 import org.example.daos.DatabaseConnector;
 import org.example.daos.JobRoleDao;
 import org.example.exceptions.DoesNotExistException;
-import org.example.exceptions.IllegalArgumentException;
 import org.example.models.JobRole;
 import org.example.services.JobRoleService;
 import org.junit.jupiter.api.Test;
@@ -75,16 +74,6 @@ class JobRoleServiceTest {
         Mockito.when(mockJobRoleDao.getJobRoleById(id, conn)).thenReturn(jobRole);
 
         assertEquals(jobRole, jobRoleService.getJobRoleById(id));
-    }
-
-    @Test
-    void getJobRoleById_ShouldThrowIllegalArgumentExceptionWhenDaoThrowsIllegalArgumentException()
-            throws SQLException, IllegalArgumentException, DoesNotExistException {
-        int id = -6;
-        Mockito.when(mockDatabaseConnector.getConnection()).thenReturn(conn);
-
-        assertThrows(IllegalArgumentException.class,
-                () -> jobRoleService.getJobRoleById(id));
     }
 
     @Test

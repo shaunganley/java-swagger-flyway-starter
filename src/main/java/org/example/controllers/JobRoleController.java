@@ -2,7 +2,6 @@ package org.example.controllers;
 
 import io.swagger.annotations.Api;
 import org.example.exceptions.DoesNotExistException;
-import org.example.exceptions.IllegalArgumentException;
 import org.example.services.JobRoleService;
 
 import javax.ws.rs.GET;
@@ -43,9 +42,6 @@ public class JobRoleController {
         try {
             return Response.ok().entity(
                     jobRoleService.getJobRoleById(id)).build();
-        } catch (IllegalArgumentException e) {
-            return Response.status(
-                    Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
         } catch (DoesNotExistException e) {
             return Response.status(
                     Response.Status.NOT_FOUND).entity(
