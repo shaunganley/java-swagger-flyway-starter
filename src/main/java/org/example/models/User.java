@@ -2,17 +2,17 @@ package org.example.models;
 
 public class User {
 
-    String username;
+    private String username;
 
-    String password;
+    private String password;
 
-    int UserRoleID;
+    private int userRoleID;
 
     public User(final String username, final String password,
-                final int UserRoleID) {
+                final int userRoleID) {
         this.username = username;
         this.password = password;
-        this.UserRoleID = UserRoleID;
+        this.userRoleID = userRoleID;
     }
 
     public String getUsername() {
@@ -32,10 +32,10 @@ public class User {
     }
 
     public int getUserRoleID() {
-        return UserRoleID;
+        return userRoleID;
     }
 
-    public void setUserRoleID(final int UserRoleID) {
-        this.UserRoleID = UserRoleID;
+    public void setUserRoleID(final int userRoleID) {
+        this.userRoleID = userRoleID;
     }
 }

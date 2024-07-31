@@ -14,6 +14,8 @@ import java.util.List;
 
 public class JobRoleService {
 
+
+
     private final JobRoleDao roleDao;
     private final DatabaseConnector databaseConnector;
 
