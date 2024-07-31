@@ -2,7 +2,7 @@ package org.example.exceptions;
 
 public enum Entity {
 
-    USER("User");
+    USER("User"), ROLE("Role");
 
     private final String entity;
 
@@ -14,4 +14,3 @@ public enum Entity {
         return entity;
     }
 }
-
