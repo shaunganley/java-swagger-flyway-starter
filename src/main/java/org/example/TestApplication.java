@@ -1,15 +1,22 @@
 package org.example;
 
+
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import io.federecio.dropwizard.swagger.SwaggerBundle;
 import io.federecio.dropwizard.swagger.SwaggerBundleConfiguration;
+import io.jsonwebtoken.Jwts;
+import org.example.controllers.AuthController;
 import org.example.controllers.JobRoleController;
 
+import org.example.daos.AuthDao;
 import org.example.daos.DatabaseConnector;
 import org.example.daos.JobRoleDao;
+import org.example.services.AuthService;
 import org.example.services.JobRoleService;
+
+import java.security.Key;
 
 
 public class TestApplication extends Application<TestConfiguration> {
@@ -33,10 +40,15 @@ public class TestApplication extends Application<TestConfiguration> {
     @Override
     public void run(final TestConfiguration configuration,
                     final Environment environment) {
+        Key jwtKey = Jwts.SIG.HS256.key().build();
         DatabaseConnector databaseConnector = new DatabaseConnector();
         environment.jersey()
                 .register(new JobRoleController(
-                            new JobRoleService(
+                             new JobRoleService(
                                 new JobRoleDao(), databaseConnector)));
+        environment.jersey()
+                .register(new AuthController(
+                  new AuthService(
+                    new AuthDao(), jwtKey)));
     }
 }
