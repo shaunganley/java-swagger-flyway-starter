@@ -5,5 +5,4 @@ CREATE TABLE project (
                         technology varchar(20),
                         clientId int NOT NULL,
                         FOREIGN KEY (clientId) REFERENCES client(id)
-
 );
