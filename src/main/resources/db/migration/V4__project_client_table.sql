@@ -4,4 +4,5 @@ CREATE TABLE project (
                         value int,
                         technology varchar(20)
                         FOREIGN KEY (clientId) REFERENCES client(id)
+                #
 );
