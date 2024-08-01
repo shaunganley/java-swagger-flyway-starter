@@ -3,6 +3,4 @@ CREATE TABLE project (
                         name varchar(30),
                         value int,
                         technology varchar(20),
-                        clientId int NOT NULL,
-                        FOREIGN KEY (clientId) REFERENCES client(id)
 );
