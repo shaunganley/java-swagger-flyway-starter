@@ -19,8 +19,6 @@ public class AuthenticationIntegrationTest {
     private static final DropwizardAppExtension<TestConfiguration> APP =
             new DropwizardAppExtension<>(TestApplication.class);
 
-    private static String adminUsername;
-    private static String adminPassword;
 
 
 
@@ -28,8 +26,9 @@ public class AuthenticationIntegrationTest {
     void loginShouldReturnJWTToken() {
         Client client = APP.client();
 
-        adminUsername = "admin"; //System.getenv("ADMIN_USERNAME");
-        adminPassword = "admin"; //System.getenv("ADMIN_PASSWORD");
+        String adminUsername = System.getenv().get("ADMIN_USERNAME");
+        String adminPassword = System.getenv().get("ADMIN_PASSWORD");
+
 
         LoginRequest loginRequest = new LoginRequest(adminUsername, adminPassword);
 
