@@ -23,3 +23,14 @@ INSERT INTO sales (name, salary, bankAcc_No, nino, commission) VALUES
                                                                    ('David Brown', 62000.00, '210987654321', 'GH456789F', 8000.00),
                                                                    ('Eva Green', 54000.00, '345678901234', 'IJ567890G', 4500.00);
 
+INSERT INTO delivery (name, salary, bankAcc_No, nino) VALUES
+                                                          ('Tom Wilson', 32000.00, '123456789012', 'ZW123456A'),
+                                                          ('Nancy Drew', 35000.00, '987654321098', 'XY234567B'),
+                                                          ('Jake Harris', 30000.00, '567890123456', 'CD345678C'),
+                                                          ('Laura King', 33000.00, '210987654321', 'EF456789D'),
+                                                          ('Sam Brown', 31000.00, '345678901234', 'GH567890E');
+
+SELECT s.salesID, s.name, s.salary, s.bankAcc_No, s.nino, s.commission
+FROM sales s
+         LEFT JOIN client c ON s.salesID = c.salesID
+WHERE c.salesID IS NULL;
