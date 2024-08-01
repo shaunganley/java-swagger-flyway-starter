@@ -30,7 +30,25 @@ INSERT INTO delivery (name, salary, bankAcc_No, nino) VALUES
                                                           ('Laura King', 33000.00, '210987654321', 'EF456789D'),
                                                           ('Sam Brown', 31000.00, '345678901234', 'GH567890E');
 
+INSERT INTO project (`value`, technologyList, leadName) VALUES
+                                                            (25000.00, 'Java,SQL', 'Alice Johnson'),
+                                                            (35000.00, 'PHP,SQL', 'Bob Smith'),
+                                                            (15000.00, 'Java', 'Carol White'),
+                                                            (45000.00, 'Java,PHP,SQL', 'David Brown'),
+                                                            (30000.00, 'SQL', 'Eva Green');
+
 SELECT s.salesID, s.name, s.salary, s.bankAcc_No, s.nino, s.commission
 FROM sales s
-         LEFT JOIN client c ON s.salesID = c.salesID
+LEFT JOIN client c ON s.salesID = c.salesID
 WHERE c.salesID IS NULL;
+
+Select  client.name, `value`
+from project
+join client ON client.clientID
+group by client.name
+having avg(`value`);
+
+SELECT
+salesID, name, commission
+FROM
+sales;
