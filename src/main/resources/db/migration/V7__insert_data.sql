@@ -1,19 +1,19 @@
 insert into client(clientID, name, address, phoneNo) values (1, 'james', 'address', '0308400308');
 insert into client(clientID, name, address, phoneNo) values (2, 'john',  'address3', '0308400304');
 insert into sales (Name, salary, bankAcc_No, nino) values ('Luke', 10000.00, 1002034, 'Mick');
-insert into client(clientID, name, address, phoneNo) values (1, 'frank', 'address', '0308400308');
-insert into client(clientID, name, address, phoneNo) values (2, 'John', 'address', '0308400308');
-insert into client(clientID, name, address, phoneNo) values (3, 'jason', 'address', '0308400308');
-insert into client(clientID, name, address, phoneNo) values (4, 'shea', 'address', '0308400308');
+insert into client(clientID, name, address, phoneNo) values (3, 'frank', 'address', '0308400308');
+insert into client(clientID, name, address, phoneNo) values (4, 'John', 'address', '0308400308');
+insert into client(clientID, name, address, phoneNo) values (5, 'jason', 'address', '0308400308');
+insert into client(clientID, name, address, phoneNo) values (6, 'shea', 'address', '0308400308');
 
 Select `value`, client.name
 from project
-join client ON client.clientID
+         join client ON client.clientID
 having max(`value`);
 
 Select `value`, client.name
 from project
-join client ON client.clientID
+         join client ON client.clientID
 having min(`value`);
 
 INSERT INTO sales (name, salary, bankAcc_No, nino, commission) VALUES
@@ -39,18 +39,16 @@ INSERT INTO project (`value`, technologyList, leadName) VALUES
 
 SELECT s.salesID, s.name, s.salary, s.bankAcc_No, s.nino, s.commission
 FROM sales s
-LEFT JOIN client c ON s.salesID = c.salesID
+         LEFT JOIN client c ON s.salesID = c.salesID
 WHERE c.salesID IS NULL;
 
 Select  client.name, `value`
 from project
-join client ON client.clientID
+         join client ON client.clientID
 group by client.name
 having avg(`value`);
 
 SELECT
-salesID, name, commission
+    salesID, name, commission
 FROM
-sales;
-
---
+    sales;
