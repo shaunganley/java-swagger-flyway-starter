@@ -53,7 +53,8 @@ public class JobRoleResponse {
         return capabilityID;
     }
 
-    public void setCapabilityID(final int capability) { this.capabilityID = capabilityID; }
+    public void setCapabilityID(final int capability) {
+        this.capabilityID = capabilityID; }
 
     public String getLocation() {
         return location;
