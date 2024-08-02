@@ -34,7 +34,7 @@ public class JobRoleController {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    @RolesAllowed({ UserRole.USER, UserRole.ADMIN })
+    @RolesAllowed({UserRole.USER, UserRole.ADMIN})
     @ApiOperation(
             value = "Returns Job Roles",
             authorizations = @Authorization(value = HttpHeaders.AUTHORIZATION),
@@ -52,13 +52,13 @@ public class JobRoleController {
     @Produces(MediaType.APPLICATION_JSON)
     @RolesAllowed({UserRole.USER, UserRole.ADMIN})
     @ApiOperation(
-         value = "Returns Job Roles By Id",
+            value = "Returns Job Roles By Id",
             authorizations = @Authorization(value = HttpHeaders.AUTHORIZATION),
             response = JobRole.class)
     public Response getJobRoleById(final @PathParam("id") int id) {
         try {
             JobRoleInfo jobRoleInfo = jobRoleService.getJobRoleById(id);
-                return Response.ok().entity(jobRoleInfo).build();
+            return Response.ok().entity(jobRoleInfo).build();
         } catch (SQLException | DatabaseConnectionException e) {
             return Response.serverError().build();
         } catch (DoesNotExistException e) {
@@ -75,13 +75,12 @@ public class JobRoleController {
             value = "Deletes Job Role By Id",
             authorizations = @Authorization(value = HttpHeaders.AUTHORIZATION),
             response = JobRole.class)
-    public Response deleteJobRole(final @PathParam("id") int id,
-                                  final Connection conn) {
+    public Response deleteJobRole(final @PathParam("id") int id) {
         try {
             jobRoleService.deleteJobRole(id);
             return Response.noContent().build();
         } catch (SQLException | DatabaseConnectionException e) {
-            return Response.serverError().build();
+            return Response.serverError().entity(e.getMessage()).build();
         } catch (DoesNotExistException e) {
             return Response.status(Response.Status.NOT_FOUND)
                     .entity(e.getMessage()).build();
