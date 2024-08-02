@@ -85,4 +85,11 @@ public class JobRoleDao {
         }
         return null;
     }
+    public void deleteJobRole(final int id, final Connection c) throws
+            SQLException {
+        String deleteStatement = "DELETE FROM jobRoles WHERE id = ?";
+        PreparedStatement st = c.prepareStatement(deleteStatement);
+        st.setInt(1, id);
+        st.executeUpdate();
+    }
 }

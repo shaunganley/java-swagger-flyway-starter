@@ -11,6 +11,7 @@ import org.example.models.JobRoleInfo;
 import org.example.services.JobRoleService;
 
 import javax.annotation.security.RolesAllowed;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -18,6 +19,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.sql.Connection;
 import java.sql.SQLException;
 
 @Api("Job Roles")
@@ -57,6 +59,27 @@ public class JobRoleController {
         try {
             JobRoleInfo jobRoleInfo = jobRoleService.getJobRoleById(id);
                 return Response.ok().entity(jobRoleInfo).build();
+        } catch (SQLException | DatabaseConnectionException e) {
+            return Response.serverError().build();
+        } catch (DoesNotExistException e) {
+            return Response.status(Response.Status.NOT_FOUND)
+                    .entity(e.getMessage()).build();
+        }
+    }
+
+    @DELETE
+    @Path("/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @RolesAllowed({UserRole.ADMIN})
+    @ApiOperation(
+            value = "Deletes Job Role By Id",
+            authorizations = @Authorization(value = HttpHeaders.AUTHORIZATION),
+            response = JobRole.class)
+    public Response deleteJobRole(final @PathParam("id") int id,
+                                  final Connection conn) {
+        try {
+            jobRoleService.deleteJobRole(id);
+            return Response.noContent().build();
         } catch (SQLException | DatabaseConnectionException e) {
             return Response.serverError().build();
         } catch (DoesNotExistException e) {
