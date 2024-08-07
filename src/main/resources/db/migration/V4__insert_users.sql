@@ -1,2 +1,3 @@
-INSERT INTO user
-VALUES (1, 'user1', 'password123'), (2, 'user2', 'password234');
+INSERT INTO user (username, password, role_id)
+VALUES ('admin_user', 'admin_password', (SELECT id FROM role WHERE title = 'admin')),
+       ('employee_user', 'employee_password', (SELECT id FROM role WHERE title = 'employee'));

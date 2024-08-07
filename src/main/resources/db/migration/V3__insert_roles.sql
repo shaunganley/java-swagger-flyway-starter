@@ -1,3 +1,1 @@
-INSERT INTO role
-VALUES (1, 'admin'),
-       (2, 'employee');
+INSERT INTO role (title) VALUES ('admin'), ('employee');
