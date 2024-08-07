@@ -19,8 +19,9 @@ public class TestDao {
                     "SHOW DATABASES;");
             long end = System.currentTimeMillis();
 
-            System.out.println("Total time of execute" +
-                    " query in milliseconds: " + (end - start));
+            System.out.println("Total time of execute"
+                    + " query in milliseconds: " + (end - start));
+
 
             System.out.println("Retrieving databse name");
             while (resultSet.next()) {
