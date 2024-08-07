@@ -17,9 +17,13 @@ public class TestDao {
             ResultSet resultSet = statement.executeQuery(
                     "SHOW DATABASES;");
 
+            System.out.println("Retrieving databse name");
             while (resultSet.next()) {
+                System.out.println(resultSet.getString("Database"));
                 databases.add(resultSet.getString("Database"));
             }
+            System.out.println("Finished retrieving database names");
+
         }
 
         return databases;
