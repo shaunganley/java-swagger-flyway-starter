@@ -32,7 +32,7 @@ INSERT INTO delivery (name, salary, bankAcc_No, nino) VALUES
 
 INSERT INTO project (`value`, technologyList, leadName) VALUES
                                                             (25000.00, 'Java,SQL', 'Alice Johnson'),
-                                                            (35000.00, 'PHP,SQL', 'Bob Smith'),
+                                                            (35000.00, PHP, Java, 'Bob Smith'),
                                                             (15000.00, 'Java', 'Carol White'),
                                                             (45000.00, 'Java,PHP,SQL', 'David Brown'),
                                                             (30000.00, 'SQL', 'Eva Green');
