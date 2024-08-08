@@ -3,13 +3,15 @@ package org.example.models;
 import java.math.BigDecimal;
 
 public class EmployeeResponse {
-    private int employeeId;
-    private String employeeName;
-    private BigDecimal salary;
-    private int bankAccountNumber;
-    private int nationalInsuranceNumber;
+    private final int employeeId;
+    private final String employeeName;
+    private final BigDecimal salary;
+    private final int bankAccountNumber;
+    private final int nationalInsuranceNumber;
 
-    public EmployeeResponse(int employeeId, String employeeName, BigDecimal salary, int bankAccountNumber, int nationalInsuranceNumber) {
+    public EmployeeResponse(final int employeeId, final String employeeName,
+                            final BigDecimal salary, final int bankAccountNumber,
+                            final int nationalInsuranceNumber) {
         this.employeeId = employeeId;
         this.employeeName = employeeName;
         this.salary = salary;
@@ -21,39 +23,19 @@ public class EmployeeResponse {
         return employeeId;
     }
 
-    public void setEmployeeId(int employeeId) {
-        this.employeeId = employeeId;
-    }
-
     public String getEmployeeName() {
         return employeeName;
-    }
-
-    public void setEmployeeName(String employeeName) {
-        this.employeeName = employeeName;
     }
 
     public BigDecimal getSalary() {
         return salary;
     }
 
-    public void setSalary(BigDecimal salary) {
-        this.salary = salary;
-    }
-
     public int getBankAccountNumber() {
         return bankAccountNumber;
     }
 
-    public void setBankAccountNumber(int bankAccountNumber) {
-        this.bankAccountNumber = bankAccountNumber;
-    }
-
     public int getNationalInsuranceNumber() {
         return nationalInsuranceNumber;
-    }
-
-    public void setNationalInsuranceNumber(int nationalInsuranceNumber) {
-        this.nationalInsuranceNumber = nationalInsuranceNumber;
     }
 }
