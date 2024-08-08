@@ -49,7 +49,8 @@ public class EmployeeController {
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     public Response createEmployee(final EmployeeRequest
-                                               employeeRequest) throws SQLException {
+                                               employeeRequest)
+            throws SQLException {
         try {
             return Response
                     .status(Response.Status.CREATED)

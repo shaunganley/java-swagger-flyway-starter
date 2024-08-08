@@ -1,6 +1,5 @@
 package org.example.daos;
 
-import org.example.models.DeliveryEmployee;
 import org.example.models.Employee;
 import org.example.models.EmployeeRequest;
 import org.example.models.SalesEmployee;
@@ -25,9 +24,9 @@ public class EmployeeDao {
             Statement statement = connection.createStatement();
 
             ResultSet resultSet = statement.executeQuery(
-                    "SELECT EmployeeID, Name, Salary,BankAccountNumber, NationalInsuranceNumber"
-                            +
-                            " FROM Employee ");
+                    "SELECT EmployeeID, Name, Salary,"
+                            + "BankAccountNumber, NationalInsuranceNumber"
+                            + " FROM Employee ");
 
             while (resultSet.next()) {
                 Employee employee = new Employee(
@@ -48,7 +47,7 @@ public class EmployeeDao {
 
 
     //create employee
-    public int createEmployee(EmployeeRequest employee)
+    public int createEmployee(final EmployeeRequest employee)
             throws SQLException {
         Connection c = DatabaseConnector.getConnection();
 
@@ -81,7 +80,7 @@ public class EmployeeDao {
 
 
     //create delivery emp
-    public int createDeliveryEmployee(int id) throws SQLException {
+    public int createDeliveryEmployee(final int id) throws SQLException {
         Connection c = DatabaseConnector.getConnection();
 
         String insertStatement =
@@ -106,7 +105,7 @@ public class EmployeeDao {
 
 
     //create sales employee
-    public int createSalesEmployee(int id) throws SQLException {
+    public int createSalesEmployee(final int id) throws SQLException {
         Connection c = DatabaseConnector.getConnection();
 
         String insertStatement =
@@ -151,8 +150,6 @@ public class EmployeeDao {
                         resultSet.getInt("EmployeeID"),
                         resultSet.getBigDecimal("CommmissionRate"),
                         (Employee) resultSet.getObject("SalesID"));
-                        
-
 
                 salesEmployees.add(salesEmployee);
             }
@@ -162,7 +159,7 @@ public class EmployeeDao {
     }
 
 
-    public Employee getEmployeeById(int id) throws SQLException {
+    public Employee getEmployeeById(final int id) throws SQLException {
         try (Connection connection = DatabaseConnector.getConnection()) {
             String query = "SELECT EmployeeID, Name, Salary, BankAccountNumber, NationalInsuranceNumber FROM Employee WHERE EmployeeID = ?";
 
@@ -183,7 +180,7 @@ public class EmployeeDao {
         return null;
     }
 
-    public void updateEmployee(int id, EmployeeRequest employeeRequest)
+    public void updateEmployee(final int id, final EmployeeRequest employeeRequest)
             throws SQLException {
         Connection connection = DatabaseConnector.getConnection();
 
