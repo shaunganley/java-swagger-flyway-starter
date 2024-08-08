@@ -4,7 +4,7 @@ public class Client {
     private int id;
     private int salesID;
 
-    public Client(int id, int salesID) {
+    public Client(final int id, final int salesID) {
         this.id = id;
         this.salesID = salesID;
     }
@@ -13,7 +13,7 @@ public class Client {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(final int id) {
         this.id = id;
     }
 
@@ -21,7 +21,7 @@ public class Client {
         return salesID;
     }
 
-    public void setSalesID(int salesID) {
+    public void setSalesID(final int salesID) {
         this.salesID = salesID;
     }
 }
