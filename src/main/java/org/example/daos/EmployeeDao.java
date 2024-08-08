@@ -15,11 +15,14 @@ public class EmployeeDao {
     public List<Employee> getAllSalesEmloyees() throws SQLException {
         List<Employee> employees = new ArrayList<>();
 
-        try(Connection connection = DatabaseConnector.getConnection()) {
+        try
+                (Connection connection = DatabaseConnector.getConnection()) {
             Statement statement = connection.createStatement();
 
             ResultSet resultSet = statement.executeQuery(
-                    "select empId, name,, salary, bankAccNo, nino, commisionRate from Employee join salesEmployee using (empId);");
+                    "select empId, name,, salary, bankAccNo, nino, commisionRate"
+                            +
+                            " from Employee join salesEmployee using (empId);");
 
             while (resultSet.next()) {
 
@@ -28,7 +31,7 @@ public class EmployeeDao {
                         resultSet.getString("name"),
                         resultSet.getDouble("salary"),
                         resultSet.getString("bankAccNo"),
-                        resultSet.getString("nino")      ,
+                        resultSet.getString("nino"),
                 new Sales(resultSet.getDouble("commissionRate")));
 
                 employees.add(employee);
