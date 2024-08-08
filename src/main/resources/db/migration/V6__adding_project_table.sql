@@ -9,7 +9,7 @@ create table Project
     deliveryEmpId int  not null,
     completed     bool not null,
 
-    FOREIGN KEY (clientId) REFERENCES Client(clientId),
-    FOREIGN KEY (techLeadId) REFERENCES tech_lead(techLeadId),
-    FOREIGN KEY (deliveryEmpId) REFERENCES deliveryEmployee(id)
+    FOREIGN KEY (clientId) REFERENCES Client (clientId),
+    FOREIGN KEY (techLeadId) REFERENCES tech_lead (techLeadId),
+    FOREIGN KEY (deliveryEmpId) REFERENCES deliveryEmployee (id)
 );
