@@ -9,9 +9,9 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class EmployeeService {
-    EmployeeDao employeeDao;
+    final EmployeeDao employeeDao;
 
-    public EmployeeService(EmployeeDao employeeDao) {
+    public EmployeeService(final EmployeeDao employeeDao) {
         this.employeeDao = employeeDao;
     }
 
@@ -23,16 +23,16 @@ public class EmployeeService {
         return employeeDao.getAllSalesEmployee();
     }
 
-    public Employee getEmployeeById(int id) throws SQLException {
+    public Employee getEmployeeById(final int id) throws SQLException {
         return employeeDao.getEmployeeById(id);
     }
 
-    public void updateEmployee(int id, EmployeeRequest employeeRequest)
+    public void updateEmployee(final int id, final EmployeeRequest employeeRequest)
             throws SQLException {
         Employee employeeToUpdate = employeeDao.getEmployeeById(id);
     }
 
-    public int createEmployee(EmployeeRequest employeeRequest) throws SQLException {
+    public int createEmployee(final EmployeeRequest employeeRequest) throws SQLException {
         int id = employeeDao.createEmployee(employeeRequest);
 
         return id;

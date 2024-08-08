@@ -19,7 +19,7 @@ public class EmployeeController {
 
     EmployeeService employeeService;
 
-    public EmployeeController(EmployeeService employeeService) {
+    public EmployeeController(final EmployeeService employeeService) {
         this.employeeService = employeeService;
     }
 
@@ -47,7 +47,7 @@ public class EmployeeController {
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public Response createEmployee(EmployeeRequest employeeRequest) throws SQLException {
+    public Response createEmployee(final EmployeeRequest employeeRequest) throws SQLException {
         try {
             return Response
                     .status(Response.Status.CREATED)
@@ -62,7 +62,7 @@ public class EmployeeController {
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response updateEmployee(
-            @PathParam("id") int id, EmployeeRequest employeeRequest) {
+            @PathParam("id") final int id, final EmployeeRequest employeeRequest) {
         try {
             employeeService.updateEmployee(id, employeeRequest);
             return Response.ok().build();

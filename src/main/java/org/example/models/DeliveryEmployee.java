@@ -12,9 +12,6 @@ public class DeliveryEmployee {
         this.employee = employee;
     }
 
-    public DeliveryEmployee(int deliveryID, String name, BigDecimal salary, String bankAccountNumber, String nationalInsuranceNumber) {
-    }
-
     public int getDeliveryEmployeeId() {
         return deliveryEmployeeId;
     }

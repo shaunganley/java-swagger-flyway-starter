@@ -48,7 +48,7 @@ public class EmployeeDao {
 
 
     //create employee
-    public int createEmployee(final EmployeeRequest employee)
+    public int createEmployee(EmployeeRequest employee)
             throws SQLException {
         Connection c = DatabaseConnector.getConnection();
 
@@ -140,7 +140,7 @@ public class EmployeeDao {
             Statement statement = connection.createStatement();
 
             ResultSet resultSet = statement.executeQuery(
-                    "SELECT EmployeeID, SalesEmployee.SalesID, SalesEmployee.Commission"
+                    "SELECT EmployeeID, SalesEmployee.SalesID, SCommission"
                             +
                             " FROM Employee "
                             +
@@ -159,35 +159,6 @@ public class EmployeeDao {
         }
 
         return salesEmployees;
-    }
-
-    public List<DeliveryEmployee> getAllDeliveryEmployees() throws SQLException {
-        List<DeliveryEmployee> deliveryEmployees = new ArrayList<>();
-
-        try (Connection connection = DatabaseConnector.getConnection()) {
-            Statement statement = connection.createStatement();
-
-            ResultSet resultSet = statement.executeQuery(
-                    "SELECT EmployeeID, DeliveryID, Name, Salary,BankAccountNumber, NationalInsuranceNumber"
-                            +
-                            " FROM Employee "
-                            +
-                            "join DeliveryEmployee using (EmployeeID);");
-
-            while (resultSet.next()) {
-                DeliveryEmployee deliveryEmployee = new DeliveryEmployee(
-                        resultSet.getInt("DeliveryID"),
-                        resultSet.getString("Name"),
-                        resultSet.getBigDecimal("salary"),
-                        resultSet.getString("BankAccountNumber"),
-                        resultSet.getString("NationalInsuranceNumber"));
-
-
-                deliveryEmployees.add(deliveryEmployee);
-            }
-        }
-
-        return deliveryEmployees;
     }
 
 
