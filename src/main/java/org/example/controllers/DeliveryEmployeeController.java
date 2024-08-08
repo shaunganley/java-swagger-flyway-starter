@@ -1,8 +1,10 @@
 package org.example.controllers;
 
 import freemarker.core.ReturnInstruction;
+import org.example.exceptions.InvalidException;
 import org.example.models.DeliveryEmployee;
 import org.example.models.DeliveryEmployeeRequest;
+import org.example.services.DeliveryEmployeeService;
 
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
@@ -20,10 +22,12 @@ public class DeliveryEmployeeController {
     public Response updateDeliveryEmployee(
             @PathParam("id") int id, DeliveryEmployeeRequest deliveryEmployeeRequest) {
         try {
-            deliveryEmployeeService.updateDeliveryEmployee(id, deliveryEmployeeRequest);
+            DeliveryEmployeeService.updateDeliveryEmployee(id, deliveryEmployeeRequest);
             return Response.noContent().build();
         } catch (SQLException e) {
             return Response.serverError().build();
+        } catch (InvalidException e) {
+            throw new RuntimeException(e);
         }
     }
 }

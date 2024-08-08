@@ -9,7 +9,7 @@ import java.sql.SQLException;
 
 public class SalesEmployeeDao {
 
-    public void updateDelivery(int id,
+    public static void updateSalesEmployee(int id,
                                SalesEmployeeRequest salesEmployee) throws
             SQLException {
 

@@ -1,7 +1,9 @@
 package org.example.controllers;
 
+import org.example.exceptions.InvalidException;
 import org.example.models.DeliveryEmployeeRequest;
 import org.example.models.SalesEmployeeRequest;
+import org.example.services.SalesEmployeeService;
 
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
@@ -19,10 +21,12 @@ public class SalesEmployeeController {
     public Response updateSalesEmployee(
             @PathParam("id") int id, SalesEmployeeRequest salesEmployeeRequest) {
         try {
-            salesEmployeeService.updateDeliveryEmployee(id, salesEmployeeRequest);
+            SalesEmployeeService.updateSalesEmployee(id, salesEmployeeRequest);
             return Response.noContent().build();
         } catch (SQLException e) {
             return Response.serverError().build();
+        } catch (InvalidException e) {
+            throw new RuntimeException(e);
         }
     }
 }

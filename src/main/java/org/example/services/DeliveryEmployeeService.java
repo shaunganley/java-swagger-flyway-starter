@@ -1,18 +1,23 @@
 package org.example.services;
 
 import org.example.daos.DeliveryEmployeeDao;
+import org.example.exceptions.InvalidException;
 import org.example.models.DeliveryEmployee;
 import org.example.models.DeliveryEmployeeRequest;
+import org.example.validators.DeliveryEmployeeValidator;
 
 import java.sql.SQLException;
 
 public class DeliveryEmployeeService {
 
-    public void updateDeliveryEmployee(int id,
-                                       DeliveryEmployeeRequest deliveryEmployeeRequest)
-    throws SQLException {
+    DeliveryEmployeeDao deliveryEmployeeDao;
+    DeliveryEmployeeValidator deliveryEmployeeValidator;
 
-        deliveryEmployeeValidator.validateDeliveryEmployee(deliveryEmployeeRequest);
+    public static void updateDeliveryEmployee(int id,
+                                              DeliveryEmployeeRequest deliveryEmployeeRequest)
+            throws SQLException, InvalidException {
+
+        DeliveryEmployeeValidator.validateDeliveryEmployee(deliveryEmployeeRequest);
 
         DeliveryEmployee deliveryEmployeeToUpdate = DeliveryEmployeeDao.getDeliveryEmployeeById(id);
 
