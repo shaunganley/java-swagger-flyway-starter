@@ -11,7 +11,7 @@ import java.util.List;
 
 public class EmployeeDao {
 
-    public List<Employee> getDeliveryEmloyees() throws SQLException {
+    public List<Employee> getAllDeliveryEmloyees() throws SQLException {
         List<Employee> orders = new ArrayList<>();
 
         try(Connection connection = DatabaseConnector.getConnection()) {
@@ -33,7 +33,7 @@ public class EmployeeDao {
         return Employees;
     }
 
-    public List<Employee> getSalesEmloyees() throws SQLException {
+    public List<Employee> getAllSalesEmloyees() throws SQLException {
         List<Employee> orders = new ArrayList<>();
 
         try(Connection connection = DatabaseConnector.getConnection()) {
