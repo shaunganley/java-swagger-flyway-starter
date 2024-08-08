@@ -10,6 +10,10 @@ public class Sales {
         this.commissionRate = commissionRate;
     }
 
+    public Sales(final double commissionRate) {
+        this.commissionRate = commissionRate;
+    }
+
     public int getSalesEmpId() {
         return salesEmpId;
     }

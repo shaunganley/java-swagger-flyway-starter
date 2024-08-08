@@ -1,6 +1,7 @@
 package org.example.daos;
 
 import org.example.models.Employee;
+import org.example.models.Sales;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -11,48 +12,29 @@ import java.util.List;
 
 public class EmployeeDao {
 
-    public List<Employee> getAllDeliveryEmloyees() throws SQLException {
-        List<Employee> orders = new ArrayList<>();
-
-        try(Connection connection = DatabaseConnector.getConnection()) {
-            Statement statement = connection.createStatement();
-
-            ResultSet resultSet = statement.executeQuery(
-                    "select * from Employee join deliveryEmployee using (empId);");
-
-            while (resultSet.next()) {
-
-//                Order order = new Order(
-//                        resultSet.getInt("OrderID"),
-//                        new Customer(resultSet.getInt("CustomerID"), resultSet.getString("CustomerName")),
-//                        resultSet.getDate("OrderDate"));
-//
-//                Employees.add(order);
-            }
-        }
-        return Employees;
-    }
-
     public List<Employee> getAllSalesEmloyees() throws SQLException {
-        List<Employee> orders = new ArrayList<>();
+        List<Employee> employees = new ArrayList<>();
 
         try(Connection connection = DatabaseConnector.getConnection()) {
             Statement statement = connection.createStatement();
 
             ResultSet resultSet = statement.executeQuery(
-                    "select * from Employee join salesEmployee using (empId);");
+                    "select empId, name,, salary, bankAccNo, nino, commisionRate from Employee join salesEmployee using (empId);");
 
             while (resultSet.next()) {
 
-//                Order order = new Order(
-//                        resultSet.getInt("OrderID"),
-//                        new Customer(resultSet.getInt("CustomerID"), resultSet.getString("CustomerName")),
-//                        resultSet.getDate("OrderDate"));
-//
-//                Employees.add(order);
+                Employee employee = new Employee(
+                        resultSet.getInt("empId"),
+                        resultSet.getString("name"),
+                        resultSet.getDouble("salary"),
+                        resultSet.getString("bankAccNo"),
+                        resultSet.getString("nino")      ,
+                new Sales(resultSet.getDouble("commissionRate")));
+
+                employees.add(employee);
             }
         }
-        return Employees;
+        return employees;
     }
 
 }
