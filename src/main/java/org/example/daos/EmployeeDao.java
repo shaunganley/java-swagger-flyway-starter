@@ -20,9 +20,15 @@ public class EmployeeDao {
             Statement statement = connection.createStatement();
 
             ResultSet resultSet = statement.executeQuery(
-                    "select empId, name,, salary, bankAccNo, nino, commisionRate"
+                    "select empId, name,, salary,"
                             +
-                            " from Employee join salesEmployee using (empId);");
+                            " bankAccNo, nino, commisionRate"
+                            +
+                            " from Employee "
+                            +
+                            "join salesEmployee "
+                            +
+                            "using (empId);");
 
             while (resultSet.next()) {
 
