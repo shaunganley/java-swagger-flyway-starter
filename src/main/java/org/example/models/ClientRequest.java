@@ -21,9 +21,9 @@ public class ClientRequest {
     }
 
     @JsonCreator ClientRequest(
-            @JsonProperty("ClientID") int clientId,
-            @JsonProperty("ClientName") String clientName,
-            @JsonProperty("SalesEmpID") int salesEmployeeId){
+            @JsonProperty("ClientID") final int clientId,
+            @JsonProperty("ClientName") final String clientName,
+            @JsonProperty("SalesEmpID") final int salesEmployeeId){
                 this.clientId = clientId;
                 this.clientName = clientName;
                 this.salesEmployeeId = salesEmployeeId;

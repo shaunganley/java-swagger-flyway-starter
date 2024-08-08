@@ -16,8 +16,8 @@ public class DeliveryEmployeeRequest {
     }
 
     @JsonCreator DeliveryEmployeeRequest(
-            @JsonProperty("DeliveryID") int deliveryEmployeeId,
-            @JsonProperty("EmployeeID") int employeeId){
+            @JsonProperty("DeliveryID") final int deliveryEmployeeId,
+            @JsonProperty("EmployeeID") final int employeeId){
                 this.deliveryEmployeeId = deliveryEmployeeId;
                 this.employeeId = employeeId;
 

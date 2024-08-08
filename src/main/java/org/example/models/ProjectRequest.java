@@ -3,8 +3,6 @@ package org.example.models;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.math.BigDecimal;
-
 public class ProjectRequest {
     private final int projectId;
     private final String projectName;
@@ -38,12 +36,12 @@ public class ProjectRequest {
     }
 
     @JsonCreator ProjectRequest(
-            @JsonProperty("ProjectID") int projectId,
-            @JsonProperty("ProjectName") String projectName,
-            @JsonProperty("IsCompleted") boolean isCompleted,
-            @JsonProperty("ClientID") int clientId,
-            @JsonProperty("`Value`") int value,
-            @JsonProperty("TechLeadID") int techLeadId){
+            @JsonProperty("ProjectID") final int projectId,
+            @JsonProperty("ProjectName") final String projectName,
+            @JsonProperty("IsCompleted") final boolean isCompleted,
+            @JsonProperty("ClientID") final int clientId,
+            @JsonProperty("`Value`") final int value,
+            @JsonProperty("TechLeadID") final int techLeadId){
         this.projectId = projectId;
         this.projectName = projectName;
         this.isCompleted = isCompleted;

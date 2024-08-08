@@ -8,7 +8,9 @@ public class ProjectResponse {
     private final int clientId;
     private final int techLeadId;
 
-    public ProjectResponse(int projectId, String projectName, int value, boolean isCompleted, int clientId, int techLeadId) {
+    public ProjectResponse(int projectId, String projectName,
+                           int value, boolean isCompleted,
+                           int clientId, int techLeadId) {
         this.projectId = projectId;
         this.projectName = projectName;
         this.value = value;

@@ -23,9 +23,9 @@ public class SalesEmployeeRequest {
     }
 
     @JsonCreator SalesEmployeeRequest(
-            @JsonProperty("SalesID") int salesEmployeeId,
-            @JsonProperty("EmployeeID") int employeeId,
-            @JsonProperty("Commission") BigDecimal commissionRate){
+            @JsonProperty("SalesID") final int salesEmployeeId,
+            @JsonProperty("EmployeeID") final int employeeId,
+            @JsonProperty("Commission") final BigDecimal commissionRate){
                 this.salesEmployeeId = salesEmployeeId;
                 this.employeeId = employeeId;
                 this.commissionRate = commissionRate;

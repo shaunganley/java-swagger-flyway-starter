@@ -33,11 +33,11 @@ public class EmployeeRequest {
     }
 
     @JsonCreator EmployeeRequest(
-            @JsonProperty("EmployeeID") int employeeId,
-            @JsonProperty("Name") String employeeName,
-            @JsonProperty("Salary") BigDecimal salary,
-            @JsonProperty("BankAccountNumber") int bankAccountNumber,
-            @JsonProperty("NationalInsuranceNumber") int nationalInsuranceNumber){
+            @JsonProperty("EmployeeID") final int employeeId,
+            @JsonProperty("Name") final String employeeName,
+            @JsonProperty("Salary") final BigDecimal salary,
+            @JsonProperty("BankAccountNumber") final int bankAccountNumber,
+            @JsonProperty("NationalInsuranceNumber") final int nationalInsuranceNumber){
                 this.employeeId = employeeId;
                 this.employeeName = employeeName;
                 this.salary = salary;
