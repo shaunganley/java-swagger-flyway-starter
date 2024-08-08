@@ -16,7 +16,7 @@ public class Client {
         return clientId;
     }
 
-    public void setClientId(int clientId) {
+    public void setClientId(final int clientId) {
         this.clientId = clientId;
     }
 
@@ -24,7 +24,7 @@ public class Client {
         return clientName;
     }
 
-    public void setClientName(String clientName) {
+    public void setClientName(final String clientName) {
         this.clientName = clientName;
     }
 
@@ -32,7 +32,7 @@ public class Client {
         return salesEmployee;
     }
 
-    public void setSalesEmployee(SalesEmployee salesEmployee) {
+    public void setSalesEmployee(final SalesEmployee salesEmployee) {
         this.salesEmployee = salesEmployee;
     }
 

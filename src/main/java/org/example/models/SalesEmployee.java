@@ -19,7 +19,7 @@ public class SalesEmployee {
         return salesEmployeeId;
     }
 
-    public void setSalesEmployeeId(int salesEmployeeId) {
+    public void setSalesEmployeeId(final int salesEmployeeId) {
         this.salesEmployeeId = salesEmployeeId;
     }
 
@@ -27,7 +27,7 @@ public class SalesEmployee {
         return commissionRate;
     }
 
-    public void setCommissionRate(BigDecimal commissionRate) {
+    public void setCommissionRate(final BigDecimal commissionRate) {
         this.commissionRate = commissionRate;
     }
 
@@ -35,7 +35,7 @@ public class SalesEmployee {
         return employee;
     }
 
-    public void setEmployee(Employee employee) {
+    public void setEmployee(final Employee employee) {
         this.employee = employee;
     }
 }

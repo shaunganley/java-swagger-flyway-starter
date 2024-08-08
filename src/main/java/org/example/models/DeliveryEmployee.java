@@ -14,7 +14,7 @@ public class DeliveryEmployee {
         return deliveryEmployeeId;
     }
 
-    public void setDeliveryEmployeeId(int deliveryEmployeeId) {
+    public void setDeliveryEmployeeId(final int deliveryEmployeeId) {
         this.deliveryEmployeeId = deliveryEmployeeId;
     }
 
@@ -22,7 +22,7 @@ public class DeliveryEmployee {
         return employee;
     }
 
-    public void setEmployee(Employee employee) {
+    public void setEmployee(final Employee employee) {
         this.employee = employee;
     }
 }

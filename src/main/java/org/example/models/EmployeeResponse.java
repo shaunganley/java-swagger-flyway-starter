@@ -24,7 +24,7 @@ public class EmployeeResponse {
         return employeeId;
     }
 
-    public void setEmployeeId(int employeeId) {
+    public void setEmployeeId(final int employeeId) {
         this.employeeId = employeeId;
     }
 
@@ -32,7 +32,7 @@ public class EmployeeResponse {
         return employeeName;
     }
 
-    public void setEmployeeName(String employeeName) {
+    public void setEmployeeName(final String employeeName) {
         this.employeeName = employeeName;
     }
 
@@ -40,7 +40,7 @@ public class EmployeeResponse {
         return salary;
     }
 
-    public void setSalary(BigDecimal salary) {
+    public void setSalary(final BigDecimal salary) {
         this.salary = salary;
     }
 
@@ -48,7 +48,7 @@ public class EmployeeResponse {
         return bankAccountNumber;
     }
 
-    public void setBankAccountNumber(int bankAccountNumber) {
+    public void setBankAccountNumber(final int bankAccountNumber) {
         this.bankAccountNumber = bankAccountNumber;
     }
 
@@ -56,7 +56,7 @@ public class EmployeeResponse {
         return nationalInsuranceNumber;
     }
 
-    public void setNationalInsuranceNumber(int nationalInsuranceNumber) {
+    public void setNationalInsuranceNumber(final int nationalInsuranceNumber) {
         this.nationalInsuranceNumber = nationalInsuranceNumber;
     }
 }

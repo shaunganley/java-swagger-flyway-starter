@@ -8,9 +8,9 @@ public class ProjectResponse {
     private int clientId;
     private int techLeadId;
 
-    public ProjectResponse(int projectId, String projectName,
-                           int value, boolean isCompleted,
-                           int clientId, int techLeadId) {
+    public ProjectResponse(final int projectId, final String projectName,
+                           final int value, final boolean isCompleted,
+                           final int clientId, final int techLeadId) {
         this.projectId = projectId;
         this.projectName = projectName;
         this.value = value;
@@ -23,7 +23,7 @@ public class ProjectResponse {
         return projectId;
     }
 
-    public void setProjectId(int projectId) {
+    public void setProjectId(final int projectId) {
         this.projectId = projectId;
     }
 
@@ -31,7 +31,7 @@ public class ProjectResponse {
         return projectName;
     }
 
-    public void setProjectName(String projectName) {
+    public void setProjectName(final String projectName) {
         this.projectName = projectName;
     }
 
@@ -39,7 +39,7 @@ public class ProjectResponse {
         return value;
     }
 
-    public void setValue(int value) {
+    public void setValue(final int value) {
         this.value = value;
     }
 
@@ -47,7 +47,7 @@ public class ProjectResponse {
         return isCompleted;
     }
 
-    public void setCompleted(boolean isCompleted) {
+    public void setCompleted(final boolean isCompleted) {
         this.isCompleted = isCompleted;
     }
 
@@ -55,7 +55,7 @@ public class ProjectResponse {
         return clientId;
     }
 
-    public void setClientId(int clientId) {
+    public void setClientId(final int clientId) {
         this.clientId = clientId;
     }
 
@@ -63,7 +63,7 @@ public class ProjectResponse {
         return techLeadId;
     }
 
-    public void setTechLeadId(int techLeadId) {
+    public void setTechLeadId(final int techLeadId) {
         this.techLeadId = techLeadId;
     }
 }

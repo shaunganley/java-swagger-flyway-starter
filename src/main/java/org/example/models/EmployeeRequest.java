@@ -16,7 +16,7 @@ public class EmployeeRequest {
         return employeeId;
     }
 
-    public void setEmployeeId(int employeeId) {
+    public void setEmployeeId(final int employeeId) {
         this.employeeId = employeeId;
     }
 
@@ -24,7 +24,7 @@ public class EmployeeRequest {
         return employeeName;
     }
 
-    public void setEmployeeName(String employeeName) {
+    public void setEmployeeName(final String employeeName) {
         this.employeeName = employeeName;
     }
 
@@ -32,7 +32,7 @@ public class EmployeeRequest {
         return salary;
     }
 
-    public void setSalary(BigDecimal salary) {
+    public void setSalary(final BigDecimal salary) {
         this.salary = salary;
     }
 
@@ -40,7 +40,7 @@ public class EmployeeRequest {
         return bankAccountNumber;
     }
 
-    public void setBankAccountNumber(int bankAccountNumber) {
+    public void setBankAccountNumber(final int bankAccountNumber) {
         this.bankAccountNumber = bankAccountNumber;
     }
 
@@ -48,7 +48,7 @@ public class EmployeeRequest {
         return nationalInsuranceNumber;
     }
 
-    public void setNationalInsuranceNumber(int nationalInsuranceNumber) {
+    public void setNationalInsuranceNumber(final int nationalInsuranceNumber) {
         this.nationalInsuranceNumber = nationalInsuranceNumber;
     }
 
@@ -57,7 +57,8 @@ public class EmployeeRequest {
             @JsonProperty("Name") final String employeeName,
             @JsonProperty("Salary") final BigDecimal salary,
             @JsonProperty("BankAccountNumber") final int bankAccountNumber,
-            @JsonProperty("NationalInsuranceNumber") final int nationalInsuranceNumber) {
+            @JsonProperty("NationalInsuranceNumber")
+                final int nationalInsuranceNumber) {
                 this.employeeId = employeeId;
                 this.employeeName = employeeName;
                 this.salary = salary;

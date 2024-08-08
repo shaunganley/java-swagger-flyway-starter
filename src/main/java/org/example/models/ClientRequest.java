@@ -12,7 +12,7 @@ public class ClientRequest {
         return clientId;
     }
 
-    public void setClientId(int clientId) {
+    public void setClientId(final int clientId) {
         this.clientId = clientId;
     }
 
@@ -20,7 +20,7 @@ public class ClientRequest {
         return clientName;
     }
 
-    public void setClientName(String clientName) {
+    public void setClientName(final String clientName) {
         this.clientName = clientName;
     }
 
@@ -28,7 +28,7 @@ public class ClientRequest {
         return salesEmployeeId;
     }
 
-    public void setSalesEmployeeId(int salesEmployeeId) {
+    public void setSalesEmployeeId(final int salesEmployeeId) {
         this.salesEmployeeId = salesEmployeeId;
     }
 

@@ -23,7 +23,7 @@ public class Project {
         return projectId;
     }
 
-    public void setProjectId(int projectId) {
+    public void setProjectId(final int projectId) {
         this.projectId = projectId;
     }
 
@@ -31,7 +31,7 @@ public class Project {
         return projectName;
     }
 
-    public void setProjectName(String projectName) {
+    public void setProjectName(final String projectName) {
         this.projectName = projectName;
     }
 
@@ -39,7 +39,7 @@ public class Project {
         return value;
     }
 
-    public void setValue(int value) {
+    public void setValue(final int value) {
         this.value = value;
     }
 
@@ -47,7 +47,7 @@ public class Project {
         return isCompleted;
     }
 
-    public void setIsCompleted(boolean isCompleted) {
+    public void setIsCompleted(final boolean isCompleted) {
         this.isCompleted = isCompleted;
     }
 
@@ -55,7 +55,7 @@ public class Project {
         return client;
     }
 
-    public void setClient(Client client) {
+    public void setClient(final Client client) {
         this.client = client;
     }
 
@@ -63,7 +63,7 @@ public class Project {
         return deliveryEmployee;
     }
 
-    public void setDeliveryEmployee(DeliveryEmployee deliveryEmployee) {
+    public void setDeliveryEmployee(final DeliveryEmployee deliveryEmployee) {
         this.deliveryEmployee = deliveryEmployee;
     }
 }

@@ -14,7 +14,7 @@ public class SalesEmployeeRequest {
         return salesEmployeeId;
     }
 
-    public void setSalesEmployeeId(int salesEmployeeId) {
+    public void setSalesEmployeeId(final int salesEmployeeId) {
         this.salesEmployeeId = salesEmployeeId;
     }
 
@@ -22,7 +22,7 @@ public class SalesEmployeeRequest {
         return employeeId;
     }
 
-    public void setEmployeeId(int employeeId) {
+    public void setEmployeeId(final int employeeId) {
         this.employeeId = employeeId;
     }
 
@@ -30,14 +30,14 @@ public class SalesEmployeeRequest {
         return commissionRate;
     }
 
-    public void setCommissionRate(BigDecimal commissionRate) {
+    public void setCommissionRate(final BigDecimal commissionRate) {
         this.commissionRate = commissionRate;
     }
 
     @JsonCreator SalesEmployeeRequest(
             @JsonProperty("SalesID") final int salesEmployeeId,
             @JsonProperty("EmployeeID") final int employeeId,
-            @JsonProperty("Commission") final BigDecimal commissionRate){
+            @JsonProperty("Commission") final BigDecimal commissionRate) {
                 this.salesEmployeeId = salesEmployeeId;
                 this.employeeId = employeeId;
                 this.commissionRate = commissionRate;

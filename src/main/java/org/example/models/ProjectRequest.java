@@ -15,7 +15,7 @@ public class ProjectRequest {
         return projectId;
     }
 
-    public void setProjectId(int projectId) {
+    public void setProjectId(final int projectId) {
         this.projectId = projectId;
     }
 
@@ -23,7 +23,7 @@ public class ProjectRequest {
         return projectName;
     }
 
-    public void setProjectName(String projectName) {
+    public void setProjectName(final String projectName) {
         this.projectName = projectName;
     }
 
@@ -31,15 +31,15 @@ public class ProjectRequest {
         return value;
     }
 
-    public void setValue(int value) {
+    public void setValue(final int value) {
         this.value = value;
     }
 
-    public boolean setIsCompleted() {
+    public boolean getIsCompleted() {
         return isCompleted;
     }
 
-    public void setIsCompleted(boolean isCompleted) {
+    public void setIsCompleted(final boolean isCompleted) {
         this.isCompleted = isCompleted;
     }
 
@@ -47,8 +47,16 @@ public class ProjectRequest {
         return clientId;
     }
 
+    public void setClientId(final int clientId) {
+        this.clientId = clientId;
+    }
+
     public int getTechLeadId() {
         return techLeadId;
+    }
+
+    public void setTechLeadId(final int techLeadId) {
+        this.techLeadId = techLeadId;
     }
 
     @JsonCreator ProjectRequest(

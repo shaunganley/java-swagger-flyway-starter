@@ -7,7 +7,8 @@ public class SalesEmployeeResponse {
     private int employeeId;
     private BigDecimal commissionRate;
 
-    public SalesEmployeeResponse (final int salesEmployeeId, final int employeeId,
+    public SalesEmployeeResponse(final int salesEmployeeId,
+                                  final int employeeId,
                                   final BigDecimal commissionRate) {
         this.salesEmployeeId = salesEmployeeId;
         this.employeeId = employeeId;
@@ -18,7 +19,7 @@ public class SalesEmployeeResponse {
         return salesEmployeeId;
     }
 
-    public void setSalesEmployeeId(int salesEmployeeId) {
+    public void setSalesEmployeeId(final int salesEmployeeId) {
         this.salesEmployeeId = salesEmployeeId;
     }
 
@@ -26,7 +27,7 @@ public class SalesEmployeeResponse {
         return employeeId;
     }
 
-    public void setEmployeeId(int employeeId) {
+    public void setEmployeeId(final int employeeId) {
         this.employeeId = employeeId;
     }
 
@@ -34,7 +35,7 @@ public class SalesEmployeeResponse {
         return commissionRate;
     }
 
-    public void setCommissionRate(BigDecimal commissionRate) {
+    public void setCommissionRate(final BigDecimal commissionRate) {
         this.commissionRate = commissionRate;
     }
 }
