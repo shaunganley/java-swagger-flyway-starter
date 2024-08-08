@@ -2,7 +2,9 @@ package org.example.exceptions;
 
 public enum Entity {
 
-    DELIVERY("Delivery"), SALES("Sales");
+    PROJECT("Project"),
+    DELIVERY("Delivery"),
+    SALES("Sales");
 
     private final String entity;
 
@@ -11,6 +13,6 @@ public enum Entity {
     }
 
     public String getEntity() {
-        return entity;
+        return this.entity;
     }
 }
