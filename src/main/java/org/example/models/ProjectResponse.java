@@ -47,8 +47,8 @@ public class ProjectResponse {
         return isCompleted;
     }
 
-    public void setCompleted(final boolean isCompleted) {
-        this.isCompleted = isCompleted;
+    public void setCompleted(final boolean completed) {
+        this.isCompleted = completed;
     }
 
     public int getClientId() {
