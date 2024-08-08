@@ -1,6 +1,5 @@
 package org.example.controllers;
 import io.swagger.annotations.Api;
-import org.example.models.SalesEmployee;
 import org.example.services.EmployeeService;
 import org.example.models.EmployeeRequest;
 
