@@ -1,8 +1,8 @@
 CREATE TABLE SalesEmployee(
-    salesId int PRIMARY KEY AUTO_INCREMENT,
-    name Varchar(100),
-    salary Decimal(10,2),
-    bankAccountNumber varchar(50),
-    nationalInsuranceNumber Varchar(50),
-    commissionRate Decimal(5,2)
+    SalesID int PRIMARY KEY AUTO_INCREMENT,
+    Name Varchar(100),
+    Salary Decimal(10,2),
+    BankAccountNumber varchar(50),
+    NationalInsuranceNumber Varchar(50),
+    CommissionRate Decimal(5,2)
  );
