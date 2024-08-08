@@ -1,12 +1,10 @@
 package org.example.daos;
 
 import org.example.models.Employee;
+import org.example.models.EmployeeRequest;
 import org.example.models.Role;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,4 +50,29 @@ public class EmployeeDao {
 
         return employeeList;
     }
+
+
+    public int createEmployee(EmployeeRequest employee) throws SQLException {
+        Connection c = DatabaseConnector.getConnection();
+
+        String insertStatement = "INSERT INTO `Employee` (name, salary, bank_account_number, " +
+                "national_insurance_number) VALUES (?,?,?,?)";
+
+        PreparedStatement st = c.prepareStatement(insertStatement, Statement.RETURN_GENERATED_KEYS);
+
+        st.setString(1, employee.getName());
+        st.setDouble(2, employee.getSalary());
+        st.setString(3, employee.getBankAccountNumber());
+        st.setString(4, employee.getNationalInsuranceNumber());
+
+        st.executeUpdate();
+
+        ResultSet rs = st.getGeneratedKeys();
+
+        if(rs.next()){
+            return rs.getInt(1);
+        }
+        return -1;
+    }
+    
 }
