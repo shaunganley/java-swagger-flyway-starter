@@ -1,9 +1,11 @@
 package org.example.controllers;
 import io.swagger.annotations.Api;
+import org.example.models.SalesEmployee;
 import org.example.services.EmployeeService;
 import org.example.models.EmployeeRequest;
 
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -12,6 +14,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.sql.SQLException;
 
+@Api("DCML Employee API")
 @Path("/api/employees")
 public class EmployeeController {
 
@@ -23,8 +26,15 @@ public class EmployeeController {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getAllEmployees() {
+    public Response getAllEmployees() throws SQLException {
         return Response.ok().entity(employeeService.getAllEmployees()).build();
+    }
+
+    @GET
+    @Path("/sales")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getAllSalesEmployees() throws SQLException {
+        return Response.ok().entity(employeeService.getSalesEmployees()).build();
     }
 
     @GET
@@ -32,7 +42,21 @@ public class EmployeeController {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getEmployeeById(@PathParam("id") int id)
             throws SQLException {
-        return Response.ok().entity(employeeService.getEmployeeById(id)).build();
+        return Response.ok().entity(employeeService.getEmployeeById(id))
+                .build();
+    }
+
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response createEmployee(EmployeeRequest employeeRequest) throws SQLException {
+        try {
+            return Response
+                    .status(Response.Status.CREATED)
+                    .entity(employeeService.createEmployee(employeeRequest))
+                    .build();
+        } catch (SQLException e) {
+            return Response.serverError().entity(e.getMessage()).build();
+        }
     }
 
     @PUT
@@ -42,12 +66,10 @@ public class EmployeeController {
             @PathParam("id") int id, EmployeeRequest employeeRequest) {
         try {
             employeeService.updateEmployee(id, employeeRequest);
+            return Response.ok().build();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                    .build();
         }
-
     }
-
-    )
-
 }

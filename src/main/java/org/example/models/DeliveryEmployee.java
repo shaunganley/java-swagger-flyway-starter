@@ -1,5 +1,7 @@
 package org.example.models;
 
+import java.math.BigDecimal;
+
 public class DeliveryEmployee {
     private int deliveryEmployeeId;
     private Employee employee;
@@ -8,6 +10,9 @@ public class DeliveryEmployee {
                             final Employee employee) {
         this.deliveryEmployeeId = deliveryEmployeeId;
         this.employee = employee;
+    }
+
+    public DeliveryEmployee(int deliveryID, String name, BigDecimal salary, String bankAccountNumber, String nationalInsuranceNumber) {
     }
 
     public int getDeliveryEmployeeId() {

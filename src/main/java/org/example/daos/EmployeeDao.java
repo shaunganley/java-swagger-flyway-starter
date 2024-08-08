@@ -1,5 +1,10 @@
 package org.example.daos;
 
+import org.example.models.DeliveryEmployee;
+import org.example.models.Employee;
+import org.example.models.EmployeeRequest;
+import org.example.models.SalesEmployee;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -7,6 +12,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+
+
 
 public class EmployeeDao {
 
@@ -27,8 +34,8 @@ public class EmployeeDao {
                         resultSet.getInt("EmployeeID"),
                         resultSet.getString("Name"),
                         resultSet.getBigDecimal("salary"),
-                        resultSet.getString("BankAccountNumber"),
-                        resultSet.getString("NationalInsuranceNumber"));
+                        resultSet.getInt("BankAccountNumber"),
+                        resultSet.getInt("NationalInsuranceNumber"));
 
 
                 employees.add(employee);
@@ -46,20 +53,19 @@ public class EmployeeDao {
         Connection c = DatabaseConnector.getConnection();
 
         String insertStatement =
-                "INSERT INTO Employee (, Name, Salary, "
+                "INSERT INTO Employee (Name, Salary, "
                         +
-                        "BankAcountNumber,"
+                        "BankAccountNumber,"
                         +
                         "NationalInsuranceNumber) VALUES (?,?,?,?)";
 
         PreparedStatement st = c.prepareStatement(insertStatement,
                 Statement.RETURN_GENERATED_KEYS);
 
-        st.setString(1, employee.getEmployeeId());
-        st.setString(1,employee.getEmployeeName);
+        st.setString(1, employee.getEmployeeName());
         st.setBigDecimal(2, employee.getSalary());
-        st.setString(1, employee.getBankAccountNumber());
-        st.setString(1, employee.getNationalInsuranceNumber());
+        st.setInt(3, employee.getBankAccountNumber());
+        st.setInt(4, employee.getNationalInsuranceNumber());
 
         st.executeUpdate();
 
@@ -134,20 +140,18 @@ public class EmployeeDao {
             Statement statement = connection.createStatement();
 
             ResultSet resultSet = statement.executeQuery(
-                    "SELECT EmployeeID, SalesID, Name, Salary,BankAccountNumber, NationalInsuranceNumber, CommissionRate"
+                    "SELECT EmployeeID, SalesEmployee.SalesID, SalesEmployee.Commission"
                             +
                             " FROM Employee "
                             +
-                            "join SalesEmployee using (SalesEmployeeID);");
+                            "join SalesEmployee using (EmployeeID);");
 
             while (resultSet.next()) {
                 SalesEmployee salesEmployee = new SalesEmployee(
-                        resultSet.getInt("SalesID"),
-                        resultSet.getString("Name"),
-                        resultSet.getBigDecimal("salary"),
-                        resultSet.getString("BankAccountNumber"),
-                        resultSet.getString("NationalInsuranceNumber"),
-                        resultSet.getBigDecimal("CommissionRate"));
+                        resultSet.getInt("EmployeeID"),
+                        resultSet.getBigDecimal("CommmissionRate"),
+                        (Employee) resultSet.getObject("SalesID"));
+                        
 
 
                 salesEmployees.add(salesEmployee);
@@ -200,8 +204,8 @@ public class EmployeeDao {
                         resultSet.getInt("EmployeeID"),
                         resultSet.getString("Name"),
                         resultSet.getBigDecimal("Salary"),
-                        resultSet.getString("BankAccountNumber"),
-                        resultSet.getString("NationalInsuranceNumber")
+                        resultSet.getInt("BankAccountNumber"),
+                        resultSet.getInt("NationalInsuranceNumber")
                 );
             }
         }
@@ -215,7 +219,13 @@ public class EmployeeDao {
         String updateStatment = "UPDATE Employee SET Name = ?,Salary = ?, BankAccountNumber = ?, NationalInsuranceNumber = ? WHERE EmployeeID = ?";
         PreparedStatement st = connection.prepareStatement(updateStatment);
 
-        updateStatment.setString(1, employeeRequest.getName());
+        st.setString(1, employeeRequest.getEmployeeName());
+        st.setBigDecimal(2, employeeRequest.getSalary());
+        st.setInt(3, employeeRequest.getBankAccountNumber());
+        st.setInt(4, id);
+
+        st.executeUpdate();
+
 
     }
 
