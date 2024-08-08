@@ -1,8 +1,6 @@
 package org.example.controllers;
 
-import freemarker.core.ReturnInstruction;
 import org.example.exceptions.InvalidException;
-import org.example.models.DeliveryEmployee;
 import org.example.models.DeliveryEmployeeRequest;
 import org.example.services.DeliveryEmployeeService;
 
@@ -20,9 +18,11 @@ public class DeliveryEmployeeController {
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response updateDeliveryEmployee(
-            @PathParam("id") int id, DeliveryEmployeeRequest deliveryEmployeeRequest) {
+            @PathParam("id") final int id,
+            final DeliveryEmployeeRequest deliveryEmployeeRequest) {
         try {
-            DeliveryEmployeeService.updateDeliveryEmployee(id, deliveryEmployeeRequest);
+            DeliveryEmployeeService.updateDeliveryEmployee(id,
+                    deliveryEmployeeRequest);
             return Response.noContent().build();
         } catch (SQLException e) {
             return Response.serverError().build();

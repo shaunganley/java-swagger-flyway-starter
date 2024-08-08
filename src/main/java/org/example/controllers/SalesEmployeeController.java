@@ -1,7 +1,6 @@
 package org.example.controllers;
 
 import org.example.exceptions.InvalidException;
-import org.example.models.DeliveryEmployeeRequest;
 import org.example.models.SalesEmployeeRequest;
 import org.example.services.SalesEmployeeService;
 
@@ -19,7 +18,8 @@ public class SalesEmployeeController {
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response updateSalesEmployee(
-            @PathParam("id") int id, SalesEmployeeRequest salesEmployeeRequest) {
+            @PathParam("id") final int id,
+            final SalesEmployeeRequest salesEmployeeRequest) {
         try {
             SalesEmployeeService.updateSalesEmployee(id, salesEmployeeRequest);
             return Response.noContent().build();

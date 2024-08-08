@@ -9,9 +9,10 @@ public class SalesEmployee {
     private String nationalInsurance;
     private double commissionRate;
 
-    public SalesEmployee( int id, String name, double salary,
-                             String bankNumber, String nationalInsurance,
-                          double commissionRate) {
+    public SalesEmployee(final int id, final String name, final double salary,
+                         final String bankNumber,
+                         final String nationalInsurance,
+                         final double commissionRate) {
         this.id = id;
         this.name = name;
         this.salary = salary;
@@ -24,7 +25,7 @@ public class SalesEmployee {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(final int id) {
         this.id = id;
     }
 
@@ -32,7 +33,7 @@ public class SalesEmployee {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(final String name) {
         this.name = name;
     }
 
@@ -40,7 +41,7 @@ public class SalesEmployee {
         return salary;
     }
 
-    public void setSalary(double salary) {
+    public void setSalary(final double salary) {
         this.salary = salary;
     }
 
@@ -48,7 +49,7 @@ public class SalesEmployee {
         return bankNumber;
     }
 
-    public void setBankNumber(String bankNumber) {
+    public void setBankNumber(final String bankNumber) {
         this.bankNumber = bankNumber;
     }
 
@@ -56,7 +57,7 @@ public class SalesEmployee {
         return nationalInsurance;
     }
 
-    public void setNationalInsurance(String nationalInsurance) {
+    public void setNationalInsurance(final String nationalInsurance) {
         this.nationalInsurance = nationalInsurance;
     }
 
@@ -64,7 +65,7 @@ public class SalesEmployee {
         return commissionRate;
     }
 
-    public void setCommissionRate(double commissionRate) {
+    public void setCommissionRate(final double commissionRate) {
         this.commissionRate = commissionRate;
     }
 }

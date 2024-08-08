@@ -8,15 +8,21 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class DeliveryEmployeeDao {
+public final class DeliveryEmployeeDao {
 
-    public static DeliveryEmployee getDeliveryEmployeeById(final int id) throws SQLException {
+    private DeliveryEmployeeDao() {
+
+    }
+
+    public static DeliveryEmployee getDeliveryEmployeeById(final int id)
+            throws SQLException {
 
         try (Connection connection = DatabaseConnector.getConnection()) {
             String query =
                     "select employee.id as 'Employee Id', name, salary, "
                             + "bankNumber, nationalInsurance from employee "
-                            + "right join delivery on employee.id = delivery.employeeID;";
+                            + "right join delivery "
+                            + "on employee.id = delivery.employeeID;";
 
             PreparedStatement statement = connection.prepareStatement(query);
 
@@ -37,9 +43,12 @@ public class DeliveryEmployeeDao {
         return null;
     }
 
-    public static void updateDeliveryEmployee(int id,
-                               DeliveryEmployeeRequest deliveryEmployee) throws
-            SQLException {
+    public static void updateDeliveryEmployee(
+            final int id, final DeliveryEmployeeRequest deliveryEmployee)
+            throws SQLException {
+
+        final int three = 3;
+        final int four = 4;
 
         Connection c = DatabaseConnector.getConnection();
 
@@ -51,8 +60,8 @@ public class DeliveryEmployeeDao {
 
         st.setString(1, deliveryEmployee.getName());
         st.setDouble(2, deliveryEmployee.getSalary());
-        st.setString(3, deliveryEmployee.getBankNumber());
-        st.setString(4, deliveryEmployee.getNationalInsurance());
+        st.setString(three, deliveryEmployee.getBankNumber());
+        st.setString(four, deliveryEmployee.getNationalInsurance());
 
         st.executeUpdate();
     }

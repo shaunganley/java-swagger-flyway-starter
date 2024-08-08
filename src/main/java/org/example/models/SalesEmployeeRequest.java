@@ -15,7 +15,7 @@ public class SalesEmployeeRequest {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(final String name) {
         this.name = name;
     }
 
@@ -23,7 +23,7 @@ public class SalesEmployeeRequest {
         return salary;
     }
 
-    public void setSalary(double salary) {
+    public void setSalary(final double salary) {
         this.salary = salary;
     }
 
@@ -31,7 +31,7 @@ public class SalesEmployeeRequest {
         return bankNumber;
     }
 
-    public void setBankNumber(String bankNumber) {
+    public void setBankNumber(final String bankNumber) {
         this.bankNumber = bankNumber;
     }
 
@@ -39,7 +39,7 @@ public class SalesEmployeeRequest {
         return nationalInsurance;
     }
 
-    public void setNationalInsurance(String nationalInsurance) {
+    public void setNationalInsurance(final String nationalInsurance) {
         this.nationalInsurance = nationalInsurance;
     }
 
@@ -47,16 +47,19 @@ public class SalesEmployeeRequest {
         return commissionRate;
     }
 
-    public void setCommissionRate(double commissionRate) {
+    public void setCommissionRate(final double commissionRate) {
         this.commissionRate = commissionRate;
     }
 
     @JsonCreator
-    public SalesEmployeeRequest(@JsonProperty("name") String name,
-                                   @JsonProperty("salary") double salary,
-                                   @JsonProperty("bankNumber") String bankNumber,
-                                   @JsonProperty("nationalInsurance") String nationalInsurance,
-                                @JsonProperty("commissionRate") double commissionRate) {
+    public SalesEmployeeRequest(@JsonProperty("name") final String name,
+                                @JsonProperty("salary") final double salary,
+                                @JsonProperty("bankNumber")
+                                    final String bankNumber,
+                                @JsonProperty("nationalInsurance")
+                                    final String nationalInsurance,
+                                @JsonProperty("commissionRate")
+                                    final double commissionRate) {
         this.name = name;
         this.salary = salary;
         this.bankNumber = bankNumber;

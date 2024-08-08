@@ -1,6 +1,5 @@
 package org.example.models;
 
-import java.util.Date;
 
 public class DeliveryEmployee {
 
@@ -10,8 +9,9 @@ public class DeliveryEmployee {
     private String bankNumber;
     private String nationalInsurance;
 
-    public DeliveryEmployee( int id, String name, double salary,
-                             String bankNumber, String nationalInsurance) {
+    public DeliveryEmployee(final int id, final String name,
+                            final double salary, final String bankNumber,
+                            final String nationalInsurance) {
         this.id = id;
         this.name = name;
         this.salary = salary;
@@ -23,7 +23,7 @@ public class DeliveryEmployee {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(final int id) {
         this.id = id;
     }
 
@@ -31,7 +31,7 @@ public class DeliveryEmployee {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(final String name) {
         this.name = name;
     }
 
@@ -39,7 +39,7 @@ public class DeliveryEmployee {
         return salary;
     }
 
-    public void setSalary(double salary) {
+    public void setSalary(final double salary) {
         this.salary = salary;
     }
 
@@ -47,7 +47,7 @@ public class DeliveryEmployee {
         return bankNumber;
     }
 
-    public void setBankNumber(String bankNumber) {
+    public void setBankNumber(final String bankNumber) {
         this.bankNumber = bankNumber;
     }
 
@@ -55,7 +55,7 @@ public class DeliveryEmployee {
         return nationalInsurance;
     }
 
-    public void setNationalInsurance(String nationalInsurance) {
+    public void setNationalInsurance(final String nationalInsurance) {
         this.nationalInsurance = nationalInsurance;
     }
 }

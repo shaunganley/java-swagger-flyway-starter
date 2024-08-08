@@ -14,7 +14,7 @@ public class DeliveryEmployeeRequest {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(final String name) {
         this.name = name;
     }
 
@@ -22,7 +22,7 @@ public class DeliveryEmployeeRequest {
         return salary;
     }
 
-    public void setSalary(double salary) {
+    public void setSalary(final double salary) {
         this.salary = salary;
     }
 
@@ -30,7 +30,7 @@ public class DeliveryEmployeeRequest {
         return bankNumber;
     }
 
-    public void setBankNumber(String bankNumber) {
+    public void setBankNumber(final String bankNumber) {
         this.bankNumber = bankNumber;
     }
 
@@ -38,15 +38,17 @@ public class DeliveryEmployeeRequest {
         return nationalInsurance;
     }
 
-    public void setNationalInsurance(String nationalInsurance) {
+    public void setNationalInsurance(final String nationalInsurance) {
         this.nationalInsurance = nationalInsurance;
     }
 
     @JsonCreator
-    public DeliveryEmployeeRequest(@JsonProperty("name") String name,
-                                   @JsonProperty("salary") double salary,
-                                   @JsonProperty("bankNumber") String bankNumber,
-                                   @JsonProperty("nationalInsurance") String nationalInsurance) {
+    public DeliveryEmployeeRequest(@JsonProperty("name") final String name,
+                                   @JsonProperty("salary") final double salary,
+                                   @JsonProperty("bankNumber")
+                                       final String bankNumber,
+                                   @JsonProperty("nationalInsurance")
+                                       final String nationalInsurance) {
         this.name = name;
         this.salary = salary;
         this.bankNumber = bankNumber;

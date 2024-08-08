@@ -13,13 +13,15 @@ public class DeliveryEmployeeService {
     DeliveryEmployeeDao deliveryEmployeeDao;
     DeliveryEmployeeValidator deliveryEmployeeValidator;
 
-    public static void updateDeliveryEmployee(int id,
-                                              DeliveryEmployeeRequest deliveryEmployeeRequest)
+    public static void updateDeliveryEmployee(
+            final int id, final DeliveryEmployeeRequest deliveryEmployeeRequest)
             throws SQLException, InvalidException {
 
-        DeliveryEmployeeValidator.validateDeliveryEmployee(deliveryEmployeeRequest);
+        DeliveryEmployeeValidator.validateDeliveryEmployee(
+                deliveryEmployeeRequest);
 
-        DeliveryEmployee deliveryEmployeeToUpdate = DeliveryEmployeeDao.getDeliveryEmployeeById(id);
+        DeliveryEmployee deliveryEmployeeToUpdate =
+                DeliveryEmployeeDao.getDeliveryEmployeeById(id);
 
         if (deliveryEmployeeToUpdate == null) {
             throw new SQLException();
