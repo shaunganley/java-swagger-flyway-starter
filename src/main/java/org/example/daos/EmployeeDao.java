@@ -161,7 +161,9 @@ public class EmployeeDao {
 
     public Employee getEmployeeById(final int id) throws SQLException {
         try (Connection connection = DatabaseConnector.getConnection()) {
-            String query = "SELECT EmployeeID, Name, Salary, BankAccountNumber, NationalInsuranceNumber FROM Employee WHERE EmployeeID = ?";
+            String query = "SELECT EmployeeID, Name, Salary, "
+                    + "BankAccountNumber, NationalInsuranceNumber "
+                    + "FROM Employee WHERE EmployeeID = ?";
 
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setInt(1, id);
@@ -184,7 +186,10 @@ public class EmployeeDao {
             throws SQLException {
         Connection connection = DatabaseConnector.getConnection();
 
-        String updateStatment = "UPDATE Employee SET Name = ?,Salary = ?, BankAccountNumber = ?, NationalInsuranceNumber = ? WHERE EmployeeID = ?";
+        String updateStatment = "UPDATE Employee SET Name = ?"
+                + ",Salary = ?, BankAccountNumber = ?, "
+                + "NationalInsuranceNumber = ? "
+                + "WHERE EmployeeID = ?";
         PreparedStatement st = connection.prepareStatement(updateStatment);
 
         st.setString(1, employeeRequest.getEmployeeName());
