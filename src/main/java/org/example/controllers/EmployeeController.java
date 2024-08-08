@@ -12,11 +12,10 @@ import javax.ws.rs.core.Response;
 import java.sql.SQLException;
 
 @Api("Engineering Academy Dropwizard Order API")
-@Path("api/employee")
+@Path("employee")
 public class EmployeeController {
 
     private EmployeeService employeeService;
-    private EmployeeRequest employeeRequest;
 
     public EmployeeController(EmployeeService employeeService) {
         this.employeeService = employeeService;
@@ -31,6 +30,9 @@ public class EmployeeController {
                 role)).build();
     }
 
+//    1. As a member of the HR team I want to be able to create a new delivery
+//    employee. I should be able to store a name, salary, bank account number
+//    and national insurance number
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     public Response createEmployee(EmployeeRequest employeeRequest) {
@@ -40,7 +42,7 @@ public class EmployeeController {
                     .entity(employeeService.createEmployee(employeeRequest))
                     .build();
         } catch (FailedToCreateException | SQLException e) {
-            System.out.println("Coś nie działa");
+            System.out.println("Not working");
             return Response.serverError().build();
         } catch (InvalidException e) {
             return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();

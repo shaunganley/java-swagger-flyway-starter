@@ -16,8 +16,9 @@ public class EmployeeService {
     private EmployeeDao employeeDao;
     private EmployeeValidator employeeValidator;
 
-    public EmployeeService(EmployeeDao employeeDao) {
+    public EmployeeService(EmployeeDao employeeDao, EmployeeValidator employeeValidator) {
         this.employeeDao = employeeDao;
+        this.employeeValidator = employeeValidator;
     }
 
     public List<Employee> getEmployeesByRole(String role) throws SQLException {

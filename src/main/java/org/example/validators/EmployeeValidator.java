@@ -4,15 +4,13 @@ import org.example.exceptions.Entity;
 import org.example.exceptions.InvalidException;
 import org.example.models.EmployeeRequest;
 
-import java.sql.Date;
 import java.sql.SQLException;
-import java.time.LocalDate;
 
 public class EmployeeValidator {
 
     EmployeeRequest employeeRequest;
 
-    public EmployeeValidator(EmployeeRequest employeeRequest) {
+    public EmployeeValidator() {
         this.employeeRequest = employeeRequest;
     }
 
