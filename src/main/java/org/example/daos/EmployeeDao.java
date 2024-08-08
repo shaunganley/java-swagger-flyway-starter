@@ -141,7 +141,7 @@ public class EmployeeDao {
             Statement statement = connection.createStatement();
 
             ResultSet resultSet = statement.executeQuery(
-                    "SELECT EmployeeID, SalesEmployee.SalesID, SCommission"
+                    "SELECT EmployeeID, SalesEmployee.SalesID, Commission"
                             +
                             " FROM Employee "
                             +
