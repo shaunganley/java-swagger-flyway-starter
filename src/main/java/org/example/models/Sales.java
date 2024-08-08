@@ -5,24 +5,24 @@ public class Sales {
     private int salesEmpId;
     private double commissionRate;
 
-    public Sales(int salesEmpId, double commissionRate) {
+    public Sales(final int salesEmpId, final double commissionRate) {
         this.salesEmpId = salesEmpId;
         this.commissionRate = commissionRate;
     }
 
-    public int getSalesEmployeeID() {
+    public int getSalesEmpId() {
         return salesEmpId;
     }
 
-    public void setSalesEmployeeID (int salesEmpId) {
+    public void setSalesEmpId(final int salesEmpId) {
         this.salesEmpId = salesEmpId;
     }
 
-    public double getComissionRate() {
+    public double getCommissionRate() {
         return commissionRate;
     }
 
-    public void setComissionRate (double commissionRate) {
+    public void setCommissionRate(final double commissionRate) {
         this.commissionRate = commissionRate;
     }
 }

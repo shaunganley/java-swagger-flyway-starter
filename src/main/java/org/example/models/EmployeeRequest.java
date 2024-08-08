@@ -10,11 +10,11 @@ public class EmployeeRequest {
     private String bankAccNo;
     private String nino;
 
-    public int getEmployeeId() {
+    public int getEmpId() {
         return empId;
     }
 
-    public void setEmployeeId(int empId) {
+    public void setEmpId(final int empId) {
         this.empId = empId;
     }
 
@@ -22,7 +22,7 @@ public class EmployeeRequest {
         return name;
     }
 
-    public void setName (String name) {
+    public void setName(final String name) {
         this.name = name;
     }
 
@@ -30,29 +30,33 @@ public class EmployeeRequest {
         return salary;
     }
 
-    public void setSalary(double salary) {
+    public void setSalary(final double salary) {
         this.salary = salary;
     }
 
-    public String getBankAccNo() { return bankAccNo;}
+    public String getBankAccNo() {
+        return bankAccNo;
+    }
 
-    public void setBankAccNo (String bankAccNo) {
+    public void setBankAccNo(final String bankAccNo) {
         this.bankAccNo = bankAccNo;
     }
 
-    public String getNino() { return nino;}
+    public String getNino() {
+        return nino;
+    }
 
-    public void setNino (String nino) {
+    public void setNino(final String nino) {
         this.nino = nino;
     }
+
     @JsonCreator
     public EmployeeRequest(
-            @JsonProperty("employeeID") int empId,
-            @JsonProperty("name") String name,
-            @JsonProperty("salary") double salary,
-            @JsonProperty("BankAccountNumber") String bankAccNo,
-            @JsonProperty("nationalInsuranceNumber") String nino)
-    {
+            final @JsonProperty("employeeID") int empId,
+            final @JsonProperty("name") String name,
+            final @JsonProperty("salary") double salary,
+            final @JsonProperty("BankAccountNumber") String bankAccNo,
+            final @JsonProperty("nationalInsuranceNumber") String nino) {
         this.empId = empId;
         this.name = name;
         this.salary = salary;

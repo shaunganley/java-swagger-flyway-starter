@@ -1,7 +1,5 @@
 package org.example.models;
 
-import java.util.Date;
-
 public class Employee {
 
     private int empId;
@@ -13,7 +11,9 @@ public class Employee {
     private Delivery delivery;
 
 
-    public Employee(int empId, String name, double salary, String bankAccNo, String nino, Sales sales) {
+    public Employee(final int empId, final String name,
+                    final double salary, final String bankAccNo,
+                    final String nino, final Sales sales) {
         this.empId = empId;
         this.name = name;
         this.salary = salary;
@@ -23,7 +23,9 @@ public class Employee {
 
     }
 
-    public Employee(int empId, String name, double salary, String bankAccNo, String nino, Delivery delivery) {
+    public Employee(final int empId, final String name,
+                    final double salary, final String bankAccNo,
+                    final String nino, final Delivery delivery) {
         this.empId = empId;
         this.name = name;
         this.salary = salary;
@@ -32,35 +34,32 @@ public class Employee {
         this.delivery = delivery;
 
     }
-
-    public int getEmployeeId() {
+    public int getEmpId() {
         return empId;
     }
-
-    public void setEmployeeId(int empId) {
+    public void setEmpId(final int empId) {
         this.empId = empId;
     }
-
     public String getName() {
         return name;
     }
 
-    public void setName (String name) {
+    public void setName(final String name) {
         this.name = name;
     }
-
     public double getSalary() {
         return salary;
     }
 
-    public void setSalary(double salary) {
+    public void setSalary(final double salary) {
         this.salary = salary;
     }
+
     public String getNino() {
         return nino;
     }
 
-    public void setNino (String nino) {
+    public void setNino(final String nino) {
         this.nino = nino;
     }
 
@@ -68,15 +67,14 @@ public class Employee {
         return bankAccNo;
     }
 
-    public void setBankAccNo (String bankAccNo) {
+    public void setBankAccNo(final String bankAccNo) {
         this.bankAccNo = bankAccNo;
     }
-
     public Sales getSales() {
         return sales;
     }
 
-    public void setSales(Sales sales) {
+    public void setSales(final Sales sales) {
         this.sales = sales;
     }
 
@@ -84,7 +82,7 @@ public class Employee {
         return delivery;
     }
 
-    public void setDelivery(Delivery delivery) {
+    public void setDelivery(final Delivery delivery) {
         this.delivery = delivery;
     }
 }

@@ -1,16 +1,17 @@
 package org.example.models;
 
-public class Delivery   {
+public class Delivery {
     private int id;
 
-    public Delivery(int id) {
+    public Delivery(final int id) {
         this.id = id;
     }
 
     public int getId() {
         return id;
     }
-    public void setId(int id) {
+
+    public void setId(final int id) {
         this.id = id;
     }
 }
