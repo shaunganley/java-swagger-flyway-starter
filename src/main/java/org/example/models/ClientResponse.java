@@ -1,9 +1,9 @@
 package org.example.models;
 
 public class ClientResponse {
-    private final int clientId;
-    private final String clientName;
-    private final int salesEmployeeId;
+    private int clientId;
+    private String clientName;
+    private int salesEmployeeId;
 
     public ClientResponse(final int clientId, final String clientName,
                           final int salesEmployeeId) {
@@ -16,11 +16,23 @@ public class ClientResponse {
         return clientId;
     }
 
+    public void setClientId(int clientId) {
+        this.clientId = clientId;
+    }
+
     public String getClientName() {
         return clientName;
     }
 
+    public void setClientName(String clientName) {
+        this.clientName = clientName;
+    }
+
     public int getSalesEmployeeId() {
         return salesEmployeeId;
+    }
+
+    public void setSalesEmployeeId(int salesEmployeeId) {
+        this.salesEmployeeId = salesEmployeeId;
     }
 }

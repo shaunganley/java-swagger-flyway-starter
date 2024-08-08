@@ -3,11 +3,11 @@ package org.example.models;
 import java.math.BigDecimal;
 
 public class Employee {
-    private final int employeeId;
-    private final String employeeName;
-    private final BigDecimal salary;
-    private final int bankAccountNumber;
-    private final int nationalInsuranceNumber;
+    private int employeeId;
+    private String employeeName;
+    private BigDecimal salary;
+    private int bankAccountNumber;
+    private int nationalInsuranceNumber;
 
     public Employee(final int employeeId, final String employeeName,
                     final BigDecimal salary, final int bankAccountNumber,
@@ -23,19 +23,39 @@ public class Employee {
         return employeeId;
     }
 
+    public void setEmployeeId(int employeeId) {
+        this.employeeId = employeeId;
+    }
+
     public String getEmployeeName() {
         return employeeName;
+    }
+
+    public void setEmployeeName(String employeeName) {
+        this.employeeName = employeeName;
     }
 
     public BigDecimal getSalary() {
         return salary;
     }
 
+    public void setSalary(BigDecimal salary) {
+        this.salary = salary;
+    }
+
     public int getBankAccountNumber() {
         return bankAccountNumber;
     }
 
+    public void setBankAccountNumber(int bankAccountNumber) {
+        this.bankAccountNumber = bankAccountNumber;
+    }
+
     public int getNationalInsuranceNumber() {
         return nationalInsuranceNumber;
+    }
+
+    public void setNationalInsuranceNumber(int nationalInsuranceNumber) {
+        this.nationalInsuranceNumber = nationalInsuranceNumber;
     }
 }

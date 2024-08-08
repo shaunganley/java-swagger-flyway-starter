@@ -1,8 +1,8 @@
 package org.example.models;
 
 public class DeliveryEmployeeResponse {
-    private final int deliveryEmployeeId;
-    private final int employeeId;
+    private int deliveryEmployeeId;
+    private int employeeId;
 
     public DeliveryEmployeeResponse(final int deliveryEmployeeId,
                                     final int employeeId) {
@@ -14,7 +14,15 @@ public class DeliveryEmployeeResponse {
         return deliveryEmployeeId;
     }
 
+    public void setDeliveryEmployeeId(int deliveryEmployeeId) {
+        this.deliveryEmployeeId = deliveryEmployeeId;
+    }
+
     public int getEmployeeId() {
         return employeeId;
+    }
+
+    public void setEmployeeId(int employeeId) {
+        this.employeeId = employeeId;
     }
 }

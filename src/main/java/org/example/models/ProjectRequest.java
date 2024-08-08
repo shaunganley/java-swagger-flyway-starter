@@ -4,27 +4,43 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class ProjectRequest {
-    private final int projectId;
-    private final String projectName;
-    private final int value;
-    private final boolean isCompleted;
-    private final int clientId;
-    private final int techLeadId;
+    private int projectId;
+    private String projectName;
+    private int value;
+    private boolean isCompleted;
+    private int clientId;
+    private int techLeadId;
 
     public int getProjectId() {
         return projectId;
+    }
+
+    public void setProjectId(int projectId) {
+        this.projectId = projectId;
     }
 
     public String getProjectName() {
         return projectName;
     }
 
+    public void setProjectName(String projectName) {
+        this.projectName = projectName;
+    }
+
     public int getValue() {
         return value;
     }
 
-    public boolean isCompleted() {
+    public void setValue(int value) {
+        this.value = value;
+    }
+
+    public boolean setIsCompleted() {
         return isCompleted;
+    }
+
+    public void setIsCompleted(boolean isCompleted) {
+        this.isCompleted = isCompleted;
     }
 
     public int getClientId() {
@@ -41,7 +57,7 @@ public class ProjectRequest {
             @JsonProperty("IsCompleted") final boolean isCompleted,
             @JsonProperty("ClientID") final int clientId,
             @JsonProperty("`Value`") final int value,
-            @JsonProperty("TechLeadID") final int techLeadId){
+            @JsonProperty("TechLeadID") final int techLeadId) {
         this.projectId = projectId;
         this.projectName = projectName;
         this.isCompleted = isCompleted;

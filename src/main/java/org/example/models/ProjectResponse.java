@@ -1,12 +1,12 @@
 package org.example.models;
 
 public class ProjectResponse {
-    private final int projectId;
-    private final String projectName;
-    private final int value;
-    private final boolean isCompleted;
-    private final int clientId;
-    private final int techLeadId;
+    private int projectId;
+    private String projectName;
+    private int value;
+    private boolean isCompleted;
+    private int clientId;
+    private int techLeadId;
 
     public ProjectResponse(int projectId, String projectName,
                            int value, boolean isCompleted,
@@ -23,23 +23,47 @@ public class ProjectResponse {
         return projectId;
     }
 
+    public void setProjectId(int projectId) {
+        this.projectId = projectId;
+    }
+
     public String getProjectName() {
         return projectName;
+    }
+
+    public void setProjectName(String projectName) {
+        this.projectName = projectName;
     }
 
     public int getValue() {
         return value;
     }
 
-    public boolean isCompleted() {
+    public void setValue(int value) {
+        this.value = value;
+    }
+
+    public boolean getIsCompleted() {
         return isCompleted;
+    }
+
+    public void setCompleted(boolean isCompleted) {
+        this.isCompleted = isCompleted;
     }
 
     public int getClientId() {
         return clientId;
     }
 
+    public void setClientId(int clientId) {
+        this.clientId = clientId;
+    }
+
     public int getTechLeadId() {
         return techLeadId;
+    }
+
+    public void setTechLeadId(int techLeadId) {
+        this.techLeadId = techLeadId;
     }
 }

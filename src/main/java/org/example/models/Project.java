@@ -1,14 +1,12 @@
 package org.example.models;
 
-import java.math.BigDecimal;
-
 public class Project {
-    private final int projectId;
-    private final String projectName;
-    private final int value;
-    private final boolean isCompleted;
-    private final Client client;
-    private final DeliveryEmployee deliveryEmployee;
+    private int projectId;
+    private String projectName;
+    private int value;
+    private boolean isCompleted;
+    private Client client;
+    private DeliveryEmployee deliveryEmployee;
 
     public Project(final int projectId, final String projectName,
                    final int value, final Client client,
@@ -25,23 +23,47 @@ public class Project {
         return projectId;
     }
 
+    public void setProjectId(int projectId) {
+        this.projectId = projectId;
+    }
+
     public String getProjectName() {
         return projectName;
+    }
+
+    public void setProjectName(String projectName) {
+        this.projectName = projectName;
     }
 
     public int getValue() {
         return value;
     }
 
-    public boolean isCompleted() {
+    public void setValue(int value) {
+        this.value = value;
+    }
+
+    public boolean getIsCompleted() {
         return isCompleted;
+    }
+
+    public void setIsCompleted(boolean isCompleted) {
+        this.isCompleted = isCompleted;
     }
 
     public Client getClient() {
         return client;
     }
 
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
     public DeliveryEmployee getDeliveryEmployee() {
         return deliveryEmployee;
+    }
+
+    public void setDeliveryEmployee(DeliveryEmployee deliveryEmployee) {
+        this.deliveryEmployee = deliveryEmployee;
     }
 }
