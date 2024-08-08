@@ -33,13 +33,14 @@ public class EmployeeController {
     @Path("/sales")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllSalesEmployees() throws SQLException {
-        return Response.ok().entity(employeeService.getSalesEmployees()).build();
+        return Response.ok().entity(employeeService
+                .getSalesEmployees()).build();
     }
 
     @GET
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getEmployeeById(@PathParam("id") int id)
+    public Response getEmployeeById(@PathParam("id") final int id)
             throws SQLException {
         return Response.ok().entity(employeeService.getEmployeeById(id))
                 .build();
@@ -47,7 +48,8 @@ public class EmployeeController {
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public Response createEmployee(final EmployeeRequest employeeRequest) throws SQLException {
+    public Response createEmployee(final EmployeeRequest
+                                               employeeRequest) throws SQLException {
         try {
             return Response
                     .status(Response.Status.CREATED)
@@ -62,7 +64,8 @@ public class EmployeeController {
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response updateEmployee(
-            @PathParam("id") final int id, final EmployeeRequest employeeRequest) {
+            @PathParam("id") final int id, final
+    EmployeeRequest employeeRequest) {
         try {
             employeeService.updateEmployee(id, employeeRequest);
             return Response.ok().build();

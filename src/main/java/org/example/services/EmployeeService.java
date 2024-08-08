@@ -27,12 +27,14 @@ public class EmployeeService {
         return employeeDao.getEmployeeById(id);
     }
 
-    public void updateEmployee(final int id, final EmployeeRequest employeeRequest)
+    public void updateEmployee(final int id, final
+    EmployeeRequest employeeRequest)
             throws SQLException {
         Employee employeeToUpdate = employeeDao.getEmployeeById(id);
     }
 
-    public int createEmployee(final EmployeeRequest employeeRequest) throws SQLException {
+    public int createEmployee(final EmployeeRequest
+                                      employeeRequest) throws SQLException {
         int id = employeeDao.createEmployee(employeeRequest);
 
         return id;

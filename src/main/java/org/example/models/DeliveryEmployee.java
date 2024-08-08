@@ -1,7 +1,5 @@
 package org.example.models;
 
-import java.math.BigDecimal;
-
 public class DeliveryEmployee {
     private int deliveryEmployeeId;
     private Employee employee;
