@@ -15,6 +15,8 @@ import java.util.List;
 
 
 public class EmployeeDao {
+    private final int three = 3;
+    private final int four = 4;
 
     //get all employees
     public List<Employee> getAllEmployees() throws SQLException {
@@ -63,8 +65,8 @@ public class EmployeeDao {
 
         st.setString(1, employee.getEmployeeName());
         st.setBigDecimal(2, employee.getSalary());
-        st.setInt(3, employee.getBankAccountNumber());
-        st.setInt(4, employee.getNationalInsuranceNumber());
+        st.setInt(three, employee.getBankAccountNumber());
+        st.setInt(four, employee.getNationalInsuranceNumber());
 
         st.executeUpdate();
 
@@ -182,7 +184,8 @@ public class EmployeeDao {
         return null;
     }
 
-    public void updateEmployee(final int id, final EmployeeRequest employeeRequest)
+    public void updateEmployee(final int id,
+                               final EmployeeRequest employeeRequest)
             throws SQLException {
         Connection connection = DatabaseConnector.getConnection();
 
@@ -194,12 +197,9 @@ public class EmployeeDao {
 
         st.setString(1, employeeRequest.getEmployeeName());
         st.setBigDecimal(2, employeeRequest.getSalary());
-        st.setInt(3, employeeRequest.getBankAccountNumber());
-        st.setInt(4, id);
+        st.setInt(three, employeeRequest.getBankAccountNumber());
+        st.setInt(four, id);
 
         st.executeUpdate();
-
-
     }
-
 }
