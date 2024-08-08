@@ -3,12 +3,13 @@ package org.example.models;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class DeliveryEmployeeRequest {
+public class SalesEmployeeRequest {
 
     private String name;
     private double salary;
     private String bankNumber;
     private String nationalInsurance;
+    private double commissionRate;
 
     public String getName() {
         return name;
@@ -42,14 +43,24 @@ public class DeliveryEmployeeRequest {
         this.nationalInsurance = nationalInsurance;
     }
 
+    public double getCommissionRate() {
+        return commissionRate;
+    }
+
+    public void setCommissionRate(double commissionRate) {
+        this.commissionRate = commissionRate;
+    }
+
     @JsonCreator
-    public DeliveryEmployeeRequest(@JsonProperty("name") String name,
+    public SalesEmployeeRequest(@JsonProperty("name") String name,
                                    @JsonProperty("salary") double salary,
                                    @JsonProperty("bankNumber") String bankNumber,
-                                   @JsonProperty("nationalInsurance") String nationalInsurance) {
+                                   @JsonProperty("nationalInsurance") String nationalInsurance,
+                                @JsonProperty("commissionRate") double commissionRate) {
         this.name = name;
         this.salary = salary;
         this.bankNumber = bankNumber;
         this.nationalInsurance = nationalInsurance;
+        this.commissionRate = commissionRate;
     }
 }
