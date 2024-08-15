@@ -20,6 +20,7 @@ import org.example.services.EmployeeService;
 
 import org.example.services.ProjectService;
 import org.example.services.TestService;
+import org.example.validators.ProjectValidator;
 
 
 public class TestApplication
@@ -59,7 +60,8 @@ public class TestApplication
                         new EmployeeService(new EmployeeDao())));
         environment.jersey()
                 .register(new ProjectController(
-                        new ProjectService(new ProjectDao())));
+                        new ProjectService(new ProjectDao(),
+                                new ProjectValidator())));
     }
 
 }
