@@ -60,4 +60,20 @@ public class EmployeeController {
             return Response.serverError().build();
         }
     }
+    @GET
+    @Path("delivery/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getDeliveryEmployeeById(final @PathParam("id") int id)
+            throws SQLException {
+        try {
+            return Response.ok().entity(
+                    employeeService.getDeliveryEmployeeById(id))
+                    .build();
+        } catch (DoesNotExistException e) {
+            return Response.status(Response.Status.NOT_FOUND)
+                    .entity(e.getMessage()).build();
+        } catch (SQLException e) {
+            return Response.serverError().build();
+        }
+    }
 }

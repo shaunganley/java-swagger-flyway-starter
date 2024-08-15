@@ -105,4 +105,36 @@ public class EmployeeDao {
         }
         return null;
     }
+
+    public DeliveryEmployee getDeliveryEmployeeById(final int id)
+
+            throws SQLException {
+        try (Connection connection = DatabaseConnector.getConnection()) {
+            String query = "SELECT employee.id, name, salary,"
+                    +
+                    "bankNumber, nationalInsurance "
+                    +
+                    "from employee "
+                    +
+                    "right join delivery "
+                    +
+                    "on employee.id = delivery.employeeID "
+                    +
+                    "where delivery.id = ?;";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setInt(1, id);
+
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                return new DeliveryEmployee(
+                        resultSet.getInt("id"),
+                        resultSet.getString("name"),
+                        resultSet.getBigDecimal("salary"),
+                        resultSet.getString("bankNumber"),
+                        resultSet.getString("nationalInsurance"));
+            }
+        }
+        return null;
+    }
 }
