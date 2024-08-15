@@ -12,7 +12,7 @@ public class ProjectService {
         this.projectDao = projectDao;
     }
 
-    public List<Project> getHighestValueProject() throws SQLException {
+    public Project getHighestValueProject() throws SQLException {
         return projectDao.getHighestValueProject();
     }
 }
