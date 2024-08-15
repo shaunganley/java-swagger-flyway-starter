@@ -38,7 +38,8 @@ public class EmployeeService {
 
     public DeliveryEmployee getDeliveryEmployeeById(final int id)
             throws SQLException, DoesNotExistException {
-        DeliveryEmployee deliveryEmployee = employeeDao.getDeliveryEmployeeById(id);
+        DeliveryEmployee deliveryEmployee =
+                employeeDao.getDeliveryEmployeeById(id);
         if (deliveryEmployee == null) {
             throw new DoesNotExistException(Entity.SALESEMPLOYEE);
         }
