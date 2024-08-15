@@ -11,7 +11,7 @@ import javax.ws.rs.core.Response;
 import java.sql.SQLException;
 
 @Api("Project API")
-@Path("/api")
+@Path("/api/projects")
 public class ProjectController {
 
     ProjectService projectService;
@@ -22,7 +22,7 @@ public class ProjectController {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    @Path("/highestvalueproject")
+    @Path("/highestValue")
     public Response
     getHighestValueProject() {
         try {
