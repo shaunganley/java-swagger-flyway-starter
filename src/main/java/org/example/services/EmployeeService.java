@@ -2,6 +2,7 @@ package org.example.services;
 
 
 import org.example.daos.EmployeeDao;
+import org.example.models.DeliveryEmployee;
 import org.example.models.SalesEmployee;
 
 import java.sql.SQLException;
@@ -17,5 +18,9 @@ public class EmployeeService {
 
     public List<SalesEmployee> getAllSalesEmployees() throws SQLException {
         return employeeDao.getAllSalesEmployees();
+    }
+
+    public List<DeliveryEmployee> getAllDeliveryEmployees()throws SQLException {
+        return employeeDao.getAllDeliveryEmployees();
     }
 }

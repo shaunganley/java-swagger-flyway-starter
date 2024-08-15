@@ -30,4 +30,16 @@ public class EmployeeController {
             return Response.serverError().build();
         }
     }
+
+    @GET
+    @Path("/delivery")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getDeliveryEmployees() throws SQLException {
+        try {
+            return Response.ok().entity(
+                    employeeService.getAllDeliveryEmployees()).build();
+        } catch (SQLException e) {
+            return Response.serverError().build();
+        }
+    }
 }
