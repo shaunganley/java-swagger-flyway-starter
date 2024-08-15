@@ -13,4 +13,10 @@ public class SalesEmployees extends Employees {
         super(id, name, salary, bankAccountNumber, nin);
         this.commission = commission;
     }
+    public float getCommission() {
+        return commission;
+    }
+    public void setCommission(final float commission) {
+        this.commission = commission;
+    }
 }
