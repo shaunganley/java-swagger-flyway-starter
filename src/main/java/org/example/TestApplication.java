@@ -13,9 +13,7 @@ import org.example.daos.TestDao;
 import org.example.services.ClientService;
 
 import org.example.controllers.EmployeeController;
-import org.example.controllers.TestController;
 import org.example.daos.EmployeeDao;
-import org.example.daos.TestDao;
 import org.example.services.EmployeeService;
 
 import org.example.services.TestService;
@@ -53,6 +51,7 @@ public class TestApplication
         environment.jersey()
                 .register(new ClientController(
                         new ClientService(new ClientDao())));
+        environment.jersey()
                 .register(new EmployeeController(
                         new EmployeeService(new EmployeeDao())));
     }
