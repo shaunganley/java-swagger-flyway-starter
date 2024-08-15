@@ -4,7 +4,10 @@ package org.example.services;
 import org.example.daos.EmployeeDao;
 import org.example.exceptions.DoesNotExistException;
 import org.example.exceptions.Entity;
+import org.example.exceptions.FailedToCreateException;
+import org.example.exceptions.InvalidException;
 import org.example.models.DeliveryEmployee;
+import org.example.models.DeliveryEmployeeDetailsRequest;
 import org.example.models.SalesEmployee;
 
 import java.sql.SQLException;
@@ -44,5 +47,18 @@ public class EmployeeService {
             throw new DoesNotExistException(Entity.SALESEMPLOYEE);
         }
         return deliveryEmployee;
+    }
+
+    public int createDeliveryEmployee(
+            final DeliveryEmployeeDetailsRequest
+                    deliveryEmployeeDetailsRequest)
+        throws SQLException, FailedToCreateException, InvalidException {
+        int id = employeeDao.createDeliveryEmployee(
+                deliveryEmployeeDetailsRequest);
+
+        if (id == 1) {
+            throw new FailedToCreateException(Entity.DELIVERYEMPLOYEE);
+        }
+        return id;
     }
 }
