@@ -1,13 +1,21 @@
 package org.example.controllers;
 
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.Authorization;
 import org.example.exceptions.DoesNotExistException;
+import org.example.models.DeliveryEmployee;
+import org.example.models.Employee;
+import org.example.models.SalesEmployee;
+import org.example.models.UserRole;
 import org.example.services.EmployeeService;
 
+import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.sql.SQLException;
@@ -23,7 +31,11 @@ public class EmployeeController {
 
     @GET
     @Path("/sales")
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)@RolesAllowed({UserRole.ADMIN})
+    @ApiOperation(
+            value = "Returns All Sales Employees",
+            authorizations = @Authorization(value = HttpHeaders.AUTHORIZATION),
+            response = SalesEmployee.class)
     public Response getSalesEmployees() throws SQLException {
         try {
             return Response.ok().entity(
@@ -36,6 +48,11 @@ public class EmployeeController {
     @GET
     @Path("/delivery")
     @Produces(MediaType.APPLICATION_JSON)
+    @RolesAllowed({UserRole.ADMIN})
+    @ApiOperation(
+            value = "Returns All Delivery Employees",
+            authorizations = @Authorization(value = HttpHeaders.AUTHORIZATION),
+            response = DeliveryEmployee.class)
     public Response getDeliveryEmployees() throws SQLException {
         try {
             return Response.ok().entity(
@@ -47,6 +64,11 @@ public class EmployeeController {
     @GET
     @Path("/sales/{id}")
     @Produces(MediaType.APPLICATION_JSON)
+    @RolesAllowed({UserRole.ADMIN})
+    @ApiOperation(
+            value = "Returns a Sales Employee",
+            authorizations = @Authorization(value = HttpHeaders.AUTHORIZATION),
+            response = SalesEmployee.class)
     public Response getSalesEmployeeById(final @PathParam("id") int id)
         throws SQLException {
         try {
@@ -63,6 +85,11 @@ public class EmployeeController {
     @GET
     @Path("/delivery/{id}")
     @Produces(MediaType.APPLICATION_JSON)
+    @RolesAllowed({UserRole.ADMIN})
+    @ApiOperation(
+            value = "Returns a Delivery Employee",
+            authorizations = @Authorization(value = HttpHeaders.AUTHORIZATION),
+            response = DeliveryEmployee.class)
     public Response getDeliveryEmployeeById(final @PathParam("id") int id)
             throws SQLException {
         try {
