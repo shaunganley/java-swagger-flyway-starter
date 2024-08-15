@@ -11,29 +11,27 @@ import java.util.List;
 
 public class ProjectDao {
 
-    public List<Project> getHighestValueProject() throws SQLException {
-        List<Project> projects = new ArrayList<>();
-
+    public Project getHighestValueProject() throws SQLException {
+        Project project = null;
         try (Connection connection = DatabaseConnector.getConnection()) {
-            Statement statement = connection.createStatement();
-
-            ResultSet resultSet = statement.executeQuery(
+            String query =
                     "SELECT id, projectName, projectValue, "
-                           + "techLeadID, clientID FROM `project` "
-                           + "ORDER BY projectValue desc LIMIT 1;");
+                            + "techLeadID, clientID FROM `project` "
+                            + "ORDER BY projectValue desc LIMIT 1;";
+            PreparedStatement statement = connection.prepareStatement(query);
+
+            ResultSet resultSet = statement.executeQuery();
 
             while (resultSet.next()) {
-                Project project = new Project(
+                project = new Project(
                         resultSet.getInt("id"),
                         resultSet.getString("projectName"),
                         resultSet.getDouble("projectValue"),
                         resultSet.getInt("techLeadID"),
                         resultSet.getInt("clientID")
-                        );
-
-                projects.add(project);
+                );
             }
-            return projects;
         }
+        return project;
     }
 }
