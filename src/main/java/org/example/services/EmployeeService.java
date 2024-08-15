@@ -20,7 +20,15 @@ public class EmployeeService {
         return employeeDao.getAllSalesEmployees();
     }
 
-    public List<DeliveryEmployee> getAllDeliveryEmployees()throws SQLException {
+    public List<DeliveryEmployee> getAllDeliveryEmployees()
+            throws SQLException {
         return employeeDao.getAllDeliveryEmployees();
     }
+    public SalesEmployee getSalesEmployeeById(final int id)
+            throws SQLException {
+        return employeeDao.getSalesEmployeeById(id);
+    }
+    //    public Product getProductById(final int id) throws SQLException {
+    //        return productDao.getProductById(id);
+    //    }
 }
