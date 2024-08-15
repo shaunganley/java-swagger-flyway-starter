@@ -4,7 +4,9 @@ public enum Entity {
     EMPLOYEE("Employee"),
     SALESEMPLOYEE("Sale Employee"),
     DELIVERYEMPLOYEE("Delivery Employee"),
-    PROJECT("Project");
+    PROJECT("Project"),
+    USER("User");
+
     private final String entity;
 
     Entity(final String entity) {
