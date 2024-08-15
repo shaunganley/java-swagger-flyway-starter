@@ -1,6 +1,7 @@
 package org.example.controllers;
 
 import io.swagger.annotations.Api;
+import org.example.exceptions.DoesNotExistException;
 import org.example.services.EmployeeService;
 
 import javax.ws.rs.GET;

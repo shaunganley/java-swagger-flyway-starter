@@ -77,19 +77,17 @@ public class EmployeeDao {
 
             throws SQLException {
         try (Connection connection = DatabaseConnector.getConnection()) {
-            String query = "SELECT employee.id, name, salary,bankNumber,"
+            String query = "SELECT employee.id, name, salary,"
                     +
-                    " nationalInsurance,commissionRate "
+                    "bankNumber, nationalInsurance,commissionRate "
                     +
                     "from employee "
                     +
-                    "join sales "
+                    "right join sales "
                     +
-                    "on employee.id = "
+                    "on employee.id = sales.employeeID "
                     +
-                    "sales.employeeID "
-                    +
-                    "where employee.id = ?;";
+                    "where sales.id = ?;";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setInt(1, id);
 
