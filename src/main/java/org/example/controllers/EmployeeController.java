@@ -45,7 +45,7 @@ public class EmployeeController {
         }
     }
     @GET
-    @Path("sales/{id}")
+    @Path("/sales/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getSalesEmployeeById(final @PathParam("id") int id)
         throws SQLException {
@@ -61,7 +61,7 @@ public class EmployeeController {
         }
     }
     @GET
-    @Path("delivery/{id}")
+    @Path("/delivery/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getDeliveryEmployeeById(final @PathParam("id") int id)
             throws SQLException {
