@@ -24,7 +24,8 @@ public class EmployeeController {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getSalesEmployees() throws SQLException {
         try {
-            return Response.ok().entity(employeeService.getAllSalesEmployees()).build();
+            return Response.ok().entity(
+                    employeeService.getAllSalesEmployees()).build();
         } catch (SQLException e) {
             return Response.serverError().build();
         }

@@ -2,11 +2,11 @@ package org.example.models;
 
 import java.math.BigDecimal;
 
-public class SalesEmployees extends Employees {
+public class SalesEmployee extends Employee {
 
     private float commission;
 
-    public SalesEmployees(final int id, final String name,
+    public SalesEmployee(final int id, final String name,
                          final BigDecimal salary,
                          final String bankAccountNumber,
                          final String nin, final float commission) {

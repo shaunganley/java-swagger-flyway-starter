@@ -2,7 +2,7 @@ package org.example.models;
 
 import java.math.BigDecimal;
 
-public abstract class Employees {
+public abstract class Employee {
     // name, salary, bank account number and national insurance number
     private int id;
     private String name;
@@ -10,7 +10,7 @@ public abstract class Employees {
     private String bankAccountNumber;
     private String nin;
 
-    public Employees(final int id, final String name, final BigDecimal salary,
+    public Employee(final int id, final String name, final BigDecimal salary,
                     final String bankAccountNumber, final String nin) {
         this.id = id;
         this.name = name;

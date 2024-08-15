@@ -1,6 +1,6 @@
 package org.example.daos;
 
-import org.example.models.SalesEmployees;
+import org.example.models.SalesEmployee;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,22 +11,26 @@ import java.util.List;
 
 public class EmployeeDao {
 
-        public List<SalesEmployees> getAllSalesEmployees() throws SQLException {
-            List<SalesEmployees> salesEmployees = new ArrayList<>();
+        public List<SalesEmployee> getAllSalesEmployees() throws SQLException {
+            List<SalesEmployee> salesEmployees = new ArrayList<>();
 
             try (Connection connection = DatabaseConnector.getConnection()) {
                 String query =
-                        "SELECT id, name, salary, "
+                        "SELECT employee.id, name, salary,"
                                 +
-                                "bankNumber, nationalInsurance, "
-                        + "commissionRate from employee "
-                        + "join sales USING(id);";
+                                "bankNumber, nationalInsurance,commissionRate"
+                                +
+                                " from employee"
+                                +
+                                " join sales"
+                                +
+                                " on employee.id = sales.employeeID;";
                 PreparedStatement statement =
                         connection.prepareStatement(query);
                 ResultSet resultSet = statement.executeQuery();
 
                 while (resultSet.next()) {
-                    salesEmployees.add(new SalesEmployees(
+                    salesEmployees.add(new SalesEmployee(
                             resultSet.getInt("id"),
                             resultSet.getString("name"),
                             resultSet.getBigDecimal("salary"),
