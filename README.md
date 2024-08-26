@@ -59,3 +59,16 @@ Health Check
 ---
 
 To see your applications health enter url `http://localhost:8081/healthcheck`
+
+**How to Lint**
+---
+
+Configure checkstyle in Intellij:
+1. Open Settings,
+2. Go to Tools, then Checkstyle,
+3. Under Configuration File, click Add,
+4. Type 'Sun Checks Modified' in the Description,
+5. Click Browse, then go to src/main/resources/sun_checks_modified,
+6. Click Next, then Next again, then Finish,
+7. Check the box for Active, then click Apply, then OK,
+8. Click on the CheckStyle button above the Terminal button and select Sun Checks Modified as the Rules.
