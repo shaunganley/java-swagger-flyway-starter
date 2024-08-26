@@ -7,8 +7,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TestDao {
-    public List<String> testConnection() throws SQLException {
+public class JobRoleDao {
+    public List<String> getAllJobRoles() throws SQLException {
         List<String> databases = new ArrayList<>();
 
         try (Connection connection = DatabaseConnector.getConnection()) {
