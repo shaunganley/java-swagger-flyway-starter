@@ -1,12 +1,40 @@
 package org.example.models;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import java.sql.Date;
 
+@ApiModel(value = "Job Role Response", description = "Defines mapped JobRole object to pass to other methods")
 public class JobRoleResponse {
+    @ApiModelProperty(
+            value = "Job role's name",
+            required = true,
+            example = "Delivery manager")
     private String roleName;
+
+    @ApiModelProperty(
+            value = "Role's location, defined by ENUM value",
+            required = true,
+            example = "Gdańsk")
     private String jobRoleLocation;
+
+    @ApiModelProperty(
+            value = "Capability's name",
+            required = true,
+            example = "Digital Service")
     private String capabilityName;
+
+    @ApiModelProperty(
+            value = "Band's name",
+            required = true,
+            example = "Trainee")
     private String bandName;
+
+    @ApiModelProperty(
+            value = "Expire date of offer",
+            required = true,
+            example = "11/12/2024")
     private Date closingDate;
 
     public JobRoleResponse(final String roleName,
