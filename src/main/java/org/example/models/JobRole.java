@@ -6,24 +6,29 @@ public class JobRole {
     private int jobRoleId;
     private String roleName;
     private String jobRoleLocation;
-    private int capabilityId;
-    private int bandId;
+    private String capabilityName;
+    private String bandName;
     private Date closingDate;
 
-    public JobRole(int jobRoleId, String jobRoleLocation, String roleName, int capabilityId, Date closingDate, int bandId) {
+    public JobRole(final int jobRoleId,
+                   final String roleName,
+                   final String jobRoleLocation,
+                   final String capabilityName,
+                   final String bandName,
+                   final Date closingDate) {
         this.jobRoleId = jobRoleId;
-        this.jobRoleLocation = jobRoleLocation;
         this.roleName = roleName;
-        this.capabilityId = capabilityId;
+        this.jobRoleLocation = jobRoleLocation;
+        this.capabilityName = capabilityName;
+        this.bandName = bandName;
         this.closingDate = closingDate;
-        this.bandId = bandId;
     }
 
     public int getJobRoleId() {
         return jobRoleId;
     }
 
-    public void setJobRoleId(int jobRoleId) {
+    public void setJobRoleId(final int jobRoleId) {
         this.jobRoleId = jobRoleId;
     }
 
@@ -31,7 +36,7 @@ public class JobRole {
         return roleName;
     }
 
-    public void setRoleName(String roleName) {
+    public void setRoleName(final String roleName) {
         this.roleName = roleName;
     }
 
@@ -39,31 +44,31 @@ public class JobRole {
         return jobRoleLocation;
     }
 
-    public void setJobRoleLocation(String jobRoleLocation) {
+    public void setJobRoleLocation(final String jobRoleLocation) {
         this.jobRoleLocation = jobRoleLocation;
     }
 
-    public int getCapabilityId() {
-        return capabilityId;
+    public String getCapabilityName() {
+        return capabilityName;
     }
 
-    public void setCapabilityId(int capabilityId) {
-        this.capabilityId = capabilityId;
+    public void setCapabilityName(final String capabilityName) {
+        this.capabilityName = capabilityName;
     }
 
-    public int getBandId() {
-        return bandId;
+    public String getBandName() {
+        return bandName;
     }
 
-    public void setBandId(int bandId) {
-        this.bandId = bandId;
+    public void setBandName(final String bandName) {
+        this.bandName = bandName;
     }
 
     public Date getClosingDate() {
         return closingDate;
     }
 
-    public void setClosingDate(Date closingDate) {
+    public void setClosingDate(final Date closingDate) {
         this.closingDate = closingDate;
     }
 }

@@ -17,16 +17,18 @@ public class JobRoleDao {
             Statement statement = connection.createStatement();
 
             ResultSet resultSet = statement.executeQuery(
-                    "SELECT * FROM job-roles;");
+                    "SELECT (roleName, location, capabilityName, bandName, closingDate) FROM job-roles"
+                            + "INNER JOIN capabilities USING(capabilityId)"
+                            + "INNER JOIN band USING(bandId);");
 
             while (resultSet.next()) {
                 JobRole jobRole;
                 jobRole = new JobRole(resultSet.getInt("jobRoleId"),
-                        resultSet.getString("jobRoleLocation"),
                         resultSet.getString("roleName"),
-                        resultSet.getInt("capabilityId"),
-                        resultSet.getDate("closingDate"),
-                        resultSet.getInt("bandId")
+                        resultSet.getString("jobRoleLocation"),
+                        resultSet.getString("capabilityName"),
+                        resultSet.getString("bandName"),
+                        resultSet.getDate("closingDate")
                         );
                 jobRoles.add(jobRole);
             }
