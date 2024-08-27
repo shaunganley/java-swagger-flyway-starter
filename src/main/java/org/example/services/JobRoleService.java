@@ -1,6 +1,7 @@
 package org.example.services;
 
 import org.example.daos.JobRoleDao;
+import org.example.mappers.JobRoleMapper;
 import org.example.models.JobRole;
 import org.example.models.JobRoleResponse;
 
@@ -14,11 +15,12 @@ public class JobRoleService {
     public JobRoleService(final JobRoleDao jobRoleDao) {
         this.jobRoleDao = jobRoleDao;
     }
+
     public List<JobRole> testConnection() throws SQLException {
         return jobRoleDao.getAllJobRoles();
     }
 
     public List<JobRoleResponse> getAllJobRoles() throws SQLException {
-        return jobRoleDao.getAllJobRoles();
+        return JobRoleMapper.toResponse(jobRoleDao.getAllJobRoles());
     }
 }
