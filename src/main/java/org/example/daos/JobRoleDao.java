@@ -17,14 +17,17 @@ public class JobRoleDao {
         try (Connection connection = DatabaseConnector.getConnection()) {
 
             String query =
-                    "select job_roles.roleName, "
+                    "select job_roles.jobRoleId, job_roles.roleName, "
                             + "job_roles.location, "
-                            + "capability.capabilityName, "
-                            + "band.bandName, job_roles.closingDate "
+                            + "capability.capabilityName, band.bandName, "
+                            + "job_roles.closingDate "
                             + "from job_roles "
                             + "join capability on job_roles.capabilityId = "
                             + "capability.capabilityId "
-                            + "join band on job_roles.bandId = band.nameId;";
+                            + "join band on job_roles.bandId = band.nameId "
+                            + "join status on status.statusId "
+                            + "where job_roles.statusId = 1 "
+                            + "group by job_roles.jobRoleId;";
             PreparedStatement statement =
                     connection.prepareStatement(query);
             ResultSet resultSet = statement.executeQuery();
