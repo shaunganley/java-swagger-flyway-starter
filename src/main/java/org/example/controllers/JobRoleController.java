@@ -13,6 +13,7 @@ import org.example.models.JobRole;
 import org.example.models.JobRoleResponse;
 import org.example.services.JobRoleService;
 
+import javax.validation.constraints.Null;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -57,7 +58,7 @@ public class JobRoleController {
         } catch (SQLException e) {
             LOGGER.error("getAllJobRoles failed, SQL Exception\n" + e.getMessage());
             return Response.serverError().build();
-        } catch (DoesNotExistException e) {
+        } catch (DoesNotExistException | NullPointerException e) {
             LOGGER.error("getAllJobRoles failed, DoesNotExistException\n" + e.getMessage());
             return Response.status(Response.Status.NOT_FOUND).build();
         }

@@ -4,6 +4,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 import java.sql.Date;
+import java.util.Objects;
 
 @ApiModel(value = "Job Role", description = "Defines raw object for JobRole class present in DB")
 public class JobRole {
@@ -102,4 +103,18 @@ public class JobRole {
     public void setClosingDate(final Date closingDate) {
         this.closingDate = closingDate;
     }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        JobRole jobRole = (JobRole) o;
+        return jobRoleId == jobRole.jobRoleId && Objects.equals(roleName, jobRole.roleName) && Objects.equals(jobRoleLocation, jobRole.jobRoleLocation) && Objects.equals(capabilityName, jobRole.capabilityName) && Objects.equals(bandName, jobRole.bandName) && Objects.equals(closingDate, jobRole.closingDate);
+    }
+
 }
