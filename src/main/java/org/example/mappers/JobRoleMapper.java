@@ -17,8 +17,8 @@ public final class JobRoleMapper {
                 .map(jobRole -> new JobRoleResponse(
                         jobRole.getRoleName(),
                         jobRole.getLocation(),
-                        jobRole.getCapabilityId(),
-                        jobRole.getBandId(),
+                        jobRole.getCapabilityName(),
+                        jobRole.getBandName(),
                         jobRole.getClosingDate()))
                 .collect(Collectors.toList());
     }

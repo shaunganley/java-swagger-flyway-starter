@@ -24,7 +24,8 @@ public class JobRole {
         this.closingDate = closingDate;
     }
 
-    public JobRole(final String roleName, final String location, final int capabilityId,
+    public JobRole(final String roleName, final String location,
+                   final int capabilityId,
                    final int bandId,
                    final Date closingDate) {
         this.roleName = roleName;

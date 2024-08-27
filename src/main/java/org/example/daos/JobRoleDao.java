@@ -3,9 +3,9 @@ package org.example.daos;
 import org.example.models.JobRole;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,26 +15,27 @@ public class JobRoleDao {
         List<JobRole> jobRoles = new ArrayList<>();
 
         try (Connection connection = DatabaseConnector.getConnection()) {
-            Statement statement = connection.createStatement();
 
-            ResultSet resultSet = statement.executeQuery(
+            String query =
                     "select job_roles.roleName, "
                             + "job_roles.location, "
                             + "capability.capabilityName, "
-                            + "band.bandName, job_roles.closingDate"
-                            + "from job_roles"
+                            + "band.bandName, job_roles.closingDate "
+                            + "from job_roles "
                             + "join capability on job_roles.capabilityId = "
-                            + "capability.capabilityId"
-                            + "join band on job_roles.bandId = band.nameId;");
+                            + "capability.capabilityId "
+                            + "join band on job_roles.bandId = band.nameId;";
+            PreparedStatement statement =
+                    connection.prepareStatement(query);
+            ResultSet resultSet = statement.executeQuery();
 
             while (resultSet.next()) {
-                JobRole jobRole = new JobRole(
+                jobRoles.add(new JobRole(
                         resultSet.getString("job_roles.roleName"),
                         resultSet.getString("job_roles.location"),
                         resultSet.getString("capability.capabilityName"),
                         resultSet.getString("band.bandName"),
-                        resultSet.getDate("job_roles.closingDate"));
-                jobRoles.add(jobRole);
+                        resultSet.getDate("job_roles.closingDate")));
             }
         }
         return jobRoles;
