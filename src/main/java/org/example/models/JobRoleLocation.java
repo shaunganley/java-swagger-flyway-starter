@@ -15,7 +15,7 @@ public enum JobRoleLocation {
 
     private final String jobRoleLocation;
 
-    JobRoleLocation(String jobRoleLocation) {
+    JobRoleLocation(final String jobRoleLocation) {
         this.jobRoleLocation = jobRoleLocation;
     }
 

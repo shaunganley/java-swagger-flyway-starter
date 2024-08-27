@@ -3,6 +3,7 @@ package org.example.controllers;
 import io.swagger.annotations.Api;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.example.exceptions.DoesNotExistException;
 import org.example.services.JobRoleService;
 
 import javax.ws.rs.GET;
@@ -32,7 +33,11 @@ public class JobRoleController {
         try {
             return Response.ok().entity(jobRoleService.getAllJobRoles()).build();
         } catch (SQLException e) {
+            LOGGER.info("getAllJobRoles failed, SQL Exception", e);
             return Response.serverError().build();
+        } catch (DoesNotExistException e) {
+            LOGGER.info("getAllJobRoles failed, DoesNotExistException", e);
+            return Response.status(Response.Status.NOT_FOUND).build();
         }
     }
 }
