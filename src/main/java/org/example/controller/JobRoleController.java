@@ -1,8 +1,7 @@
-package org.example.controllers;
+package org.example.controller;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import io.swagger.annotations.Authorization;
@@ -16,18 +15,21 @@ import org.example.services.JobRoleService;
 import javax.validation.constraints.Null;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.sql.SQLException;
-import java.util.List;
+
+import static util.HttpStatus.INTERNAL_SERVER_ERROR;
+import static util.HttpStatus.NOT_FOUND;
+import static util.HttpStatus.OK;
 
 
 @Api("Job Role API")
 @Path("/api/job-roles")
 public class JobRoleController {
+
 
     JobRoleService jobRoleService;
 
@@ -47,9 +49,9 @@ public class JobRoleController {
             responseContainer = "List",
             produces = "application/json")
     @ApiResponses({
-            @ApiResponse(code = 200, message = "Job roles listed successfully", response = JobRole.class),
-            @ApiResponse(code = 500, message = "getAllJobRoles failed, SQL Exception"),
-            @ApiResponse(code = 404, message = "getAllJobRoles failed, DoesNotExistException")
+            @ApiResponse(code = OK, message = "Job roles listed successfully", response = JobRole.class),
+            @ApiResponse(code = INTERNAL_SERVER_ERROR, message = "getAllJobRoles failed, SQL Exception"),
+            @ApiResponse(code = NOT_FOUND, message = "getAllJobRoles failed, DoesNotExistException")
     })
     public Response getAllJobRoles() {
         LOGGER.info("Get all job roles request received");
@@ -63,15 +65,4 @@ public class JobRoleController {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
     }
-
-
-// TODO: Jak uzywamy parametry w controllerze, trzeba dodać jeszcze @ApiParam. Jak niżej
-//    @Annotacje jak wyżej, dostosować odpowiednio
-//    public Response getProductById(
-//            @ApiParam(
-//                    value = "ID of specific product",
-//                    required = true)
-//            @PathParam("id") int id) {
-//              tutaj idzie kod
-//            }
 }
