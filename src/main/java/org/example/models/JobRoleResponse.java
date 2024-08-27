@@ -5,25 +5,13 @@ import java.sql.Date;
 public class JobRoleResponse {
     private String roleName;
     private String location;
-    private int capabilityId;
-    private int bandId;
     private Date closingDate;
     private String capabilityName;
     private String bandName;
 
     public JobRoleResponse(final String roleName, final String location,
-                   final int capabilityId,
-                   final int bandId, final Date closingDate) {
-        this.roleName = roleName;
-        this.location = location;
-        this.capabilityId = capabilityId;
-        this.bandId = bandId;
-        this.closingDate = closingDate;
-    }
-
-    public JobRoleResponse(final String roleName, final String bandName,
                            final String capabilityName,
-                           final String location, final Date closingDate) {
+                           final String bandName, final Date closingDate) {
         this.roleName = roleName;
         this.location = location;
         this.capabilityName = capabilityName;
@@ -45,22 +33,6 @@ public class JobRoleResponse {
 
     public void setRoleName(final String roleName) {
         this.roleName = roleName;
-    }
-
-    public int getCapabilityId() {
-        return capabilityId;
-    }
-
-    public void setCapabilityId(final int capabilityId) {
-        this.capabilityId = capabilityId;
-    }
-
-    public int getBandId() {
-        return bandId;
-    }
-
-    public void setBandId(final int bandId) {
-        this.bandId = bandId;
     }
 
     public Date getClosingDate() {
