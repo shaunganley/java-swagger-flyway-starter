@@ -30,13 +30,14 @@ public class JobRoleController {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllJobRoles() {
+        LOGGER.info("Get all job roles request received");
         try {
             return Response.ok().entity(jobRoleService.getAllJobRoles()).build();
         } catch (SQLException e) {
-            LOGGER.info("getAllJobRoles failed, SQL Exception", e);
+            LOGGER.error("getAllJobRoles failed, SQL Exception\n" + e.getMessage());
             return Response.serverError().build();
         } catch (DoesNotExistException e) {
-            LOGGER.info("getAllJobRoles failed, DoesNotExistException", e);
+            LOGGER.error("getAllJobRoles failed, DoesNotExistException\n" + e.getMessage());
             return Response.status(Response.Status.NOT_FOUND).build();
         }
     }
