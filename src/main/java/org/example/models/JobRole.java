@@ -5,12 +5,12 @@ import java.sql.Date;
 public class JobRole {
     private int jobRoleId;
     private String roleName;
-    private JobRoleLocation jobRoleLocation;
+    private String jobRoleLocation;
     private int capabilityId;
     private int bandId;
     private Date closingDate;
 
-    public JobRole(int jobRoleId, JobRoleLocation jobRoleLocation, String roleName, int capabilityId, Date closingDate, int bandId) {
+    public JobRole(int jobRoleId, String jobRoleLocation, String roleName, int capabilityId, Date closingDate, int bandId) {
         this.jobRoleId = jobRoleId;
         this.jobRoleLocation = jobRoleLocation;
         this.roleName = roleName;
@@ -35,11 +35,11 @@ public class JobRole {
         this.roleName = roleName;
     }
 
-    public JobRoleLocation getJobRoleLocation() {
+    public String getJobRoleLocation() {
         return jobRoleLocation;
     }
 
-    public void setJobRoleLocation(JobRoleLocation jobRoleLocation) {
+    public void setJobRoleLocation(String jobRoleLocation) {
         this.jobRoleLocation = jobRoleLocation;
     }
 

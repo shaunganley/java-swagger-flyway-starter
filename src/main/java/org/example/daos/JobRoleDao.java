@@ -1,5 +1,7 @@
 package org.example.daos;
 
+import org.example.models.JobRole;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -8,20 +10,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class JobRoleDao {
-    public List<String> getAllJobRoles() throws SQLException {
-        List<String> databases = new ArrayList<>();
+    public List<JobRole> getAllJobRoles() throws SQLException {
+        List<JobRole> jobRoles = new ArrayList<>();
 
         try (Connection connection = DatabaseConnector.getConnection()) {
             Statement statement = connection.createStatement();
 
             ResultSet resultSet = statement.executeQuery(
-                    "SHOW DATABASES;");
+                    "SELECT * FROM job-roles;");
 
             while (resultSet.next()) {
-                databases.add(resultSet.getString("Database"));
+                JobRole jobRole;
+                jobRole = new JobRole(resultSet.getInt("jobRoleId"),
+                        resultSet.getString("jobRoleLocation"),
+                        resultSet.getString("roleName"),
+                        resultSet.getInt("capabilityId"),
+                        resultSet.getDate("closingDate"),
+                        resultSet.getInt("bandId")
+                        );
+                jobRoles.add(jobRole);
             }
         }
 
-        return databases;
+        return jobRoles;
     }
 }
