@@ -55,7 +55,7 @@ public class TestApplication extends Application<TestConfiguration> {
                 Binder<>(JwtToken.class));
 
         environment.jersey()
-                .register(new AuthController( new AuthService(new AuthDao(), jwtkey)));
+                .register(new AuthController(new AuthService(new AuthDao(), jwtkey)));
     }
 
 }

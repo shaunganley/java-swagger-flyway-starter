@@ -5,7 +5,7 @@ public class User {
     final String password;
     final int roleId;
 
-    public User(String email,
+    public User(final String email,
                 final String password,
                 final int roleId) {
         this.email = email;

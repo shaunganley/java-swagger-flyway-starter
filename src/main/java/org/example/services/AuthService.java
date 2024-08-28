@@ -3,10 +3,8 @@ package org.example.services;
 import io.jsonwebtoken.Jwts;
 import org.example.daos.AuthDao;
 import org.example.exceptions.Entity;
-import org.example.exceptions.FailedToCreateException;
 import org.example.exceptions.InvalidException;
 import org.example.models.LoginRequest;
-import org.example.models.RegisterRequest;
 import org.example.models.User;
 
 import java.security.Key;
