@@ -41,7 +41,7 @@ public class AuthService {
                 .expiration(new Date(System.currentTimeMillis()
                         + MAGIC_NUM_288))
                 .claim("Role", user.getRoleId())
-                .subject(user.getUsername())
+                .subject(user.getEmail())
                 .issuer("DropwizardDemo")
                 .signWith(key)
                 .compact();
