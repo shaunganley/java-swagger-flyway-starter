@@ -1,14 +1,13 @@
-package org.example.daos;
+package org.example.services;
 
+import org.example.daos.JobRoleDao;
 import org.example.exceptions.DoesNotExistException;
 import org.example.models.JobRole;
 import org.example.models.JobRoleResponse;
 import org.junit.jupiter.api.BeforeEach;
 import org.mockito.Mockito;
 
-import org.example.services.JobRoleService;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 
 import java.sql.Date;
 import java.sql.SQLException;

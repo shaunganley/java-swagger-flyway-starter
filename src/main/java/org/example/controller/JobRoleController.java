@@ -28,10 +28,7 @@ import static util.HttpStatus.OK;
 @Api("Job Role API")
 @Path("/api/job-roles")
 public class JobRoleController {
-
-
     JobRoleService jobRoleService;
-
     private static final Logger LOGGER = LogManager.getLogger();
 
     public JobRoleController(final JobRoleService jobRoleService) {

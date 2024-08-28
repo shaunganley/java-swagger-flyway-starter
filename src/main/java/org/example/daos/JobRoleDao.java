@@ -22,18 +22,28 @@ public class JobRoleDao {
                             + " INNER JOIN band USING(bandId);");
 
             while (resultSet.next()) {
-                JobRole jobRole;
-                jobRole = new JobRole(resultSet.getInt("jobRoleId"),
-                        resultSet.getString("roleName"),
-                        resultSet.getString("location"),
-                        resultSet.getString("capabilityName"),
-                        resultSet.getString("bandName"),
-                        resultSet.getDate("closingDate")
-                        );
-                jobRoles.add(jobRole);
+                addJobRoleFromResultSet(jobRoles, resultSet);
             }
         }
 
         return jobRoles;
+    }
+
+    private void addJobRoleFromResultSet(final List<JobRole> jobRoles,
+                                         final ResultSet resultSet) {
+        JobRole jobRole;
+        try {
+            jobRole = new JobRole(resultSet.getInt("jobRoleId"),
+                    resultSet.getString("roleName"),
+                    resultSet.getString("location"),
+                    resultSet.getString("capabilityName"),
+                    resultSet.getString("bandName"),
+                    resultSet.getDate("closingDate")
+            );
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        jobRoles.add(jobRole);
     }
 }
