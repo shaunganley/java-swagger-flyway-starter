@@ -3,7 +3,6 @@ package org.example.daos;
 import org.example.exceptions.ResultSetException;
 import org.example.models.JobRole;
 
-import java.lang.module.ResolutionException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;

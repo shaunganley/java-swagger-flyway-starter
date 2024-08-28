@@ -1,4 +1,4 @@
-package util;
+package org.example.util;
 
 public final class HttpStatus {
 

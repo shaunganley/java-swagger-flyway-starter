@@ -21,9 +21,9 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.sql.SQLException;
 
-import static util.HttpStatus.INTERNAL_SERVER_ERROR;
-import static util.HttpStatus.NOT_FOUND;
-import static util.HttpStatus.OK;
+import static org.example.util.HttpStatus.INTERNAL_SERVER_ERROR;
+import static org.example.util.HttpStatus.NOT_FOUND;
+import static org.example.util.HttpStatus.OK;
 
 
 @Api("Job Role API")
