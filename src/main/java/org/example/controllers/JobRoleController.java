@@ -59,7 +59,7 @@ public class JobRoleController {
             return Response.serverError().build();
         } catch (DoesNotExistException | NullPointerException e) {
             LOGGER.error("getAllJobRoles failed, DoesNotExistException\n" + e.getMessage());
-            return Response.status(Response.Status.NOT_FOUND).build();
+            return Response.status(Response.Status.NOT_FOUND).entity(e.getMessage()).build();
         } catch (ResultSetException e) {
             LOGGER.error("getAllJobRoles failed, ResultSetException\n" + e.getMessage());
             return Response.serverError().build();
