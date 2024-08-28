@@ -3,10 +3,7 @@ package org.example.daos;
 import org.example.models.LoginRequest;
 import org.example.models.User;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.ResultSet;
+import java.sql.*;
 
 
 public class AuthDao {
@@ -33,23 +30,5 @@ public class AuthDao {
         }
         return null;
     }
-
-
-//    public int createUser(final RegisterRequest user)
-//            throws SQLException {
-//        Connection c = DatabaseConnector.getConnection();
-//
-//        String insertStatement = "INSERT INTO `User` (Username, "
-//                + "Password, role_id) VALUES (?,?, 2);";
-//
-//        PreparedStatement st = c.prepareStatement(insertStatement,
-//                Statement.RETURN_GENERATED_KEYS);
-//
-//        st.setString(1, user.getUsername());
-//        st.setString(2, user.getPassword());
-//
-//        return st.executeUpdate();
-//
-//    }
 
 }

@@ -63,22 +63,4 @@ public class AuthController {
         }
     }
 
-//    @POST
-//    @Path("/register")
-//    @Produces(MediaType.APPLICATION_JSON)
-//    public Response register(final RegisterRequest registerRequest) {
-//        try {
-//            System.out.println(registerRequest);
-//            authService.register(registerRequest);
-//            return Response.noContent().build();
-//        } catch (SQLException e) {
-//            return Response.serverError().build();
-//        } catch (InvalidException e) {
-//            System.out.println(e.getMessage());
-//            return Response.status(Response.Status.BAD_REQUEST)
-//                    .entity(e.getMessage()).build();
-//        } catch (FailedToCreateException e) {
-//            throw new RuntimeException(e);
-//        }
-//    }
 }
