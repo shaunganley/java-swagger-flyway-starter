@@ -1,7 +1,9 @@
 package org.example.daos;
 
+import org.example.exceptions.ResultSetException;
 import org.example.models.JobRole;
 
+import java.lang.module.ResolutionException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class JobRoleDao {
-    public List<JobRole> getAllJobRoles() throws SQLException {
+    public List<JobRole> getAllJobRoles() throws SQLException, ResultSetException {
         List<JobRole> jobRoles = new ArrayList<>();
 
         try (Connection connection = DatabaseConnector.getConnection()) {
@@ -30,7 +32,7 @@ public class JobRoleDao {
     }
 
     private void addJobRoleFromResultSet(final List<JobRole> jobRoles,
-                                         final ResultSet resultSet) {
+                                         final ResultSet resultSet) throws ResultSetException {
         JobRole jobRole;
         try {
             jobRole = new JobRole(resultSet.getInt("jobRoleId"),
@@ -41,7 +43,7 @@ public class JobRoleDao {
                     resultSet.getDate("closingDate")
             );
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new ResultSetException(e.getMessage());
         }
 
         jobRoles.add(jobRole);

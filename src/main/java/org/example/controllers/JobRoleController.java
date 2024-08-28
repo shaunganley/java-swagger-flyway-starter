@@ -1,4 +1,4 @@
-package org.example.controller;
+package org.example.controllers;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -8,6 +8,7 @@ import io.swagger.annotations.Authorization;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.example.exceptions.DoesNotExistException;
+import org.example.exceptions.ResultSetException;
 import org.example.models.JobRole;
 import org.example.models.JobRoleResponse;
 import org.example.services.JobRoleService;
@@ -59,6 +60,9 @@ public class JobRoleController {
         } catch (DoesNotExistException | NullPointerException e) {
             LOGGER.error("getAllJobRoles failed, DoesNotExistException\n" + e.getMessage());
             return Response.status(Response.Status.NOT_FOUND).build();
+        } catch (ResultSetException e) {
+            LOGGER.error("getAllJobRoles failed, ResultSetException\n" + e.getMessage());
+            return Response.serverError().build();
         }
     }
 }

@@ -11,7 +11,15 @@ public final class JobRoleMapper {
     private JobRoleMapper() {
     }
 
-    public static JobRoleResponse toResponse(final JobRole jobRole) {
+    public static List<JobRoleResponse> toResponse(final List<JobRole> jobRoles) {
+        List<JobRoleResponse> jobRoleResponses = new ArrayList<>();
+        for (JobRole j : jobRoles) {
+            jobRoleResponses.add(toResponse(j));
+        }
+        return jobRoleResponses;
+    }
+
+    private static JobRoleResponse toResponse(final JobRole jobRole) {
         return new JobRoleResponse(
                 jobRole.getRoleName(),
                 jobRole.getJobRoleLocation(),
@@ -19,14 +27,6 @@ public final class JobRoleMapper {
                 jobRole.getBandName(),
                 jobRole.getClosingDate()
         );
-    }
-
-    public static List<JobRoleResponse> toResponse(final List<JobRole> jobRoles) {
-        List<JobRoleResponse> jobRoleResponses = new ArrayList<>();
-        for (JobRole j : jobRoles) {
-            jobRoleResponses.add(toResponse(j));
-        }
-        return jobRoleResponses;
     }
 
 }
