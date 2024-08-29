@@ -37,11 +37,17 @@ public class AuthIntegrationTest {
     public void login_shouldReturnOK_whenValidLoginRequest() {
         Client client = APP.client();
 
+        System.out.println(VALID_PASSWORD);
+
         Response response = client.target("http://localhost:8080/api/auth/login")
                 .request()
                 .post(Entity.json(VALID_LOGIN_REQUEST));
 
-        assertNotNull(response.readEntity(String.class));
+        String responseBody = response.readEntity(String.class);
+        System.out.println("Response Body: " + responseBody);
+        System.out.println("Response Status: " + response.getStatus());
+
+        assertNotNull(responseBody);
         assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
     }
 
