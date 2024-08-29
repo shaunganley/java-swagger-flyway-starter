@@ -6,6 +6,7 @@ import org.example.exceptions.Entity;
 import org.example.exceptions.InvalidException;
 import org.example.models.LoginRequest;
 import org.example.models.User;
+import org.example.utils.JwtUtils;
 import org.mindrot.jbcrypt.BCrypt;
 
 import java.security.Key;
@@ -34,22 +35,9 @@ public class AuthService {
         String requestPassword = loginRequest.getPassword();
         boolean isPasswordMatch = BCrypt.checkpw(requestPassword, user.getPassword());
         if (isPasswordMatch){
-            return generateJwtToken(user);
+            return JwtUtils.generateToken(user.getEmail());
         } else{
             throw new InvalidException(Entity.USER, "Invalid credentials");
         }
     }
-
-    private String generateJwtToken(final User user) {
-        return Jwts.builder()
-                .issuedAt(new Date(System.currentTimeMillis()))
-                .expiration(new Date(System.currentTimeMillis()
-                        + MAGIC_NUM_288))
-                .claim("Role", user.getRoleId())
-                .subject(user.getEmail())
-                .issuer("DropwizardDemo")
-                .signWith(key)
-                .compact();
-    }
-
 }
