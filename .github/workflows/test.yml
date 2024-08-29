@@ -34,6 +34,3 @@ jobs:
 
     - name: Run Integration Tests
       run: mvn clean integration-test
-
-    - name: Debugging
-      run: echo "VALID_TEST_EMAIL=${VALID_TEST_EMAIL}"
