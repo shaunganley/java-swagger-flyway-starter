@@ -5,6 +5,7 @@ CREATE TABLE job_roles (
     capabilityId INT,
     bandId INT,
     closingDate DATE,
+    status ENUM('open', 'closed'),
     FOREIGN KEY (capabilityId) REFERENCES capability(capabilityId),
     FOREIGN KEY (bandId) REFERENCES band(bandId)
 );

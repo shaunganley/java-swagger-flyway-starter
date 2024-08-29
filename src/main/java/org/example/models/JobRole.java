@@ -42,18 +42,26 @@ public class JobRole {
             example = "11/12/2024")
     private Date closingDate;
 
+    @ApiModelProperty(
+            value = "Open or Closed",
+            required = true,
+            example = "open")
+    private String status;
+
     public JobRole(final int jobRoleId,
                    final String roleName,
                    final String jobRoleLocation,
                    final String capabilityName,
                    final String bandName,
-                   final Date closingDate) {
+                   final Date closingDate,
+                   final String status) {
         this.jobRoleId = jobRoleId;
         this.roleName = roleName;
         this.jobRoleLocation = jobRoleLocation;
         this.capabilityName = capabilityName;
         this.bandName = bandName;
         this.closingDate = closingDate;
+        this.status = status;
     }
 
     public int getJobRoleId() {
@@ -102,6 +110,14 @@ public class JobRole {
 
     public void setClosingDate(final Date closingDate) {
         this.closingDate = closingDate;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(final String status) {
+        this.status = status;
     }
 
     @Override

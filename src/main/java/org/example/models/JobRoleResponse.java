@@ -37,16 +37,24 @@ public class JobRoleResponse {
             example = "11/12/2024")
     private Date closingDate;
 
+    @ApiModelProperty(
+            value = "Open or Closed",
+            required = true,
+            example = "open")
+    private String status;
+
     public JobRoleResponse(final String roleName,
                            final String jobRoleLocation,
                            final String capability,
                            final String band,
-                           final Date closingDate) {
+                           final Date closingDate,
+                           final String status) {
         this.roleName = roleName;
         this.jobRoleLocation = jobRoleLocation;
         this.capabilityName = capability;
         this.bandName = band;
         this.closingDate = closingDate;
+        this.status = status;
     }
 
     public String getRoleName() {
@@ -87,5 +95,13 @@ public class JobRoleResponse {
 
     public void setClosingDate(final Date closingDate) {
         this.closingDate = closingDate;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(final String status) {
+        this.status = status;
     }
 }

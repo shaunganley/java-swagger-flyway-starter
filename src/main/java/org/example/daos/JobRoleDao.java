@@ -18,10 +18,10 @@ public class JobRoleDao {
             Statement statement = connection.createStatement();
 
             ResultSet resultSet = statement.executeQuery(
-                    "SELECT jobRoleId, roleName, location, capabilityName, bandName, closingDate FROM job_roles"
+                    "SELECT jobRoleId, roleName, location, status, capabilityName, bandName, closingDate FROM job_roles"
                             + " INNER JOIN capability USING(capabilityId)"
                             + " INNER JOIN band USING(bandId)"
-                            + "WHERE closingDate >= CURDATE();");
+                            + " WHERE status = 'open';");
 
             while (resultSet.next()) {
                 addJobRoleFromResultSet(jobRoles, resultSet);
@@ -40,7 +40,8 @@ public class JobRoleDao {
                     resultSet.getString("location"),
                     resultSet.getString("capabilityName"),
                     resultSet.getString("bandName"),
-                    resultSet.getDate("closingDate")
+                    resultSet.getDate("closingDate"),
+                    resultSet.getString("status")
             );
         } catch (SQLException e) {
             throw new ResultSetException(e.getMessage());
