@@ -11,7 +11,8 @@ import java.util.List;
 
 public class JobRoleDao {
 
-    public List<JobRole> getAllJobRoles() throws SQLException {
+    public List<JobRole> getAllJobRoles()
+            throws SQLException {
         List<JobRole> jobRoles = new ArrayList<>();
 
         try (Connection connection = DatabaseConnector.getConnection()) {
@@ -31,14 +32,15 @@ public class JobRoleDao {
             PreparedStatement statement =
                     connection.prepareStatement(query);
             ResultSet resultSet = statement.executeQuery();
-
-            while (resultSet.next()) {
-                jobRoles.add(new JobRole(
-                        resultSet.getString("job_roles.roleName"),
-                        resultSet.getString("job_roles.location"),
-                        resultSet.getString("capability.capabilityName"),
-                        resultSet.getString("band.bandName"),
-                        resultSet.getDate("job_roles.closingDate")));
+            if (resultSet != null) {
+                while (resultSet.next()) {
+                    jobRoles.add(new JobRole(
+                            resultSet.getString("job_roles.roleName"),
+                            resultSet.getString("job_roles.location"),
+                            resultSet.getString("capability.capabilityName"),
+                            resultSet.getString("band.bandName"),
+                            resultSet.getDate("job_roles.closingDate")));
+                }
             }
         }
         return jobRoles;

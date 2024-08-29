@@ -1,3 +1,4 @@
+
 INSERT INTO capability (capabilityId, capabilityName) VALUES (1, 'Software Development');
 INSERT INTO capability (capabilityId, capabilityName) VALUES (2, 'Data Science');
 INSERT INTO capability (capabilityId, capabilityName) VALUES (3, 'Cyber Security');
@@ -16,3 +17,4 @@ INSERT INTO job_roles (jobRoleId, roleName, location, capabilityId, bandId, clos
 (3, 'Financial Analyst', 'Chicago', 3, 3, '2024-09-30 17:00:00', 2),
 (4, 'Data Scientist', 'Seattle', 1, 2, '2024-10-05 17:00:00', 1),
 (5, 'Digital Marketing Manager', 'Boston', 2, 1, '2024-10-10 17:00:00', 2);
+
