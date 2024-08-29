@@ -28,6 +28,7 @@ public class AuthIntegrationTest {
             VALID_PASSWORD
     );
 
+
     private static final LoginRequest INVALID_LOGIN_REQUEST = new LoginRequest(
             "invalidadmin@email.com",
             "invalid"
