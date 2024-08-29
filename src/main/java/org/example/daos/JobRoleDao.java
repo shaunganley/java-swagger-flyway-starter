@@ -20,7 +20,8 @@ public class JobRoleDao {
             ResultSet resultSet = statement.executeQuery(
                     "SELECT jobRoleId, roleName, location, capabilityName, bandName, closingDate FROM job_roles"
                             + " INNER JOIN capability USING(capabilityId)"
-                            + " INNER JOIN band USING(bandId);");
+                            + " INNER JOIN band USING(bandId)"
+                            + "WHERE closingDate >= CURDATE();");
 
             while (resultSet.next()) {
                 addJobRoleFromResultSet(jobRoles, resultSet);
