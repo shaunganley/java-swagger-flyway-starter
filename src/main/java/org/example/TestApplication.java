@@ -24,10 +24,12 @@ public class TestApplication extends Application<TestConfiguration> {
     public static void main(final String[] args) throws Exception {
         new TestApplication().run(args);
     }
+
     @Override
     public String getName() {
         return "Test";
     }
+
     @Override
     public void initialize(final Bootstrap<TestConfiguration> bootstrap) {
         bootstrap.addBundle(new SwaggerBundle<>() {
@@ -38,6 +40,7 @@ public class TestApplication extends Application<TestConfiguration> {
             }
         });
     }
+
     @Override
     public void run(final TestConfiguration configuration,
                     final Environment environment) {
@@ -56,6 +59,6 @@ public class TestApplication extends Application<TestConfiguration> {
 
         environment.jersey()
                 .register(new AuthController(new AuthService(new AuthDao(), jwtkey)));
-    }
 
+    }
 }

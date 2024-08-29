@@ -1,13 +1,13 @@
 package org.example.controllers;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiKeyAuthDefinition;
-import io.swagger.annotations.SecurityDefinition;
-import io.swagger.annotations.SwaggerDefinition;
+import io.swagger.annotations.*;
 import org.example.exceptions.InvalidException;
 import org.example.models.LoginRequest;
+import org.example.models.UserRole;
 import org.example.services.AuthService;
 
+import javax.annotation.security.RolesAllowed;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -61,6 +61,32 @@ public class AuthController {
             return Response.status(Response.Status.BAD_REQUEST)
                     .entity(e.getMessage()).build();
         }
+    }
+
+    @GET
+    @Path("/fake1")
+    @Produces(MediaType.APPLICATION_JSON)
+    @RolesAllowed({UserRole.ADMIN, UserRole.USER})
+    @ApiOperation(
+            value = "Reaturns fake1 - user & admin",
+            authorizations = @Authorization(value = HttpHeaders.AUTHORIZATION),
+            response = Response.class
+    )
+    public Response Fake1() {
+        return Response.ok().entity("fake 1").build();
+    }
+
+    @GET
+    @Path("/fake2")
+    @Produces(MediaType.APPLICATION_JSON)
+    @RolesAllowed({UserRole.USER})
+    @ApiOperation(
+            value = "Reaturns fake2 - only user",
+            authorizations = @Authorization(value = HttpHeaders.AUTHORIZATION),
+            response = Response.class
+    )
+    public Response Fake2() {
+        return Response.ok().entity("fake2").build();
     }
 
 }
