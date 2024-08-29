@@ -29,6 +29,11 @@ jobs:
         distribution: 'temurin'
         cache: maven
 
+    - name: Print environment variables
+      run: |
+        echo "VALID_TEST_EMAIL=${VALID_TEST_EMAIL}"
+        echo "VALID_TEST_PASSWORD=${VALID_TEST_PASSWORD}"
+
     - name: Run Unit Tests
       run: mvn test
 
