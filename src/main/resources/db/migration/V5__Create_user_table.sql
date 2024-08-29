@@ -6,5 +6,5 @@ CREATE TABLE `User` (
     FOREIGN KEY (role_id) REFERENCES `Role`(id)
 );
 
-INSERT INTO User( Email, Password, role_id) VALUES ('admin', '21232f297a57a5a743894a0e4a801fc3', 1);
-INSERT INTO User( Email, Password, role_id) VALUES ('user', 'user', 2);
+INSERT INTO User( Email, Password, role_id) VALUES ('admin', '$2a$10$M87XjY69RKVJ8w135phR8u.ERXInZhxfDT9OOIfa7nNQB/r5tXLKW', 1);
+INSERT INTO User( Email, Password, role_id) VALUES ('user', '$2a$10$ZE5vKwdg23oTWcSLDaCKHuk8BnJ3MzHhBdmUcEvBVgP1z7KuiqB1q', 2);

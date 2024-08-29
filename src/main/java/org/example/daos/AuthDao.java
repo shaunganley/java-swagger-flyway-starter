@@ -5,8 +5,6 @@ import org.example.models.User;
 
 import java.sql.*;
 
-import static org.example.models.PasswordEncoder.hashPassword;
-
 
 public class AuthDao {
 
@@ -15,20 +13,10 @@ public class AuthDao {
         try (Connection connection = DatabaseConnector.getConnection()) {
 
             String query = "SELECT Email, Password, role_id FROM `User` "
-                    + "WHERE Email = ? and Password = ?;";
+                    + "WHERE Email = ?;";
             PreparedStatement statement = connection.prepareStatement(query);
 
-
-            String haslo = loginRequest.getPassword();
-            System.out.println("tutaj_____________________");
-            System.out.println(haslo);
-            String hashedPassword = hashPassword(haslo);
-            System.out.println(hashedPassword);
-
-
-
             statement.setString(1, loginRequest.getEmail());
-            statement.setString(2, loginRequest.getPassword());
 
             ResultSet resultSet = statement.executeQuery();
 

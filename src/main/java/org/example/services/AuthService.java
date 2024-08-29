@@ -3,10 +3,10 @@ package org.example.services;
 import io.jsonwebtoken.Jwts;
 import org.example.daos.AuthDao;
 import org.example.exceptions.Entity;
-import org.example.exceptions.FailedToCreateException;
 import org.example.exceptions.InvalidException;
 import org.example.models.LoginRequest;
 import org.example.models.User;
+import org.mindrot.jbcrypt.BCrypt;
 
 import java.security.Key;
 import java.sql.Date;
@@ -24,14 +24,20 @@ public class AuthService {
     }
 
     public String login(final LoginRequest loginRequest)
-            throws SQLException, InvalidException {
+            throws SQLException, InvalidException  {
         User user = authDao.getUser(loginRequest);
 
         if (user == null) {
-            throw new InvalidException(Entity.USER, "Invalid credentials");
+            throw new InvalidException(Entity.USER, "User doesn't exist");
         }
 
-        return generateJwtToken(user);
+        String requestPassword = loginRequest.getPassword();
+        boolean isPasswordMatch = BCrypt.checkpw(requestPassword, user.getPassword());
+        if (isPasswordMatch){
+            return generateJwtToken(user);
+        } else{
+            throw new InvalidException(Entity.USER, "Invalid credentials");
+        }
     }
 
     private String generateJwtToken(final User user) {
