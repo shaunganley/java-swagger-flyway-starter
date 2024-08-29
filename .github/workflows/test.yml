@@ -16,6 +16,8 @@ jobs:
       DB_USERNAME: ${{ secrets.DB_USERNAME }}
       DB_HOST: ${{ secrets.DB_HOST }}
       DB_NAME: ${{ secrets.DB_NAME }}
+      VALID_TEST_EMAIL: ${{ secrets.VALID_TEST_EMAIL }}
+      VALID_TEST_PASSWORD: ${{ secrets.VALID_TEST_PASSWORD }}
 
     steps:
     - uses: actions/checkout@v3
