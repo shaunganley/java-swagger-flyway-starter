@@ -11,7 +11,7 @@ import javax.ws.rs.core.Response;
 import java.sql.SQLException;
 
 @Api("Kainos Job Application - Job Roles API")
-@Path("/api/")
+@Path("/api")
 public class JobRoleController {
     private JobRoleService jobRoleService;
 

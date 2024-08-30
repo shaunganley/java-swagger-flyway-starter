@@ -1,7 +1,6 @@
 package com.kainos.ea.controller;
 
 import org.example.controllers.JobRoleController;
-import org.example.daos.JobRoleDao;
 import org.example.models.JobRoleResponse;
 import org.example.services.JobRoleService;
 import org.junit.Assert;
@@ -16,8 +15,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
 @ExtendWith(MockitoExtension.class)
 public class JobRoleControllerTest {
 
@@ -26,7 +23,7 @@ public class JobRoleControllerTest {
     JobRoleController jobRoleController = new JobRoleController(jobRoleService);
 
     @Test
-    public void getJobRoles_shouldReturnResponseCode200WithJobRoleResponses() throws SQLException {
+    public void getJobRoles_shouldReturnResponseCode200WithJobRoleResponses_whenNoErrorsThrown() throws SQLException {
 
         long millis=System.currentTimeMillis();
         Date closingDate = new Date(millis);
@@ -43,14 +40,11 @@ public class JobRoleControllerTest {
 
         Response actualResponse = Response.ok().entity(jobRoleService.getAllJobRoles()).build();
 
-        // check if status codes match
         Assert.assertEquals(expectedResponse.getStatus(), actualResponse.getStatus());
-        // check if the entity/body of expected and actual responses match
-        // i.e. check if lists of job role responses match
+
         Assert.assertEquals(expectedResponse.getEntity(), actualResponse.getEntity());
     }
 
-    // testing if the SQLException is handled correctly and an internal server error is returned.
     @Test
     public void getJobRoles_shouldReturnResponseCode500_whenServiceThrowsSqlException() throws SQLException {
         Mockito.when(jobRoleService.getAllJobRoles()).thenThrow(SQLException.class);

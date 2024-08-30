@@ -16,7 +16,6 @@ public class JobRoleMapperTest {
     @Test
     public void mapJobRolesListToJobRoleResponseList_shouldMapCorrectly() {
 
-        // creating job role list
         long millis=System.currentTimeMillis();
         Date closingDate = new Date(millis);
         JobRole testJobRole = new JobRole("SE", "Derry",
@@ -27,8 +26,7 @@ public class JobRoleMapperTest {
         List<JobRoleResponse> jobRoleResponses = JobRoleMapper.mapJobRolesListToJobRoleResponseList(jobRoles);
 
         Assert.assertEquals(1, jobRoleResponses.size());
-        // saving the object at index 0 in the jobRoleResponses list to a variable
-        // so that contents can be accessed
+
         JobRoleResponse response = jobRoleResponses.get(0);
         Assert.assertEquals("SE", response.getRoleName());
         Assert.assertEquals("Derry", response.getLocation());
@@ -37,8 +35,6 @@ public class JobRoleMapperTest {
         Assert.assertEquals(closingDate, response.getClosingDate());
 
     }
-
-    // testing edge case handling
 
     @Test
     public void mapJobRolesListToJobRoleResponseList_shouldHandleEmptyList() {
@@ -55,7 +51,6 @@ public class JobRoleMapperTest {
 
         long millis=System.currentTimeMillis();
         Date closingDate = new Date(millis);
-        // job role object with null values
         JobRole testJobRole = new JobRole(null, null, null, null, closingDate);
         List<JobRole> jobRoles = new ArrayList<>();
         jobRoles.add(testJobRole);
