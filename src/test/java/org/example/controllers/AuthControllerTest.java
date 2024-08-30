@@ -28,7 +28,7 @@ public class AuthControllerTest {
     );
 
     @Test
-    public void login_shouldReturnStatusOK_whenValidLoginRequest() throws
+    public void login_shouldReturnStatusOK_whenValidLoginRequest_whenNoErrorsThrown() throws
             DatabaseConnectionException, SQLException,
             LoginException {
         when(mockAuthService.login(VALID_LOGIN_REQUEST)).thenReturn(
