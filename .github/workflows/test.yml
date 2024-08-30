@@ -1,4 +1,4 @@
-name: Java CI with Maven
+name: Unit and Integration Tests
 
 on:
   push:
@@ -30,7 +30,7 @@ jobs:
           mvn flyway:clean
           mvn flyway:migrate
 
-      - name: Maven Build and Integration Tests
+      - name: Maven build with Integration and Unit Tests
         env:
           DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
           DB_USERNAME: ${{ secrets.DB_USERNAME }}
@@ -38,7 +38,4 @@ jobs:
           DB_NAME: ${{ secrets.DB_NAME }}
           VALID_TEST_EMAIL: ${{ secrets.VALID_TEST_EMAIL }}
           VALID_TEST_PASSWORD: ${{ secrets.VALID_TEST_PASSWORD }}
-        run: mvn clean integration-test
-
-      - name: Maven build with Unit Tests
         run: mvn test

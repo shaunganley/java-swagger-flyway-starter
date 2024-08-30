@@ -46,8 +46,7 @@ public class AuthServiceTest {
 
     @Test
     public void login_shouldReturnJwtToken_whenValidUserFound()
-            throws DatabaseConnectionException, SQLException, LoginException,
-            org.example.exceptions.LoginException {
+            throws DatabaseConnectionException, SQLException, LoginException {
         when(mockAuthDao.getUser(LOGIN_REQUEST)).thenReturn(USER);
         assertNotNull(authService.login(LOGIN_REQUEST));
         verify(mockAuthDao, times(1)).getUser(LOGIN_REQUEST);
