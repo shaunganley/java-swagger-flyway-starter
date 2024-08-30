@@ -25,7 +25,7 @@ public class AuthServiceTest {
     @BeforeEach
     public void setUp() throws Exception {
         KeyGenerator keyGen = KeyGenerator.getInstance("HmacSHA256");
-        keyGen.init(256); // for example
+        keyGen.init(256);
         SecretKey secretKey = keyGen.generateKey();
         this.jwtKey = secretKey;
         authService = new AuthService(mockAuthDao, jwtKey);

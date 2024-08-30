@@ -15,26 +15,26 @@ import org.example.services.TestService;
 
 import java.security.Key;
 
-public class TestApplication extends Application<TestConfiguration> {
+public class KainosWebApplication extends Application<KainosWebConfiguration> {
     public static void main(final String[] args) throws Exception {
-        new TestApplication().run(args);
+        new KainosWebApplication().run(args);
     }
     @Override
     public String getName() {
         return "Test";
     }
     @Override
-    public void initialize(final Bootstrap<TestConfiguration> bootstrap) {
+    public void initialize(final Bootstrap<KainosWebConfiguration> bootstrap) {
         bootstrap.addBundle(new SwaggerBundle<>() {
             @Override
             protected SwaggerBundleConfiguration getSwaggerBundleConfiguration(
-                    final TestConfiguration configuration) {
+                    final KainosWebConfiguration configuration) {
                 return configuration.getSwagger();
             }
         });
     }
     @Override
-    public void run(final TestConfiguration configuration,
+    public void run(final KainosWebConfiguration configuration,
                     final Environment environment) {
         Key jwtKey = Jwts.SIG.HS256.key().build();
         environment.jersey()
