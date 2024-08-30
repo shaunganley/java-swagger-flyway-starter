@@ -17,8 +17,10 @@ import org.example.models.JwtToken;
 import org.example.services.AuthService;
 import org.example.utils.JwtUtils;
 import org.glassfish.jersey.server.filter.RolesAllowedDynamicFeature;
-
 import javax.crypto.SecretKey;
+import org.example.controllers.JobRoleController;
+import org.example.daos.JobRoleDao;
+import org.example.services.JobRoleService;
 
 public class TestApplication extends Application<TestConfiguration> {
     public static void main(final String[] args) throws Exception {
@@ -60,6 +62,9 @@ public class TestApplication extends Application<TestConfiguration> {
         environment.jersey()
                 .register(new AuthController(
                         new AuthService(new AuthDao(), jwtSecretKey)));
+
+        environment.jersey()
+                .register(new JobRoleController(new JobRoleService(new JobRoleDao())));
     }
 
 }
