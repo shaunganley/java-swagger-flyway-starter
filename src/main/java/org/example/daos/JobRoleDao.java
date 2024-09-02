@@ -57,12 +57,13 @@ public class JobRoleDao {
     public JobRoleResponse getJobRoleById(final int id) throws SQLException {
         try (Connection connection = DatabaseConnector.getConnection()) {
 
-            String query = "SELECT jobRoleId, roleName, location, statusId, statusName, capabilityName, bandName, closingDate \n"
-                    + "FROM job_roles\n"
-                    + "INNER JOIN capability USING(capabilityId)\n"
-                    + "INNER JOIN band USING(bandId)\n"
-                    + "INNER JOIN status using(statusId)\n"
-                    + "WHERE jobRoleId = ?;";
+            String query =
+                "SELECT jobRoleId, roleName, location, statusId, statusName, capabilityName, bandName, closingDate \n"
+                + "FROM job_roles\n"
+                + "INNER JOIN capability USING(capabilityId)\n"
+                + "INNER JOIN band USING(bandId)\n"
+                + "INNER JOIN status using(statusId)\n"
+                + "WHERE jobRoleId = ?;";
 
             PreparedStatement statement = connection.prepareStatement(query);
 
