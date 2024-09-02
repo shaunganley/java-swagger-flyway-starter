@@ -30,4 +30,13 @@ public class JobRoleService {
         }
         return jobRoleResponses;
     }
+
+    public JobRoleResponse getJobRoleById(final int id)
+            throws SQLException, DoesNotExistException {
+        JobRoleResponse jobRoleResponse = jobRoleDao.getJobRoleById(id);
+        if (jobRoleResponse == null) {
+            throw new DoesNotExistException(Entity.JOB_ROLE);
+        }
+        return jobRoleResponse;
+    }
 }
