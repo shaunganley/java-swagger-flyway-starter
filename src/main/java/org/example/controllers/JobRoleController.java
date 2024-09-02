@@ -71,7 +71,7 @@ public class JobRoleController {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/{jobRoleId}")
     @ApiOperation(
-            value = "Returns Job Roles details",
+            value = "Returns Job Role details",
             authorizations = @Authorization(value = HttpHeaders.AUTHORIZATION),
             response = JobRoleResponse.class,
             responseContainer = "Set",

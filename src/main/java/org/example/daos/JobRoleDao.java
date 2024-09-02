@@ -2,6 +2,7 @@ package org.example.daos;
 
 import org.example.exceptions.ResultSetException;
 import org.example.models.JobRole;
+import org.example.models.JobRoleDetails;
 import org.example.models.JobRoleResponse;
 
 import java.sql.Connection;
@@ -54,11 +55,12 @@ public class JobRoleDao {
         jobRoles.add(jobRole);
     }
 
-    public JobRoleResponse getJobRoleById(final int id) throws SQLException {
+    public JobRoleDetails getJobRoleById(final int id) throws SQLException {
         try (Connection connection = DatabaseConnector.getConnection()) {
 
             String query =
-                "SELECT jobRoleId, roleName, location, statusId, statusName, capabilityName, bandName, closingDate \n"
+                "SELECT roleName, location, capabilityName, bandName, closingDate, statusName, "
+                + "description, responsibilities, sharepointUrl, numberOfOpenPositions\n"
                 + "FROM job_roles\n"
                 + "INNER JOIN capability USING(capabilityId)\n"
                 + "INNER JOIN band USING(bandId)\n"
@@ -72,13 +74,17 @@ public class JobRoleDao {
             ResultSet resultSet = statement.executeQuery();
 
             while (resultSet.next()) {
-                return new JobRoleResponse(
+                return new JobRoleDetails(
                     resultSet.getString("roleName"),
                     resultSet.getString("location"),
                     resultSet.getString("capabilityName"),
                     resultSet.getString("bandName"),
                     resultSet.getDate("closingDate"),
-                    resultSet.getString("statusName")
+                    resultSet.getString("statusName"),
+                    resultSet.getString("description"),
+                    resultSet.getString("responsibilities"),
+                    resultSet.getString("sharepointUrl"),
+                    resultSet.getInt("numberOfOpenPositions")
                 );
             }
         }

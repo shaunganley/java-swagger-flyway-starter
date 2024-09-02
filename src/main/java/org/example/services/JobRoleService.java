@@ -6,6 +6,7 @@ import org.example.exceptions.Entity;
 import org.example.exceptions.ResultSetException;
 import org.example.mappers.JobRoleMapper;
 import org.example.models.JobRole;
+import org.example.models.JobRoleDetails;
 import org.example.models.JobRoleResponse;
 
 import java.sql.SQLException;
@@ -31,12 +32,12 @@ public class JobRoleService {
         return jobRoleResponses;
     }
 
-    public JobRoleResponse getJobRoleById(final int id)
+    public JobRoleDetails getJobRoleById(final int id)
             throws SQLException, DoesNotExistException {
-        JobRoleResponse jobRoleResponse = jobRoleDao.getJobRoleById(id);
-        if (jobRoleResponse == null) {
+        JobRoleDetails JobRoleDetails = jobRoleDao.getJobRoleById(id);
+        if (JobRoleDetails == null) {
             throw new DoesNotExistException(Entity.JOB_ROLE);
         }
-        return jobRoleResponse;
+        return JobRoleDetails;
     }
 }
