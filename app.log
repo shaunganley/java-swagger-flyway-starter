@@ -94,3 +94,8 @@ JobRole does not exist
 2024-09-02 12:06:16.779 [dw-42 - GET /api/job-roles] ERROR org.example.controllers.JobRoleController - getAllJobRoles failed, DoesNotExistException
 JobRole does not exist
 2024-09-02 12:15:29.411 [dw-52 - GET /api/job-roles] INFO  org.example.controllers.JobRoleController - Get all job roles request received
+2024-09-02 16:02:41.627 [main] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.2.Final
+2024-09-02 16:02:42.087 [main] INFO  org.example.controllers.AuthController - Authcontroller has been initialized
+2024-09-02 16:02:42.088 [main] INFO  org.example.controllers.JobRoleController - JobController initialized
+2024-09-02 16:02:42.464 [dw-36 - GET /api/job-roles] INFO  org.example.controllers.JobRoleController - Get all job roles request received
+2024-09-02 16:02:43.242 [dw-37 - GET /api/job-roles] INFO  org.example.controllers.JobRoleController - Get all job roles request received

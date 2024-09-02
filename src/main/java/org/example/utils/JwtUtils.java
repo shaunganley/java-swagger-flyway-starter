@@ -15,6 +15,7 @@ public class JwtUtils {
     private static final long EXPIRATION_TIME = 86400000; // 1 day in milliseconds
 
     public static String generateToken(String email, int role_id) {
+        System.out.println(SECRET_KEY);
         Map<String, Object> claims = new HashMap<>();
         claims.put("email", email);
         claims.put("role_id", role_id);
