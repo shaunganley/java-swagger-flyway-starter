@@ -23,7 +23,7 @@ public class AuthService {
     }
 
     public String login(final LoginRequest loginRequest)
-            throws SQLException, InvalidException  {
+            throws SQLException, InvalidException {
         User user = authDao.getUser(loginRequest);
 
         if (user == null) {
@@ -32,9 +32,9 @@ public class AuthService {
 
         String requestPassword = loginRequest.getPassword();
         boolean isPasswordMatch = BCrypt.checkpw(requestPassword, user.getPassword());
-        if (isPasswordMatch){
+        if (isPasswordMatch) {
             return JwtUtils.generateToken(user.getEmail(), user.getRoleId());
-        } else{
+        } else {
             throw new InvalidException(Entity.USER, "Invalid credentials");
         }
     }

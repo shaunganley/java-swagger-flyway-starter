@@ -1,13 +1,13 @@
 package org.example.controllers;
 
-import io.swagger.annotations.*;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiKeyAuthDefinition;
+import io.swagger.annotations.SecurityDefinition;
+import io.swagger.annotations.SwaggerDefinition;
 import org.example.exceptions.InvalidException;
 import org.example.models.LoginRequest;
-import org.example.models.UserRole;
 import org.example.services.AuthService;
 
-import javax.annotation.security.RolesAllowed;
-import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
