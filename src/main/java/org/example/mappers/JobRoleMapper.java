@@ -26,7 +26,7 @@ public final class JobRoleMapper {
                 jobRole.getCapabilityName(),
                 jobRole.getBandName(),
                 jobRole.getClosingDate(),
-                jobRole.getStatus()
+                jobRole.getStatusName()
         );
     }
 

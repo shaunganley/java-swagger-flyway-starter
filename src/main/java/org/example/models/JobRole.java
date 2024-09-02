@@ -46,7 +46,7 @@ public class JobRole {
             value = "Open or Closed",
             required = true,
             example = "open")
-    private String status;
+    private String statusName;
 
     public JobRole(final int jobRoleId,
                    final String roleName,
@@ -54,14 +54,14 @@ public class JobRole {
                    final String capabilityName,
                    final String bandName,
                    final Date closingDate,
-                   final String status) {
+                   final String statusName) {
         this.jobRoleId = jobRoleId;
         this.roleName = roleName;
         this.jobRoleLocation = jobRoleLocation;
         this.capabilityName = capabilityName;
         this.bandName = bandName;
         this.closingDate = closingDate;
-        this.status = status;
+        this.statusName = statusName;
     }
 
     public int getJobRoleId() {
@@ -112,12 +112,12 @@ public class JobRole {
         this.closingDate = closingDate;
     }
 
-    public String getStatus() {
-        return status;
+    public String getStatusName() {
+        return statusName;
     }
 
-    public void setStatus(final String status) {
-        this.status = status;
+    public void setStatusName(final String statusName) {
+        this.statusName = statusName;
     }
 
     @Override

@@ -41,20 +41,20 @@ public class JobRoleResponse {
             value = "Open or Closed",
             required = true,
             example = "open")
-    private String status;
+    private String statusName;
 
     public JobRoleResponse(final String roleName,
                            final String jobRoleLocation,
                            final String capability,
                            final String band,
                            final Date closingDate,
-                           final String status) {
+                           final String statusName) {
         this.roleName = roleName;
         this.jobRoleLocation = jobRoleLocation;
         this.capabilityName = capability;
         this.bandName = band;
         this.closingDate = closingDate;
-        this.status = status;
+        this.statusName = statusName;
     }
 
     public String getRoleName() {
@@ -97,11 +97,11 @@ public class JobRoleResponse {
         this.closingDate = closingDate;
     }
 
-    public String getStatus() {
-        return status;
+    public String getStatusName() {
+        return statusName;
     }
 
-    public void setStatus(final String status) {
-        this.status = status;
+    public void setStatusName(final String statusName) {
+        this.statusName = statusName;
     }
 }
