@@ -1,6 +1,5 @@
 package org.example.daos;
 
-import org.example.exceptions.DatabaseConnectionException;
 import org.example.models.LoginRequest;
 import org.example.models.User;
 import org.springframework.security.crypto.argon2.Argon2PasswordEncoder;
@@ -13,10 +12,9 @@ import java.sql.SQLException;
 import static org.example.util.PasswordEncoder.getPasswordEncoder;
 
 public class AuthDao {
-    private final int maxSetStringNumber = 3;
 
     public User getUser(final LoginRequest loginRequest)
-            throws SQLException, DatabaseConnectionException {
+            throws SQLException {
         try (Connection connection = DatabaseConnector.getConnection()) {
             String query = "SELECT `email`, `password`, `roleId`"
                     + "FROM `User`"
@@ -26,8 +24,8 @@ public class AuthDao {
             statement.setString(1, loginRequest.getEmail());
 
             ResultSet resultSet = statement.executeQuery();
-            Argon2PasswordEncoder arg2SpringSecurity = getPasswordEncoder();
             while (resultSet.next()) {
+                Argon2PasswordEncoder arg2SpringSecurity = getPasswordEncoder();
                 String encodedPassword =
                         resultSet.getString("password");
                 if (
