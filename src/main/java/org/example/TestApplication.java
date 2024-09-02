@@ -9,16 +9,18 @@ import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import io.federecio.dropwizard.swagger.SwaggerBundle;
 import io.federecio.dropwizard.swagger.SwaggerBundleConfiguration;
-import io.jsonwebtoken.Jwts;
 import org.example.auth.JwtAuthenticator;
 import org.example.auth.RoleAuthorizer;
 import org.example.controllers.AuthController;
 import org.example.daos.AuthDao;
 import org.example.models.JwtToken;
 import org.example.services.AuthService;
+import org.example.utils.JwtUtils;
 import org.glassfish.jersey.server.filter.RolesAllowedDynamicFeature;
-
-import java.security.Key;
+import javax.crypto.SecretKey;
+import org.example.controllers.JobRoleController;
+import org.example.daos.JobRoleDao;
+import org.example.services.JobRoleService;
 
 public class TestApplication extends Application<TestConfiguration> {
     public static void main(final String[] args) throws Exception {
@@ -45,11 +47,11 @@ public class TestApplication extends Application<TestConfiguration> {
     public void run(final TestConfiguration configuration,
                     final Environment environment) {
 
-        Key jwtkey = Jwts.SIG.HS256.key().build();
+        SecretKey jwtSecretKey = JwtUtils.getSecretKey();
 
         environment.jersey().register(new AuthDynamicFeature(
                 new OAuthCredentialAuthFilter.Builder<JwtToken>()
-                        .setAuthenticator(new JwtAuthenticator(jwtkey))
+                        .setAuthenticator(new JwtAuthenticator(jwtSecretKey))
                         .setAuthorizer(new RoleAuthorizer())
                         .setPrefix("Bearer")
                         .buildAuthFilter()));
@@ -58,7 +60,10 @@ public class TestApplication extends Application<TestConfiguration> {
                 Binder<>(JwtToken.class));
 
         environment.jersey()
-                .register(new AuthController(new AuthService(new AuthDao(), jwtkey)));
+                .register(new AuthController(
+                        new AuthService(new AuthDao(), jwtSecretKey)));
 
+        environment.jersey()
+                .register(new JobRoleController(new JobRoleService(new JobRoleDao())));
     }
 }
