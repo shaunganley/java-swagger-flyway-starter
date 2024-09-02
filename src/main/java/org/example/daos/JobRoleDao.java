@@ -11,7 +11,7 @@ import java.util.List;
 
 public class JobRoleDao {
 
-    public List<JobRole> getAllJobRoles()
+    public List<JobRole> getOpenJobRoles()
             throws SQLException {
         List<JobRole> jobRoles = new ArrayList<>();
 

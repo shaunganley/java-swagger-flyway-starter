@@ -17,8 +17,8 @@ public class JobRoleService {
         this.jobRoleDao = jobRoleDao;
     }
 
-    public List<JobRoleResponse> getAllJobRoles() throws SQLException {
+    public List<JobRoleResponse> getOpenJobRoles() throws SQLException {
         return JobRoleMapper.mapJobRolesListToJobRoleResponseList(
-                jobRoleDao.getAllJobRoles());
+                jobRoleDao.getOpenJobRoles());
     }
 }

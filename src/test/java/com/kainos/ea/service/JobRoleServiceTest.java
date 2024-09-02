@@ -1,7 +1,4 @@
 package com.kainos.ea.service;
-
-import com.google.common.annotations.VisibleForTesting;
-import org.checkerframework.checker.units.qual.A;
 import org.example.daos.JobRoleDao;
 import org.example.models.JobRole;
 import org.example.models.JobRoleResponse;
@@ -44,9 +41,9 @@ public class JobRoleServiceTest {
         List<JobRoleResponse> expectedResponse = new ArrayList<>();
         expectedResponse.add(jobRoleResponse);
 
-        Mockito.when(jobRoleDao.getAllJobRoles()).thenReturn(jobRoles);
+        Mockito.when(jobRoleDao.getOpenJobRoles()).thenReturn(jobRoles);
 
-        List<JobRoleResponse> actualResponse = jobRoleService.getAllJobRoles();
+        List<JobRoleResponse> actualResponse = jobRoleService.getOpenJobRoles();
 
         Assert.assertEquals(expectedResponse.size(), actualResponse.size());
         Assert.assertEquals(1, actualResponse.size());
@@ -75,10 +72,10 @@ public class JobRoleServiceTest {
     @Test
     public void getAllJobRoles_shouldThrowSqlException_whenDaoThrowsSqlException() throws SQLException{
 
-        Mockito.when(jobRoleDao.getAllJobRoles()).thenThrow(SQLException.class);
+        Mockito.when(jobRoleDao.getOpenJobRoles()).thenThrow(SQLException.class);
 
         assertThrows(SQLException.class,
-                () -> jobRoleService.getAllJobRoles());
+                () -> jobRoleService.getOpenJobRoles());
 
     }
 

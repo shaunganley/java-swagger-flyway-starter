@@ -36,9 +36,9 @@ public class JobRoleControllerTest {
 
         Response expectedResponse = Response.ok().entity(jobRoleResponses).build();
 
-        Mockito.when(jobRoleService.getAllJobRoles()).thenReturn(jobRoleResponses);
+        Mockito.when(jobRoleService.getOpenJobRoles()).thenReturn(jobRoleResponses);
 
-        Response actualResponse = Response.ok().entity(jobRoleService.getAllJobRoles()).build();
+        Response actualResponse = Response.ok().entity(jobRoleService.getOpenJobRoles()).build();
 
         Assert.assertEquals(expectedResponse.getStatus(), actualResponse.getStatus());
 
@@ -47,7 +47,7 @@ public class JobRoleControllerTest {
 
     @Test
     public void getJobRoles_shouldReturnResponseCode500_whenServiceThrowsSqlException() throws SQLException {
-        Mockito.when(jobRoleService.getAllJobRoles()).thenThrow(SQLException.class);
+        Mockito.when(jobRoleService.getOpenJobRoles()).thenThrow(SQLException.class);
 
         Response response = jobRoleController.getJobRoles();
 

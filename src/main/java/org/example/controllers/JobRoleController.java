@@ -25,7 +25,7 @@ public class JobRoleController {
     public Response getJobRoles() throws SQLException {
         try {
             return Response.ok().entity(
-                    jobRoleService.getAllJobRoles()).build();
+                    jobRoleService.getOpenJobRoles()).build();
         } catch (SQLException e) {
             return Response.serverError().build();
         }
