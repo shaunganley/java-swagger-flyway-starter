@@ -10,10 +10,14 @@ import java.security.Key;
 import java.util.Optional;
 
 public class JwtAuthenticator implements Authenticator<String, JwtToken> {
-    Key key;
+    private final Key key;
 
     public JwtAuthenticator(final Key key) {
         this.key = key;
+    }
+
+    public Key getKey() {
+        return key;
     }
 
     @Override

@@ -5,7 +5,7 @@ import java.security.Principal;
 
 public class JwtToken implements Principal {
 
-    UserRole userRole;
+    private UserRole userRole;
 
     public JwtToken(final UserRole userRole) {
         setUserRole(userRole);

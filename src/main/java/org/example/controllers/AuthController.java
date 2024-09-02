@@ -35,7 +35,7 @@ import org.apache.logging.log4j.Logger;
 
 public class AuthController {
 
-    AuthService authService;
+    private final AuthService authService;
 
     private static final Logger LOGGER = LogManager.getLogger();
 

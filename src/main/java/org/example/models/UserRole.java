@@ -6,7 +6,7 @@ public class UserRole {
 
     public static final String ADMIN = "admin";
     public static final String USER = "user";
-    int id;
+    private int id;
 
     private static final Map<Integer, String> ROLES_MAP = Map.of(
             1, ADMIN,
