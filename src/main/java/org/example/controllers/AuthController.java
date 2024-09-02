@@ -63,30 +63,4 @@ public class AuthController {
         }
     }
 
-    @GET
-    @Path("/fake1")
-    @Produces(MediaType.APPLICATION_JSON)
-    @RolesAllowed({UserRole.ADMIN, UserRole.USER})
-    @ApiOperation(
-            value = "Reaturns fake1 - user & admin",
-            authorizations = @Authorization(value = HttpHeaders.AUTHORIZATION),
-            response = Response.class
-    )
-    public Response Fake1() {
-        return Response.ok().entity("fake 1").build();
-    }
-
-    @GET
-    @Path("/fake2")
-    @Produces(MediaType.APPLICATION_JSON)
-    @RolesAllowed({UserRole.USER})
-    @ApiOperation(
-            value = "Reaturns fake2 - only user",
-            authorizations = @Authorization(value = HttpHeaders.AUTHORIZATION),
-            response = Response.class
-    )
-    public Response Fake2() {
-        return Response.ok().entity("fake2").build();
-    }
-
 }

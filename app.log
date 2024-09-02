@@ -55,3 +55,42 @@
 2024-08-28 13:40:28.694 [dw-41 - GET /api/job-roles] INFO  org.example.controllers.JobRoleController - Get all job roles request received
 2024-08-28 13:40:32.570 [dw-36 - GET /api/job-roles] INFO  org.example.controllers.JobRoleController - Get all job roles request received
 2024-08-28 13:41:26.760 [dw-37 - GET /api/job-roles] INFO  org.example.controllers.JobRoleController - Get all job roles request received
+2024-09-02 11:41:11.320 [main] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.2.Final
+2024-09-02 11:41:11.893 [main] INFO  org.example.controllers.AuthController - Authcontroller has been initialized
+2024-09-02 11:41:11.894 [main] INFO  org.example.controllers.JobRoleController - JobController initialized
+2024-09-02 11:42:55.508 [dw-36 - POST /api/auth/login] INFO  org.example.controllers.AuthController - Login request received
+2024-09-02 11:43:05.951 [dw-51 - POST /api/auth/login] INFO  org.example.controllers.AuthController - Login request received
+2024-09-02 11:45:33.756 [main] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.2.Final
+2024-09-02 11:45:34.216 [main] INFO  org.example.controllers.AuthController - Authcontroller has been initialized
+2024-09-02 11:45:34.217 [main] INFO  org.example.controllers.JobRoleController - JobController initialized
+2024-09-02 11:45:49.401 [dw-42 - POST /api/auth/login] INFO  org.example.controllers.AuthController - Login request received
+2024-09-02 11:46:42.318 [main] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.2.Final
+2024-09-02 11:46:42.810 [main] INFO  org.example.controllers.AuthController - Authcontroller has been initialized
+2024-09-02 11:46:42.811 [main] INFO  org.example.controllers.JobRoleController - JobController initialized
+2024-09-02 11:46:56.785 [dw-42 - POST /api/auth/login] INFO  org.example.controllers.AuthController - Login request received
+2024-09-02 11:48:58.223 [main] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.2.Final
+2024-09-02 11:48:58.691 [main] INFO  org.example.controllers.AuthController - Authcontroller has been initialized
+2024-09-02 11:48:58.691 [main] INFO  org.example.controllers.JobRoleController - JobController initialized
+2024-09-02 11:49:25.207 [dw-41 - POST /api/auth/login] INFO  org.example.controllers.AuthController - Login request received
+2024-09-02 11:59:43.245 [main] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.2.Final
+2024-09-02 11:59:43.711 [main] INFO  org.example.controllers.AuthController - Authcontroller has been initialized
+2024-09-02 11:59:43.711 [main] INFO  org.example.controllers.JobRoleController - JobController initialized
+2024-09-02 12:00:10.576 [dw-41 - POST /api/auth/login] INFO  org.example.controllers.AuthController - Login request received
+2024-09-02 12:03:12.448 [main] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.2.Final
+2024-09-02 12:03:12.947 [main] INFO  org.example.controllers.AuthController - Authcontroller has been initialized
+2024-09-02 12:03:12.947 [main] INFO  org.example.controllers.JobRoleController - JobController initialized
+2024-09-02 12:03:27.674 [dw-41 - POST /api/auth/login] INFO  org.example.controllers.AuthController - Login request received
+2024-09-02 12:04:07.568 [main] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.2.Final
+2024-09-02 12:04:08.027 [main] INFO  org.example.controllers.AuthController - Authcontroller has been initialized
+2024-09-02 12:04:08.028 [main] INFO  org.example.controllers.JobRoleController - JobController initialized
+2024-09-02 12:04:24.255 [dw-41 - POST /api/auth/login] INFO  org.example.controllers.AuthController - Login request received
+2024-09-02 12:05:05.636 [dw-41 - GET /api/job-roles] INFO  org.example.controllers.JobRoleController - Get all job roles request received
+2024-09-02 12:05:06.245 [dw-41 - GET /api/job-roles] ERROR org.example.controllers.JobRoleController - getAllJobRoles failed, DoesNotExistException
+JobRole does not exist
+2024-09-02 12:05:55.768 [dw-38 - GET /api/job-roles] INFO  org.example.controllers.JobRoleController - Get all job roles request received
+2024-09-02 12:05:56.327 [dw-38 - GET /api/job-roles] ERROR org.example.controllers.JobRoleController - getAllJobRoles failed, DoesNotExistException
+JobRole does not exist
+2024-09-02 12:06:16.098 [dw-42 - GET /api/job-roles] INFO  org.example.controllers.JobRoleController - Get all job roles request received
+2024-09-02 12:06:16.779 [dw-42 - GET /api/job-roles] ERROR org.example.controllers.JobRoleController - getAllJobRoles failed, DoesNotExistException
+JobRole does not exist
+2024-09-02 12:15:29.411 [dw-52 - GET /api/job-roles] INFO  org.example.controllers.JobRoleController - Get all job roles request received
