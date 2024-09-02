@@ -7,6 +7,9 @@ import java.sql.Date;
 
 @ApiModel(value = "Job Role Response", description = "Defines mapped JobRole object to pass to other methods")
 public class JobRoleResponse {
+    @ApiModelProperty(value = "unique JobRole id")
+    private int jobRoleId;
+
     @ApiModelProperty(
             value = "Job role's name",
             required = true,
@@ -43,18 +46,29 @@ public class JobRoleResponse {
             example = "open")
     private String statusName;
 
-    public JobRoleResponse(final String roleName,
-                           final String jobRoleLocation,
-                           final String capability,
-                           final String band,
-                           final Date closingDate,
-                           final String statusName) {
+    public JobRoleResponse(
+            final int jobRoleId,
+            final String roleName,
+            final String jobRoleLocation,
+            final String capability,
+            final String band,
+            final Date closingDate,
+            final String statusName) {
+        this.jobRoleId = jobRoleId;
         this.roleName = roleName;
         this.jobRoleLocation = jobRoleLocation;
         this.capabilityName = capability;
         this.bandName = band;
         this.closingDate = closingDate;
         this.statusName = statusName;
+    }
+
+    public int getJobRoleId() {
+        return jobRoleId;
+    }
+
+    public void setJobRoleId(int jobRoleId) {
+        this.jobRoleId = jobRoleId;
     }
 
     public String getRoleName() {

@@ -5,11 +5,6 @@ import io.swagger.annotations.ApiModelProperty;
 import java.sql.Date;
 
 public class JobRoleDetails {
-    @ApiModelProperty(
-            value = "Job role's ID",
-            required = true,
-            example = "1")
-    private int jobRoleId;
 
     @ApiModelProperty(
             value = "Job role's name",
@@ -75,13 +70,12 @@ public class JobRoleDetails {
     )
     private int numberOfOpenPositions;
 
-    public JobRoleDetails(int jobRoleId, String roleName, String jobRoleLocation,
+    public JobRoleDetails(String roleName, String jobRoleLocation,
                           String capabilityName, String bandName,
                           Date closingDate,
                           String statusName, String description,
                           String responsibilities, String sharepointUrl,
                           int numberOfOpenPositions) {
-        this.jobRoleId = jobRoleId;
         this.roleName = roleName;
         this.jobRoleLocation = jobRoleLocation;
         this.capabilityName = capabilityName;
@@ -92,14 +86,6 @@ public class JobRoleDetails {
         this.responsibilities = responsibilities;
         this.sharepointUrl = sharepointUrl;
         this.numberOfOpenPositions = numberOfOpenPositions;
-    }
-
-    public int getJobRoleId() {
-        return jobRoleId;
-    }
-
-    public void setJobRoleId(int jobRoleId) {
-        this.jobRoleId = jobRoleId;
     }
 
     public String getRoleName() {

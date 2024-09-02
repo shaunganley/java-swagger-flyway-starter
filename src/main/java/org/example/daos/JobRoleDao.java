@@ -59,7 +59,7 @@ public class JobRoleDao {
         try (Connection connection = DatabaseConnector.getConnection()) {
 
             String query =
-                "SELECT jobRoleId, roleName, location, capabilityName, bandName, closingDate, statusName, "
+                "SELECT roleName, location, capabilityName, bandName, closingDate, statusName, "
                 + "description, responsibilities, sharepointUrl, numberOfOpenPositions\n"
                 + "FROM job_roles\n"
                 + "INNER JOIN capability USING(capabilityId)\n"
@@ -75,7 +75,6 @@ public class JobRoleDao {
 
             while (resultSet.next()) {
                 return new JobRoleDetails(
-                    resultSet.getInt("jobRoleId"),
                     resultSet.getString("roleName"),
                     resultSet.getString("location"),
                     resultSet.getString("capabilityName"),
