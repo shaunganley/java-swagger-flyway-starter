@@ -46,8 +46,8 @@ class JobRoleServicesTest {
 
     @Test
     public void getAllJobRoles_WhenDaoReturnsNull_ExpectDoesNotExistExceptionToBeThrown()
-            throws DoesNotExistException, SQLException, ResultSetException {
-        Mockito.when(jobRoleDao.getAllJobRoles()).thenReturn(new ArrayList<JobRole>());
+            throws SQLException, ResultSetException {
+        Mockito.when(jobRoleDao.getAllJobRoles()).thenReturn(new ArrayList<>());
         assertThrows(DoesNotExistException.class, () -> jobRoleService.getAllJobRoles());
     }
 
@@ -78,19 +78,16 @@ class JobRoleServicesTest {
     }
 
     @Test
-    public void getJobRoleById_WhenDaoReturnsNull_ExpectDoesNotExistExceptionToBeThrown()
+    public void getJobRoleById_whenDaoThrowsSQLException_ExpectSQLExceptionToBeThrown()
             throws SQLException {
-        JobRoleDetails jobRoleDetails = new JobRoleDetails(
-                "test",
-                "Belfast",
-                "testCapability",
-                "testBand",
-                Date.valueOf("2000-10-10"),
-                "open",
-                "testDescription",
-                "testResponsibilities",
-                "http://url.com",
-                2);
-        Mockito.when(jobRoleDao.getJobRoleById(1)).thenReturn(new JobRoleDetails());
+        Mockito.when(jobRoleDao.getJobRoleById(1)).thenThrow(SQLException.class);
+        assertThrows(SQLException.class, () -> jobRoleService.getJobRoleById(1));
+    }
+
+    @Test
+    public void getJobRoleById_whenDaoReturnsNull_ExpectDoesNotExistExceptionToBeThrown()
+            throws SQLException {
+        Mockito.when(jobRoleDao.getJobRoleById(1)).thenReturn(null);
+        assertThrows(DoesNotExistException.class, () -> jobRoleService.getJobRoleById(1));
     }
 }
