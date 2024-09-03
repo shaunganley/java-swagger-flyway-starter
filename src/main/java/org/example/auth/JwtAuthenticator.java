@@ -25,7 +25,7 @@ public class JwtAuthenticator implements Authenticator<String, JwtToken> {
                     .build()
                     .parseSignedClaims(token)
                     .getPayload()
-                    .get("Role", Integer.class);
+                    .get("role_id", Integer.class);
 
             JwtToken jwtToken = new JwtToken(new UserRole(roleId));
 
