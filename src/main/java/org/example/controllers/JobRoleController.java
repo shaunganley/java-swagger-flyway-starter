@@ -17,7 +17,9 @@ import org.example.services.JobRoleService;
 import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -67,5 +69,11 @@ public class JobRoleController {
             LOGGER.error("getAllJobRoles failed, ResultSetException\n" + e.getMessage());
             return Response.serverError().build();
         }
+    }
+
+    public Response applyForRole(@PathParam("id")final int jobRoleId){
+        //how to get user email?
+
+        return jobRoleService.applyForRole(jobRoleId, userEmail);
     }
 }

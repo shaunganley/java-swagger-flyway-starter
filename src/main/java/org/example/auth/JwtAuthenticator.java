@@ -4,6 +4,7 @@ import io.dropwizard.auth.AuthenticationException;
 import io.dropwizard.auth.Authenticator;
 import io.jsonwebtoken.Jwts;
 import org.example.models.JwtToken;
+import org.example.models.UserPrincipal;
 import org.example.models.UserRole;
 
 import java.security.Key;
@@ -38,4 +39,24 @@ public class JwtAuthenticator implements Authenticator<String, JwtToken> {
             return Optional.empty();
         }
     }
+
+
+    public Optional<UserPrincipal> getSubject(String jwtToken) throws AuthenticationException {
+        // Validate and parse the JWT token
+        // You can use a library like JJWT or Nimbus JOSE + JWT
+
+        // Example using JJWT
+        try {
+            String email = Jwts.parser()
+                    .setSigningKey("SECRET_KEY") // Use your secret key
+                    .parseSignedClaims(jwtToken)
+                    .getBody()
+                    .getSubject(); // Assuming the email is stored as the subject
+
+            return Optional.of(new UserPrincipal(email));
+        } catch (JwtException e) {
+            return Optional.empty();
+        }
+    }
+
 }
