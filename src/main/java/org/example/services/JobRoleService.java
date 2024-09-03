@@ -6,10 +6,12 @@ import org.example.exceptions.Entity;
 import org.example.exceptions.ResultSetException;
 import org.example.mappers.JobRoleMapper;
 import org.example.models.JobRole;
+import org.example.models.JobRoleFilteredRequest;
 import org.example.models.JobRoleResponse;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 
 public class JobRoleService {
 
@@ -25,6 +27,16 @@ public class JobRoleService {
 
     public List<JobRoleResponse> getAllJobRoles() throws SQLException, DoesNotExistException, ResultSetException {
         List<JobRoleResponse> jobRoleResponses = JobRoleMapper.toResponse(jobRoleDao.getAllJobRoles());
+        if (jobRoleResponses.isEmpty()) {
+            throw new DoesNotExistException(Entity.JOB_ROLE);
+        }
+        return jobRoleResponses;
+    }
+
+    public List<JobRoleResponse> getFilteredJobRoles(
+            JobRoleFilteredRequest jobRoleFilteredRequest) throws SQLException, DoesNotExistException, ResultSetException {
+        List<JobRoleResponse> jobRoleResponses = JobRoleMapper.toResponse(jobRoleDao.getFilteredJobRoles(
+                jobRoleFilteredRequest));
         if (jobRoleResponses.isEmpty()) {
             throw new DoesNotExistException(Entity.JOB_ROLE);
         }

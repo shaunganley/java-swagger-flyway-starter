@@ -10,9 +10,11 @@ import org.apache.logging.log4j.Logger;
 import org.example.exceptions.DoesNotExistException;
 import org.example.exceptions.ResultSetException;
 import org.example.models.JobRole;
+import org.example.models.JobRoleFilteredRequest;
 import org.example.models.JobRoleResponse;
 import org.example.services.JobRoleService;
 
+import javax.ws.rs.BeanParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -54,6 +56,36 @@ public class JobRoleController {
         LOGGER.info("Get all job roles request received");
         try {
             return Response.ok().entity(jobRoleService.getAllJobRoles()).build();
+        } catch (SQLException e) {
+            LOGGER.error("getAllJobRoles failed, SQL Exception\n" + e.getMessage());
+            return Response.serverError().build();
+        } catch (DoesNotExistException | NullPointerException e) {
+            LOGGER.error("getAllJobRoles failed, DoesNotExistException\n" + e.getMessage());
+            return Response.status(Response.Status.NOT_FOUND).entity(e.getMessage()).build();
+        } catch (ResultSetException e) {
+            LOGGER.error("getAllJobRoles failed, ResultSetException\n" + e.getMessage());
+            return Response.serverError().build();
+        }
+    }
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @ApiOperation(
+            value = "Returns a list of Job Roles",
+            authorizations = @Authorization(value = HttpHeaders.AUTHORIZATION),
+            response = JobRoleResponse.class,
+            responseContainer = "Filtered list",
+            produces = "application/json")
+    @ApiResponses({
+            @ApiResponse(code = OK, message = "Job roles listed successfully", response = JobRole.class),
+            @ApiResponse(code = INTERNAL_SERVER_ERROR, message = "getAllJobRoles failed, SQL Exception"),
+            @ApiResponse(code = NOT_FOUND, message = "getAllJobRoles failed, DoesNotExistException")
+    })
+    @Path("/filter")
+    public Response getFilteredJobRoles(@BeanParam JobRoleFilteredRequest jobRoleFilteredRequest) {
+        LOGGER.info("Get all job roles request received");
+        try {
+            return Response.ok().entity(jobRoleService.getFilteredJobRoles(jobRoleFilteredRequest)).build();
         } catch (SQLException e) {
             LOGGER.error("getAllJobRoles failed, SQL Exception\n" + e.getMessage());
             return Response.serverError().build();

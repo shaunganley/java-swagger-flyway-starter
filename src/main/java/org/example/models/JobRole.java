@@ -39,7 +39,7 @@ public class JobRole {
     @ApiModelProperty(
             value = "Expire date of offer",
             required = true,
-            example = "11/12/2024")
+            example = "2024-12-30")
     private Date closingDate;
 
     @ApiModelProperty(
