@@ -1,6 +1,17 @@
 # GoodDayOrg backend application
 ### check <a href="https://github.com/GoodDayOrg/GDO-frontend" target="_blank">here</a>, to see frontend.
 
+## Setting Up Git Hooks
+
+To ensure consistent code formatting, we use a pre-commit hook to run Spotless before each commit. Follow these steps to set up the hooks:
+
+**Run the Setup Script**:
+   Execute the following command to install the Git hooks:
+
+   ```bash
+   ./setup-hooks.sh
+   ```
+
 Database Migration - Local
 ---
 
