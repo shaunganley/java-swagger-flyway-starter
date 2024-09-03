@@ -4,6 +4,7 @@ import org.example.daos.JobRoleDao;
 import org.example.exceptions.DoesNotExistException;
 import org.example.exceptions.ResultSetException;
 import org.example.models.JobRole;
+import org.example.models.JobRoleDetails;
 import org.example.models.JobRoleResponse;
 import org.junit.jupiter.api.BeforeEach;
 import org.mockito.Mockito;
@@ -55,5 +56,41 @@ class JobRoleServicesTest {
             throws SQLException, ResultSetException {
         Mockito.when(jobRoleDao.getAllJobRoles()).thenThrow(SQLException.class);
         assertThrows(SQLException.class, () -> jobRoleService.getAllJobRoles());
+    }
+
+    @Test
+    public void getJobRoleById_shouldReturnJobRoleDetails()
+            throws SQLException, DoesNotExistException {
+        JobRoleDetails expectedResult = new JobRoleDetails(
+                "test",
+                "Belfast",
+                "testCapability",
+                "testBand",
+                Date.valueOf("2000-10-11"),
+                "open",
+                "testDescription",
+                "testResponsibilities",
+                "http://url.com",
+                2);
+        Mockito.when(jobRoleDao.getJobRoleById(1)).thenReturn(expectedResult);
+        JobRoleDetails result = jobRoleService.getJobRoleById(1);
+        assertEquals(result, expectedResult);
+    }
+
+    @Test
+    public void getJobRoleById_WhenDaoReturnsNull_ExpectDoesNotExistExceptionToBeThrown()
+            throws SQLException {
+        JobRoleDetails jobRoleDetails = new JobRoleDetails(
+                "test",
+                "Belfast",
+                "testCapability",
+                "testBand",
+                Date.valueOf("2000-10-10"),
+                "open",
+                "testDescription",
+                "testResponsibilities",
+                "http://url.com",
+                2);
+        Mockito.when(jobRoleDao.getJobRoleById(1)).thenReturn(new JobRoleDetails());
     }
 }
