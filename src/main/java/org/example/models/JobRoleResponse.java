@@ -129,24 +129,17 @@ public class JobRoleResponse {
             return false;
         }
         JobRoleResponse that = (JobRoleResponse) o;
-        return jobRoleId == that.jobRoleId &&
-                Objects.equals(roleName, that.roleName) &&
-                Objects.equals(jobRoleLocation, that.jobRoleLocation) &&
-                Objects.equals(capabilityName, that.capabilityName) &&
-                Objects.equals(bandName, that.bandName) &&
-                Objects.equals(closingDate, that.closingDate) &&
-                Objects.equals(statusName, that.statusName);
+        return jobRoleId == that.jobRoleId && Objects.equals(roleName,
+                that.roleName) && Objects.equals(jobRoleLocation,
+                that.jobRoleLocation) && Objects.equals(capabilityName,
+                that.capabilityName) && Objects.equals(bandName, that.bandName)
+                && Objects.equals(closingDate, that.closingDate)
+                && Objects.equals(statusName, that.statusName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(
-                jobRoleId,
-                roleName,
-                jobRoleLocation,
-                capabilityName,
-                bandName,
-                closingDate,
-                statusName);
+        return Objects.hash(jobRoleId, roleName, jobRoleLocation,
+                capabilityName, bandName, closingDate, statusName);
     }
 }
