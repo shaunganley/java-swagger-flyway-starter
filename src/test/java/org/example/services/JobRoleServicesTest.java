@@ -39,7 +39,7 @@ class JobRoleServicesTest {
 
         List<JobRoleResponse> expected = new ArrayList<>();
         expected.add(
-                new JobRoleResponse("test", "Belfast", "testCapability", "testBand", Date.valueOf("2000-10-10"), "open")
+                new JobRoleResponse(1, "test", "Belfast", "testCapability", "testBand", Date.valueOf("2000-10-10"), "open")
         );
     }
 
