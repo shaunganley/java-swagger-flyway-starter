@@ -20,7 +20,7 @@ public class LoginTest {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
         // click on sign in
-        driver.findElement(By.xpath("/html/body/header/a")).click();
+        driver.findElement(By.id("login")).click();
         Thread.sleep(1000);
 
         //enter email address
