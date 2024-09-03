@@ -70,12 +70,16 @@ public class JobRoleDetails {
     )
     private int numberOfOpenPositions;
 
-    public JobRoleDetails(String roleName, String jobRoleLocation,
-                          String capabilityName, String bandName,
-                          Date closingDate,
-                          String statusName, String description,
-                          String responsibilities, String sharepointUrl,
-                          int numberOfOpenPositions) {
+    public JobRoleDetails(final String roleName,
+                          final String jobRoleLocation,
+                          final String capabilityName,
+                          final String bandName,
+                          final Date closingDate,
+                          final String statusName,
+                          final String description,
+                          final String responsibilities,
+                          final String sharepointUrl,
+                          final int numberOfOpenPositions) {
         this.roleName = roleName;
         this.jobRoleLocation = jobRoleLocation;
         this.capabilityName = capabilityName;
@@ -92,7 +96,7 @@ public class JobRoleDetails {
         return roleName;
     }
 
-    public void setRoleName(String roleName) {
+    public void setRoleName(final String roleName) {
         this.roleName = roleName;
     }
 
@@ -100,7 +104,7 @@ public class JobRoleDetails {
         return jobRoleLocation;
     }
 
-    public void setJobRoleLocation(String jobRoleLocation) {
+    public void setJobRoleLocation(final String jobRoleLocation) {
         this.jobRoleLocation = jobRoleLocation;
     }
 
@@ -108,7 +112,7 @@ public class JobRoleDetails {
         return capabilityName;
     }
 
-    public void setCapabilityName(String capabilityName) {
+    public void setCapabilityName(final String capabilityName) {
         this.capabilityName = capabilityName;
     }
 
@@ -116,7 +120,7 @@ public class JobRoleDetails {
         return bandName;
     }
 
-    public void setBandName(String bandName) {
+    public void setBandName(final String bandName) {
         this.bandName = bandName;
     }
 
@@ -124,7 +128,7 @@ public class JobRoleDetails {
         return closingDate;
     }
 
-    public void setClosingDate(Date closingDate) {
+    public void setClosingDate(final Date closingDate) {
         this.closingDate = closingDate;
     }
 
@@ -132,7 +136,7 @@ public class JobRoleDetails {
         return statusName;
     }
 
-    public void setStatusName(String statusName) {
+    public void setStatusName(final String statusName) {
         this.statusName = statusName;
     }
 
@@ -140,7 +144,7 @@ public class JobRoleDetails {
         return description;
     }
 
-    public void setDescription(String description) {
+    public void setDescription(final String description) {
         this.description = description;
     }
 
@@ -148,7 +152,7 @@ public class JobRoleDetails {
         return responsibilities;
     }
 
-    public void setResponsibilities(String responsibilities) {
+    public void setResponsibilities(final String responsibilities) {
         this.responsibilities = responsibilities;
     }
 
@@ -156,7 +160,7 @@ public class JobRoleDetails {
         return sharepointUrl;
     }
 
-    public void setSharepointUrl(String sharepointUrl) {
+    public void setSharepointUrl(final String sharepointUrl) {
         this.sharepointUrl = sharepointUrl;
     }
 
@@ -164,7 +168,7 @@ public class JobRoleDetails {
         return numberOfOpenPositions;
     }
 
-    public void setNumberOfOpenPositions(int numberOfOpenPositions) {
+    public void setNumberOfOpenPositions(final int numberOfOpenPositions) {
         this.numberOfOpenPositions = numberOfOpenPositions;
     }
 }

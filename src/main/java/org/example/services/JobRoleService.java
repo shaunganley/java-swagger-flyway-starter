@@ -34,10 +34,10 @@ public class JobRoleService {
 
     public JobRoleDetails getJobRoleById(final int id)
             throws SQLException, DoesNotExistException {
-        JobRoleDetails JobRoleDetails = jobRoleDao.getJobRoleById(id);
-        if (JobRoleDetails == null) {
+        JobRoleDetails jobRoleDetails = jobRoleDao.getJobRoleById(id);
+        if (jobRoleDetails == null) {
             throw new DoesNotExistException(Entity.JOB_ROLE);
         }
-        return JobRoleDetails;
+        return jobRoleDetails;
     }
 }

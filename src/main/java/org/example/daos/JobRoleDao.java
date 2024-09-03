@@ -3,7 +3,6 @@ package org.example.daos;
 import org.example.exceptions.ResultSetException;
 import org.example.models.JobRole;
 import org.example.models.JobRoleDetails;
-import org.example.models.JobRoleResponse;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
