@@ -22,14 +22,15 @@ public class KainosJobWebApplication extends
     public static void main(final String[] args) throws Exception {
         new KainosJobWebApplication().run(args);
     }
+
     @Override
     public String getName() {
         return "KainosJobApp";
     }
 
     @Override
-    public void initialize(final Bootstrap<KainosJobWebConfiguration>
-                                       bootstrap) {
+    public void initialize(final Bootstrap
+            <KainosJobWebConfiguration> bootstrap) {
         bootstrap.addBundle(new SwaggerBundle<>() {
             @Override
             protected SwaggerBundleConfiguration getSwaggerBundleConfiguration(
@@ -39,13 +40,13 @@ public class KainosJobWebApplication extends
         });
     }
 
-            @Override
-            public void run(final KainosJobWebConfiguration configuration,
-                            final Environment environment) {
-                Key jwtKey = Jwts.SIG.HS256.key().build();
-                environment.jersey().register(new AuthController(
-                        new AuthService(new AuthDao(), jwtKey)));
-                environment.jersey().register(new JobRoleController(
-                        new JobRoleService(new JobRoleDao())));
-            }
-        }
+    @Override
+    public void run(final KainosJobWebConfiguration configuration,
+                    final Environment environment) {
+        Key jwtKey = Jwts.SIG.HS256.key().build();
+        environment.jersey().register(new AuthController(
+                new AuthService(new AuthDao(), jwtKey)));
+        environment.jersey().register(new JobRoleController(
+                new JobRoleService(new JobRoleDao())));
+    }
+}
