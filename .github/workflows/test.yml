@@ -38,4 +38,5 @@ jobs:
           DB_NAME: ${{ secrets.DB_NAME }}
           VALID_TEST_EMAIL: ${{ secrets.VALID_TEST_EMAIL }}
           VALID_TEST_PASSWORD: ${{ secrets.VALID_TEST_PASSWORD }}
+
         run: mvn test

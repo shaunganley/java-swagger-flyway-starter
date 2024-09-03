@@ -2,8 +2,8 @@ package org.example.integration;
 
 import io.dropwizard.testing.junit5.DropwizardAppExtension;
 import io.dropwizard.testing.junit5.DropwizardExtensionsSupport;
-import org.example.KainosWebApplication;
-import org.example.KainosWebConfiguration;
+import org.example.KainosJobWebApplication;
+import org.example.KainosJobWebConfiguration;
 import org.example.models.LoginRequest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -17,8 +17,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @ExtendWith(DropwizardExtensionsSupport.class)
 public class AuthIntegrationTest {
-    private static final DropwizardAppExtension<KainosWebConfiguration> APP =
-            new DropwizardAppExtension<>(KainosWebApplication.class);
+    private static final DropwizardAppExtension<KainosJobWebConfiguration> APP =
+            new DropwizardAppExtension<>(KainosJobWebApplication.class);
 
     private static final LoginRequest VALID_LOGIN_REQUEST = new LoginRequest(
             System.getenv().get("VALID_TEST_EMAIL"),
