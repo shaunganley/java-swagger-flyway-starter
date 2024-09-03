@@ -53,7 +53,7 @@ class JobRoleServicesTest {
                 .filter(jobRole -> "open".equals(jobRole.getStatusName()))
                 .collect(Collectors.toList());
 
-        // Check if the filtered result is an instance of List<JobRoleResponse>
+        // Check if the filtered result is non-Null
         assertTrue(filteredResult.stream().allMatch(Objects::nonNull));
 
         // Check if the filtered result matches the expected list
