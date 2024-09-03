@@ -34,9 +34,10 @@ public class AuthIntegrationTest {
     public void login_shouldReturnOK_whenValidLoginRequest() {
         Client client = APP.client();
 
-        Response response = client.target("http://localhost:8080/api/auth/login")
-                .request()
-                .post(Entity.json(VALID_LOGIN_REQUEST));
+        Response response =
+                client.target("http://localhost:8080/api/auth/login")
+                        .request()
+                        .post(Entity.json(VALID_LOGIN_REQUEST));
 
         assertNotNull(response.readEntity(String.class));
         assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
@@ -46,10 +47,12 @@ public class AuthIntegrationTest {
     public void login_shouldReturnBadRequest_whenInvalidLoginRequest() {
         Client client = APP.client();
 
-        Response response = client.target("http://localhost:8080/api/auth/login")
-                .request()
-                .post(Entity.json(INVALID_LOGIN_REQUEST));
+        Response response =
+                client.target("http://localhost:8080/api/auth/login")
+                        .request()
+                        .post(Entity.json(INVALID_LOGIN_REQUEST));
 
         assertEquals(400, response.getStatus());
     }
+
 }

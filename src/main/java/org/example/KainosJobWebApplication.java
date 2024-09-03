@@ -28,7 +28,8 @@ public class KainosJobWebApplication extends
     }
 
     @Override
-    public void initialize(final Bootstrap<KainosJobWebConfiguration> bootstrap) {
+    public void initialize(final Bootstrap<KainosJobWebConfiguration>
+                                       bootstrap) {
         bootstrap.addBundle(new SwaggerBundle<>() {
             @Override
             protected SwaggerBundleConfiguration getSwaggerBundleConfiguration(

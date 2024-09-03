@@ -1,8 +1,7 @@
-package com.kainos.ea.service;
+package org.example.services;
 import org.example.daos.JobRoleDao;
 import org.example.models.JobRole;
 import org.example.models.JobRoleResponse;
-import org.example.services.JobRoleService;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

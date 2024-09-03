@@ -1,6 +1,5 @@
-package com.kainos.ea.controller;
+package org.example.controllers;
 
-import org.example.controllers.JobRoleController;
 import org.example.models.JobRoleResponse;
 import org.example.services.JobRoleService;
 import org.junit.Assert;
