@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 import static org.example.utils.JwtUtils.generateToken;
 import static org.junit.jupiter.api.Assertions.*;
 
-class JwtUtilsTest {
+final class JwtUtilsTest {
 
     @Test
     public void generateToken_ShouldGenerateTokenWithCorrectClaims() {
@@ -12,12 +12,11 @@ class JwtUtilsTest {
         var resultEmail = Jwts.parser().setSigningKey(JwtUtils.getSecretKey()).build().parseSignedClaims(result)
                 .getPayload().get("email", String.class);
         var resultRoleId = Jwts.parser().setSigningKey(JwtUtils.getSecretKey()).build().parseSignedClaims(result)
-                .getPayload().get("role_id", Integer.class);
+                .getPayload().get("roleId", Integer.class);
 
         assertEquals("siema@gmail.com", resultEmail);
         assertEquals(1, resultRoleId);
     }
-
     @Test
     public void testGenerateToken_NotNullOrEmpty() {
         String token = generateToken("test@example.com", 1);
