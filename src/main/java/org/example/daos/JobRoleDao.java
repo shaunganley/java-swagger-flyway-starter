@@ -3,6 +3,7 @@ package org.example.daos;
 import org.example.exceptions.ResultSetException;
 import org.example.models.JobRole;
 import org.example.models.JobRoleFilteredRequest;
+import org.example.models.JobRoleStatus;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,9 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 import java.sql.Statement;
 
 public class JobRoleDao {
@@ -49,10 +48,10 @@ public class JobRoleDao {
 
     private static String baseQuery() {
         return
-                "SELECT jobRoleId, roleName, location, status, capabilityName, bandName, closingDate FROM job_roles"
+                "SELECT jobRoleId, roleName, location, statusId, capabilityName, bandName, closingDate FROM job_roles"
                         + " INNER JOIN capability USING(capabilityId)"
                         + " INNER JOIN band USING(bandId)"
-                        + " WHERE status = 'open'";
+                        + " WHERE statusId = " + JobRoleStatus.OPEN.getStatus();
     }
 
     private void applyFiltersToQuery(JobRoleFilteredRequest jobRequest,
@@ -130,7 +129,7 @@ public class JobRoleDao {
                     resultSet.getString("capabilityName"),
                     resultSet.getString("bandName"),
                     resultSet.getDate("closingDate"),
-                    resultSet.getString("status")
+                    resultSet.getString("statusId")
             );
         } catch (SQLException e) {
             throw new ResultSetException(e.getMessage());
