@@ -1,4 +1,4 @@
-package com.kainos.ea.controller;
+package org.example.controller;
 
 import org.example.controllers.JobRoleController;
 import org.example.models.JobRoleResponse;

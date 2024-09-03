@@ -87,11 +87,11 @@ public class JobRoleDao {
                     +
                     "JOIN "
                     +
-                    "status ON job_roles.statusId = status.statusId  -- Corrected the join with proper ON clause "
+                    "status ON job_roles.statusId = status.statusId "
                     +
                     "WHERE "
                     +
-                    "job_roles.jobRoleId = 1;";
+                    "job_roles.jobRoleId = ?;";
             PreparedStatement statement =
                     connection.prepareStatement(query);
             statement.setInt(1, id);

@@ -1,4 +1,4 @@
-package com.kainos.ea.integration;
+package org.example.integration;
 
 import io.dropwizard.testing.junit5.DropwizardAppExtension;
 import io.dropwizard.testing.junit5.DropwizardExtensionsSupport;

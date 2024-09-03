@@ -1,4 +1,4 @@
-package com.kainos.ea.service;
+package org.example.service;
 import org.example.daos.JobRoleDao;
 import org.example.models.JobRole;
 import org.example.models.JobRoleResponse;
