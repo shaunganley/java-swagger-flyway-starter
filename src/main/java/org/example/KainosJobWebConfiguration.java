@@ -8,6 +8,9 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 public class KainosWebConfiguration extends Configuration {
+
+}
+public class KainosJobWebConfiguration extends Configuration {
     @Valid
     @NotNull
     private final SwaggerBundleConfiguration swagger =
