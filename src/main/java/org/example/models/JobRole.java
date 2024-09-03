@@ -9,6 +9,11 @@ public class JobRole {
     private Date closingDate;
     private String capabilityName;
     private String bandName;
+    private String statusName;
+    private String description;
+    private String responsibilities;
+    private String sharepointUrl;
+    private int numberOfOpenPositions;
 
     public JobRole(final String roleName, final String location,
                    final String capabilityName,
@@ -18,6 +23,25 @@ public class JobRole {
         this.capabilityName = capabilityName;
         this.bandName = bandName;
         this.closingDate = closingDate;
+    }
+
+    public JobRole(final String roleName, final String description,
+                   final String responsibilities,
+                   final String sharepointUrl, final String location,
+                   final String capabilityName,
+                   final String bandName, final Date closingDate,
+                   final String statusName,
+                   final int numberOfOpenPositions) {
+        this.roleName = roleName;
+        this.description = description;
+        this.responsibilities = responsibilities;
+        this.sharepointUrl = sharepointUrl;
+        this.location = location;
+        this.capabilityName = capabilityName;
+        this.bandName = bandName;
+        this.closingDate = closingDate;
+        this.statusName = statusName;
+        this.numberOfOpenPositions = numberOfOpenPositions;
     }
 
     public int getJobRoleId() {
@@ -65,6 +89,46 @@ public class JobRole {
 
     public void setBandName(final String bandName) {
         this.bandName = bandName;
+    }
+
+    public String getStatusName() {
+        return statusName;
+    }
+
+    public void setStatusName(final String statusName) {
+        this.statusName = statusName;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(final String description) {
+        this.description = description;
+    }
+
+    public String getSharepointUrl() {
+        return sharepointUrl;
+    }
+
+    public void setSharepointUrl(final String sharepointUrl) {
+        this.sharepointUrl = sharepointUrl;
+    }
+
+    public String getResponsibilities() {
+        return responsibilities;
+    }
+
+    public void setResponsibilities(final String responsibilities) {
+        this.responsibilities = responsibilities;
+    }
+
+    public int getNumberOfOpenPositions() {
+        return numberOfOpenPositions;
+    }
+
+    public void setNumberOfOpenPositions(final int numberOfOpenPositions) {
+        this.numberOfOpenPositions = numberOfOpenPositions;
     }
 }
 
