@@ -83,17 +83,17 @@ public class JobRoleController {
     })
     @Path("/filter")
     public Response getFilteredJobRoles(@BeanParam JobRoleFilteredRequest jobRoleFilteredRequest) {
-        LOGGER.info("Get all job roles request received");
+        LOGGER.info("Get filtered job roles request received");
         try {
             return Response.ok().entity(jobRoleService.getFilteredJobRoles(jobRoleFilteredRequest)).build();
         } catch (SQLException e) {
-            LOGGER.error("getAllJobRoles failed, SQL Exception\n" + e.getMessage());
+            LOGGER.error("getFilteredJobRoles failed, SQL Exception\n" + e.getMessage());
             return Response.serverError().build();
         } catch (DoesNotExistException | NullPointerException e) {
-            LOGGER.error("getAllJobRoles failed, DoesNotExistException\n" + e.getMessage());
+            LOGGER.error("getFilteredJobRoles failed, DoesNotExistException\n" + e.getMessage());
             return Response.status(Response.Status.NOT_FOUND).entity(e.getMessage()).build();
         } catch (ResultSetException e) {
-            LOGGER.error("getAllJobRoles failed, ResultSetException\n" + e.getMessage());
+            LOGGER.error("getFilteredJobRoles failed, ResultSetException\n" + e.getMessage());
             return Response.serverError().build();
         }
     }
