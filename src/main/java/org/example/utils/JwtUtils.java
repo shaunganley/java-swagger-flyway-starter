@@ -9,7 +9,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-public class JwtUtils {
+public final class JwtUtils {
 
     private JwtUtils() {
     }
@@ -17,8 +17,8 @@ public class JwtUtils {
     private static final SecretKey SECRET_KEY = Keys.secretKeyFor(SignatureAlgorithm.HS256);
     private static final long EXPIRATION_TIME = 86400000; // 1 day in milliseconds
 
-    public static String generateToken(final String email,final int roleId) {
-        Map<String, Object> claims = new HashMap<>();
+       public static String generateToken(final String email, final int roleId) {
+            Map<String, Object> claims = new HashMap<>();
         claims.put("email", email);
         claims.put("roleId", roleId);
 
