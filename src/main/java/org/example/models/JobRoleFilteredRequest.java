@@ -46,6 +46,10 @@ public class JobRoleFilteredRequest {
         return roleName;
     }
 
+    public String getLikeRoleName() {
+        return "%"+roleName+"%";
+    }
+
     public void setRoleName(String roleName) {
         this.roleName = roleName;
     }

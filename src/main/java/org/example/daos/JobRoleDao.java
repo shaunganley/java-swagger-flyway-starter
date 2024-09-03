@@ -58,9 +58,9 @@ public class JobRoleDao {
     private void applyFiltersToQuery(JobRoleFilteredRequest jobRequest,
                                      StringBuilder query,
                                      List<Object> parameters) {
-        if (jobRequest.getRoleName() != null) {
+        if (jobRequest.getRoleName() != null && !jobRequest.getRoleName().isBlank()) {
             query.append(" AND roleName LIKE ?");
-            parameters.add(jobRequest.getRoleName());
+            parameters.add(jobRequest.getLikeRoleName());
         }
         applyFilter(jobRequest.getJobRoleLocation(), "location", query,
                 parameters);
@@ -93,7 +93,7 @@ public class JobRoleDao {
                         throw new IllegalArgumentException();
                     }
                 }
-
+                System.out.println(statement);
                 ResultSet resultSet = statement.executeQuery();
 
                 while (resultSet.next()) {
