@@ -15,6 +15,8 @@ import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -29,7 +31,8 @@ class JobRoleServicesTest {
     }
 
     @Test
-    public void getAllJobRoles_shouldReturnListOfJobRoles() throws SQLException, ResultSetException {
+    public void getAllJobRoles_shouldReturnListOfJobRoles()
+            throws SQLException, ResultSetException, DoesNotExistException {
         jobRoles.add(
                 new JobRole(3, "test", "Belfast", "testCapability", "testBand", Date.valueOf("2000-10-10"), "open")
         );
@@ -40,8 +43,22 @@ class JobRoleServicesTest {
 
         List<JobRoleResponse> expected = new ArrayList<>();
         expected.add(
-                new JobRoleResponse(1, "test", "Belfast", "testCapability", "testBand", Date.valueOf("2000-10-10"), "open")
+                new JobRoleResponse(3, "test", "Belfast", "testCapability", "testBand", Date.valueOf("2000-10-10"), "open")
         );
+
+        List<JobRoleResponse> result = jobRoleService.getAllJobRoles();
+
+        // Filter the result to include only JobRoleResponse with status "open"
+        List<JobRoleResponse> filteredResult = result.stream()
+                .filter(jobRole -> "open".equals(jobRole.getStatusName()))
+                .collect(Collectors.toList());
+
+        // Check if the filtered result is an instance of List<JobRoleResponse>
+        assertTrue(filteredResult.stream().allMatch(Objects::nonNull));
+
+        // Check if the filtered result matches the expected list
+        assertEquals(expected, filteredResult);
+
     }
 
     @Test
@@ -74,7 +91,7 @@ class JobRoleServicesTest {
                 2);
         Mockito.when(jobRoleDao.getJobRoleById(1)).thenReturn(expectedResult);
         JobRoleDetails result = jobRoleService.getJobRoleById(1);
-        assertEquals(result, expectedResult);
+        assertEquals(expectedResult, result);
     }
 
     @Test
