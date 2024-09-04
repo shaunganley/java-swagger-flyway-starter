@@ -6,6 +6,7 @@ import org.example.exceptions.Entity;
 import org.example.exceptions.ResultSetException;
 import org.example.mappers.JobRoleMapper;
 import org.example.models.JobRole;
+import org.example.models.JobRoleApplication;
 import org.example.models.JobRoleResponse;
 
 import java.sql.SQLException;
@@ -29,5 +30,9 @@ public class JobRoleService {
             throw new DoesNotExistException(Entity.JOB_ROLE);
         }
         return jobRoleResponses;
+    }
+
+    public List<JobRoleApplication> getAllUserApplications(int userId) throws SQLException {
+        return jobRoleDao.getUserJobRoleApplications(userId);
     }
 }

@@ -2,6 +2,7 @@ package org.example.daos;
 
 import org.example.exceptions.ResultSetException;
 import org.example.models.JobRole;
+import org.example.models.JobRoleApplication;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -48,5 +49,35 @@ public class JobRoleDao {
         }
 
         jobRoles.add(jobRole);
+    }
+
+    public List<JobRoleApplication> getUserJobRoleApplications(int userId)
+            throws SQLException {
+        List<JobRoleApplication> jobRoleApplications = new ArrayList<>();
+
+        try (Connection connection = DatabaseConnector.getConnection()) {
+            Statement statement = connection.createStatement();
+
+            ResultSet resultSet = statement.executeQuery(
+                    "SELECT jr.roleName, aps.statusName "
+                            + "FROM job_application ja "
+                            + "INNER JOIN application_status aps ON ja.statusId = aps.statusId "
+                            + "INNER JOIN job_roles jr ON ja.roleId = jr.jobRoleId "
+                            + "INNER JOIN user u ON ja.userId = u.userId "
+                            + "WHERE u.userId = " + userId + ";"
+            );
+
+            while(resultSet.next()) {
+                JobRoleApplication jobRoleApplication = new JobRoleApplication(
+                        resultSet.getString("roleName"),
+                        resultSet.getString("statusName")
+                );
+
+                jobRoleApplications.add(jobRoleApplication);
+            }
+        }
+
+        return jobRoleApplications;
+
     }
 }

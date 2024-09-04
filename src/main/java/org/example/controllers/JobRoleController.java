@@ -10,11 +10,13 @@ import org.apache.logging.log4j.Logger;
 import org.example.exceptions.DoesNotExistException;
 import org.example.exceptions.ResultSetException;
 import org.example.models.JobRole;
+import org.example.models.JobRoleApplication;
 import org.example.models.JobRoleResponse;
 import org.example.services.JobRoleService;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
@@ -62,6 +64,30 @@ public class JobRoleController {
             return Response.status(Response.Status.NOT_FOUND).entity(e.getMessage()).build();
         } catch (ResultSetException e) {
             LOGGER.error("getAllJobRoles failed, ResultSetException\n" + e.getMessage());
+            return Response.serverError().build();
+        }
+    }
+
+    @GET
+    @Path("/applications/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @ApiOperation(
+            value = "Returns a list of user's applications",
+            authorizations = @Authorization(value = HttpHeaders.AUTHORIZATION),
+            response = JobRoleApplication.class,
+            responseContainer = "List",
+            produces = "application/json")
+    @ApiResponses({
+            @ApiResponse(code = OK, message = "Job roles listed successfully", response = JobRoleApplication.class),
+            @ApiResponse(code = INTERNAL_SERVER_ERROR, message = "getUserAllJobApplications failed, SQL Exception"),
+//            @ApiResponse(code = NOT_FOUND, message = "getUserAllJobApplications failed, DoesNotExistException")
+    })
+    public Response getUserAllJobApplications(@PathParam("id") int userId)
+            throws SQLException {
+        try {
+            return Response.ok().entity(jobRoleService.getAllUserApplications(userId)).build();
+        } catch(SQLException e) {
+            e.printStackTrace();
             return Response.serverError().build();
         }
     }
