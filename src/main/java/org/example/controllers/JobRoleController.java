@@ -2,7 +2,7 @@ package org.example.controllers;
 
 import io.swagger.annotations.Api;
 import org.eclipse.jetty.http.HttpStatus;
-import org.example.exception.DoesNotExistException;
+import org.example.exceptions.DoesNotExistException;
 import org.example.services.JobRoleService;
 
 import javax.ws.rs.GET;

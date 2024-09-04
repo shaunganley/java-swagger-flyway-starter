@@ -1,7 +1,6 @@
 package org.example.daos;
 
 import org.example.models.JobRole;
-import org.example.models.JobRoleDetailedResponse;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -36,7 +35,7 @@ public class JobRoleDao {
             if (resultSet != null) {
                 while (resultSet.next()) {
                     jobRoles.add(new JobRole(
-                            resultSet.getInt("job_roles.getJobRoleId"),
+                            resultSet.getInt("job_roles.jobRoleId"),
                             resultSet.getString("job_roles.roleName"),
                             resultSet.getString("job_roles.location"),
                             resultSet.getString("capability.capabilityName"),
@@ -48,76 +47,55 @@ public class JobRoleDao {
         return jobRoles;
     }
 
-    public JobRole getJobRoleById(final int id)
-            throws SQLException {
-
+    public JobRole getJobRoleById(final int id) throws SQLException {
         try (Connection connection = DatabaseConnector.getConnection()) {
 
             String query = "SELECT "
+                    + "job_roles.jobRoleId, "
+                    + "job_roles.roleName, "
+                    + "job_roles.description, "
+                    + "job_roles.responsibilities, "
+                    + "job_roles.sharepointUrl, "
+                    + "job_roles.location, "
+                    + "band.bandName, "
+                    + "capability.capabilityName, "
+                    + "job_roles.closingDate, "
+                    + "status.statusName, "
+                    + "job_roles.numberOfOpenPositions "
+                    + "FROM "
+                    + "job_roles "
+                    + "JOIN "
+                    + "capability ON job_roles.capabilityId"
                     +
-                    "job_roles.roleName, "
-                    +
-                    "job_roles.description, "
-                    +
-                    "job_roles.responsibilities, "
-                    +
-                    "job_roles.sharepointUrl, "
-                    +
-                    "job_roles.location, "
-                    +
-                    "band.bandName, "
-                    +
-                    "capability.capabilityName, "
-                    +
-                    "job_roles.closingDate, "
-                    +
-                    "status.statusName, "
-                    +
-                    "job_roles.numberOfOpenPositions "
-                    +
-                    "FROM "
-                    +
-                    "job_roles "
-                    +
-                    "JOIN "
-                    +
-                    "capability ON job_roles.capabilityId = "
-                    +
-                    "capability.capabilityId "
-                    +
-                    "JOIN "
-                    +
-                    "band ON job_roles.bandId = band.nameId "
-                    +
-                    "JOIN "
-                    +
-                    "status ON job_roles.statusId = status.statusId "
-                    +
-                    "WHERE "
-                    +
-                    "job_roles.jobRoleId = ?;";
-            PreparedStatement statement =
-                    connection.prepareStatement(query);
+                    " = capability.capabilityId "
+                    + "JOIN "
+                    + "band ON job_roles.bandId = band.nameId "
+                    + "JOIN "
+                    + "status ON job_roles.statusId = status.statusId "
+                    + "WHERE "
+                    + "job_roles.jobRoleId = ?;";
+
+            PreparedStatement statement = connection.prepareStatement(query);
             statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
-            if (resultSet != null) {
-                if (resultSet.next()) {
-                    return new JobRole(
-                            resultSet.getInt(1),
-                            resultSet.getString("job_roles.roleName"),
-                            resultSet.getString("job_roles.description"),
-                            resultSet.getString("job_roles.responsibilities"),
-                            resultSet.getString("job_roles.sharepointUrl"),
-                            resultSet.getString("job_roles.location"),
-                            resultSet.getString("capability.capabilityName"),
-                            resultSet.getString("band.bandName"),
-                            resultSet.getDate("job_roles.closingDate"),
-                            resultSet.getString("status.statusName"),
-                            resultSet.getInt(
-                                    "job_roles.numberOfOpenPositions"));
-                }
+
+            if (resultSet != null && resultSet.next()) {
+                return new JobRole(
+                        resultSet.getInt("jobRoleId"),
+                        resultSet.getString("roleName"),
+                        resultSet.getString("description"),
+                        resultSet.getString("responsibilities"),
+                        resultSet.getString("sharepointUrl"),
+                        resultSet.getString("location"),
+                        resultSet.getString("capabilityName"),
+                        resultSet.getString("bandName"),
+                        resultSet.getDate("closingDate"),
+                        resultSet.getString("statusName"),
+                        resultSet.getInt("numberOfOpenPositions"));
             }
+
             return null;
         }
     }
+
 }

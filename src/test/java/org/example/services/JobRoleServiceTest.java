@@ -1,6 +1,6 @@
 package org.example.services;
 import org.example.daos.JobRoleDao;
-import org.example.exception.DoesNotExistException;
+import org.example.exceptions.DoesNotExistException;
 import org.example.models.JobRole;
 import org.example.models.JobRoleDetailedResponse;
 import org.example.models.JobRoleResponse;
@@ -89,7 +89,7 @@ public class JobRoleServiceTest {
         Date closingDate = new Date(millis);
         // Arrange
         int jobRoleId = 1;
-        JobRoleDetailedResponse expectedJobRole = new JobRoleDetailedResponse(1,"Software Engineer", "Develops, tests, and maintains software applications.", "Design, develop, and maintain software applications.", "https://sharepoint.com/job/software-engineer", "New York", "Software Development", "Senior", closingDate, "Open", 1);
+        JobRole expectedJobRole = new JobRole(1,"Software Engineer", "Develops, tests, and maintains software applications.", "Design, develop, and maintain software applications.", "https://sharepoint.com/job/software-engineer", "New York", "Software Development", "Senior", closingDate, "Open", 1);
         // Mock the behavior of the DAO
         Mockito.when(jobRoleDao.getJobRoleById(jobRoleId)).thenReturn(expectedJobRole);
 

@@ -2,7 +2,7 @@ package org.example.services;
 
 import org.example.daos.DatabaseConnector;
 import org.example.daos.JobRoleDao;
-import org.example.exception.DoesNotExistException;
+import org.example.exceptions.DoesNotExistException;
 import org.example.mappers.JobRoleMapper;
 import org.example.models.JobRole;
 import org.example.models.JobRoleDetailedResponse;
@@ -31,7 +31,6 @@ public class JobRoleService {
         if (jobRole == null) {
             throw new DoesNotExistException();
         }
-        return JobRoleMapper.mapJobRoleToJobRoleDetailedResponse(
-                jobRoleDao.getJobRoleById(id));
+        return JobRoleMapper.mapJobRoleToJobRoleDetailedResponse(jobRole);
     }
 }

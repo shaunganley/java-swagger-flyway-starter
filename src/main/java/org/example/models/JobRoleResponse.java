@@ -12,7 +12,8 @@ public class JobRoleResponse {
     private String capabilityName;
     private String bandName;
 
-    public JobRoleResponse(final int jobRoleId, final String roleName, final String location,
+    public JobRoleResponse(final int jobRoleId,
+                           final String roleName, final String location,
                            final String capabilityName,
                            final String bandName, final Date closingDate) {
         this.jobRoleId = jobRoleId;
@@ -27,7 +28,7 @@ public class JobRoleResponse {
         return jobRoleId;
     }
 
-    public void setJobRoleId(int jobRoleId) {
+    public void setJobRoleId(final int jobRoleId) {
         this.jobRoleId = jobRoleId;
     }
 

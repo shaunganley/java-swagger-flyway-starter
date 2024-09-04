@@ -77,8 +77,8 @@ public class JobRoleMapperTest {
         JobRole jobRole = new JobRole(1,"Software Engineer", "Develops, tests, and maintains software applications.", "Design, develop, and maintain software applications.", "https://sharepoint.com/job/software-engineer", "New York", "Software Development", "Senior", closingDate, "Open", 1);
 
         JobRoleDetailedResponse  jobRoleDetailedResponse = JobRoleMapper.mapJobRoleToJobRoleDetailedResponse(jobRole);
-        assertEquals(jobRole.getJobRoleId(),
-                jobRoleDetailedResponse.getJobRoleId());
+       assertEquals(jobRole.getJobRoleId(),
+          jobRoleDetailedResponse.getJobRoleId());
         assertEquals(jobRole.getRoleName(),
                 jobRoleDetailedResponse.getRoleName());
         assertEquals(jobRole.getDescription(),

@@ -28,6 +28,7 @@ public class JobRoleDetailedResponse {
                                    final Date closingDate,
                                    final String statusName,
                                    final int numberOfOpenPositions) {
+        this.jobRoleId = jobRoleId;
         this.roleName = roleName;
         this.description = description;
         this.responsibilities = responsibilities;
