@@ -18,7 +18,8 @@ public class JobRoleDao {
             Statement statement = connection.createStatement();
 
             ResultSet resultSet = statement.executeQuery(
-                    "SELECT jobRoleId, roleName, location, statusId, statusName, capabilityName, bandName, closingDate\n"
+                    "SELECT jobRoleId, roleName, location, statusId, statusName, capabilityName, "
+                            + "bandName, closingDate\n"
                             + "FROM job_roles\n"
                             + "INNER JOIN capability USING(capabilityId)\n"
                             + "INNER JOIN band USING(bandId)\n"
