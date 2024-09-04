@@ -13,16 +13,16 @@ public class User {
         this.roleId = roleId;
     }
 
-    public String getPassword() {
-        return password;
+    public String getEmail() {
+        return email;
     }
 
     public int getRoleId() {
         return roleId;
     }
 
-    public String getEmail() {
-        return email;
+    public String getPassword() {
+        return password;
     }
 }
 

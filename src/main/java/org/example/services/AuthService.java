@@ -7,19 +7,15 @@ import org.example.models.LoginRequest;
 import org.example.models.User;
 import org.example.utils.JwtUtils;
 import org.mindrot.jbcrypt.BCrypt;
-
-import java.security.Key;
 import java.sql.SQLException;
 
 public class AuthService {
 
     private static final int MAGIC_NUM_288 = 28800000;
     private final AuthDao authDao;
-    private final Key key;
 
-    public AuthService(final AuthDao authDao, final Key key) {
+    public AuthService(final AuthDao authDao) {
         this.authDao = authDao;
-        this.key = key;
     }
 
     public String login(final LoginRequest loginRequest)

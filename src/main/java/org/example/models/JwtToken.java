@@ -39,4 +39,5 @@ public class JwtToken implements Principal {
     public String getUserEmail() {
         return userEmail;
     }
+
 }
