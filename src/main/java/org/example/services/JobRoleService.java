@@ -7,7 +7,9 @@ import org.example.exceptions.ResultSetException;
 import org.example.mappers.JobRoleMapper;
 import org.example.models.JobRole;
 import org.example.models.JobRoleResponse;
+import org.example.models.RoleApplicationResponse;
 
+import javax.ws.rs.core.Response;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -29,5 +31,9 @@ public class JobRoleService {
             throw new DoesNotExistException(Entity.JOB_ROLE);
         }
         return jobRoleResponses;
+    }
+
+    public RoleApplicationResponse applyForRole(int jobRoleId, String userEmail) {
+        return jobRoleDao.applyForRole(jobRoleId, userEmail);
     }
 }

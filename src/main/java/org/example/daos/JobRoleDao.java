@@ -2,6 +2,7 @@ package org.example.daos;
 
 import org.example.exceptions.ResultSetException;
 import org.example.models.JobRole;
+import org.example.models.RoleApplicationResponse;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -48,5 +49,11 @@ public class JobRoleDao {
         }
 
         jobRoles.add(jobRole);
+    }
+
+    public RoleApplicationResponse applyForRole(int jobRoleId, String userEmail) {
+        //TODO:Save to AWS bucket or pass confirmation about successful sending and proceed to joining table
+        //If saved to bucket proceed with
+        return new RoleApplicationResponse("success");
     }
 }

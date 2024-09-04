@@ -3,6 +3,7 @@ package org.example.controllers;
 import io.dropwizard.auth.Auth;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import io.swagger.annotations.Authorization;
@@ -83,14 +84,12 @@ public class JobRoleController {
             value = "Inform user if cv was sent successfully",
             authorizations = @Authorization(value = HttpHeaders.AUTHORIZATION),
             response = RoleApplicationResponse.class,
-            responseContainer = "List",
             produces = "application/json")
     @Path("/{jobRoleId}/applications")
-    public Response applyForRole(@PathParam("jobRoleId")final int jobRoleId, @Auth final JwtToken token, Object fileToWrite){
+    public Response applyForRole(@PathParam("jobRoleId")final int jobRoleId, Object fileToWrite, @ApiParam(hidden = true) @Auth final JwtToken token){
         //Object to be changed to proper Type
         String userEmail = token.getUserEmail();
-        System.out.println("User email is: " + userEmail);
-        return Response.ok().entity(new RoleApplicationResponse("Successfully sent with email: " + userEmail)).build();
-        //return jobRoleService.applyForRole(jobRoleId, userEmail);
+        //return Response.ok().entity(jobRoleService.applyForRole(jobRoleId, userEmail)).build();
+        return Response.ok().entity(new RoleApplicationResponse("success with email: " + userEmail)).build();
     }
 }
