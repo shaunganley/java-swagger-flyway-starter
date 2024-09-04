@@ -37,14 +37,14 @@ public class JobRoleIntegrationTest {
     @Test
     public void getJobRoleById_shouldReturnJobRole_whenJobRoleExists() {
         Client client = APP.client();
-        int jobRoleId = 1;
 
-        JobRole response = client
-                .target(BASE_URL + "/job-roles/" + jobRoleId)
+        Response response = client
+                .target(BASE_URL + "/job-roles/1")
                 .request()
-                .get(JobRole.class);
+                .get();
 
-        Assertions.assertEquals(200, response);
+        Assertions.assertEquals(200, response.getStatus());
+        Assertions.assertEquals(1, response.readEntity(JobRole.class).getJobRoleId());
 
     }
 

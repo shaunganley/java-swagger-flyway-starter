@@ -71,7 +71,7 @@ public class JobRoleControllerTest {
 
         int jobRoleId = 1;
         Date closingDate = new Date(System.currentTimeMillis());
-        JobRoleDetailedResponse expectedJobRole = new JobRoleDetailedResponse("Software Engineer",
+        JobRoleDetailedResponse expectedJobRole = new JobRoleDetailedResponse(1, "Software Engineer",
                 "Develops, tests, and maintains software applications.",
                 "Design, develop, and maintain software applications.",
                 "https://sharepoint.com/job/software-engineer", "New York",

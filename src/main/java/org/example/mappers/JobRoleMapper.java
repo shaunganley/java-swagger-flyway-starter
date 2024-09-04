@@ -27,6 +27,7 @@ public final class JobRoleMapper {
     public static JobRoleDetailedResponse mapJobRoleToJobRoleDetailedResponse(
             final JobRoleDetailedResponse jobRole) {
         return new JobRoleDetailedResponse(
+                jobRole.getJobRoleId(),
                 jobRole.getRoleName(),
                 jobRole.getDescription(),
                 jobRole.getResponsibilities(),
