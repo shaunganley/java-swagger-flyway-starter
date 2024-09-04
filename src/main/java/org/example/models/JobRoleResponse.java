@@ -3,20 +3,32 @@ package org.example.models;
 import java.sql.Date;
 
 public class JobRoleResponse {
+
+
+    private int jobRoleId;
     private String roleName;
     private String location;
     private Date closingDate;
     private String capabilityName;
     private String bandName;
 
-    public JobRoleResponse(final String roleName, final String location,
+    public JobRoleResponse(final int jobRoleId, final String roleName, final String location,
                            final String capabilityName,
                            final String bandName, final Date closingDate) {
+        this.jobRoleId = jobRoleId;
         this.roleName = roleName;
         this.location = location;
         this.capabilityName = capabilityName;
         this.bandName = bandName;
         this.closingDate = closingDate;
+    }
+
+    public int getJobRoleId() {
+        return jobRoleId;
+    }
+
+    public void setJobRoleId(int jobRoleId) {
+        this.jobRoleId = jobRoleId;
     }
 
     public String getLocation() {

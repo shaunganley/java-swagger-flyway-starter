@@ -32,13 +32,13 @@ public class JobRoleServiceTest {
         long millis=System.currentTimeMillis();
         Date closingDate = new Date(millis);
 
-        JobRole jobRole1 = new JobRole("SE", "Derry",
+        JobRole jobRole1 = new JobRole(1,"SE", "Derry",
                 "Eng", "Band 4", closingDate);
 
         List<JobRole> jobRoles = new ArrayList<>();
         jobRoles.add(jobRole1);
 
-        JobRoleResponse jobRoleResponse = new JobRoleResponse("SE", "Derry",
+        JobRoleResponse jobRoleResponse = new JobRoleResponse(1,"SE", "Derry",
                 "Eng", "Band 4", closingDate);
 
         List<JobRoleResponse> expectedResponse = new ArrayList<>();

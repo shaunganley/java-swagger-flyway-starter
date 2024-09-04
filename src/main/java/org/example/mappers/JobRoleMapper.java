@@ -16,6 +16,7 @@ public final class JobRoleMapper {
             final List<JobRole> jobRoles) {
         return jobRoles.stream()
                 .map(jobRole -> new JobRoleResponse(
+                        jobRole.getJobRoleId(),
                         jobRole.getRoleName(),
                         jobRole.getLocation(),
                         jobRole.getCapabilityName(),
@@ -25,7 +26,7 @@ public final class JobRoleMapper {
     }
 
     public static JobRoleDetailedResponse mapJobRoleToJobRoleDetailedResponse(
-            final JobRoleDetailedResponse jobRole) {
+            final JobRole jobRole) {
         return new JobRoleDetailedResponse(
                 jobRole.getJobRoleId(),
                 jobRole.getRoleName(),

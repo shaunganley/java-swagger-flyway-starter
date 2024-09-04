@@ -15,9 +15,10 @@ public class JobRole {
     private String sharepointUrl;
     private int numberOfOpenPositions;
 
-    public JobRole(final String roleName, final String location,
+    public JobRole(final int jobRoleId, final String roleName, final String location,
                    final String capabilityName,
                    final String bandName, final Date closingDate) {
+        this.jobRoleId = jobRoleId;
         this.roleName = roleName;
         this.location = location;
         this.capabilityName = capabilityName;
@@ -25,13 +26,14 @@ public class JobRole {
         this.closingDate = closingDate;
     }
 
-    public JobRole(final String roleName, final String description,
+    public JobRole(final int jobRoleId, final String roleName, final String description,
                    final String responsibilities,
                    final String sharepointUrl, final String location,
                    final String capabilityName,
                    final String bandName, final Date closingDate,
                    final String statusName,
                    final int numberOfOpenPositions) {
+        this.jobRoleId = jobRoleId;
         this.roleName = roleName;
         this.description = description;
         this.responsibilities = responsibilities;

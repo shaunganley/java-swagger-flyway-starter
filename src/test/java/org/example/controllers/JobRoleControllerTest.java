@@ -30,7 +30,7 @@ public class JobRoleControllerTest {
         long millis = System.currentTimeMillis();
         Date closingDate = new Date(millis);
 
-        JobRoleResponse jobRoleResponse = new JobRoleResponse("SE", "Derry",
+        JobRoleResponse jobRoleResponse = new JobRoleResponse(1,"SE", "Derry",
                 "Eng", "Band 4", closingDate);
 
         List<JobRoleResponse> jobRoleResponses = new ArrayList<>();

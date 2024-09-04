@@ -36,6 +36,7 @@ public class JobRoleDao {
             if (resultSet != null) {
                 while (resultSet.next()) {
                     jobRoles.add(new JobRole(
+                            resultSet.getInt("job_roles.getJobRoleId"),
                             resultSet.getString("job_roles.roleName"),
                             resultSet.getString("job_roles.location"),
                             resultSet.getString("capability.capabilityName"),
@@ -47,7 +48,7 @@ public class JobRoleDao {
         return jobRoles;
     }
 
-    public JobRoleDetailedResponse getJobRoleById(final int id)
+    public JobRole getJobRoleById(final int id)
             throws SQLException {
 
         try (Connection connection = DatabaseConnector.getConnection()) {
@@ -101,7 +102,7 @@ public class JobRoleDao {
             ResultSet resultSet = statement.executeQuery();
             if (resultSet != null) {
                 if (resultSet.next()) {
-                    return new JobRoleDetailedResponse(
+                    return new JobRole(
                             resultSet.getInt(1),
                             resultSet.getString("job_roles.roleName"),
                             resultSet.getString("job_roles.description"),
