@@ -49,21 +49,21 @@ public class JobRoleController {
             produces = "application/json")
     @ApiResponses({
             @ApiResponse(code = OK, message = "Job roles listed successfully", response = JobRole.class),
-            @ApiResponse(code = INTERNAL_SERVER_ERROR, message = "getAllJobRoles failed, SQL Exception"),
-            @ApiResponse(code = NOT_FOUND, message = "getAllJobRoles failed, DoesNotExistException")
+            @ApiResponse(code = INTERNAL_SERVER_ERROR, message = "getting all job roles failed due to SQL Exception"),
+            @ApiResponse(code = NOT_FOUND, message = "getting all job roles failed due to DoesNotExistException")
     })
     public Response getAllJobRoles() {
         LOGGER.info("Get all job roles request received");
         try {
             return Response.ok().entity(jobRoleService.getAllJobRoles()).build();
         } catch (SQLException e) {
-            LOGGER.error("getAllJobRoles failed, SQL Exception\n" + e.getMessage());
+            LOGGER.error("getting all job roles failed due to SQL Exception\n" + e.getMessage());
             return Response.serverError().build();
         } catch (DoesNotExistException | NullPointerException e) {
-            LOGGER.error("getAllJobRoles failed, DoesNotExistException\n" + e.getMessage());
+            LOGGER.error("getting all job roles failed due to DoesNotExistException\n" + e.getMessage());
             return Response.status(Response.Status.NOT_FOUND).entity(e.getMessage()).build();
         } catch (ResultSetException e) {
-            LOGGER.error("getAllJobRoles failed, ResultSetException\n" + e.getMessage());
+            LOGGER.error("getting all job roles failed due to ResultSetException\n" + e.getMessage());
             return Response.serverError().build();
         }
     }
@@ -78,8 +78,8 @@ public class JobRoleController {
             produces = "application/json")
     @ApiResponses({
             @ApiResponse(code = OK, message = "Job roles listed successfully", response = JobRole.class),
-            @ApiResponse(code = INTERNAL_SERVER_ERROR, message = "getAllJobRoles failed, SQL Exception"),
-            @ApiResponse(code = NOT_FOUND, message = "getAllJobRoles failed, DoesNotExistException")
+            @ApiResponse(code = INTERNAL_SERVER_ERROR, message = "getting filtered job roles failed due to SQL exception"),
+            @ApiResponse(code = NOT_FOUND, message = "getting filtered job roles failed due to DoesNotExistExceptio")
     })
     @Path("/filter")
     public Response getFilteredJobRoles(final @BeanParam JobRoleFilteredRequest jobRoleFilteredRequest) {
@@ -90,10 +90,10 @@ public class JobRoleController {
             LOGGER.error("getting filtered job roles failed due to SQL exception\n" + e.getMessage());
             return Response.serverError().build();
         } catch (DoesNotExistException | NullPointerException e) {
-            LOGGER.error("getFilteredJobRoles failed, DoesNotExistException\n" + e.getMessage());
+            LOGGER.error("getting filtered job roles failed due to DoesNotExistException\n" + e.getMessage());
             return Response.status(Response.Status.NOT_FOUND).entity(e.getMessage()).build();
         } catch (ResultSetException e) {
-            LOGGER.error("getFilteredJobRoles failed, ResultSetException\n" + e.getMessage());
+            LOGGER.error("getting filtered job roles failed due to ResultSetException\n" + e.getMessage());
             return Response.serverError().build();
         }
     }
