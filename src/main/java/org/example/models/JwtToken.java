@@ -6,9 +6,12 @@ import java.security.Principal;
 public class JwtToken implements Principal {
 
     private UserRole userRole;
+    private String userEmail;
 
-    public JwtToken(final UserRole userRole) {
+    public JwtToken(final UserRole userRole,
+                    final String userEmail) {
         setUserRole(userRole);
+        setUserEmail(userEmail);
     }
 
     @Override
@@ -29,5 +32,11 @@ public class JwtToken implements Principal {
         this.userRole = userRole;
     }
 
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
+    }
 
+    public String getUserEmail() {
+        return userEmail;
+    }
 }

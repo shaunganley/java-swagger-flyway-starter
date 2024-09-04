@@ -1,5 +1,6 @@
 package org.example.controllers;
 
+import io.dropwizard.auth.Auth;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -11,11 +12,15 @@ import org.example.exceptions.DoesNotExistException;
 import org.example.exceptions.ResultSetException;
 import org.example.models.JobRole;
 import org.example.models.JobRoleResponse;
+import org.example.models.JwtToken;
+import org.example.models.RoleApplicationResponse;
 import org.example.models.UserRole;
 import org.example.services.JobRoleService;
 
 import javax.annotation.security.RolesAllowed;
+import javax.print.attribute.standard.Media;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -71,9 +76,21 @@ public class JobRoleController {
         }
     }
 
-    public Response applyForRole(@PathParam("id")final int jobRoleId){
-        //how to get user email?
-
-        return jobRoleService.applyForRole(jobRoleId, userEmail);
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    @RolesAllowed({UserRole.USER})
+    @ApiOperation(
+            value = "Inform user if cv was sent successfully",
+            authorizations = @Authorization(value = HttpHeaders.AUTHORIZATION),
+            response = RoleApplicationResponse.class,
+            responseContainer = "List",
+            produces = "application/json")
+    @Path("/{jobRoleId}/applications")
+    public Response applyForRole(@PathParam("jobRoleId")final int jobRoleId, @Auth final JwtToken token, Object fileToWrite){
+        //Object to be changed to proper Type
+        String userEmail = token.getUserEmail();
+        System.out.println("User email is: " + userEmail);
+        return Response.ok().entity(new RoleApplicationResponse("Successfully sent with email: " + userEmail)).build();
+        //return jobRoleService.applyForRole(jobRoleId, userEmail);
     }
 }

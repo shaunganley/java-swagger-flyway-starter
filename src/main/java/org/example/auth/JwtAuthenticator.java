@@ -2,6 +2,7 @@ package org.example.auth;
 
 import io.dropwizard.auth.AuthenticationException;
 import io.dropwizard.auth.Authenticator;
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import org.example.models.JwtToken;
 import org.example.models.UserPrincipal;
@@ -25,36 +26,19 @@ public class JwtAuthenticator implements Authenticator<String, JwtToken> {
     public Optional<JwtToken> authenticate(final String token)
             throws AuthenticationException {
         try {
-            Integer roleId = Jwts.parser()
+            Claims claims = Jwts.parser()
                     .setSigningKey(key)
                     .build()
                     .parseSignedClaims(token)
-                    .getPayload()
-                    .get("role_id", Integer.class);
+                    .getPayload();
 
-            JwtToken jwtToken = new JwtToken(new UserRole(roleId));
+            Integer roleId = claims.get("role_id", Integer.class);
+            String userEmail = claims.get("email", String.class);
+
+            JwtToken jwtToken = new JwtToken(new UserRole(roleId), userEmail);
 
             return Optional.of(jwtToken);
         } catch (Exception e) {
-            return Optional.empty();
-        }
-    }
-
-
-    public Optional<UserPrincipal> getSubject(String jwtToken) throws AuthenticationException {
-        // Validate and parse the JWT token
-        // You can use a library like JJWT or Nimbus JOSE + JWT
-
-        // Example using JJWT
-        try {
-            String email = Jwts.parser()
-                    .setSigningKey("SECRET_KEY") // Use your secret key
-                    .parseSignedClaims(jwtToken)
-                    .getBody()
-                    .getSubject(); // Assuming the email is stored as the subject
-
-            return Optional.of(new UserPrincipal(email));
-        } catch (JwtException e) {
             return Optional.empty();
         }
     }
