@@ -87,7 +87,7 @@ public class JobRoleController {
         try {
             return Response.ok().entity(jobRoleService.getFilteredJobRoles(jobRoleFilteredRequest)).build();
         } catch (SQLException e) {
-            LOGGER.error("getFilteredJobRoles failed, SQL Exception\n" + e.getMessage());
+            LOGGER.error("getting filtered job roles failed due to SQL exception\n" + e.getMessage());
             return Response.serverError().build();
         } catch (DoesNotExistException | NullPointerException e) {
             LOGGER.error("getFilteredJobRoles failed, DoesNotExistException\n" + e.getMessage());

@@ -17,7 +17,7 @@ public class JobRoleFilteredRequest {
     @ApiModelProperty(
             value = "Role's location, defined by ENUM value",
             required = true,
-            example = "[Gdańsk]")
+            example = "[Gdansk]")
     @QueryParam("jobRoleLocation")
     private List<String> jobRoleLocation;
 

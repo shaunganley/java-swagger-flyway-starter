@@ -64,9 +64,7 @@ class JobRoleServicesTest {
 
     @Test
     public void testGetFilteredJobRolesEmptyList() throws SQLException, ResultSetException {
-        // Given
         when(jobRoleDao.getFilteredJobRoles(any())).thenReturn(Collections.emptyList());
-        // When & Then
         assertThrows(DoesNotExistException.class, () ->  jobRoleService.getFilteredJobRoles(
                 new JobRoleFilteredRequest()));
   }

@@ -21,7 +21,7 @@ public class JobRole {
     @ApiModelProperty(
             value = "Role's location, defined by ENUM value",
             required = true,
-            example = "Gdańsk")
+            example = "Gdansk")
     private String jobRoleLocation;
 
     @ApiModelProperty(
