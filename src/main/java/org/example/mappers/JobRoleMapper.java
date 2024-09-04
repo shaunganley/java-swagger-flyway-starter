@@ -24,21 +24,19 @@ public final class JobRoleMapper {
                 .collect(Collectors.toList());
     }
 
-    public static List<JobRoleDetailedResponse> mapJobRoleListToJobRoleDetailResponseList(
-            final List<JobRole> jobRoles) {
-        return jobRoles.stream()
-                .map(jobRole -> new JobRoleDetailedResponse(
-                        jobRole.getRoleName(),
-                        jobRole.getDescription(),
-                        jobRole.getResponsibilities(),
-                        jobRole.getSharepointUrl(),
-                        jobRole.getLocation(),
-                        jobRole.getCapabilityName(),
-                        jobRole.getBandName(),
-                        jobRole.getClosingDate(),
-                        jobRole.getStatusName(),
-                        jobRole.getNumberOfOpenPositions()))
-                .collect(Collectors.toList());
+    public static JobRoleDetailedResponse mapJobRoleToJobRoleDetailedResponse(
+            final JobRoleDetailedResponse jobRole) {
+        return new JobRoleDetailedResponse(
+                jobRole.getRoleName(),
+                jobRole.getDescription(),
+                jobRole.getResponsibilities(),
+                jobRole.getSharepointUrl(),
+                jobRole.getLocation(),
+                jobRole.getCapabilityName(),
+                jobRole.getBandName(),
+                jobRole.getClosingDate(),
+                jobRole.getStatusName(),
+                jobRole.getNumberOfOpenPositions());
     }
 
 }

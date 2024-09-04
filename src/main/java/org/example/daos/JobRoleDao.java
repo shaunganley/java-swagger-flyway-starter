@@ -1,6 +1,7 @@
 package org.example.daos;
 
 import org.example.models.JobRole;
+import org.example.models.JobRoleDetailedResponse;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -46,7 +47,7 @@ public class JobRoleDao {
         return jobRoles;
     }
 
-    public JobRole getJobRoleById(final int id)
+    public JobRoleDetailedResponse getJobRoleById(final int id)
             throws SQLException {
 
         try (Connection connection = DatabaseConnector.getConnection()) {
@@ -79,7 +80,9 @@ public class JobRoleDao {
                     +
                     "JOIN "
                     +
-                    "capability ON job_roles.capabilityId = capability.capabilityId "
+                    "capability ON job_roles.capabilityId = "
+                    +
+                    "capability.capabilityId "
                     +
                     "JOIN "
                     +
@@ -97,8 +100,9 @@ public class JobRoleDao {
             statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet != null) {
-                while (resultSet.next()) {
-                    return new JobRole(
+                if (resultSet.next()) {
+                    return new JobRoleDetailedResponse(
+                            resultSet.getInt(1),
                             resultSet.getString("job_roles.roleName"),
                             resultSet.getString("job_roles.description"),
                             resultSet.getString("job_roles.responsibilities"),

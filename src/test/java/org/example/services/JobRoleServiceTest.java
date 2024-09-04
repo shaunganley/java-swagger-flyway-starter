@@ -1,8 +1,9 @@
-package org.example.service;
+package org.example.services;
 import org.example.daos.JobRoleDao;
+import org.example.exception.DoesNotExistException;
 import org.example.models.JobRole;
+import org.example.models.JobRoleDetailedResponse;
 import org.example.models.JobRoleResponse;
-import org.example.services.JobRoleService;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -14,6 +15,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @ExtendWith(MockitoExtension.class)
@@ -76,6 +79,52 @@ public class JobRoleServiceTest {
 
         assertThrows(SQLException.class,
                 () -> jobRoleService.getOpenJobRoles());
+
+    }
+
+    @Test
+    public void getJobRoleById_shouldReturnJobRole() throws SQLException, DoesNotExistException {
+
+        long millis=System.currentTimeMillis();
+        Date closingDate = new Date(millis);
+        // Arrange
+        int jobRoleId = 1;
+        JobRoleDetailedResponse expectedJobRole = new JobRoleDetailedResponse("Software Engineer", "Develops, tests, and maintains software applications.", "Design, develop, and maintain software applications.", "https://sharepoint.com/job/software-engineer", "New York", "Software Development", "Senior", closingDate, "Open", 1);
+        // Mock the behavior of the DAO
+        Mockito.when(jobRoleDao.getJobRoleById(jobRoleId)).thenReturn(expectedJobRole);
+
+        // Act
+        JobRoleDetailedResponse actualJobRole = jobRoleService.getJobRoleById(jobRoleId);
+
+        // Assert
+        Assert.assertNotNull(actualJobRole);
+        assertEquals(expectedJobRole.getRoleName(), actualJobRole.getRoleName());
+        assertEquals(expectedJobRole.getLocation(), actualJobRole.getLocation());
+        assertEquals(expectedJobRole.getDescription(), actualJobRole.getDescription());
+        assertEquals(expectedJobRole.getResponsibilities(), actualJobRole.getResponsibilities());
+        assertEquals(expectedJobRole.getSharepointUrl(), actualJobRole.getSharepointUrl());
+        assertEquals(expectedJobRole.getNumberOfOpenPositions(), actualJobRole.getNumberOfOpenPositions());
+    }
+
+    @Test
+    public void getJobRoleById_shouldThrowSqlException_whenDaoThrowsSqlException() throws SQLException{
+
+        Mockito.when(jobRoleDao.getJobRoleById(1)).thenThrow(SQLException.class);
+
+        assertThrows(SQLException.class,
+                () -> jobRoleService.getJobRoleById(1));
+
+    }
+
+    @Test
+    public void getJobRoleById_shouldReturnNull_whenJobRoleDoesNotExist() throws SQLException{
+
+        int nonExistentJobRoleId = 999;
+
+        Mockito.when(jobRoleDao.getJobRoleById(nonExistentJobRoleId)).thenReturn(null);
+
+        assertThrows(DoesNotExistException.class,
+                () -> jobRoleService.getJobRoleById(nonExistentJobRoleId));
 
     }
 

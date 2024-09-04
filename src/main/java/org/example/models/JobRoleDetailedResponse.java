@@ -3,6 +3,9 @@ package org.example.models;
 import java.sql.Date;
 
 public class JobRoleDetailedResponse {
+
+
+    private int jobRoleId;
     private String roleName;
     private String statusName;
     private String description;
@@ -14,7 +17,8 @@ public class JobRoleDetailedResponse {
     private String bandName;
     private Date closingDate;
 
-    public JobRoleDetailedResponse(final String roleName,
+    public JobRoleDetailedResponse(final int jobRoleId,
+                                   final String roleName,
                                    final String description,
                                    final String responsibilities,
                                    final String sharepointUrl,
@@ -34,6 +38,14 @@ public class JobRoleDetailedResponse {
         this.closingDate = closingDate;
         this.statusName = statusName;
         this.numberOfOpenPositions = numberOfOpenPositions;
+    }
+
+    public int getJobRoleId() {
+        return jobRoleId;
+    }
+
+    public void setJobRoleId(final int jobRoleId) {
+        this.jobRoleId = jobRoleId;
     }
 
     public String getRoleName() {

@@ -1,6 +1,8 @@
 package org.example.controllers;
 
 import io.swagger.annotations.Api;
+import org.eclipse.jetty.http.HttpStatus;
+import org.example.exception.DoesNotExistException;
 import org.example.services.JobRoleService;
 
 import javax.ws.rs.GET;
@@ -42,6 +44,8 @@ public class JobRoleController {
                     jobRoleService.getJobRoleById(id)).build();
         } catch (SQLException e) {
             return Response.serverError().build();
+        } catch (DoesNotExistException e) {
+            return Response.status(HttpStatus.NOT_FOUND_404).build();
         }
     }
 }
