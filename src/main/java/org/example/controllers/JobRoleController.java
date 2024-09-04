@@ -4,7 +4,6 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.Authorization;
 import org.example.models.JobRoleResponse;
-import org.example.models.UserRole;
 import org.example.services.JobRoleService;
 
 import javax.annotation.security.RolesAllowed;
