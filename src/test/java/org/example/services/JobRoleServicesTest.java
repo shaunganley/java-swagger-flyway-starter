@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static org.example.utils.Utils.compareLists;
+import static org.example.utils.Utils.assertEqualLists;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
@@ -44,7 +44,7 @@ class JobRoleServicesTest {
                 new JobRoleResponse("test", "Belfast", "testCapability", "testBand", Date.valueOf("2000-10-10"), "open")
         );
         var result = jobRoleService.getAllJobRoles();
-        compareLists(expected, result);
+        assertEqualLists(expected, result);
 
     }
 
@@ -89,7 +89,6 @@ class JobRoleServicesTest {
                 new JobRoleResponse("test", "Belfast", "testCapability", "testBand", Date.valueOf("2000-10-10"), "open")
         );
         var result = jobRoleService.getFilteredJobRoles(jobRoleFilteredRequest);
-        compareLists(expected, result);
-
+        assertEqualLists(expected, result);
     }
 }
