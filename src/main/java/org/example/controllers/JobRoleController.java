@@ -80,15 +80,18 @@ public class JobRoleController {
     @ApiResponses({
             @ApiResponse(code = OK, message = "Job roles listed successfully", response = JobRoleApplication.class),
             @ApiResponse(code = INTERNAL_SERVER_ERROR, message = "getUserAllJobApplications failed, SQL Exception"),
-//            @ApiResponse(code = NOT_FOUND, message = "getUserAllJobApplications failed, DoesNotExistException")
+            @ApiResponse(code = NOT_FOUND, message = "getUserAllJobApplications failed, DoesNotExistException")
     })
-    public Response getUserAllJobApplications(@PathParam("id") int userId)
-            throws SQLException {
+    public Response getUserAllJobApplications(@PathParam("id") int userId) {
+        LOGGER.info("Get all user job applications request received");
         try {
             return Response.ok().entity(jobRoleService.getAllUserApplications(userId)).build();
         } catch(SQLException e) {
-            e.printStackTrace();
+            LOGGER.error("getUserAllJobApplications failed, SQLException\n" + e.getMessage());
             return Response.serverError().build();
+        } catch (DoesNotExistException e) {
+            LOGGER.error("getUserAllJobApplications failed, DoesNotExistException\n" + e.getMessage());
+            return Response.status(Response.Status.NOT_FOUND).entity(e.getMessage()).build();
         }
     }
 }

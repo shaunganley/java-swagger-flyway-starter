@@ -32,7 +32,12 @@ public class JobRoleService {
         return jobRoleResponses;
     }
 
-    public List<JobRoleApplication> getAllUserApplications(int userId) throws SQLException {
-        return jobRoleDao.getUserJobRoleApplications(userId);
+    public List<JobRoleApplication> getAllUserApplications(int userId) throws SQLException, DoesNotExistException {
+        List<JobRoleApplication> jobRoleApplications = jobRoleDao.getUserJobRoleApplications(userId);
+        if(jobRoleApplications.isEmpty()) {
+            throw new DoesNotExistException(Entity.USER);
+        }
+
+        return jobRoleApplications;
     }
 }
