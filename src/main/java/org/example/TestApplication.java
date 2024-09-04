@@ -61,7 +61,7 @@ public class TestApplication extends Application<TestConfiguration> {
 
         environment.jersey()
                 .register(new AuthController(
-                        new AuthService(new AuthDao(), jwtSecretKey)));
+                        new AuthService(new AuthDao())));
 
         environment.jersey()
                 .register(new JobRoleController(new JobRoleService(new JobRoleDao())));

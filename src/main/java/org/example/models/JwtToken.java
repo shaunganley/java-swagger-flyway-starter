@@ -28,6 +28,4 @@ public class JwtToken implements Principal {
     public void setUserRole(final UserRole userRole) {
         this.userRole = userRole;
     }
-
-
 }
