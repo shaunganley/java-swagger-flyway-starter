@@ -107,9 +107,13 @@ public class JobRoleResponse {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+    public boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         JobRoleResponse that = (JobRoleResponse) o;
         return Objects.equals(roleName, that.roleName)
                 && Objects.equals(jobRoleLocation, that.jobRoleLocation)

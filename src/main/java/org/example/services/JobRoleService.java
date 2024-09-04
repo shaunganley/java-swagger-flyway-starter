@@ -11,7 +11,6 @@ import org.example.models.JobRoleResponse;
 
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Optional;
 
 public class JobRoleService {
 
@@ -34,7 +33,8 @@ public class JobRoleService {
     }
 
     public List<JobRoleResponse> getFilteredJobRoles(
-            JobRoleFilteredRequest jobRoleFilteredRequest) throws SQLException, DoesNotExistException, ResultSetException {
+            final JobRoleFilteredRequest jobRoleFilteredRequest)
+            throws SQLException, DoesNotExistException, ResultSetException {
         List<JobRoleResponse> jobRoleResponses = JobRoleMapper.toResponse(jobRoleDao.getFilteredJobRoles(
                 jobRoleFilteredRequest));
         if (jobRoleResponses.isEmpty()) {

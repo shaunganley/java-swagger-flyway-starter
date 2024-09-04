@@ -34,7 +34,7 @@ public class JobRoleDao {
     }
 
     public List<JobRole> getFilteredJobRoles(
-            JobRoleFilteredRequest jobRequest)
+            final JobRoleFilteredRequest jobRequest)
             throws SQLException, ResultSetException {
         List<JobRole> jobRoles = new ArrayList<>();
         StringBuilder query = new StringBuilder(baseQuery());
@@ -54,9 +54,9 @@ public class JobRoleDao {
                         + " WHERE statusId = " + JobRoleStatus.OPEN.getStatus();
     }
 
-    private void applyFiltersToQuery(JobRoleFilteredRequest jobRequest,
-                                     StringBuilder query,
-                                     List<Object> parameters) {
+    private void applyFiltersToQuery(final JobRoleFilteredRequest jobRequest,
+                                     final StringBuilder query,
+                                     final List<Object> parameters) {
         if (jobRequest.getRoleName() != null && !jobRequest.getRoleName().isBlank()) {
             query.append(" AND roleName LIKE ?");
             parameters.add(jobRequest.getLikeRoleName());
@@ -75,8 +75,8 @@ public class JobRoleDao {
 
     }
 
-    private void executeFilteredJobQuery(StringBuilder query, List<Object> parameters,
-                                         List<JobRole> jobRoles)
+    private void executeFilteredJobQuery(final StringBuilder query, final List<Object> parameters,
+                                         final List<JobRole> jobRoles)
             throws SQLException, ResultSetException {
         try (Connection connection = DatabaseConnector.getConnection()) {
             try (PreparedStatement statement = connection.prepareStatement(
@@ -102,8 +102,8 @@ public class JobRoleDao {
         }
     }
 
-    private <T> void applyFilter(List<T> values, String key,
-                                 StringBuilder query, List<Object> parameters) {
+    private <T> void applyFilter(final List<T> values, final String key,
+                                 final StringBuilder query, final List<Object> parameters) {
         if (isPresent(values)) {
             query.append(" AND ").append(key).append(" IN (");
             query.append(String.join(", ", Collections.nCopies(
@@ -114,7 +114,7 @@ public class JobRoleDao {
     }
 
 
-    private <E> boolean isPresent(List<E> list) {
+    private <E> boolean isPresent(final List<E> list) {
         return list != null && !list.isEmpty();
     }
 

@@ -6,7 +6,7 @@ public enum JobRoleStatus {
 
     private final int status;
 
-    JobRoleStatus(int status) {
+    JobRoleStatus(final int status) {
         this.status = status;
     }
 

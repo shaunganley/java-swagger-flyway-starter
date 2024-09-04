@@ -47,10 +47,10 @@ public class JobRoleFilteredRequest {
     }
 
     public String getLikeRoleName() {
-        return "%"+roleName+"%";
+        return "%" + roleName + "%";
     }
 
-    public void setRoleName(String roleName) {
+    public void setRoleName(final String roleName) {
         this.roleName = roleName;
     }
 
@@ -58,7 +58,7 @@ public class JobRoleFilteredRequest {
         return jobRoleLocation;
     }
 
-    public void setJobRoleLocation(List<String> jobRoleLocation) {
+    public void setJobRoleLocation(final List<String> jobRoleLocation) {
         this.jobRoleLocation = jobRoleLocation;
     }
 
@@ -66,7 +66,7 @@ public class JobRoleFilteredRequest {
         return capabilityId;
     }
 
-    public void setCapabilityId(List<Integer> capabilityId) {
+    public void setCapabilityId(final List<Integer> capabilityId) {
         this.capabilityId = capabilityId;
     }
 
@@ -74,7 +74,7 @@ public class JobRoleFilteredRequest {
         return bandId;
     }
 
-    public void setBandId(List<Integer> bandId) {
+    public void setBandId(final List<Integer> bandId) {
         this.bandId = bandId;
     }
 
@@ -82,7 +82,7 @@ public class JobRoleFilteredRequest {
         return closingDate;
     }
 
-    public void setClosingDate(Date closingDate) {
+    public void setClosingDate(final Date closingDate) {
         this.closingDate = closingDate;
     }
 }

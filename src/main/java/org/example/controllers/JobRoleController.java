@@ -82,7 +82,7 @@ public class JobRoleController {
             @ApiResponse(code = NOT_FOUND, message = "getAllJobRoles failed, DoesNotExistException")
     })
     @Path("/filter")
-    public Response getFilteredJobRoles(@BeanParam JobRoleFilteredRequest jobRoleFilteredRequest) {
+    public Response getFilteredJobRoles(final @BeanParam JobRoleFilteredRequest jobRoleFilteredRequest) {
         LOGGER.info("Get filtered job roles request received");
         try {
             return Response.ok().entity(jobRoleService.getFilteredJobRoles(jobRoleFilteredRequest)).build();
