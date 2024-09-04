@@ -76,7 +76,6 @@ public class JobRoleDao {
                 jobRoleApplications.add(jobRoleApplication);
             }
         }
-
         return jobRoleApplications;
 
     }

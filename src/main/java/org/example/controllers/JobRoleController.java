@@ -78,7 +78,7 @@ public class JobRoleController {
             responseContainer = "List",
             produces = "application/json")
     @ApiResponses({
-            @ApiResponse(code = OK, message = "Job roles listed successfully", response = JobRoleApplication.class),
+            @ApiResponse(code = OK, message = "User's job applications listed successfully", response = JobRoleApplication.class),
             @ApiResponse(code = INTERNAL_SERVER_ERROR, message = "getUserAllJobApplications failed, SQL Exception"),
             @ApiResponse(code = NOT_FOUND, message = "getUserAllJobApplications failed, DoesNotExistException")
     })

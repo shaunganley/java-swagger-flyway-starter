@@ -37,7 +37,6 @@ public class JobRoleService {
         if(jobRoleApplications.isEmpty()) {
             throw new DoesNotExistException(Entity.USER);
         }
-
         return jobRoleApplications;
     }
 }
