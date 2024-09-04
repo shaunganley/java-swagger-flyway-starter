@@ -1,4 +1,4 @@
-package com.kainos.ea.mapper;
+package org.example.mapper;
 
 import org.example.mappers.JobRoleMapper;
 import org.example.models.JobRole;
