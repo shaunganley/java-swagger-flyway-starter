@@ -1,5 +1,4 @@
 package org.example.daos;
-
 import org.example.exceptions.DatabaseConnectionException;
 import org.example.models.LoginRequest;
 import org.example.models.User;
@@ -12,8 +11,8 @@ import java.sql.SQLException;
 
 import static org.example.util.PasswordEncoder.getPasswordEncoder;
 
-public class AuthDao {
 
+public class AuthDao {
     public User getUser(final LoginRequest loginRequest)
             throws SQLException, DatabaseConnectionException {
         try (Connection connection = DatabaseConnector.getConnection()) {
@@ -25,8 +24,9 @@ public class AuthDao {
             statement.setString(1, loginRequest.getEmail());
 
             ResultSet resultSet = statement.executeQuery();
-            Argon2PasswordEncoder arg2SpringSecurity = getPasswordEncoder();
+
             while (resultSet.next()) {
+                Argon2PasswordEncoder arg2SpringSecurity = getPasswordEncoder();
                 String encodedPassword =
                         resultSet.getString("password");
                 if (
@@ -45,5 +45,4 @@ public class AuthDao {
         }
         return null;
     }
-
 }
