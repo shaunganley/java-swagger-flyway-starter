@@ -19,7 +19,7 @@
         <dropwizard.version>2.0.3</dropwizard.version>
         <spotless.version>2.43.0</spotless.version>
         <mainClass>org.example.TestApplication</mainClass>
-        <google-java-format.version>1.23.0</google-java-format.version>
+        <palantir-java-format.version>2.49.0</palantir-java-format.version>
     </properties>
 
     <dependencyManagement>
@@ -104,11 +104,6 @@
             <artifactId>junit-jupiter</artifactId>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>com.google.googlejavaformat</groupId>
-            <artifactId>google-java-format</artifactId>
-            <version>${google-java-format.version}</version>
-        </dependency>
     </dependencies>
 
     <build>
@@ -140,13 +135,9 @@
                         </formats>
                         <!-- define a language-specific format -->
                         <java>
-                            <!-- no need to specify files, inferred automatically, but you can if you want -->
-
-                            <!-- apply a specific flavor of google-java-format and reflow long strings -->
-                            <googleJavaFormat>
-                                <version>${google-java-format.version}</version>
-                                <style>AOSP</style>
-                            </googleJavaFormat>
+                            <palantirJavaFormat>
+                                <version>${palantir-java-format.version}</version>
+                            </palantirJavaFormat>
                         </java>
                     </configuration>
                     <executions>
