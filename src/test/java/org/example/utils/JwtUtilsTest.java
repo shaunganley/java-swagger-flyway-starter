@@ -12,7 +12,7 @@ final class JwtUtilsTest {
         var resultEmail = Jwts.parser().setSigningKey(JwtUtils.getSecretKey()).build().parseSignedClaims(result)
                 .getPayload().get("email", String.class);
         var resultRoleId = Jwts.parser().setSigningKey(JwtUtils.getSecretKey()).build().parseSignedClaims(result)
-                .getPayload().get("roleId", Integer.class);
+                .getPayload().get("role_id", Integer.class);
 
         assertEquals("siema@gmail.com", resultEmail);
         assertEquals(1, resultRoleId);

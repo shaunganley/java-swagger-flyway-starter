@@ -16,6 +16,10 @@ public class JwtAuthenticator implements Authenticator<String, JwtToken> {
         this.key = key;
     }
 
+    public Key getKey() {
+        return key;
+    }
+
     @Override
     public Optional<JwtToken> authenticate(final String token)
             throws AuthenticationException {

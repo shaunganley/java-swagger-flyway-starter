@@ -66,5 +66,4 @@ public class TestApplication extends Application<TestConfiguration> {
         environment.jersey()
                 .register(new JobRoleController(new JobRoleService(new JobRoleDao())));
     }
-
 }

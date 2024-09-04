@@ -19,7 +19,7 @@ public class AuthService {
     }
 
     public String login(final LoginRequest loginRequest)
-            throws SQLException, InvalidException  {
+            throws SQLException, InvalidException {
         User user = authDao.getUser(loginRequest);
 
         if (user == null) {
