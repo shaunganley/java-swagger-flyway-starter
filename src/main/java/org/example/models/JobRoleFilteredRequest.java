@@ -6,23 +6,23 @@ import java.util.List;
 import javax.ws.rs.QueryParam;
 
 public class JobRoleFilteredRequest {
-    @ApiModelProperty(value = "Job role's name", required = true, example = "Delivery manager")
+    @ApiModelProperty(value = "Job role's name", example = "Delivery manager")
     @QueryParam("roleName")
     private String roleName;
 
-    @ApiModelProperty(value = "Role's location, defined by ENUM value", required = true, example = "[Gdansk]")
+    @ApiModelProperty(value = "Role's location, defined by ENUM value", example = "[Gdansk]")
     @QueryParam("jobRoleLocation")
     private List<String> jobRoleLocation;
 
-    @ApiModelProperty(value = "Capability's name", required = true, example = "[1]")
+    @ApiModelProperty(value = "Capability's name", example = "[Cyber Security]")
     @QueryParam("capabilityName")
     private List<String> capabilityName;
 
-    @ApiModelProperty(value = "Band's name", required = true, example = "[1]")
+    @ApiModelProperty(value = "Band's name", example = "[Trainee]")
     @QueryParam("bandName")
     private List<String> bandName;
 
-    @ApiModelProperty(value = "Expire date of offer", required = true, example = "2024-12-30")
+    @ApiModelProperty(value = "Expire date of offer", example = "2024-12-30")
     @QueryParam("closingDate")
     private Date closingDate;
 
@@ -31,7 +31,7 @@ public class JobRoleFilteredRequest {
     }
 
     public String getLikeRoleName() {
-        return "%" + roleName + "%";
+        return roleName;
     }
 
     public void setRoleName(final String roleName) {
@@ -44,6 +44,10 @@ public class JobRoleFilteredRequest {
 
     public void setJobRoleLocation(final List<String> jobRoleLocation) {
         this.jobRoleLocation = jobRoleLocation;
+    }
+
+    public String getCommaSeparatedJobRoleLocation() {
+        return jobRoleLocation != null ? String.join(",", jobRoleLocation) : null;
     }
 
     public List<String> getCapabilityName() {

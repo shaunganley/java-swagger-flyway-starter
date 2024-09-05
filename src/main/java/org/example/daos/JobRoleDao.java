@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import org.example.exceptions.ResultSetException;
@@ -52,57 +53,73 @@ public class JobRoleDao {
                 + "WHERE statusName = 'open'";
     }
 
-    private void applyFiltersToQuery(
-            final JobRoleFilteredRequest jobRequest, final StringBuilder query, final List<Object> parameters) {
-        if (jobRequest.getRoleName() != null && !jobRequest.getRoleName().isBlank()) {
-            query.append(" AND roleName LIKE ?");
-            parameters.add(jobRequest.getLikeRoleName());
-        }
-        applyFilter(jobRequest.getJobRoleLocation(), "location", query, parameters);
-        applyFilter(jobRequest.getCapabilityName(), "capabilityName", query, parameters);
-        applyFilter(jobRequest.getBandName(), "bandName", query, parameters);
-        if (jobRequest.getClosingDate() != null) {
-            query.append(" AND closingDate < ?");
-            parameters.add(jobRequest.getClosingDate());
-        }
-
-        query.append(";");
-    }
-
     private void executeFilteredJobQuery(
             final StringBuilder query, final List<Object> parameters, final List<JobRole> jobRoles)
             throws SQLException, ResultSetException {
-        try (Connection connection = DatabaseConnector.getConnection()) {
-            try (PreparedStatement statement = connection.prepareStatement(query.toString())) {
-                for (int i = 0; i < parameters.size(); i++) {
-                    if (parameters.get(i) instanceof String) {
-                        statement.setString(i + 1, (String) parameters.get(i));
-                    } else if (parameters.get(i) instanceof Integer) {
-                        statement.setInt(i + 1, (Integer) parameters.get(i));
-                    } else if (parameters.get(i) instanceof java.sql.Date) {
-                        statement.setDate(i + 1, (java.sql.Date) parameters.get(i));
-                    } else {
-                        throw new IllegalArgumentException();
-                    }
-                }
-                System.out.println(statement);
-                ResultSet resultSet = statement.executeQuery();
+        try (Connection connection = DatabaseConnector.getConnection();
+                PreparedStatement statement = connection.prepareStatement(query.toString())) {
 
-                while (resultSet.next()) {
-                    addJobRoleFromResultSet(jobRoles, resultSet);
-                }
+            setParameters(statement, parameters);
+            System.out.println(statement);
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                addJobRoleFromResultSet(jobRoles, resultSet);
             }
         }
     }
 
-    private <T> void applyFilter(
-            final List<T> values, final String key, final StringBuilder query, final List<Object> parameters) {
-        if (isPresent(values)) {
-            query.append(" AND ").append(key).append(" IN (");
-            query.append(String.join(", ", Collections.nCopies(values.size(), "?")));
-            query.append(")");
-            parameters.addAll(values);
+    private void setParameters(PreparedStatement statement, List<Object> parameters) throws SQLException {
+        for (int i = 0; i < parameters.size(); i++) {
+            Object param = parameters.get(i);
+            if (param instanceof String) {
+                statement.setString(i + 1, (String) param);
+            } else if (param instanceof Integer) {
+                statement.setInt(i + 1, (Integer) param);
+            } else if (param instanceof java.sql.Date) {
+                statement.setDate(i + 1, (java.sql.Date) param);
+            } else {
+                throw new IllegalArgumentException(
+                        "Unsupported parameter type: " + param.getClass().getName());
+            }
         }
+    }
+
+    private void appendFilter(StringBuilder query, List<Object> parameters, String key, Object value) {
+        if (value != null && !value.toString().isBlank()) {
+            if (value instanceof String && ((String) value).contains(",")) {
+                // Handle comma-separated values
+                query.append(" AND ").append(key).append(" IN (");
+                String[] values = ((String) value).split(",");
+                query.append(String.join(", ", Collections.nCopies(values.length, "?")));
+                query.append(")");
+                parameters.addAll(Arrays.asList(values));
+            } else if (value instanceof List) {
+                // Handle list of values
+                List<?> values = (List<?>) value;
+                if (!values.isEmpty()) {
+                    query.append(" AND ").append(key).append(" IN (");
+                    query.append(String.join(", ", Collections.nCopies(values.size(), "?")));
+                    query.append(")");
+                    parameters.addAll(values);
+                }
+            } else {
+                // Handle single value
+                query.append(" AND ").append(key).append(" LIKE ?");
+                parameters.add(value);
+            }
+        }
+    }
+
+    private void applyFiltersToQuery(
+            final JobRoleFilteredRequest jobRequest, final StringBuilder query, final List<Object> parameters) {
+        appendFilter(query, parameters, "roleName", jobRequest.getLikeRoleName());
+        appendFilter(query, parameters, "location", jobRequest.getCommaSeparatedJobRoleLocation());
+        appendFilter(query, parameters, "capabilityName", jobRequest.getCapabilityName());
+        appendFilter(query, parameters, "bandName", jobRequest.getBandName());
+        appendFilter(query, parameters, "closingDate", jobRequest.getClosingDate());
+
+        query.append(";");
     }
 
     private <E> boolean isPresent(final List<E> list) {
