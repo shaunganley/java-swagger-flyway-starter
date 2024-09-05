@@ -70,14 +70,14 @@ public class JobRoleDao {
         }
     }
 
-    private void setParameters(PreparedStatement statement, List<Object> parameters) throws SQLException {
+    private void setParameters(final PreparedStatement statement, final List<Object> parameters) throws SQLException {
         for (int i = 0; i < parameters.size(); i++) {
             Object param = parameters.get(i);
             if (param instanceof String) {
                 statement.setString(i + 1, (String) param);
             } else if (param instanceof Integer) {
                 statement.setInt(i + 1, (Integer) param);
-            } else if (param instanceof java.sql.Date) {
+            } else if (param instanceof Date) {
                 statement.setDate(i + 1, (java.sql.Date) param);
             } else {
                 throw new IllegalArgumentException(
@@ -86,7 +86,8 @@ public class JobRoleDao {
         }
     }
 
-    private void appendFilter(StringBuilder query, List<Object> parameters, String key, Object value) {
+    private void appendFilter(
+            final StringBuilder query, final List<Object> parameters, final String key, final Object value) {
         if (value != null && !value.toString().isBlank()) {
             if ("closingDate".equals(key) && value instanceof Date) {
                 query.append(" AND ").append(key).append(" < ?");
