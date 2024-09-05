@@ -21,17 +21,6 @@ import java.sql.SQLException;
 
 @Api("Auth API")
 @Path("/api/auth")
-@SwaggerDefinition(
-        securityDefinition = @SecurityDefinition(
-                apiKeyAuthDefinitions = {
-                        @ApiKeyAuthDefinition(
-                                key = HttpHeaders.AUTHORIZATION,
-                                name = HttpHeaders.AUTHORIZATION,
-                                in = ApiKeyAuthDefinition.ApiKeyLocation.HEADER
-                        )
-                }
-        )
-)
 
 public class AuthController {
 
