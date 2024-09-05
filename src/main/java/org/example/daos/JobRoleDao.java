@@ -78,7 +78,7 @@ public class JobRoleDao {
             } else if (param instanceof Integer) {
                 statement.setInt(i + 1, (Integer) param);
             } else if (param instanceof Date) {
-                statement.setDate(i + 1, (java.sql.Date) param);
+                statement.setDate(i + 1, (Date) param);
             } else {
                 throw new IllegalArgumentException(
                         "Unsupported parameter type: " + param.getClass().getName());
