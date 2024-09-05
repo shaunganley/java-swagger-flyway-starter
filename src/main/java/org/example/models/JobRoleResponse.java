@@ -8,6 +8,9 @@ import java.util.Objects;
 
 @ApiModel(value = "Job Role Response", description = "Defines mapped JobRole object to pass to other methods")
 public class JobRoleResponse {
+    @ApiModelProperty(value = "unique JobRole id")
+    private int jobRoleId;
+
     @ApiModelProperty(
             value = "Job role's name",
             required = true,
@@ -42,20 +45,31 @@ public class JobRoleResponse {
             value = "Open or Closed",
             required = true,
             example = "open")
-    private String status;
+    private String statusName;
 
-    public JobRoleResponse(final String roleName,
-                           final String jobRoleLocation,
-                           final String capability,
-                           final String band,
-                           final Date closingDate,
-                           final String status) {
+    public JobRoleResponse(
+            final int jobRoleId,
+            final String roleName,
+            final String jobRoleLocation,
+            final String capability,
+            final String band,
+            final Date closingDate,
+            final String statusName) {
+        this.jobRoleId = jobRoleId;
         this.roleName = roleName;
         this.jobRoleLocation = jobRoleLocation;
         this.capabilityName = capability;
         this.bandName = band;
         this.closingDate = closingDate;
-        this.status = status;
+        this.statusName = statusName;
+    }
+
+    public int getJobRoleId() {
+        return jobRoleId;
+    }
+
+    public void setJobRoleId(final int jobRoleId) {
+        this.jobRoleId = jobRoleId;
     }
 
     public String getRoleName() {
@@ -98,12 +112,12 @@ public class JobRoleResponse {
         this.closingDate = closingDate;
     }
 
-    public String getStatus() {
-        return status;
+    public String getStatusName() {
+        return statusName;
     }
 
-    public void setStatus(final String status) {
-        this.status = status;
+    public void setStatusName(final String statusName) {
+        this.statusName = statusName;
     }
 
     @Override
@@ -115,16 +129,17 @@ public class JobRoleResponse {
             return false;
         }
         JobRoleResponse that = (JobRoleResponse) o;
-        return Objects.equals(roleName, that.roleName)
-                && Objects.equals(jobRoleLocation, that.jobRoleLocation)
-                && Objects.equals(capabilityName, that.capabilityName)
-                && Objects.equals(bandName, that.bandName)
+        return jobRoleId == that.jobRoleId && Objects.equals(roleName,
+                that.roleName) && Objects.equals(jobRoleLocation,
+                that.jobRoleLocation) && Objects.equals(capabilityName,
+                that.capabilityName) && Objects.equals(bandName, that.bandName)
                 && Objects.equals(closingDate, that.closingDate)
-                && Objects.equals(status, that.status);
+                && Objects.equals(statusName, that.statusName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(roleName, jobRoleLocation, capabilityName, bandName, closingDate, status);
+        return Objects.hash(jobRoleId, roleName, jobRoleLocation,
+                capabilityName, bandName, closingDate, statusName);
     }
 }

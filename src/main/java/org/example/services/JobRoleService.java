@@ -7,6 +7,7 @@ import org.example.exceptions.ResultSetException;
 import org.example.mappers.JobRoleMapper;
 import org.example.models.JobRole;
 import org.example.models.JobRoleFilteredRequest;
+import org.example.models.JobRoleDetails;
 import org.example.models.JobRoleResponse;
 
 import java.sql.SQLException;
@@ -30,6 +31,14 @@ public class JobRoleService {
             throw new DoesNotExistException(Entity.JOB_ROLE);
         }
         return jobRoleResponses;
+    }
+    public JobRoleDetails getJobRoleById(final int id)
+            throws SQLException, DoesNotExistException {
+        JobRoleDetails jobRoleDetails = jobRoleDao.getJobRoleById(id);
+        if (jobRoleDetails == null) {
+            throw new DoesNotExistException(Entity.JOB_ROLE);
+        }
+        return jobRoleDetails;
     }
 
     public List<JobRoleResponse> getFilteredJobRoles(

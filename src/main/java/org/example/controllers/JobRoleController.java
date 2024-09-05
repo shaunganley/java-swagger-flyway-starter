@@ -19,6 +19,7 @@ import javax.ws.rs.BeanParam;
 import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
@@ -100,6 +101,30 @@ public class JobRoleController {
         } catch (ResultSetException e) {
             LOGGER.error("getting filtered job roles failed due to ResultSetException\n" + e.getMessage());
             return Response.serverError().build();
+        }
+    }
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/{jobRoleId}")
+    @ApiOperation(
+            value = "Returns Job Role details",
+            authorizations = @Authorization(value = HttpHeaders.AUTHORIZATION),
+            response = JobRoleResponse.class,
+            responseContainer = "Set",
+            produces = "application/json")
+    public Response getJobRoleById(@PathParam("jobRoleId") final int jobRoleId) {
+        LOGGER.info("Get job role by ID request received");
+        try {
+            return Response.ok().entity(jobRoleService.getJobRoleById(jobRoleId)).build();
+        } catch (SQLException e) {
+            LOGGER.error("getJobRoleById failed, SQL Exception \n{}",
+                    e.getMessage());
+            return Response.serverError().build();
+        } catch (DoesNotExistException | NullPointerException e) {
+            LOGGER.error("getJobRoleById failed, DoesNotExistException\n{}",
+                    e.getMessage());
+            return Response.status(Response.Status.NOT_FOUND).entity(e.getMessage()).build();
         }
     }
 }
