@@ -1,0 +1,15 @@
+#!/bin/sh
+# This script will run Spotless before a commit to ensure that the code is formatted.
+
+echo "Running Spotless formatting..."
+
+# Run Spotless
+mvn spotless:apply
+
+# Check if there are any changes after formatting
+if ! git diff --quiet; then
+  echo "Code has been automatically formatted. Please review the changes and commit again."
+  exit 1
+fi
+
+echo "Code formatting is complete. Proceeding with commit..."
