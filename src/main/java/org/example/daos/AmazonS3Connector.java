@@ -20,12 +20,8 @@ public class AmazonS3Connector {
             return amazonS3Client;
         }
 
-        AWSCredentials credentials = new BasicAWSCredentials(
-                System.getenv().get("AWS_ACCESS_KEY_ID"),
-                System.getenv().get("AWS_SECRET_ACCESS_KEY"));
         amazonS3Client = AmazonS3ClientBuilder
                 .standard()
-                .withCredentials(new AWSStaticCredentialsProvider(credentials))
                 .withRegion(REGION)
                 .build();
 
