@@ -7,6 +7,12 @@ import io.swagger.annotations.ApiModelProperty;
 public class JobRoleApplication {
 
     @ApiModelProperty(
+            value = "Role's id",
+            required = true
+    )
+    private int jobRoleId;
+
+    @ApiModelProperty(
             value = "Role's name",
             required = true
     )
@@ -17,11 +23,21 @@ public class JobRoleApplication {
             required = true,
             example = "hired"
     )
-    private String status;
+    private String statusApplicationName;
 
-    public JobRoleApplication(String roleName, String status) {
+    public JobRoleApplication(int jobRoleId, String roleName,
+                              String statusApplicationName) {
+        this.jobRoleId = jobRoleId;
         this.roleName = roleName;
-        this.status = status;
+        this.statusApplicationName = statusApplicationName;
+    }
+
+    public String getStatusApplicationName() {
+        return statusApplicationName;
+    }
+
+    public void setStatusApplicationName(String statusApplicationName) {
+        this.statusApplicationName = statusApplicationName;
     }
 
     public String getRoleName() {
@@ -32,11 +48,11 @@ public class JobRoleApplication {
         this.roleName = roleName;
     }
 
-    public String getStatus() {
-        return status;
+    public int getJobRoleId() {
+        return jobRoleId;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setJobRoleId(int jobRoleId) {
+        this.jobRoleId = jobRoleId;
     }
 }

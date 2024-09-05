@@ -42,11 +42,11 @@ public class JobRoleService {
         return jobRoleDetails;
     }
 
-//    public List<JobRoleApplication> getAllUserApplications(int userId) throws SQLException, DoesNotExistException {
-//        List<JobRoleApplication> jobRoleApplications = jobRoleDao.getUserJobRoleApplications(userId);
-//        if(jobRoleApplications.isEmpty()) {
-//            throw new DoesNotExistException(Entity.USER);
-//        }
-//        return jobRoleApplications;
-//    }
+    public List<JobRoleApplication> getAllUserApplications(String email) throws SQLException, DoesNotExistException {
+        List<JobRoleApplication> jobRoleApplications = jobRoleDao.getUserJobRoleApplications(email);
+        if(jobRoleApplications.isEmpty()) {
+            throw new DoesNotExistException(Entity.USER);
+        }
+        return jobRoleApplications;
+    }
 }
