@@ -3,16 +3,15 @@ package org.example.daos;
 import org.example.exceptions.ResultSetException;
 import org.example.models.JobRole;
 import org.example.models.JobRoleFilteredRequest;
-import org.example.models.JobRoleStatus;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.sql.Statement;
 
 public class JobRoleDao {
     public List<JobRole> getAllJobRoles()
@@ -48,10 +47,13 @@ public class JobRoleDao {
 
     private static String baseQuery() {
         return
-                "SELECT jobRoleId, roleName, location, statusId, capabilityName, bandName, closingDate FROM job_roles"
-                        + " INNER JOIN capability USING(capabilityId)"
-                        + " INNER JOIN band USING(bandId)"
-                        + " WHERE statusId = " + JobRoleStatus.OPEN.getStatus();
+                "SELECT jobRoleId, roleName, location, statusId, statusName, capabilityName, "
+                        + "bandName, closingDate\n"
+                        + "FROM job_roles\n"
+                        + "INNER JOIN capability USING(capabilityId)\n"
+                        + "INNER JOIN band USING(bandId)\n"
+                        + "INNER JOIN status using(statusId)\n"
+                        + "WHERE statusName = 'open'";
     }
 
     private void applyFiltersToQuery(final JobRoleFilteredRequest jobRequest,
@@ -129,7 +131,7 @@ public class JobRoleDao {
                     resultSet.getString("capabilityName"),
                     resultSet.getString("bandName"),
                     resultSet.getDate("closingDate"),
-                    resultSet.getString("statusId")
+                    resultSet.getString("statusName")
             );
         } catch (SQLException e) {
             throw new ResultSetException(e.getMessage());

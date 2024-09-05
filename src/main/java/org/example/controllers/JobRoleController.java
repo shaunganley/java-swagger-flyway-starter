@@ -12,9 +12,11 @@ import org.example.exceptions.ResultSetException;
 import org.example.models.JobRole;
 import org.example.models.JobRoleFilteredRequest;
 import org.example.models.JobRoleResponse;
+import org.example.models.UserRole;
 import org.example.services.JobRoleService;
 
 import javax.ws.rs.BeanParam;
+import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -41,6 +43,7 @@ public class JobRoleController {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
+    @RolesAllowed({UserRole.ADMIN, UserRole.USER})
     @ApiOperation(
             value = "Returns a list of Job Roles",
             authorizations = @Authorization(value = HttpHeaders.AUTHORIZATION),
@@ -82,6 +85,7 @@ public class JobRoleController {
                     message = "getting filtered job roles failed due to SQL exception"),
             @ApiResponse(code = NOT_FOUND, message = "getting filtered job roles failed due to DoesNotExistExceptio")
     })
+    @RolesAllowed({UserRole.ADMIN, UserRole.USER})
     @Path("/filter")
     public Response getFilteredJobRoles(final @BeanParam JobRoleFilteredRequest jobRoleFilteredRequest) {
         LOGGER.info("Get filtered job roles request received");
