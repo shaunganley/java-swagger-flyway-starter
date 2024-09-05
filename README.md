@@ -49,13 +49,44 @@ How to start the test application
     2. DB_PASSWORD
     3. DB_HOST
     4. DB_NAME
-1. Run `mvn clean install` to build your application
-1. You can start application via:
-    1. Terminal: `java -jar target/java-swagger-flyway-starter-org.kainos.ea.jar server config.yml`
-    2. IDE: Edit run configuration -> Add `server` to program arguments -> Run
-1. To check that your application is running enter url `http://localhost:8080/api/test`
+2. Run `mvn clean install` to build your application
+3. You can start application via IDE: Edit run configuration -> Add `server` to program arguments -> Run
+4. To check that your application is running enter url `http://localhost:8080/api/test`
 
 Health Check
 ---
 
 To see your applications health enter url `http://localhost:8081/healthcheck`
+
+**How to Lint**
+---
+
+Configure checkstyle in Intellij:
+1. Open Settings,
+2. Go to Tools, then Checkstyle,
+3. Under Configuration File, click Add,
+4. Type 'Sun Checks Modified' in the Description,
+5. Click Browse, then go to src/main/resources/sun_checks_modified,
+6. Click Next, then Next again, then Finish,
+7. Check the box for Active, then click Apply, then OK,
+8. Click on the CheckStyle button above the Terminal button and select Sun Checks Modified as the Rules.
+
+**How to run Integration Tests**
+---
+
+1. Open the .zshrc file
+2. Add the following lines to your ~/.zshrc file:
+
+```
+export "VALID_TEST_EMAIL"="user@email.com"
+export "VALID_TEST_PASSWORD"="regularU\$er123"
+ 
+```
+
+3. Reload your terminal session if required:
+
+```
+. ~/.zshrc
+```
+
+4. Reload IntelliJ if required
