@@ -1,7 +1,7 @@
 CREATE TABLE job_roles (
     jobRoleId INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
     roleName VARCHAR(70) NOT NULL,
-    location ENUM('Belfast', 'Atlanta', 'Indianapolis', 'Buenos Aires', 'Antwerp', 'Toronto', 'Copenhagen', 'Helsinki', 'Paris', 'Frankfurt am Main', 'Gdańsk'),
+    location ENUM('Belfast', 'Atlanta', 'Indianapolis', 'Buenos Aires', 'Antwerp', 'Toronto', 'Copenhagen', 'Helsinki', 'Paris', 'Frankfurt am Main', 'Gdansk'),
     capabilityId INT,
     bandId INT,
     closingDate DATE,
