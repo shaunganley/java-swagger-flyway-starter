@@ -1,16 +1,10 @@
 package org.example.models;
 
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 import java.sql.Date;
-import java.util.Objects;
 
-@ApiModel(value = "Job Role", description = "Defines raw object for JobRole class present in DB")
-public class JobRole {
-
-    @ApiModelProperty(value = "unique JobRole id")
-    private int jobRoleId;
+public class JobRoleDetails {
 
     @ApiModelProperty(
             value = "Job role's name",
@@ -48,28 +42,54 @@ public class JobRole {
             example = "open")
     private String statusName;
 
-    public JobRole(final int jobRoleId,
-                   final String roleName,
-                   final String jobRoleLocation,
-                   final String capabilityName,
-                   final String bandName,
-                   final Date closingDate,
-                   final String statusName) {
-        this.jobRoleId = jobRoleId;
+    @ApiModelProperty(
+            value = "Job role description",
+            required = true,
+            example = "Description"
+    )
+    private String description;
+
+    @ApiModelProperty(
+            value = "Job role responsibilities",
+            required = true,
+            example = "responsibilities"
+    )
+    private String responsibilities;
+
+    @ApiModelProperty(
+            value = "https://url.com",
+            required = true,
+            example = "https://url.com"
+    )
+    private String sharepointUrl;
+
+    @ApiModelProperty(
+            value = "Number of open positions",
+            required = true,
+            example = "2"
+    )
+    private int numberOfOpenPositions;
+
+    public JobRoleDetails(final String roleName,
+                          final String jobRoleLocation,
+                          final String capabilityName,
+                          final String bandName,
+                          final Date closingDate,
+                          final String statusName,
+                          final String description,
+                          final String responsibilities,
+                          final String sharepointUrl,
+                          final int numberOfOpenPositions) {
         this.roleName = roleName;
         this.jobRoleLocation = jobRoleLocation;
         this.capabilityName = capabilityName;
         this.bandName = bandName;
         this.closingDate = closingDate;
         this.statusName = statusName;
-    }
-
-    public int getJobRoleId() {
-        return jobRoleId;
-    }
-
-    public void setJobRoleId(final int jobRoleId) {
-        this.jobRoleId = jobRoleId;
+        this.description = description;
+        this.responsibilities = responsibilities;
+        this.sharepointUrl = sharepointUrl;
+        this.numberOfOpenPositions = numberOfOpenPositions;
     }
 
     public String getRoleName() {
@@ -120,25 +140,35 @@ public class JobRole {
         this.statusName = statusName;
     }
 
-    @Override
-    public boolean equals(final Object o) {
-        if (this == o) {
-            return true;
-        }
-
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        JobRole jobRole = (JobRole) o;
-        return jobRoleId == jobRole.jobRoleId && Objects.equals(roleName, jobRole.roleName)
-                && Objects.equals(jobRoleLocation, jobRole.jobRoleLocation)
-                && Objects.equals(capabilityName, jobRole.capabilityName)
-                && Objects.equals(bandName, jobRole.bandName)
-                && Objects.equals(closingDate, jobRole.closingDate);
+    public String getDescription() {
+        return description;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(jobRoleId, roleName, jobRoleLocation, capabilityName, bandName, closingDate);
+    public void setDescription(final String description) {
+        this.description = description;
+    }
+
+    public String getResponsibilities() {
+        return responsibilities;
+    }
+
+    public void setResponsibilities(final String responsibilities) {
+        this.responsibilities = responsibilities;
+    }
+
+    public String getSharepointUrl() {
+        return sharepointUrl;
+    }
+
+    public void setSharepointUrl(final String sharepointUrl) {
+        this.sharepointUrl = sharepointUrl;
+    }
+
+    public int getNumberOfOpenPositions() {
+        return numberOfOpenPositions;
+    }
+
+    public void setNumberOfOpenPositions(final int numberOfOpenPositions) {
+        this.numberOfOpenPositions = numberOfOpenPositions;
     }
 }

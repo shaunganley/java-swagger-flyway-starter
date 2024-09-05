@@ -12,8 +12,10 @@ import org.example.exceptions.ResultSetException;
 import org.example.models.JobRole;
 import org.example.models.JobRoleApplication;
 import org.example.models.JobRoleResponse;
+import org.example.models.UserRole;
 import org.example.services.JobRoleService;
 
+import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -41,6 +43,7 @@ public class JobRoleController {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
+    @RolesAllowed({UserRole.ADMIN, UserRole.USER})
     @ApiOperation(
             value = "Returns a list of Job Roles",
             authorizations = @Authorization(value = HttpHeaders.AUTHORIZATION),
@@ -69,29 +72,53 @@ public class JobRoleController {
     }
 
     @GET
-    @Path("/applications/{id}")
     @Produces(MediaType.APPLICATION_JSON)
+    @Path("/{jobRoleId}")
     @ApiOperation(
-            value = "Returns a list of user's applications",
+            value = "Returns Job Role details",
             authorizations = @Authorization(value = HttpHeaders.AUTHORIZATION),
-            response = JobRoleApplication.class,
-            responseContainer = "List",
+            response = JobRoleResponse.class,
+            responseContainer = "Set",
             produces = "application/json")
-    @ApiResponses({
-            @ApiResponse(code = OK, message = "User's job applications listed successfully", response = JobRoleApplication.class),
-            @ApiResponse(code = INTERNAL_SERVER_ERROR, message = "getUserAllJobApplications failed, SQL Exception"),
-            @ApiResponse(code = NOT_FOUND, message = "getUserAllJobApplications failed, DoesNotExistException")
-    })
-    public Response getUserAllJobApplications(@PathParam("id") int userId) {
-        LOGGER.info("Get all user job applications request received");
+    public Response getJobRoleById(@PathParam("jobRoleId") final int jobRoleId) {
+        LOGGER.info("Get job role by ID request received");
         try {
-            return Response.ok().entity(jobRoleService.getAllUserApplications(userId)).build();
-        } catch(SQLException e) {
-            LOGGER.error("getUserAllJobApplications failed, SQLException\n" + e.getMessage());
+            return Response.ok().entity(jobRoleService.getJobRoleById(jobRoleId)).build();
+        } catch (SQLException e) {
+            LOGGER.error("getJobRoleById failed, SQL Exception \n{}",
+                    e.getMessage());
             return Response.serverError().build();
-        } catch (DoesNotExistException e) {
-            LOGGER.error("getUserAllJobApplications failed, DoesNotExistException\n" + e.getMessage());
+        } catch (DoesNotExistException | NullPointerException e) {
+            LOGGER.error("getJobRoleById failed, DoesNotExistException\n{}",
+                    e.getMessage());
             return Response.status(Response.Status.NOT_FOUND).entity(e.getMessage()).build();
         }
     }
+
+//    @GET
+//    @Path("/applications/{id}")
+//    @Produces(MediaType.APPLICATION_JSON)
+//    @ApiOperation(
+//            value = "Returns a list of user's applications",
+//            authorizations = @Authorization(value = HttpHeaders.AUTHORIZATION),
+//            response = JobRoleApplication.class,
+//            responseContainer = "List",
+//            produces = "application/json")
+//    @ApiResponses({
+//            @ApiResponse(code = OK, message = "User's job applications listed successfully", response = JobRoleApplication.class),
+//            @ApiResponse(code = INTERNAL_SERVER_ERROR, message = "getUserAllJobApplications failed, SQL Exception"),
+//            @ApiResponse(code = NOT_FOUND, message = "getUserAllJobApplications failed, DoesNotExistException")
+//    })
+//    public Response getUserAllJobApplications(@PathParam("id") int userId) {
+//        LOGGER.info("Get all user job applications request received");
+//        try {
+//            return Response.ok().entity(jobRoleService.getAllUserApplications(userId)).build();
+//        } catch(SQLException e) {
+//            LOGGER.error("getUserAllJobApplications failed, SQLException\n" + e.getMessage());
+//            return Response.serverError().build();
+//        } catch (DoesNotExistException e) {
+//            LOGGER.error("getUserAllJobApplications failed, DoesNotExistException\n" + e.getMessage());
+//            return Response.status(Response.Status.NOT_FOUND).entity(e.getMessage()).build();
+//        }
+//    }
 }

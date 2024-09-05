@@ -7,6 +7,7 @@ import org.example.exceptions.ResultSetException;
 import org.example.mappers.JobRoleMapper;
 import org.example.models.JobRole;
 import org.example.models.JobRoleApplication;
+import org.example.models.JobRoleDetails;
 import org.example.models.JobRoleResponse;
 
 import java.sql.SQLException;
@@ -32,11 +33,20 @@ public class JobRoleService {
         return jobRoleResponses;
     }
 
-    public List<JobRoleApplication> getAllUserApplications(int userId) throws SQLException, DoesNotExistException {
-        List<JobRoleApplication> jobRoleApplications = jobRoleDao.getUserJobRoleApplications(userId);
-        if(jobRoleApplications.isEmpty()) {
-            throw new DoesNotExistException(Entity.USER);
+    public JobRoleDetails getJobRoleById(final int id)
+            throws SQLException, DoesNotExistException {
+        JobRoleDetails jobRoleDetails = jobRoleDao.getJobRoleById(id);
+        if (jobRoleDetails == null) {
+            throw new DoesNotExistException(Entity.JOB_ROLE);
         }
-        return jobRoleApplications;
+        return jobRoleDetails;
     }
+
+//    public List<JobRoleApplication> getAllUserApplications(int userId) throws SQLException, DoesNotExistException {
+//        List<JobRoleApplication> jobRoleApplications = jobRoleDao.getUserJobRoleApplications(userId);
+//        if(jobRoleApplications.isEmpty()) {
+//            throw new DoesNotExistException(Entity.USER);
+//        }
+//        return jobRoleApplications;
+//    }
 }
