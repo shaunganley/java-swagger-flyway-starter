@@ -1,6 +1,7 @@
 package org.example.daos;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -87,7 +88,10 @@ public class JobRoleDao {
 
     private void appendFilter(StringBuilder query, List<Object> parameters, String key, Object value) {
         if (value != null && !value.toString().isBlank()) {
-            if (value instanceof String && ((String) value).contains(",")) {
+            if ("closingDate".equals(key) && value instanceof Date) {
+                query.append(" AND ").append(key).append(" < ?");
+                parameters.add(value);
+            } else if (value instanceof String && ((String) value).contains(",")) {
                 // Handle comma-separated values
                 query.append(" AND ").append(key).append(" IN (");
                 String[] values = ((String) value).split(",");
