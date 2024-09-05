@@ -1,44 +1,28 @@
 package org.example.models;
 
 import io.swagger.annotations.ApiModelProperty;
-
-import javax.ws.rs.QueryParam;
 import java.sql.Date;
 import java.util.List;
+import javax.ws.rs.QueryParam;
 
 public class JobRoleFilteredRequest {
-    @ApiModelProperty(
-            value = "Job role's name",
-            required = true,
-            example = "Delivery manager")
+    @ApiModelProperty(value = "Job role's name", required = true, example = "Delivery manager")
     @QueryParam("roleName")
     private String roleName;
 
-    @ApiModelProperty(
-            value = "Role's location, defined by ENUM value",
-            required = true,
-            example = "[Gdansk]")
+    @ApiModelProperty(value = "Role's location, defined by ENUM value", required = true, example = "[Gdansk]")
     @QueryParam("jobRoleLocation")
     private List<String> jobRoleLocation;
 
-    @ApiModelProperty(
-            value = "Capability's name",
-            required = true,
-            example = "[1]")
+    @ApiModelProperty(value = "Capability's name", required = true, example = "[1]")
     @QueryParam("capabilityId")
     private List<Integer> capabilityId;
 
-    @ApiModelProperty(
-            value = "Band's name",
-            required = true,
-            example = "[1]")
+    @ApiModelProperty(value = "Band's name", required = true, example = "[1]")
     @QueryParam("bandId")
     private List<Integer> bandId;
 
-    @ApiModelProperty(
-            value = "Expire date of offer",
-            required = true,
-            example = "2024-12-30")
+    @ApiModelProperty(value = "Expire date of offer", required = true, example = "2024-12-30")
     @QueryParam("closingDate")
     private Date closingDate;
 

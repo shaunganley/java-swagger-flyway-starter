@@ -1,8 +1,8 @@
 package org.example.utils;
 
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.*;
+
+import java.util.List;
 
 public class Utils {
 
@@ -20,5 +20,4 @@ public class Utils {
             assertEquals(list1.get(i), list2.get(i));
         }
     }
-
 }

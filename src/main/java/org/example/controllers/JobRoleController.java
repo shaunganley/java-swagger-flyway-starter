@@ -1,10 +1,24 @@
 package org.example.controllers;
 
+import static org.example.util.HttpStatus.INTERNAL_SERVER_ERROR;
+import static org.example.util.HttpStatus.NOT_FOUND;
+import static org.example.util.HttpStatus.OK;
+
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import io.swagger.annotations.Authorization;
+import java.sql.SQLException;
+import javax.annotation.security.RolesAllowed;
+import javax.ws.rs.BeanParam;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.HttpHeaders;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.example.exceptions.DoesNotExistException;
@@ -14,22 +28,6 @@ import org.example.models.JobRoleFilteredRequest;
 import org.example.models.JobRoleResponse;
 import org.example.models.UserRole;
 import org.example.services.JobRoleService;
-
-import javax.ws.rs.BeanParam;
-import javax.annotation.security.RolesAllowed;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.HttpHeaders;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import java.sql.SQLException;
-
-import static org.example.util.HttpStatus.INTERNAL_SERVER_ERROR;
-import static org.example.util.HttpStatus.NOT_FOUND;
-import static org.example.util.HttpStatus.OK;
-
 
 @Api("Job Role API")
 @Path("/api/job-roles")
@@ -52,9 +50,9 @@ public class JobRoleController {
             responseContainer = "List",
             produces = "application/json")
     @ApiResponses({
-            @ApiResponse(code = OK, message = "Job roles listed successfully", response = JobRole.class),
-            @ApiResponse(code = INTERNAL_SERVER_ERROR, message = "getting all job roles failed due to SQL Exception"),
-            @ApiResponse(code = NOT_FOUND, message = "getting all job roles failed due to DoesNotExistException")
+        @ApiResponse(code = OK, message = "Job roles listed successfully", response = JobRole.class),
+        @ApiResponse(code = INTERNAL_SERVER_ERROR, message = "getting all job roles failed due to SQL Exception"),
+        @ApiResponse(code = NOT_FOUND, message = "getting all job roles failed due to DoesNotExistException")
     })
     public Response getAllJobRoles() {
         LOGGER.info("Get all job roles request received");
@@ -65,7 +63,9 @@ public class JobRoleController {
             return Response.serverError().build();
         } catch (DoesNotExistException | NullPointerException e) {
             LOGGER.error("getting all job roles failed due to DoesNotExistException\n" + e.getMessage());
-            return Response.status(Response.Status.NOT_FOUND).entity(e.getMessage()).build();
+            return Response.status(Response.Status.NOT_FOUND)
+                    .entity(e.getMessage())
+                    .build();
         } catch (ResultSetException e) {
             LOGGER.error("getting all job roles failed due to ResultSetException\n" + e.getMessage());
             return Response.serverError().build();
@@ -81,23 +81,26 @@ public class JobRoleController {
             responseContainer = "Filtered list",
             produces = "application/json")
     @ApiResponses({
-            @ApiResponse(code = OK, message = "Job roles listed successfully", response = JobRole.class),
-            @ApiResponse(code = INTERNAL_SERVER_ERROR,
-                    message = "getting filtered job roles failed due to SQL exception"),
-            @ApiResponse(code = NOT_FOUND, message = "getting filtered job roles failed due to DoesNotExistException")
+        @ApiResponse(code = OK, message = "Job roles listed successfully", response = JobRole.class),
+        @ApiResponse(code = INTERNAL_SERVER_ERROR, message = "getting filtered job roles failed due to SQL exception"),
+        @ApiResponse(code = NOT_FOUND, message = "getting filtered job roles failed due to DoesNotExistException")
     })
     @RolesAllowed({UserRole.ADMIN, UserRole.USER})
     @Path("/filter")
     public Response getFilteredJobRoles(final @BeanParam JobRoleFilteredRequest jobRoleFilteredRequest) {
         LOGGER.info("Get filtered job roles request received");
         try {
-            return Response.ok().entity(jobRoleService.getFilteredJobRoles(jobRoleFilteredRequest)).build();
+            return Response.ok()
+                    .entity(jobRoleService.getFilteredJobRoles(jobRoleFilteredRequest))
+                    .build();
         } catch (SQLException e) {
             LOGGER.error("getting filtered job roles failed due to SQL exception\n" + e.getMessage());
             return Response.serverError().build();
         } catch (DoesNotExistException | NullPointerException e) {
             LOGGER.error("getting filtered job roles failed due to DoesNotExistException\n" + e.getMessage());
-            return Response.status(Response.Status.NOT_FOUND).entity(e.getMessage()).build();
+            return Response.status(Response.Status.NOT_FOUND)
+                    .entity(e.getMessage())
+                    .build();
         } catch (ResultSetException e) {
             LOGGER.error("getting filtered job roles failed due to ResultSetException\n" + e.getMessage());
             return Response.serverError().build();
@@ -116,15 +119,17 @@ public class JobRoleController {
     public Response getJobRoleById(@PathParam("jobRoleId") final int jobRoleId) {
         LOGGER.info("Get job role by ID request received");
         try {
-            return Response.ok().entity(jobRoleService.getJobRoleById(jobRoleId)).build();
+            return Response.ok()
+                    .entity(jobRoleService.getJobRoleById(jobRoleId))
+                    .build();
         } catch (SQLException e) {
-            LOGGER.error("getJobRoleById failed, SQL Exception \n{}",
-                    e.getMessage());
+            LOGGER.error("getJobRoleById failed, SQL Exception \n{}", e.getMessage());
             return Response.serverError().build();
         } catch (DoesNotExistException | NullPointerException e) {
-            LOGGER.error("getJobRoleById failed, DoesNotExistException\n{}",
-                    e.getMessage());
-            return Response.status(Response.Status.NOT_FOUND).entity(e.getMessage()).build();
+            LOGGER.error("getJobRoleById failed, DoesNotExistException\n{}", e.getMessage());
+            return Response.status(Response.Status.NOT_FOUND)
+                    .entity(e.getMessage())
+                    .build();
         }
     }
 }
