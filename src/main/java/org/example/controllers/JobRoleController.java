@@ -1,8 +1,8 @@
 package org.example.controllers;
 
-import static org.example.util.HttpStatus.INTERNAL_SERVER_ERROR;
-import static org.example.util.HttpStatus.NOT_FOUND;
-import static org.example.util.HttpStatus.OK;
+import static org.example.utils.HttpStatus.INTERNAL_SERVER_ERROR;
+import static org.example.utils.HttpStatus.NOT_FOUND;
+import static org.example.utils.HttpStatus.OK;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
