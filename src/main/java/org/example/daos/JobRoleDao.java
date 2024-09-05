@@ -59,8 +59,8 @@ public class JobRoleDao {
             parameters.add(jobRequest.getLikeRoleName());
         }
         applyFilter(jobRequest.getJobRoleLocation(), "location", query, parameters);
-        applyFilter(jobRequest.getCapabilityId(), "capabilityId", query, parameters);
-        applyFilter(jobRequest.getBandId(), "bandId", query, parameters);
+        applyFilter(jobRequest.getCapabilityName(), "capabilityName", query, parameters);
+        applyFilter(jobRequest.getBandName(), "bandName", query, parameters);
         if (jobRequest.getClosingDate() != null) {
             query.append(" AND closingDate < ?");
             parameters.add(jobRequest.getClosingDate());

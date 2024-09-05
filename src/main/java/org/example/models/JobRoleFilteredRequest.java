@@ -15,12 +15,12 @@ public class JobRoleFilteredRequest {
     private List<String> jobRoleLocation;
 
     @ApiModelProperty(value = "Capability's name", required = true, example = "[1]")
-    @QueryParam("capabilityId")
-    private List<Integer> capabilityId;
+    @QueryParam("capabilityName")
+    private List<String> capabilityName;
 
     @ApiModelProperty(value = "Band's name", required = true, example = "[1]")
-    @QueryParam("bandId")
-    private List<Integer> bandId;
+    @QueryParam("bandName")
+    private List<String> bandName;
 
     @ApiModelProperty(value = "Expire date of offer", required = true, example = "2024-12-30")
     @QueryParam("closingDate")
@@ -46,20 +46,20 @@ public class JobRoleFilteredRequest {
         this.jobRoleLocation = jobRoleLocation;
     }
 
-    public List<Integer> getCapabilityId() {
-        return capabilityId;
+    public List<String> getCapabilityName() {
+        return capabilityName;
     }
 
-    public void setCapabilityId(final List<Integer> capabilityId) {
-        this.capabilityId = capabilityId;
+    public void setCapabilityName(final List<String> capabilityName) {
+        this.capabilityName = capabilityName;
     }
 
-    public List<Integer> getBandId() {
-        return bandId;
+    public List<String> getBandName() {
+        return bandName;
     }
 
-    public void setBandId(final List<Integer> bandId) {
-        this.bandId = bandId;
+    public void setBandName(final List<String> bandName) {
+        this.bandName = bandName;
     }
 
     public Date getClosingDate() {
