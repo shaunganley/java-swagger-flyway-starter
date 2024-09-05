@@ -16,6 +16,7 @@ import org.example.daos.AuthDao;
 import org.example.models.JwtToken;
 import org.example.services.AuthService;
 import org.example.utils.JwtUtils;
+import org.glassfish.jersey.media.multipart.MultiPartFeature;
 import org.glassfish.jersey.server.filter.RolesAllowedDynamicFeature;
 import javax.crypto.SecretKey;
 import org.example.controllers.JobRoleController;
@@ -65,5 +66,7 @@ public class TestApplication extends Application<TestConfiguration> {
 
         environment.jersey()
                 .register(new JobRoleController(new JobRoleService(new JobRoleDao())));
+        environment.jersey()
+                .register(MultiPartFeature.class);
     }
 }

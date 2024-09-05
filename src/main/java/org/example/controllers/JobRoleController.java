@@ -10,6 +10,7 @@ import io.swagger.annotations.Authorization;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.example.exceptions.DoesNotExistException;
+import org.example.exceptions.FileUploadException;
 import org.example.exceptions.ResultSetException;
 import org.example.models.JobRole;
 import org.example.models.JobRoleResponse;
@@ -17,9 +18,12 @@ import org.example.models.JwtToken;
 import org.example.models.RoleApplicationResponse;
 import org.example.models.UserRole;
 import org.example.services.JobRoleService;
+import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 
 import javax.annotation.security.RolesAllowed;
 import javax.print.attribute.standard.Media;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -29,6 +33,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.io.InputStream;
 import java.sql.SQLException;
 
 import static org.example.util.HttpStatus.INTERNAL_SERVER_ERROR;
@@ -79,6 +84,7 @@ public class JobRoleController {
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.MULTIPART_FORM_DATA)
     @RolesAllowed({UserRole.USER})
     @ApiOperation(
             value = "Inform user if cv was sent successfully",
@@ -86,10 +92,18 @@ public class JobRoleController {
             response = RoleApplicationResponse.class,
             produces = "application/json")
     @Path("/{jobRoleId}/applications")
-    public Response applyForRole(@PathParam("jobRoleId")final int jobRoleId, Object fileToWrite, @ApiParam(hidden = true) @Auth final JwtToken token){
-        //Object to be changed to proper Type
+    public Response applyForRole(@PathParam("jobRoleId")final int jobRoleId,
+                                 @FormParam("file") final InputStream fileInputStream,
+                                 @FormParam("file") final FormDataContentDisposition fileDetail,
+                                 @ApiParam(hidden = true) @Auth final JwtToken token) {
         String userEmail = token.getUserEmail();
-        //return Response.ok().entity(jobRoleService.applyForRole(jobRoleId, userEmail)).build();
-        return Response.ok().entity(new RoleApplicationResponse("success with email: " + userEmail)).build();
+
+        try {
+            jobRoleService.applyForRole(jobRoleId, userEmail, fileInputStream, fileDetail);
+        }catch (FileUploadException e) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
+        }
+        return Response.ok().entity(new RoleApplicationResponse("File uploaded successfully")).build();
+        //return Response.ok().entity(new RoleApplicationResponse("success with email: " + userEmail)).build();
     }
 }

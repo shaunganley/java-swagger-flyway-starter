@@ -3,13 +3,16 @@ package org.example.services;
 import org.example.daos.JobRoleDao;
 import org.example.exceptions.DoesNotExistException;
 import org.example.exceptions.Entity;
+import org.example.exceptions.FileUploadException;
 import org.example.exceptions.ResultSetException;
 import org.example.mappers.JobRoleMapper;
 import org.example.models.JobRole;
 import org.example.models.JobRoleResponse;
 import org.example.models.RoleApplicationResponse;
+import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 
 import javax.ws.rs.core.Response;
+import java.io.InputStream;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -33,7 +36,10 @@ public class JobRoleService {
         return jobRoleResponses;
     }
 
-    public RoleApplicationResponse applyForRole(int jobRoleId, String userEmail) {
-        return jobRoleDao.applyForRole(jobRoleId, userEmail);
+    public void applyForRole(final int jobRoleId,
+                             final String userEmail,
+                             final InputStream fileInputStream,
+                             final FormDataContentDisposition fileDetail) throws FileUploadException {
+        jobRoleDao.applyForRole(jobRoleId, userEmail, fileInputStream, fileDetail);
     }
 }

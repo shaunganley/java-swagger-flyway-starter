@@ -8,9 +8,7 @@ import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 
 public class AmazonS3Connector {
 
-    private final String bucketName = "good-day-org-recruitment";
     private static final String REGION = "eu-west-1";
-
     private static AmazonS3 amazonS3Client;
 
     private AmazonS3Connector() {
