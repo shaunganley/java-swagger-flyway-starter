@@ -87,16 +87,15 @@ public class JobRoleServiceTest {
 
         long millis=System.currentTimeMillis();
         Date closingDate = new Date(millis);
-        // Arrange
+
         int jobRoleId = 1;
         JobRole expectedJobRole = new JobRole(1,"Software Engineer", "Develops, tests, and maintains software applications.", "Design, develop, and maintain software applications.", "https://sharepoint.com/job/software-engineer", "New York", "Software Development", "Senior", closingDate, "Open", 1);
-        // Mock the behavior of the DAO
+
         Mockito.when(jobRoleDao.getJobRoleById(jobRoleId)).thenReturn(expectedJobRole);
 
-        // Act
+
         JobRoleDetailedResponse actualJobRole = jobRoleService.getJobRoleById(jobRoleId);
 
-        // Assert
         Assert.assertNotNull(actualJobRole);
         assertEquals(expectedJobRole.getRoleName(), actualJobRole.getRoleName());
         assertEquals(expectedJobRole.getLocation(), actualJobRole.getLocation());
