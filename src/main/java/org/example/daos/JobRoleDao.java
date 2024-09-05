@@ -7,7 +7,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import org.example.exceptions.ResultSetException;
@@ -94,19 +93,12 @@ public class JobRoleDao {
                 parameters.add(value);
             } else if (value instanceof String && ((String) value).contains(",")) {
                 // Handle comma-separated values
-                query.append(" AND ").append(key).append(" IN (");
                 String[] values = ((String) value).split(",");
+                query.append(" AND ").append(key).append(" IN (");
                 query.append(String.join(", ", Collections.nCopies(values.length, "?")));
                 query.append(")");
-                parameters.addAll(Arrays.asList(values));
-            } else if (value instanceof List) {
-                // Handle list of values
-                List<?> values = (List<?>) value;
-                if (!values.isEmpty()) {
-                    query.append(" AND ").append(key).append(" IN (");
-                    query.append(String.join(", ", Collections.nCopies(values.size(), "?")));
-                    query.append(")");
-                    parameters.addAll(values);
+                for (String val : values) {
+                    parameters.add(val.trim());
                 }
             } else {
                 // Handle single value
@@ -119,7 +111,7 @@ public class JobRoleDao {
     private void applyFiltersToQuery(
             final JobRoleFilteredRequest jobRequest, final StringBuilder query, final List<Object> parameters) {
         appendFilter(query, parameters, "roleName", jobRequest.getLikeRoleName());
-        appendFilter(query, parameters, "location", jobRequest.getCommaSeparatedJobRoleLocation());
+        appendFilter(query, parameters, "location", jobRequest.getJobRoleLocation());
         appendFilter(query, parameters, "capabilityName", jobRequest.getCapabilityName());
         appendFilter(query, parameters, "bandName", jobRequest.getBandName());
         appendFilter(query, parameters, "closingDate", jobRequest.getClosingDate());

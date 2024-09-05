@@ -2,7 +2,6 @@ package org.example.models;
 
 import io.swagger.annotations.ApiModelProperty;
 import java.sql.Date;
-import java.util.List;
 import javax.ws.rs.QueryParam;
 
 public class JobRoleFilteredRequest {
@@ -10,17 +9,17 @@ public class JobRoleFilteredRequest {
     @QueryParam("roleName")
     private String roleName;
 
-    @ApiModelProperty(value = "Role's location, defined by ENUM value", example = "[Gdansk]")
+    @ApiModelProperty(value = "Role's location, defined by ENUM value", example = "Gdansk,Helsinki")
     @QueryParam("jobRoleLocation")
-    private List<String> jobRoleLocation;
+    private String jobRoleLocation;
 
-    @ApiModelProperty(value = "Capability's name", example = "[Cyber Security]")
+    @ApiModelProperty(value = "Capability's name", example = "Cyber Security,Data & AI")
     @QueryParam("capabilityName")
-    private List<String> capabilityName;
+    private String capabilityName;
 
-    @ApiModelProperty(value = "Band's name", example = "[Trainee]")
+    @ApiModelProperty(value = "Band's name", example = "Trainee")
     @QueryParam("bandName")
-    private List<String> bandName;
+    private String bandName;
 
     @ApiModelProperty(value = "Expire date of offer", example = "2024-12-30")
     @QueryParam("closingDate")
@@ -38,31 +37,27 @@ public class JobRoleFilteredRequest {
         this.roleName = roleName;
     }
 
-    public List<String> getJobRoleLocation() {
+    public String getJobRoleLocation() {
         return jobRoleLocation;
     }
 
-    public void setJobRoleLocation(final List<String> jobRoleLocation) {
+    public void setJobRoleLocation(final String jobRoleLocation) {
         this.jobRoleLocation = jobRoleLocation;
     }
 
-    public String getCommaSeparatedJobRoleLocation() {
-        return jobRoleLocation != null ? String.join(",", jobRoleLocation) : null;
-    }
-
-    public List<String> getCapabilityName() {
+    public String getCapabilityName() {
         return capabilityName;
     }
 
-    public void setCapabilityName(final List<String> capabilityName) {
+    public void setCapabilityName(final String capabilityName) {
         this.capabilityName = capabilityName;
     }
 
-    public List<String> getBandName() {
+    public String getBandName() {
         return bandName;
     }
 
-    public void setBandName(final List<String> bandName) {
+    public void setBandName(final String bandName) {
         this.bandName = bandName;
     }
 
