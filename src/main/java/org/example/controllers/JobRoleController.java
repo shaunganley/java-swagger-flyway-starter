@@ -83,7 +83,7 @@ public class JobRoleController {
             @ApiResponse(code = OK, message = "Job roles listed successfully", response = JobRole.class),
             @ApiResponse(code = INTERNAL_SERVER_ERROR,
                     message = "getting filtered job roles failed due to SQL exception"),
-            @ApiResponse(code = NOT_FOUND, message = "getting filtered job roles failed due to DoesNotExistExceptio")
+            @ApiResponse(code = NOT_FOUND, message = "getting filtered job roles failed due to DoesNotExistException")
     })
     @RolesAllowed({UserRole.ADMIN, UserRole.USER})
     @Path("/filter")
