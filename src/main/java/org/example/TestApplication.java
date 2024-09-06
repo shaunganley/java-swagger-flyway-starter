@@ -13,6 +13,7 @@ import org.example.auth.JwtAuthenticator;
 import org.example.auth.RoleAuthorizer;
 import org.example.controllers.AuthController;
 import org.example.daos.AuthDao;
+import org.example.exceptions.FileUploadException;
 import org.example.models.JwtToken;
 import org.example.services.AuthService;
 import org.example.utils.JwtUtils;
@@ -24,8 +25,10 @@ import org.example.daos.JobRoleDao;
 import org.example.services.JobRoleService;
 
 public class TestApplication extends Application<TestConfiguration> {
-    public static void main(final String[] args) throws Exception {
+    public static void main(final String[] args) throws Exception, FileUploadException {
         new TestApplication().run(args);
+        JobRoleDao jobRoleDao = new JobRoleDao();
+        jobRoleDao.uploadFileToS3();
     }
 
     @Override
@@ -66,7 +69,7 @@ public class TestApplication extends Application<TestConfiguration> {
 
         environment.jersey()
                 .register(new JobRoleController(new JobRoleService(new JobRoleDao())));
-        environment.jersey()
-                .register(MultiPartFeature.class);
+        /*environment.jersey()
+                .register(MultiPartFeature.class);*/
     }
 }

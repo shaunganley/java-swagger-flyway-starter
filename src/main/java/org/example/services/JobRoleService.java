@@ -13,6 +13,7 @@ import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 
 import javax.ws.rs.core.Response;
 import java.io.InputStream;
+import java.net.URISyntaxException;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -37,9 +38,10 @@ public class JobRoleService {
     }
 
     public void applyForRole(final int jobRoleId,
-                             final String userEmail,
-                             final InputStream fileInputStream,
-                             final FormDataContentDisposition fileDetail) throws FileUploadException {
-        jobRoleDao.applyForRole(jobRoleId, userEmail, fileInputStream, fileDetail);
+                             final String userEmail
+                             /*final InputStream fileInputStream,
+                             final FormDataContentDisposition fileDetail*/) throws FileUploadException,
+            URISyntaxException {
+        jobRoleDao.applyForRole(jobRoleId, userEmail/*, fileInputStream, fileDetail*/);
     }
 }

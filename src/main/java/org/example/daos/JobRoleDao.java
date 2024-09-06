@@ -10,7 +10,10 @@ import org.example.models.JobRole;
 import org.example.models.RoleApplicationResponse;
 import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 
+import java.io.File;
 import java.io.InputStream;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -65,25 +68,35 @@ public class JobRoleDao {
     }
 
     public void applyForRole(final int jobRoleId,
-                             final String userEmail,
-                             final InputStream fileInputStream,
-                             final FormDataContentDisposition fileDetail) throws FileUploadException {
+                             final String userEmail
+                             /*final InputStream fileInputStream,
+                             final FormDataContentDisposition fileDetail*/) throws FileUploadException,
+            URISyntaxException {
 
         //TODO: check fo existence of this job role
-        uploadFileToS3(jobRoleId, userEmail, fileInputStream, fileDetail);
+        //uploadFileToS3(jobRoleId, userEmail, fileInputStream, fileDetail);
 
         //TODO: Add application to a applications table
     }
 
 
-    public void uploadFileToS3(final int jobRoleId,
+    public void uploadFileToS3(/*final int jobRoleId,
                                final String userEmail,
                                final InputStream fileInputStream,
-                               final FormDataContentDisposition fileDetail) throws FileUploadException {
+                               final FormDataContentDisposition fileDetail*/)
+            throws FileUploadException, URISyntaxException {
 
         AmazonS3 amazonS3Client = AmazonS3Connector.getAmazonS3Client();
 
-        String fileName = "cv/" + userEmail + "/" + jobRoleId + "/" + fileDetail.getFileName();
+        /*final Class clazz = JobRoleDao.class;
+
+        final URL resource = clazz.getClassLoader().getResource("TestBodyToS3.json");
+
+        File f = new File(resource.toURI());*/
+
+        amazonS3Client.putObject(BUCKET_NAME, "TestFile", "(O  <..>  O)");
+
+        /*String fileName = "cv/" + userEmail + "/" + jobRoleId + "/" + fileDetail.getFileName();
         try {
 
             ObjectMetadata metadata = new ObjectMetadata();
@@ -95,7 +108,7 @@ public class JobRoleDao {
                     metadata);
         } catch (SdkClientException e) {
             throw new FileUploadException();
-        }
+        }*/
 
 
     }

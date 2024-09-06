@@ -34,6 +34,7 @@ import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.io.InputStream;
+import java.net.URISyntaxException;
 import java.sql.SQLException;
 
 import static org.example.util.HttpStatus.INTERNAL_SERVER_ERROR;
@@ -93,15 +94,17 @@ public class JobRoleController {
             produces = "application/json")
     @Path("/{jobRoleId}/applications")
     public Response applyForRole(@PathParam("jobRoleId")final int jobRoleId,
-                                 @FormParam("file") final InputStream fileInputStream,
-                                 @FormParam("file") final FormDataContentDisposition fileDetail,
+                                 //@FormParam("file") final InputStream fileInputStream,
+                                 //@FormParam("file") final FormDataContentDisposition fileDetail,
                                  @ApiParam(hidden = true) @Auth final JwtToken token) {
         String userEmail = token.getUserEmail();
 
         try {
-            jobRoleService.applyForRole(jobRoleId, userEmail, fileInputStream, fileDetail);
+            jobRoleService.applyForRole(jobRoleId, userEmail/*, fileInputStream, fileDetail*/);
         }catch (FileUploadException e) {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
         }
         return Response.ok().entity(new RoleApplicationResponse("File uploaded successfully")).build();
         //return Response.ok().entity(new RoleApplicationResponse("success with email: " + userEmail)).build();
