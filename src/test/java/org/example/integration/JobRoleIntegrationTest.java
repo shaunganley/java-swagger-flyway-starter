@@ -85,12 +85,14 @@ public class JobRoleIntegrationTest {
     @Test
     public void getJobRoleById_shouldReturn404_whenJobRoleDoesNotExist() {
         Client client = APP.client();
+        String token = loginAndGetToken();
 
         int nonExistentJobRoleId = 9999;
 
         Response response = client
                 .target(BASE_URL + "/job-roles/" + nonExistentJobRoleId)
                 .request()
+                .header("Authorization", "Bearer " + token)
                 .get();
 
         Assertions.assertEquals(404, response.getStatus());

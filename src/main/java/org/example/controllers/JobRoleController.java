@@ -48,6 +48,11 @@ public class JobRoleController {
     @GET
     @Path("/job-roles/{id}")
     @Produces(MediaType.APPLICATION_JSON)
+    @RolesAllowed({UserRole.ADMIN, UserRole.USER})
+    @ApiOperation(
+            value = "Returns job role by id",
+            authorizations = @Authorization(value = HttpHeaders.AUTHORIZATION),
+            response = JobRoleResponse.class)
     public Response getJobRoleById(final @PathParam("id") int id)
             throws SQLException {
         try {
