@@ -1,10 +1,13 @@
 package org.example.controllers;
 
 import io.swagger.annotations.Api;
+import org.eclipse.jetty.http.HttpStatus;
+import org.example.exceptions.DoesNotExistException;
 import org.example.services.JobRoleService;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -28,6 +31,21 @@ public class JobRoleController {
                     jobRoleService.getOpenJobRoles()).build();
         } catch (SQLException e) {
             return Response.serverError().build();
+        }
+    }
+
+    @GET
+    @Path("/job-roles/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getJobRoleById(final @PathParam("id") int id)
+            throws SQLException {
+        try {
+            return Response.ok().entity(
+                    jobRoleService.getJobRoleById(id)).build();
+        } catch (SQLException e) {
+            return Response.serverError().build();
+        } catch (DoesNotExistException e) {
+            return Response.status(HttpStatus.NOT_FOUND_404).build();
         }
     }
 }

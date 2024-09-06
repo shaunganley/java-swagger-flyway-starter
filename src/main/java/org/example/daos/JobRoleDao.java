@@ -35,6 +35,7 @@ public class JobRoleDao {
             if (resultSet != null) {
                 while (resultSet.next()) {
                     jobRoles.add(new JobRole(
+                            resultSet.getInt("job_roles.jobRoleId"),
                             resultSet.getString("job_roles.roleName"),
                             resultSet.getString("job_roles.location"),
                             resultSet.getString("capability.capabilityName"),
@@ -44,6 +45,57 @@ public class JobRoleDao {
             }
         }
         return jobRoles;
+    }
+
+    public JobRole getJobRoleById(final int id) throws SQLException {
+        try (Connection connection = DatabaseConnector.getConnection()) {
+
+            String query = "SELECT "
+                    + "job_roles.jobRoleId, "
+                    + "job_roles.roleName, "
+                    + "job_roles.description, "
+                    + "job_roles.responsibilities, "
+                    + "job_roles.sharepointUrl, "
+                    + "job_roles.location, "
+                    + "band.bandName, "
+                    + "capability.capabilityName, "
+                    + "job_roles.closingDate, "
+                    + "status.statusName, "
+                    + "job_roles.numberOfOpenPositions "
+                    + "FROM "
+                    + "job_roles "
+                    + "JOIN "
+                    + "capability ON job_roles.capabilityId"
+                    +
+                    " = capability.capabilityId "
+                    + "JOIN "
+                    + "band ON job_roles.bandId = band.nameId "
+                    + "JOIN "
+                    + "status ON job_roles.statusId = status.statusId "
+                    + "WHERE "
+                    + "job_roles.jobRoleId = ?;";
+
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setInt(1, id);
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet != null && resultSet.next()) {
+                return new JobRole(
+                        resultSet.getInt("jobRoleId"),
+                        resultSet.getString("roleName"),
+                        resultSet.getString("description"),
+                        resultSet.getString("responsibilities"),
+                        resultSet.getString("sharepointUrl"),
+                        resultSet.getString("location"),
+                        resultSet.getString("capabilityName"),
+                        resultSet.getString("bandName"),
+                        resultSet.getDate("closingDate"),
+                        resultSet.getString("statusName"),
+                        resultSet.getInt("numberOfOpenPositions"));
+            }
+
+            return null;
+        }
     }
 
 }
