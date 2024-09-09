@@ -85,26 +85,54 @@ public class JobRoleDao {
         }
     }
 
+    private boolean isNullOrEmpty(final Object value) {
+        return value == null || value.toString().isBlank();
+    }
+
+    private boolean isClosingDate(final String key, final Object value) {
+        return "closingDate".equals(key) && value instanceof Date;
+    }
+
+    private void handleClosingDate(
+            final StringBuilder query, final List<Object> parameters, final String key, final Object value) {
+        query.append(" AND ").append(key).append(" < ?");
+        parameters.add(value);
+    }
+
+    private boolean isCommaSeparatedString(final Object value) {
+        return value instanceof String && ((String) value).contains(",");
+    }
+
+    private void handleSingleValue(
+            final StringBuilder query, final List<Object> parameters, final String key, final Object value) {
+        query.append(" AND ").append(key).append(" LIKE ?");
+        parameters.add(value);
+    }
+
+    private void handleCommaSeparatedValues(
+            final StringBuilder query, final List<Object> parameters, final String key, final String value) {
+        String[] values = value.split(",");
+        query.append(" AND ").append(key).append(" IN (");
+        query.append(String.join(", ", Collections.nCopies(values.length, "?")));
+        query.append(")");
+
+        for (String val : values) {
+            parameters.add(val.trim());
+        }
+    }
+
     private void appendFilter(
             final StringBuilder query, final List<Object> parameters, final String key, final Object value) {
-        if (value != null && !value.toString().isBlank()) {
-            if ("closingDate".equals(key) && value instanceof Date) {
-                query.append(" AND ").append(key).append(" < ?");
-                parameters.add(value);
-            } else if (value instanceof String && ((String) value).contains(",")) {
-                // Handle comma-separated values
-                String[] values = ((String) value).split(",");
-                query.append(" AND ").append(key).append(" IN (");
-                query.append(String.join(", ", Collections.nCopies(values.length, "?")));
-                query.append(")");
-                for (String val : values) {
-                    parameters.add(val.trim());
-                }
-            } else {
-                // Handle single value
-                query.append(" AND ").append(key).append(" LIKE ?");
-                parameters.add(value);
-            }
+        if (isNullOrEmpty(value)) {
+            return;
+        }
+
+        if (isClosingDate(key, value)) {
+            handleClosingDate(query, parameters, key, value);
+        } else if (isCommaSeparatedString(value)) {
+            handleCommaSeparatedValues(query, parameters, key, (String) value);
+        } else {
+            handleSingleValue(query, parameters, key, value);
         }
     }
 
