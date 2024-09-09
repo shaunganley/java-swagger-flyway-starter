@@ -25,8 +25,8 @@ public class JobRoleApplication {
     )
     private String statusApplicationName;
 
-    public JobRoleApplication(int jobRoleId, String roleName,
-                              String statusApplicationName) {
+    public JobRoleApplication(final int jobRoleId, final String roleName,
+                              final String statusApplicationName) {
         this.jobRoleId = jobRoleId;
         this.roleName = roleName;
         this.statusApplicationName = statusApplicationName;
@@ -36,7 +36,7 @@ public class JobRoleApplication {
         return statusApplicationName;
     }
 
-    public void setStatusApplicationName(String statusApplicationName) {
+    public void setStatusApplicationName(final String statusApplicationName) {
         this.statusApplicationName = statusApplicationName;
     }
 
@@ -44,7 +44,7 @@ public class JobRoleApplication {
         return roleName;
     }
 
-    public void setRoleName(String roleName) {
+    public void setRoleName(final String roleName) {
         this.roleName = roleName;
     }
 
@@ -52,7 +52,7 @@ public class JobRoleApplication {
         return jobRoleId;
     }
 
-    public void setJobRoleId(int jobRoleId) {
+    public void setJobRoleId(final int jobRoleId) {
         this.jobRoleId = jobRoleId;
     }
 }

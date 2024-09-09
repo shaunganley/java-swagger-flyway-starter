@@ -149,7 +149,10 @@ public class JobRoleController {
             responseContainer = "List",
             produces = "application/json")
     @ApiResponses({
-            @ApiResponse(code = OK, message = "User's job applications listed successfully", response = JobRoleApplication.class),
+            @ApiResponse(
+                    code = OK,
+                    message = "User's job applications listed successfully",
+                    response = JobRoleApplication.class),
             @ApiResponse(code = INTERNAL_SERVER_ERROR, message = "getUserAllJobApplications failed, SQL Exception"),
             @ApiResponse(code = NOT_FOUND, message = "getUserAllJobApplications failed, DoesNotExistException")
     })
@@ -158,9 +161,8 @@ public class JobRoleController {
         String email = token.getUserEmail();
         System.out.println(email);
         try {
-
             return Response.ok().entity(jobRoleService.getAllUserApplications(email)).build();
-        } catch(SQLException e) {
+        } catch (SQLException e) {
             LOGGER.error("getUserAllJobApplications failed, SQLException\n" + e.getMessage());
             return Response.serverError().build();
         } catch (DoesNotExistException e) {

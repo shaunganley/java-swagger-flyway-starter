@@ -35,7 +35,7 @@ public class JwtToken implements Principal {
         return userEmail;
     }
 
-    public void setUserEmail(String userEmail) {
+    public void setUserEmail(final String userEmail) {
         this.userEmail = userEmail;
     }
 }

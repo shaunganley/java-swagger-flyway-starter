@@ -13,9 +13,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import org.example.exceptions.ResultSetException;
-import org.example.models.JobRole;
-import org.example.models.JobRoleDetails;
 import org.example.models.JobRoleFilteredRequest;
 
 public class JobRoleDao {
@@ -174,18 +171,18 @@ public class JobRoleDao {
         try (Connection connection = DatabaseConnector.getConnection()) {
             Statement statement = connection.createStatement();
 
-            String query = "SELECT jr.jobRoleId, jr.roleName, aps.statusApplicationName\n" +
-                    "FROM job_application ja\n" +
-                    "INNER JOIN application_status aps ON ja.statusApplicationId = aps.statusApplicationId\n" +
-                    "INNER JOIN job_roles jr ON ja.jobRoleId = jr.jobRoleId\n" +
-                    "INNER JOIN User u ON ja.Email = u.Email\n" +
-                    "WHERE u.Email = '" + email + "';";
+            String query = "SELECT jr.jobRoleId, jr.roleName, aps.statusApplicationName\n"
+                    + "FROM job_application ja\n"
+                    + "INNER JOIN application_status aps ON ja.statusApplicationId = aps.statusApplicationId\n"
+                    + "INNER JOIN job_roles jr ON ja.jobRoleId = jr.jobRoleId\n"
+                    + "INNER JOIN User u ON ja.Email = u.Email\n"
+                    + "WHERE u.Email = '" + email + "';";
             System.out.println(query);
             ResultSet resultSet = statement.executeQuery(
                     query
             );
 
-            while(resultSet.next()) {
+            while (resultSet.next()) {
                 JobRoleApplication jobRoleApplication = new JobRoleApplication(
                         resultSet.getInt("jobRoleId"),
                         resultSet.getString("roleName"),
