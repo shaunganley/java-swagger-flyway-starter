@@ -164,7 +164,7 @@ public class JobRoleDao {
         return null;
     }
 
-    public List<JobRoleApplication> getUserJobRoleApplications(String email)
+    public List<JobRoleApplication> getUserJobRoleApplications(final String email)
             throws SQLException {
         List<JobRoleApplication> jobRoleApplications = new ArrayList<>();
 
