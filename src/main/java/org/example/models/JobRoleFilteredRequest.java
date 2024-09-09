@@ -30,6 +30,9 @@ public class JobRoleFilteredRequest {
     }
 
     public String getLikeRoleName() {
+        if (roleName != null && !roleName.isEmpty()) {
+            return "%" + roleName + "%";
+        }
         return roleName;
     }
 
