@@ -114,7 +114,7 @@ public class JobRoleDao {
         final int descriptionIndex = 2;
         final int sharepointUrlIndex = 3;
         final int responsibilitiesIndex = 4;
-        final int noOfOpenPositionsIndex = 5;
+        final int numberOfOpenPositionsIndex = 5;
         final int locationIndex = 6;
         final int closingDateIndex = 7;
         final int capabilityNameIndex = 8;
@@ -131,8 +131,8 @@ public class JobRoleDao {
                 jobRole.getSharepointUrl());
         preparedStatement.setString(responsibilitiesIndex,
                 jobRole.getResponsibilities());
-        preparedStatement.setInt(noOfOpenPositionsIndex,
-                jobRole.getNoOfOpenPositions());
+        preparedStatement.setInt(numberOfOpenPositionsIndex,
+                jobRole.getNumberOfOpenPositions());
         preparedStatement.setString(locationIndex,
                 jobRole.getLocation());
         preparedStatement.setDate(closingDateIndex,

@@ -11,7 +11,7 @@ public class JobRoleRequest {
     private String description;
     private String sharepointUrl;
     private String responsibilities;
-    private int noOfOpenPositions;
+    private int numberOfOpenPositions;
     private String location;
     private Date closingDate;
     private String capabilityName;
@@ -49,12 +49,12 @@ public class JobRoleRequest {
         this.responsibilities = responsibilities;
     }
 
-    public int getNoOfOpenPositions() {
-        return noOfOpenPositions;
+    public int getNumberOfOpenPositions() {
+        return numberOfOpenPositions;
     }
 
-    public void setNoOfOpenPositions(final int noOfOpenPositions) {
-        this.noOfOpenPositions = noOfOpenPositions;
+    public void setNumberOfOpenPositions(final int numberOfOpenPositions) {
+        this.numberOfOpenPositions = numberOfOpenPositions;
     }
 
     public String getLocation() {
@@ -95,7 +95,7 @@ public class JobRoleRequest {
             @JsonProperty("description") final String description,
             @JsonProperty("sharepointUrl") final String sharepointUrl,
             @JsonProperty("responsibilities") final String responsibilities,
-            @JsonProperty("noOfOpenPositions") final int noOfOpenPositions,
+            @JsonProperty("numberOfOpenPositions") final int numberOfOpenPositions,
             @JsonProperty("location") final String location,
             @JsonProperty("closingDate") final Date closingDate,
             @JsonProperty("capabilityName") final String capabilityName,
@@ -104,7 +104,7 @@ public class JobRoleRequest {
         this.description = description;
         this.sharepointUrl = sharepointUrl;
         this.responsibilities = responsibilities;
-        this.noOfOpenPositions = noOfOpenPositions;
+        this.numberOfOpenPositions = numberOfOpenPositions;
         this.location = location;
         this.closingDate = closingDate;
         this.capabilityName = capabilityName;
