@@ -13,6 +13,7 @@ import org.example.auth.JwtAuthenticator;
 import org.example.auth.RoleAuthorizer;
 import org.example.controllers.AuthController;
 import org.example.daos.AuthDao;
+import org.example.daos.JobApplicationDao;
 import org.example.exceptions.FileUploadException;
 import org.example.models.JwtToken;
 import org.example.services.AuthService;
@@ -66,7 +67,7 @@ public class TestApplication extends Application<TestConfiguration> {
                         new AuthService(new AuthDao())));
 
         environment.jersey()
-                .register(new JobRoleController(new JobRoleService(new JobRoleDao())));
+                .register(new JobRoleController(new JobRoleService(new JobRoleDao(), new JobApplicationDao())));
         environment.jersey()
                 .register(MultiPartFeature.class);
     }

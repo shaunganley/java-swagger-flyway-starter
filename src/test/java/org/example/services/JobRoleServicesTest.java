@@ -1,5 +1,6 @@
 package org.example.services;
 
+import org.example.daos.JobApplicationDao;
 import org.example.daos.JobRoleDao;
 import org.example.exceptions.DoesNotExistException;
 import org.example.exceptions.ResultSetException;
@@ -20,7 +21,8 @@ import static org.junit.jupiter.api.Assertions.*;
 class JobRoleServicesTest {
     List<JobRole> jobRoles;
     JobRoleDao jobRoleDao = Mockito.mock(JobRoleDao.class);
-    JobRoleService jobRoleService = new JobRoleService(jobRoleDao);
+    JobApplicationDao jobApplicationDao = Mockito.mock(JobApplicationDao.class);
+    JobRoleService jobRoleService = new JobRoleService(jobRoleDao, jobApplicationDao);
 
     @BeforeEach
     public void jobRolesListClean() {

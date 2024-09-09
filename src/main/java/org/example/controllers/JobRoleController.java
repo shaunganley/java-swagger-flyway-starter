@@ -9,7 +9,10 @@ import io.swagger.annotations.ApiResponses;
 import io.swagger.annotations.Authorization;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.example.exceptions.AlreadyExistsException;
 import org.example.exceptions.DoesNotExistException;
+import org.example.exceptions.FileNeededException;
+import org.example.exceptions.FileTooBigException;
 import org.example.exceptions.FileUploadException;
 import org.example.exceptions.ResultSetException;
 import org.example.models.JobRole;
@@ -34,6 +37,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.sql.SQLException;
@@ -87,27 +91,25 @@ public class JobRoleController {
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.MULTIPART_FORM_DATA)
-    @RolesAllowed({UserRole.USER})
+    @RolesAllowed({UserRole.ADMIN, UserRole.USER})
     @ApiOperation(
             value = "Inform user if cv was sent successfully",
             authorizations = @Authorization(value = HttpHeaders.AUTHORIZATION),
             response = RoleApplicationResponse.class,
             produces = "application/json")
     @Path("/{jobRoleId}/applications")
-    public Response applyForRole(@PathParam("jobRoleId")final int jobRoleId,
+    public Response applyForRole(@PathParam("jobRoleId") final int jobRoleId,
                                  @FormDataParam("file") final InputStream fileInputStream,
-                                 @FormDataParam("file") final FormDataContentDisposition fileDetail,
                                  @ApiParam(hidden = true) @Auth final JwtToken token) {
         String userEmail = token.getUserEmail();
 
         try {
-            jobRoleService.applyForRole(jobRoleId, userEmail, fileInputStream, fileDetail);
-        }catch (FileUploadException e) {
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
-        } catch (URISyntaxException e) {
-            throw new RuntimeException(e);
+            jobRoleService.applyForRole(jobRoleId, userEmail, fileInputStream);
+        } catch (DoesNotExistException | FileTooBigException | AlreadyExistsException | FileNeededException e) {
+            return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
+        } catch (SQLException | IOException | FileUploadException e) {
+            return Response.serverError().build();
         }
         return Response.ok().entity(new RoleApplicationResponse("File uploaded successfully")).build();
-        //return Response.ok().entity(new RoleApplicationResponse("success with email: " + userEmail)).build();
     }
 }

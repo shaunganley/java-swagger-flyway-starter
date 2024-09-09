@@ -1,23 +1,17 @@
 package org.example.daos;
 
-import com.amazonaws.services.s3.AmazonS3;
-import org.example.exceptions.FileUploadException;
 import org.example.exceptions.ResultSetException;
 import org.example.models.JobRole;
-import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 
-import java.io.InputStream;
-import java.net.URISyntaxException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
 public class JobRoleDao {
-
-    private static final String BUCKET_NAME = "good-day-org-recruitment";
 
     public List<JobRole> getAllJobRoles() throws SQLException, ResultSetException {
         List<JobRole> jobRoles = new ArrayList<>();
@@ -61,49 +55,15 @@ public class JobRoleDao {
         jobRoles.add(jobRole);
     }
 
-    public void applyForRole(final int jobRoleId,
-                             final String userEmail,
-                             final InputStream fileInputStream,
-                             final FormDataContentDisposition fileDetail) throws FileUploadException,
-            URISyntaxException {
+    public boolean existsOpenById(int jobRoleId) throws SQLException {
+        try (Connection connection = DatabaseConnector.getConnection()) {
 
-        //TODO: check fo existence of this job role
-        //uploadFileToS3(jobRoleId, userEmail, fileInputStream, fileDetail);
+            String query = "SELECT * FROM job_roles WHERE jobRoleId = ? AND statusId = 1";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setInt(1, jobRoleId);
+            ResultSet resultSet = statement.executeQuery();
 
-        //TODO: Add application to a applications table
-    }
-
-
-    public void uploadFileToS3(/*final int jobRoleId,
-                               final String userEmail,
-                               final InputStream fileInputStream,
-                               final FormDataContentDisposition fileDetail*/)
-            throws FileUploadException, URISyntaxException {
-
-        AmazonS3 amazonS3Client = AmazonS3Connector.getAmazonS3Client();
-
-        /*final Class clazz = JobRoleDao.class;
-
-        final URL resource = clazz.getClassLoader().getResource("TestBodyToS3.json");
-
-        File f = new File(resource.toURI());*/
-
-        amazonS3Client.putObject(BUCKET_NAME, "TestFile", "(O  <..>  O)");
-
-        /*String fileName = "cv/" + userEmail + "/" + jobRoleId + "/" + fileDetail.getFileName();
-        try {
-
-            ObjectMetadata metadata = new ObjectMetadata();
-            metadata.setContentLength(fileDetail.getSize());
-
-            amazonS3Client.putObject(BUCKET_NAME,
-                    fileName,
-                    fileInputStream,
-                    metadata);
-        } catch (SdkClientException e) {
-            throw new FileUploadException();
-        }*/
-
-
+            return resultSet.next();
+        }
     }
 }
