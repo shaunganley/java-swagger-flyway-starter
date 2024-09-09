@@ -19,6 +19,7 @@ import org.example.models.RoleApplicationResponse;
 import org.example.models.UserRole;
 import org.example.services.JobRoleService;
 import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
+import org.glassfish.jersey.media.multipart.FormDataParam;
 
 import javax.annotation.security.RolesAllowed;
 import javax.print.attribute.standard.Media;
@@ -94,13 +95,13 @@ public class JobRoleController {
             produces = "application/json")
     @Path("/{jobRoleId}/applications")
     public Response applyForRole(@PathParam("jobRoleId")final int jobRoleId,
-                                 //@FormParam("file") final InputStream fileInputStream,
-                                 //@FormParam("file") final FormDataContentDisposition fileDetail,
+                                 @FormDataParam("file") final InputStream fileInputStream,
+                                 @FormDataParam("file") final FormDataContentDisposition fileDetail,
                                  @ApiParam(hidden = true) @Auth final JwtToken token) {
         String userEmail = token.getUserEmail();
 
         try {
-            jobRoleService.applyForRole(jobRoleId, userEmail/*, fileInputStream, fileDetail*/);
+            jobRoleService.applyForRole(jobRoleId, userEmail, fileInputStream, fileDetail);
         }catch (FileUploadException e) {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
         } catch (URISyntaxException e) {

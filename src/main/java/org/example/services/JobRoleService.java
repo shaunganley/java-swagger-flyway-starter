@@ -38,10 +38,10 @@ public class JobRoleService {
     }
 
     public void applyForRole(final int jobRoleId,
-                             final String userEmail
-                             /*final InputStream fileInputStream,
-                             final FormDataContentDisposition fileDetail*/) throws FileUploadException,
+                             final String userEmail,
+                             final InputStream fileInputStream,
+                             final FormDataContentDisposition fileDetail) throws FileUploadException,
             URISyntaxException {
-        jobRoleDao.applyForRole(jobRoleId, userEmail/*, fileInputStream, fileDetail*/);
+        jobRoleDao.applyForRole(jobRoleId, userEmail, fileInputStream, fileDetail);
     }
 }

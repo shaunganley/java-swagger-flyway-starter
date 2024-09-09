@@ -1,19 +1,13 @@
 package org.example.daos;
 
-import com.amazonaws.AmazonServiceException;
-import com.amazonaws.SdkClientException;
 import com.amazonaws.services.s3.AmazonS3;
-import com.amazonaws.services.s3.model.ObjectMetadata;
 import org.example.exceptions.FileUploadException;
 import org.example.exceptions.ResultSetException;
 import org.example.models.JobRole;
-import org.example.models.RoleApplicationResponse;
 import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 
-import java.io.File;
 import java.io.InputStream;
 import java.net.URISyntaxException;
-import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -68,9 +62,9 @@ public class JobRoleDao {
     }
 
     public void applyForRole(final int jobRoleId,
-                             final String userEmail
-                             /*final InputStream fileInputStream,
-                             final FormDataContentDisposition fileDetail*/) throws FileUploadException,
+                             final String userEmail,
+                             final InputStream fileInputStream,
+                             final FormDataContentDisposition fileDetail) throws FileUploadException,
             URISyntaxException {
 
         //TODO: check fo existence of this job role
