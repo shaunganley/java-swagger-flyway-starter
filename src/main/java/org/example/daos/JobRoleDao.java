@@ -103,7 +103,12 @@ public class JobRoleDao {
     public int createJobRole(final JobRoleRequest jobRole) throws SQLException {
         Connection connection = DatabaseConnector.getConnection();
         String insertStatement =
-                "INSERT INTO JobRole(roleName, description, sharepointUrl, responsibilities, noOfOpenPositions, location, closingDate, capabilityName, bandName) VALUES (?,?,?,?,?,?,?,?,?);";
+                "INSERT INTO job_roles (roleName, description, sharepointUrl, responsibilities, numberOfOpenPositions, "
+                        + "location, closingDate, capabilityId, bandId, statusId) "
+                        + "VALUES (?, ?, ?, ?, ?, ?, ?, "
+                        + "(SELECT capability.capabilityId FROM capability WHERE capabilityName = ?), "
+                        + "(SELECT band.nameId FROM band WHERE bandName = ?), "
+                        + "(SELECT status.statusId FROM status WHERE statusId = 1));";
 
         final int roleNameIndex = 1;
         final int descriptionIndex = 2;

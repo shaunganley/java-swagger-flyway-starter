@@ -97,9 +97,9 @@ public class JobRoleRequest {
             @JsonProperty("responsibilities") final String responsibilities,
             @JsonProperty("noOfOpenPositions") final int noOfOpenPositions,
             @JsonProperty("location") final String location,
-            @JsonProperty("closingDate") final Date closingDate),
-            @JsonProperty("capabilityName") final String capabilityName),
-            @JsonProperty("bandName") final String bandName){
+            @JsonProperty("closingDate") final Date closingDate,
+            @JsonProperty("capabilityName") final String capabilityName,
+            @JsonProperty("bandName") final String bandName) {
         this.roleName = roleName;
         this.description = description;
         this.sharepointUrl = sharepointUrl;

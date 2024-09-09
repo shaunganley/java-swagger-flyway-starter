@@ -1,5 +1,5 @@
 create table job_roles (
-	jobRoleId int not null,
+	jobRoleId int not null auto_increment,
     roleName varchar(255),
     location varchar(64),
     capabilityId int not null,
