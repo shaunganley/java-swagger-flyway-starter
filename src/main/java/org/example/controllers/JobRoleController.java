@@ -20,29 +20,19 @@ import org.example.models.JobRole;
 import org.example.models.JobRoleApplication;
 import org.example.models.JobRoleResponse;
 import org.example.models.JwtToken;
-import org.example.models.LoginRequest;
 import org.example.models.UserRole;
 import org.example.services.JobRoleService;
 
 import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.BeanParam;
 import javax.ws.rs.GET;
-import javax.ws.rs.HeaderParam;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.example.exceptions.DoesNotExistException;
-import org.example.exceptions.ResultSetException;
-import org.example.models.JobRole;
 import org.example.models.JobRoleFilteredRequest;
-import org.example.models.JobRoleResponse;
-import org.example.models.UserRole;
-import org.example.services.JobRoleService;
 
 @Api("Job Role API")
 @Path("/api/job-roles")
