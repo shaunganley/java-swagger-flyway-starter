@@ -98,4 +98,42 @@ public class JobRoleDao {
         }
     }
 
+    public List<JobRole> getSortedOpenJobRoles(
+            final String field, final String direction) throws SQLException {
+        List<JobRole> jobRoles = new ArrayList<>();
+
+        try (Connection connection = DatabaseConnector.getConnection()) {
+
+            String query =
+                    "select job_roles.jobRoleId, job_roles.roleName, "
+                            + "job_roles.location, "
+                            + "capability.capabilityName, band.bandName, "
+                            + "job_roles.closingDate "
+                            + "from job_roles "
+                            + "join capability on job_roles.capabilityId = "
+                            + "capability.capabilityId "
+                            + "join band on job_roles.bandId = band.nameId "
+                            + "join status on status.statusId "
+                            + "where job_roles.statusId = 1 "
+                            + "group by job_roles.jobRoleId"
+                            +
+                            " ORDER BY " + field + " " + direction + ";";
+            PreparedStatement statement =
+                    connection.prepareStatement(query);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet != null) {
+                while (resultSet.next()) {
+                    jobRoles.add(new JobRole(
+                            resultSet.getInt("job_roles.jobRoleId"),
+                            resultSet.getString("job_roles.roleName"),
+                            resultSet.getString("job_roles.location"),
+                            resultSet.getString("capability.capabilityName"),
+                            resultSet.getString("band.bandName"),
+                            resultSet.getDate("job_roles.closingDate")));
+                }
+            }
+        }
+        return jobRoles;
+    }
+
 }

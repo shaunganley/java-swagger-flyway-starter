@@ -33,4 +33,10 @@ public class JobRoleService {
         }
         return JobRoleMapper.mapJobRoleToJobRoleDetailedResponse(jobRole);
     }
+
+    public List<JobRoleResponse> getSortedOpenJobRoles(
+            final String field, final String direction) throws SQLException {
+        return JobRoleMapper.mapJobRolesListToJobRoleResponseList(
+                jobRoleDao.getSortedOpenJobRoles(field, direction));
+    }
 }
