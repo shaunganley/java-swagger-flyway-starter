@@ -6,6 +6,7 @@ import org.example.exceptions.DoesNotExistException;
 import org.example.mappers.JobRoleMapper;
 import org.example.models.JobRole;
 import org.example.models.JobRoleDetailedResponse;
+import org.example.models.JobRoleRequest;
 import org.example.models.JobRoleResponse;
 
 import java.sql.SQLException;
@@ -18,6 +19,13 @@ public class JobRoleService {
 
     public JobRoleService(final JobRoleDao jobRoleDao) {
         this.jobRoleDao = jobRoleDao;
+    }
+
+    public int createJobRole(final JobRoleRequest jobRoleRequest)
+            throws SQLException {
+
+        int jobRoleId = jobRoleDao.createJobRole(jobRoleRequest);
+        return jobRoleId;
     }
 
     public List<JobRoleResponse> getOpenJobRoles() throws SQLException {

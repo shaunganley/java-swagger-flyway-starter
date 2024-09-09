@@ -1,11 +1,13 @@
 package org.example.daos;
 
 import org.example.models.JobRole;
+import org.example.models.JobRoleRequest;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -96,6 +98,54 @@ public class JobRoleDao {
 
             return null;
         }
+    }
+
+    public int createJobRole(final JobRoleRequest jobRole) throws SQLException {
+        Connection connection = DatabaseConnector.getConnection();
+        String insertStatement =
+                "INSERT INTO JobRole(roleName, description, sharepointUrl, responsibilities, noOfOpenPositions, location, closingDate, capabilityName, bandName) VALUES (?,?,?,?,?,?,?,?,?);";
+
+        final int roleNameIndex = 1;
+        final int descriptionIndex = 2;
+        final int sharepointUrlIndex = 3;
+        final int responsibilitiesIndex = 4;
+        final int noOfOpenPositionsIndex = 5;
+        final int locationIndex = 6;
+        final int closingDateIndex = 7;
+        final int capabilityNameIndex = 8;
+        final int bandNameIndex = 9;
+
+        PreparedStatement preparedStatement =
+                connection.prepareStatement(insertStatement,
+                        Statement.RETURN_GENERATED_KEYS);
+        preparedStatement.setString(roleNameIndex,
+                jobRole.getRoleName());
+        preparedStatement.setString(descriptionIndex,
+                jobRole.getDescription());
+        preparedStatement.setString(sharepointUrlIndex,
+                jobRole.getSharepointUrl());
+        preparedStatement.setString(responsibilitiesIndex,
+                jobRole.getResponsibilities());
+        preparedStatement.setInt(noOfOpenPositionsIndex,
+                jobRole.getNoOfOpenPositions());
+        preparedStatement.setString(locationIndex,
+                jobRole.getLocation());
+        preparedStatement.setDate(closingDateIndex,
+                jobRole.getClosingDate());
+        preparedStatement.setString(capabilityNameIndex,
+                jobRole.getCapabilityName());
+        preparedStatement.setString(bandNameIndex,
+                jobRole.getBandName());
+
+
+        preparedStatement.executeUpdate();
+
+        ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
+
+        if (generatedKeys.next()) {
+            return generatedKeys.getInt(1);
+        }
+        return -1;
     }
 
 }

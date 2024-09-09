@@ -3,9 +3,11 @@ package org.example.controllers;
 import io.swagger.annotations.Api;
 import org.eclipse.jetty.http.HttpStatus;
 import org.example.exceptions.DoesNotExistException;
+import org.example.models.JobRoleRequest;
 import org.example.services.JobRoleService;
 
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -46,6 +48,19 @@ public class JobRoleController {
             return Response.serverError().build();
         } catch (DoesNotExistException e) {
             return Response.status(HttpStatus.NOT_FOUND_404).build();
+        }
+    }
+
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response createJobRole(final JobRoleRequest jobRoleRequest) {
+        try {
+            return Response
+                    .status(Response.Status.CREATED)
+                    .entity(jobRoleService.createJobRole(jobRoleRequest))
+                    .build();
+        } catch (SQLException e) {
+            return Response.serverError().build();
         }
     }
 }
