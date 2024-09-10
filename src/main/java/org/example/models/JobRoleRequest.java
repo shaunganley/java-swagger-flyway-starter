@@ -15,6 +15,7 @@ public class JobRoleRequest {
     private String location;
     private Date closingDate;
     private String capabilityName;
+    private int capabilityId;
     private String bandName;
 
     public String getRoleName() {
