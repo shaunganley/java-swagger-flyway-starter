@@ -32,7 +32,7 @@ public class JobApplicationDao {
 
     private String createKey(int jobRoleId, String userEmail) {
         String timestamp = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
-        return "applications/" + jobRoleId + "/" + userEmail + "-resume" + timestamp;
+        return "applications/" + jobRoleId + "/" + userEmail + "-resume" + timestamp + ".pdf";
     }
 
     public PutObjectResult uploadFileToS3(final String key,
