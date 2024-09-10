@@ -132,14 +132,13 @@ public class JobRoleControllerTest {
                 3
         );
 
-        int createdJobRoleId = 1; // Mocked job role ID
+        int createdJobRoleId = 1;
 
-        // Mock the service to return the job role ID (int)
         Mockito.when(jobRoleService.createJobRole(jobRoleRequest)).thenReturn(createdJobRoleId);
 
         Response expectedResponse = Response
                 .status(Response.Status.CREATED)
-                .entity(createdJobRoleId)  // Since the service returns an int, the response entity should be the int ID
+                .entity(createdJobRoleId)
                 .build();
 
         Response actualResponse = jobRoleController.createJobRole(jobRoleRequest);
@@ -167,7 +166,6 @@ public class JobRoleControllerTest {
                 0
         );
 
-        // Mock the service to throw InvalidException
         Mockito.when(jobRoleService.createJobRole(jobRoleRequest)).thenThrow(new InvalidException(
                 Entity.JOB_ROLE, "Invalid Job Role Request"));
 
@@ -201,7 +199,6 @@ public class JobRoleControllerTest {
                 3
         );
 
-        // Mock the service to throw an SQLException
         Mockito.when(jobRoleService.createJobRole(jobRoleRequest)).thenThrow(SQLException.class);
 
         Response response = jobRoleController.createJobRole(jobRoleRequest);
