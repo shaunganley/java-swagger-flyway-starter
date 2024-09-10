@@ -7,7 +7,7 @@
     <modelVersion>4.0.0</modelVersion>
 
 
-    <groupId>com.kainos.ea</groupId>
+    <groupId>org.example</groupId>
     <artifactId>JavaWebService</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>

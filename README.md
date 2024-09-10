@@ -70,3 +70,23 @@ Configure checkstyle in Intellij:
 6. Click Next, then Next again, then Finish,
 7. Check the box for Active, then click Apply, then OK,
 8. Click on the CheckStyle button above the Terminal button and select Sun Checks Modified as the Rules.
+
+**How to run Integration Tests**
+---
+
+1. Open the .zshrc file
+2. Add the following lines to your ~/.zshrc file:
+
+```
+export "VALID_TEST_EMAIL"="user@email.com"
+export "VALID_TEST_PASSWORD"="regularU\$er123"
+ 
+```
+
+3. Reload your terminal session if required:
+
+```
+. ~/.zshrc
+```
+
+4. Reload IntelliJ if required
