@@ -95,11 +95,12 @@ public class JobRoleRequest {
             @JsonProperty("description") final String description,
             @JsonProperty("sharepointUrl") final String sharepointUrl,
             @JsonProperty("responsibilities") final String responsibilities,
-            @JsonProperty("numberOfOpenPositions") final int numberOfOpenPositions,
+            @JsonProperty("numberOfOpenPositions")
+            final int numberOfOpenPositions,
             @JsonProperty("location") final String location,
             @JsonProperty("closingDate") final Date closingDate,
-            @JsonProperty("capabilityName") final String capabilityName,
-            @JsonProperty("bandName") final String bandName) {
+            @JsonProperty("capabilityId") final int capabilityId,
+            @JsonProperty("bandId") final int bandId) {
         this.roleName = roleName;
         this.description = description;
         this.sharepointUrl = sharepointUrl;
@@ -107,8 +108,8 @@ public class JobRoleRequest {
         this.numberOfOpenPositions = numberOfOpenPositions;
         this.location = location;
         this.closingDate = closingDate;
-        this.capabilityName = capabilityName;
-        this.bandName = bandName;
+        this.capabilityId = capabilityId;
+        this.bandId = bandId;
     }
 
 }
