@@ -1,7 +1,10 @@
 package org.example.controllers;
 
 import org.example.exceptions.DoesNotExistException;
+import org.example.exceptions.Entity;
+import org.example.exceptions.InvalidException;
 import org.example.models.JobRoleDetailedResponse;
+import org.example.models.JobRoleRequest;
 import org.example.models.JobRoleResponse;
 import org.example.services.JobRoleService;
 import org.junit.Assert;
@@ -111,5 +114,98 @@ public class JobRoleControllerTest {
     }
 
     @Test
-    public void createJobRole_
+    public void createJobRole_shouldReturnResponseCode201_whenJobRoleCreatedSuccessfully()
+            throws SQLException, InvalidException {
+
+        long millis = System.currentTimeMillis();
+        Date closingDate = new Date(millis);
+
+        JobRoleRequest jobRoleRequest = new JobRoleRequest(
+                "Valid Role Name",
+                "Some description",
+                "https://valid.url",
+                "Some responsibilities",
+                1,
+                "Some location",
+                closingDate,
+                1,
+                3
+        );
+
+        int createdJobRoleId = 1; // Mocked job role ID
+
+        // Mock the service to return the job role ID (int)
+        Mockito.when(jobRoleService.createJobRole(jobRoleRequest)).thenReturn(createdJobRoleId);
+
+        Response expectedResponse = Response
+                .status(Response.Status.CREATED)
+                .entity(createdJobRoleId)  // Since the service returns an int, the response entity should be the int ID
+                .build();
+
+        Response actualResponse = jobRoleController.createJobRole(jobRoleRequest);
+
+        Assert.assertEquals(expectedResponse.getStatus(), actualResponse.getStatus());
+        Assert.assertEquals(expectedResponse.getEntity(), actualResponse.getEntity());
+    }
+
+    @Test
+    public void createJobRole_shouldReturnResponseCode400_whenInvalidExceptionThrown()
+            throws SQLException, InvalidException {
+
+        long millis = System.currentTimeMillis();
+        Date closingDate = new Date(millis);
+
+        JobRoleRequest jobRoleRequest = new JobRoleRequest(
+                "Invalid Role Name",
+                "",
+                "",
+                "",
+                0,
+                "",
+                closingDate,
+                0,
+                0
+        );
+
+        // Mock the service to throw InvalidException
+        Mockito.when(jobRoleService.createJobRole(jobRoleRequest)).thenThrow(new InvalidException(
+                Entity.JOB_ROLE, "Invalid Job Role Request"));
+
+        Response expectedResponse = Response
+                .status(Response.Status.BAD_REQUEST)
+                .entity("JobRole is not valid: Invalid Job Role Request")
+                .build();
+
+        Response actualResponse = jobRoleController.createJobRole(jobRoleRequest);
+
+        Assert.assertEquals(expectedResponse.getStatus(), actualResponse.getStatus());
+        Assert.assertEquals(expectedResponse.getEntity(), actualResponse.getEntity());
+    }
+
+    @Test
+    public void createJobRole_shouldReturnResponseCode500_whenSQLExceptionThrown()
+            throws SQLException, InvalidException {
+
+        long millis = System.currentTimeMillis();
+        Date closingDate = new Date(millis);
+
+        JobRoleRequest jobRoleRequest = new JobRoleRequest(
+                "Valid Role Name",
+                "Some description",
+                "https://valid.url",
+                "Some responsibilities",
+                1,
+                "Some location",
+                closingDate,
+                1,
+                3
+        );
+
+        // Mock the service to throw an SQLException
+        Mockito.when(jobRoleService.createJobRole(jobRoleRequest)).thenThrow(SQLException.class);
+
+        Response response = jobRoleController.createJobRole(jobRoleRequest);
+
+        Assert.assertEquals(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode(), response.getStatus());
+    }
 }
