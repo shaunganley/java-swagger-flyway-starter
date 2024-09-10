@@ -5,4 +5,4 @@ VALUES
     ('rejected');
 
  INSERT INTO job_application (Email, jobRoleId, statusApplicationId)
- VALUES ('admin',3,1), ('admin',5,3), ('admin',6,3);
+ VALUES ('admin@example.com',3,1), ('admin@example.com',5,3), ('admin@example.com',6,3);
