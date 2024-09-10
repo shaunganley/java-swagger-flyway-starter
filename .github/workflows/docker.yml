@@ -2,7 +2,7 @@ name: Docker Image CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main , feat/US050-apply-for-role ]
 
 jobs:
 
@@ -32,7 +32,7 @@ jobs:
           DB_NAME: ${{ secrets.DB_NAME }}
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           ECR_REPOSITORY: employee_demo
-          IMAGE_TAG: good-day-org-api
+          IMAGE_TAG: piotr-bucket-test
         run: |
           docker build --build-arg DB_PASSWORD=${DB_PASSWORD} --build-arg DB_USERNAME=${DB_USERNAME} --build-arg DB_HOST=${DB_HOST} --build-arg DB_NAME=${DB_NAME} -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
