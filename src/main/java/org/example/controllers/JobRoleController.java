@@ -169,9 +169,10 @@ public class JobRoleController {
             return Response.ok().entity(jobRoleService.applyForRole(jobRoleId, userEmail, fileInputStream)).build();
             //return Response.ok().entity(new RoleApplicationResponse("File uploaded successfully")).build();
         } catch (DoesNotExistException | FileTooBigException | AlreadyExistsException | FileNeededException e) {
+            LOGGER.error("applyForRole failed\n{}", e.getMessage());
             return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
         } catch (SQLException | IOException | FileUploadException | SdkClientException e) {
-            e.printStackTrace();
+            LOGGER.error("applyForRole failed\n{}", e.getMessage());
             return Response.serverError().build();
         }
 

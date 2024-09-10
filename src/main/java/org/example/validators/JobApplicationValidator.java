@@ -33,28 +33,33 @@ public class JobApplicationValidator {
         System.out.println("file Bytes length: " + fileBytes.length);
 
         if (fileBytes.length > MAX_FILE_SIZE_BYTES){
+            System.out.println("exceeded max size");
             throw new FileTooBigException();
         }
         if(fileBytes.length == 0 ){
+            System.out.println("0 bytes found");
             throw new FileNeededException();
         }
         metadata.setContentLength(fileBytes.length);
         if (!jobRoleDao.existsOpenById(jobRoleId)){
+            System.out.println("jobrole does not exist or is not open");
             throw new DoesNotExistException(Entity.JOB_ROLE);
         }
         if (jobApplicationDao.existsByIdAndUserEmail(jobRoleId, userEmail)){
+            System.out.println("application already posted");
             throw new AlreadyExistsException(Entity.JOB_APPLICATION);
         }
 
         return fileBytes;
     }
 
-    public static byte[] readInputStream(InputStream inputStream) throws IOException {
+    private static byte[] readInputStream(InputStream inputStream) throws IOException {
         ByteArrayOutputStream buffer = new ByteArrayOutputStream();
         byte[] data = new byte[4096];  // 4KB buffer size
 
         int bytesRead;
         while ((bytesRead = inputStream.read(data, 0, data.length)) != -1) {
+            System.out.println("buffering data");
             buffer.write(data, 0, bytesRead);
         }
 

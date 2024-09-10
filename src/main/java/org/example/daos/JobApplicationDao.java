@@ -24,6 +24,7 @@ public class JobApplicationDao {
             throws SQLException, IOException {
 
         String key = createKey(jobRoleId, userEmail);
+        System.out.println("key: " + key);
         PutObjectResult putObjectResult = uploadFileToS3(key, fileBytes, metadata);
         addJobApplication(jobRoleId, userEmail);
         return putObjectResult;
@@ -38,7 +39,14 @@ public class JobApplicationDao {
                                           final byte[] fileBytes,
                                           final ObjectMetadata metadata) {
 
-        AmazonS3 amazonS3Client = AmazonS3Connector.getAmazonS3Client();
+
+        AmazonS3 amazonS3Client = null;
+        try {
+            amazonS3Client = AmazonS3Connector.getAmazonS3Client();
+        } catch (Exception e) {
+            System.out.println("Failed to get S# client");
+            System.out.println(e.getMessage());
+        }
         System.out.println("file len in bytes[] " + fileBytes.length);
 
         PutObjectResult putObjectResult;
