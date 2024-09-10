@@ -9,6 +9,7 @@ import io.swagger.annotations.ApiResponses;
 import io.swagger.annotations.Authorization;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.example.daos.JobApplicationDao;
 import org.example.exceptions.AlreadyExistsException;
 import org.example.exceptions.DoesNotExistException;
 import org.example.exceptions.FileNeededException;
@@ -37,6 +38,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URISyntaxException;
@@ -104,6 +106,7 @@ public class JobRoleController {
         String userEmail = token.getUserEmail();
 
         try {
+            LOGGER.info("Job Application Request Received");
             jobRoleService.applyForRole(jobRoleId, userEmail, fileInputStream);
         } catch (DoesNotExistException | FileTooBigException | AlreadyExistsException | FileNeededException e) {
             return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();

@@ -17,7 +17,6 @@ import org.example.validators.JobApplicationValidator;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URISyntaxException;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -53,13 +52,13 @@ public class JobRoleService {
         metadata.addUserMetadata("jobRoleId", String.valueOf(jobRoleId));
         metadata.addUserMetadata("userEmail", userEmail);
 
-        JobApplicationValidator.validateAndAddContentLengthToMetadata(jobRoleDao,
+        byte[] fileBytes = JobApplicationValidator.validateAndProduceByteArray(jobRoleDao,
                 jobApplicationDao,
                 jobRoleId,
                 userEmail,
                 fileInputStream,
                 metadata);
-        jobApplicationDao.applyForRole(jobRoleId, userEmail, fileInputStream, metadata);
+        jobApplicationDao.applyForRole(jobRoleId, userEmail, fileBytes, metadata);
     }
 
 

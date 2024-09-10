@@ -19,7 +19,7 @@ import java.sql.SQLException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-@Api("Engineering Academy Dropwizard Auth API")
+@Api("Login API")
 @Path("/api/auth")
 @SwaggerDefinition(
         securityDefinition = @SecurityDefinition(

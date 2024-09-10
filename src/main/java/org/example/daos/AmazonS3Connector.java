@@ -21,8 +21,6 @@ public class AmazonS3Connector {
 
     public static AmazonS3 getAmazonS3Client() {
 
-
-
         if (amazonS3Client != null) {
             return amazonS3Client;
         }

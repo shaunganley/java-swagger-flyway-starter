@@ -20,16 +20,18 @@ public class JobApplicationValidator {
     private static final long MAX_FILE_SIZE_MB = 5L;  // File size limit in MB
     private static final long MAX_FILE_SIZE_BYTES = MAX_FILE_SIZE_MB * 1024 * 1024;
 
-    public static void validateAndAddContentLengthToMetadata(final JobRoleDao jobRoleDao,
-                                                             final JobApplicationDao jobApplicationDao,
-                                                             final int jobRoleId,
-                                                             final String userEmail,
-                                                             final InputStream fileInputStream,
-                                                             final ObjectMetadata metadata)
+    public static byte[] validateAndProduceByteArray(final JobRoleDao jobRoleDao,
+                                                   final JobApplicationDao jobApplicationDao,
+                                                   final int jobRoleId,
+                                                   final String userEmail,
+                                                   final InputStream fileInputStream,
+                                                   final ObjectMetadata metadata)
             throws FileTooBigException, SQLException, DoesNotExistException, IOException, AlreadyExistsException,
             FileNeededException {
 
         byte[] fileBytes = readInputStream(fileInputStream);
+        System.out.println("file Bytes length: " + fileBytes.length);
+
         if (fileBytes.length > MAX_FILE_SIZE_BYTES){
             throw new FileTooBigException();
         }
@@ -43,9 +45,11 @@ public class JobApplicationValidator {
         if (jobApplicationDao.existsByIdAndUserEmail(jobRoleId, userEmail)){
             throw new AlreadyExistsException(Entity.JOB_APPLICATION);
         }
+
+        return fileBytes;
     }
 
-    private static byte[] readInputStream(InputStream inputStream) throws IOException {
+    public static byte[] readInputStream(InputStream inputStream) throws IOException {
         ByteArrayOutputStream buffer = new ByteArrayOutputStream();
         byte[] data = new byte[4096];  // 4KB buffer size
 

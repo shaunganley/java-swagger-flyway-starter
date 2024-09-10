@@ -4,6 +4,9 @@ import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import org.example.models.JobApplicationStatus;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,14 +20,24 @@ public class JobApplicationDao {
 
     public void applyForRole(final int jobRoleId,
                              final String userEmail,
-                             final InputStream fileInputStream,
+                             final byte[] fileBytes,
                              final ObjectMetadata metadata)
-            throws SQLException {
+            throws SQLException, IOException {
 
         String key = createKey(jobRoleId, userEmail);
-        uploadFileToS3(key, fileInputStream, metadata);
+        uploadFileToS3(key, fileBytes, metadata);
         addJobApplication(jobRoleId, userEmail);
 
+    }
+
+    private byte[] toByteArray(InputStream inputStream) throws IOException {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        byte[] buffer = new byte[1024];
+        int bytesRead;
+        while ((bytesRead = inputStream.read(buffer)) != -1) {
+            baos.write(buffer, 0, bytesRead);
+        }
+        return baos.toByteArray();
     }
 
     private String createKey(int jobRoleId, String userEmail) {
@@ -33,11 +46,12 @@ public class JobApplicationDao {
     }
 
     public void uploadFileToS3(final String key,
-                               final InputStream fileInputStream,
+                               final byte[] fileBytes,
                                final ObjectMetadata metadata) {
 
         AmazonS3 amazonS3Client = AmazonS3Connector.getAmazonS3Client();
-        amazonS3Client.putObject(BUCKET_NAME, key, fileInputStream, metadata);
+        System.out.println("file len in bytes[] " + fileBytes.length);
+        amazonS3Client.putObject(BUCKET_NAME, key, new ByteArrayInputStream(fileBytes), metadata);
     }
 
     public boolean existsByIdAndUserEmail(int jobRoleId, String userEmail) throws SQLException {
