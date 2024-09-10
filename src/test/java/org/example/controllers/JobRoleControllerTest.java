@@ -109,4 +109,7 @@ public class JobRoleControllerTest {
 
         Assert.assertEquals(Response.Status.NOT_FOUND.getStatusCode(), response.getStatus());
     }
+
+    @Test
+    public void createJobRole_
 }
