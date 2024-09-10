@@ -5,6 +5,7 @@ import io.dropwizard.testing.junit5.DropwizardExtensionsSupport;
 import org.example.KainosJobWebApplication;
 import org.example.KainosJobWebConfiguration;
 import org.example.models.JobRole;
+import org.example.models.JobRoleRequest;
 import org.example.models.LoginRequest;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -14,6 +15,7 @@ import javax.validation.constraints.Null;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.Response;
+import java.sql.Date;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -96,6 +98,36 @@ public class JobRoleIntegrationTest {
                 .get();
 
         Assertions.assertEquals(404, response.getStatus());
+    }
+
+    @Test
+    public void createJobRole_shouldReturn201_whenJobRoleCreatedSuccessfully() {
+        Client client = APP.client();
+        String token = loginAndGetToken();
+
+        JobRoleRequest jobRoleRequest = new JobRoleRequest(
+                "Software Engineer",
+                "Develops, tests, and maintains software applications",
+                "https://sharepoint.com/job/software-engineer",
+                "Design, develop, and maintain software applications.",
+                1,
+                "New York",
+                new Date(System.currentTimeMillis()),
+                1,
+                3
+        );
+
+        Response response = client.target(BASE_URL + "/job-roles")
+                .request()
+                .header("Authorization", "Bearer " + token)
+                .post(Entity.json(jobRoleRequest));
+
+        assertEquals(Response.Status.CREATED.getStatusCode(), response.getStatus());
+
+        int createdJobRoleId = response.readEntity(Integer.class);
+        assertNotNull(createdJobRoleId);
+
+        Assertions.assertTrue(createdJobRoleId > 0);
     }
 
 }
