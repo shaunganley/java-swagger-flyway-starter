@@ -23,7 +23,7 @@ public class AuthService {
 
     public String login(final LoginRequest loginRequest)
             throws SQLException, InvalidException {
-        if (authValidator.validateEmail(loginRequest.getEmail())) {
+        if (!authValidator.validateEmail(loginRequest.getEmail())) {
             throw new InvalidException(Entity.USER, "Invalid email");
         }
         User user = authDao.getUser(loginRequest);
