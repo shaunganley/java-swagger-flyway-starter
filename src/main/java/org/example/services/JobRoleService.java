@@ -55,7 +55,7 @@ public class JobRoleService {
         List<JobRoleResponse> jobRoleResponses =
                 JobRoleMapper.toResponse(jobRoleDao.getFilteredJobRoles(jobRoleFilteredRequest));
         if (jobRoleResponses.isEmpty()) {
-            throw new DoesNotExistException(Entity.JOB_ROLE);
+            throw new DoesNotExistException(Entity.APPLICATION);
         }
         return jobRoleResponses;
     }

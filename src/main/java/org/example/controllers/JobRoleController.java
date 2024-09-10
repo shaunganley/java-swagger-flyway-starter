@@ -163,10 +163,10 @@ public class JobRoleController {
         try {
             return Response.ok().entity(jobRoleService.getAllUserApplications(email)).build();
         } catch (SQLException e) {
-            LOGGER.error("getUserAllJobApplications failed, SQLException\n" + e.getMessage());
+            LOGGER.error("Receiving job applications failed due to SQLException\n" + e.getMessage());
             return Response.serverError().build();
         } catch (DoesNotExistException e) {
-            LOGGER.error("getUserAllJobApplications failed, DoesNotExistException\n" + e.getMessage());
+            LOGGER.error("Receiving job applications failed due to DoesNotExistException\n" + e.getMessage());
             return Response.status(Response.Status.NOT_FOUND).entity(e.getMessage()).build();
         }
     }
