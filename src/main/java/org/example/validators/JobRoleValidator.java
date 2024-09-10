@@ -77,16 +77,6 @@ public class JobRoleValidator {
                     "Closing date cannot be in the past.");
         }
 
-        // Optionally validate human-readable date format (
-        // e.g., "Monday 9 September 2024")
-        /*if (!validateHumanReadableDate(
-        jobRoleRequest.getClosingDateString())) {
-            throw new InvalidException(Entity.JOB_ROLE,
-                    "Closing Date must be in the format "
-                            + "'DayName Day Month Year' "
-                            + "(e.g., 'Monday 9 September 2024').");
-        }*/
-
         // Validate band name
         if (jobRoleRequest.getBandName() == null
                 || jobRoleRequest.getBandName().isEmpty()) {
