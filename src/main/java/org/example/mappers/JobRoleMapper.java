@@ -21,12 +21,13 @@ public final class JobRoleMapper {
 
     private static JobRoleResponse toResponse(final JobRole jobRole) {
         return new JobRoleResponse(
+                jobRole.getJobRoleId(),
                 jobRole.getRoleName(),
                 jobRole.getJobRoleLocation(),
                 jobRole.getCapabilityName(),
                 jobRole.getBandName(),
                 jobRole.getClosingDate(),
-                jobRole.getStatus()
+                jobRole.getStatusName()
         );
     }
 

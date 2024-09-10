@@ -2,7 +2,6 @@ package org.example.models;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-
 import java.sql.Date;
 import java.util.Objects;
 
@@ -12,56 +11,39 @@ public class JobRole {
     @ApiModelProperty(value = "unique JobRole id")
     private int jobRoleId;
 
-    @ApiModelProperty(
-            value = "Job role's name",
-            required = true,
-            example = "Delivery manager")
+    @ApiModelProperty(value = "Job role's name", required = true, example = "Delivery manager")
     private String roleName;
 
-    @ApiModelProperty(
-            value = "Role's location, defined by ENUM value",
-            required = true,
-            example = "Gdańsk")
+    @ApiModelProperty(value = "Role's location, defined by ENUM value", required = true, example = "Gdansk")
     private String jobRoleLocation;
 
-    @ApiModelProperty(
-            value = "Capability's name",
-            required = true,
-            example = "Digital Service")
+    @ApiModelProperty(value = "Capability's name", required = true, example = "Digital Service")
     private String capabilityName;
 
-    @ApiModelProperty(
-            value = "Band's name",
-            required = true,
-            example = "Trainee")
+    @ApiModelProperty(value = "Band's name", required = true, example = "Trainee")
     private String bandName;
 
-    @ApiModelProperty(
-            value = "Expire date of offer",
-            required = true,
-            example = "11/12/2024")
+    @ApiModelProperty(value = "Expire date of offer", required = true, example = "2024-12-30")
     private Date closingDate;
 
-    @ApiModelProperty(
-            value = "Open or Closed",
-            required = true,
-            example = "open")
-    private String status;
+    @ApiModelProperty(value = "Open or Closed", required = true, example = "open")
+    private String statusName;
 
-    public JobRole(final int jobRoleId,
-                   final String roleName,
-                   final String jobRoleLocation,
-                   final String capabilityName,
-                   final String bandName,
-                   final Date closingDate,
-                   final String status) {
+    public JobRole(
+            final int jobRoleId,
+            final String roleName,
+            final String jobRoleLocation,
+            final String capabilityName,
+            final String bandName,
+            final Date closingDate,
+            final String statusName) {
         this.jobRoleId = jobRoleId;
         this.roleName = roleName;
         this.jobRoleLocation = jobRoleLocation;
         this.capabilityName = capabilityName;
         this.bandName = bandName;
         this.closingDate = closingDate;
-        this.status = status;
+        this.statusName = statusName;
     }
 
     public int getJobRoleId() {
@@ -112,12 +94,12 @@ public class JobRole {
         this.closingDate = closingDate;
     }
 
-    public String getStatus() {
-        return status;
+    public String getStatusName() {
+        return statusName;
     }
 
-    public void setStatus(final String status) {
-        this.status = status;
+    public void setStatusName(final String statusName) {
+        this.statusName = statusName;
     }
 
     @Override
@@ -130,7 +112,8 @@ public class JobRole {
             return false;
         }
         JobRole jobRole = (JobRole) o;
-        return jobRoleId == jobRole.jobRoleId && Objects.equals(roleName, jobRole.roleName)
+        return jobRoleId == jobRole.jobRoleId
+                && Objects.equals(roleName, jobRole.roleName)
                 && Objects.equals(jobRoleLocation, jobRole.jobRoleLocation)
                 && Objects.equals(capabilityName, jobRole.capabilityName)
                 && Objects.equals(bandName, jobRole.bandName)

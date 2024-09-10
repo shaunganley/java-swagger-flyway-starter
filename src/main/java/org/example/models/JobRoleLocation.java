@@ -11,7 +11,7 @@ public enum JobRoleLocation {
     HELSINKI("Helsinki"),
     PARIS("Paris"),
     FRANKFURT_AM_MAIN("Frankfurt am Main"),
-    GDANSK("Gdańsk");
+    GDANSK("Gdansk");
 
     private final String jobRoleLocation;
 

@@ -13,6 +13,18 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Cache Docker layers
+        uses: actions/cache@v3
+        with:
+          path: /tmp/.buildx-cache
+          key: ${{ runner.os }}-buildx-${{ hashFiles('**/pom.xml') }}-cache
+          restore-keys: |
+            ${{ runner.os }}-buildx-${{ hashFiles('**/pom.xml') }}-cache
+            ${{ runner.os }}-buildx-cache
+
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
@@ -34,5 +46,12 @@ jobs:
           ECR_REPOSITORY: employee_demo
           IMAGE_TAG: good-day-org-api
         run: |
-          docker build --build-arg DB_PASSWORD=${DB_PASSWORD} --build-arg DB_USERNAME=${DB_USERNAME} --build-arg DB_HOST=${DB_HOST} --build-arg DB_NAME=${DB_NAME} -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          docker buildx create --use
+          docker buildx build \
+            --build-arg DB_PASSWORD=${DB_PASSWORD} \
+            --build-arg DB_USERNAME=${DB_USERNAME} \
+            --build-arg DB_HOST=${DB_HOST} \
+            --build-arg DB_NAME=${DB_NAME} \
+            --tag $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG \
+            --push \
+            .
