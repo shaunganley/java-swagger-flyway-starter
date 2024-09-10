@@ -10,21 +10,22 @@ import java.util.Date;
 
 public class JobRoleValidator {
 
+    private static final int JOB_ROLE_MAX_LENGTH = 50;
+    private static final int JOB_ROLE_MIN_LENGTH = 5;
+
     public void validateJobRole(final JobRoleRequest jobRoleRequest) throws
             InvalidException {
-        final int fifty = 50;
-        final int five = 5;
 
         if (jobRoleRequest.getRoleName() == null
                 || jobRoleRequest.getRoleName().isEmpty()) {
             throw new InvalidException(Entity.JOB_ROLE,
                     "Job Role Name is required.");
         }
-        if (jobRoleRequest.getRoleName().length() > fifty) {
+        if (jobRoleRequest.getRoleName().length() > JOB_ROLE_MAX_LENGTH) {
             throw new InvalidException(Entity.JOB_ROLE,
                     "Job Role Name is greater than 50 characters.");
         }
-        if (jobRoleRequest.getRoleName().length() < five) {
+        if (jobRoleRequest.getRoleName().length() < JOB_ROLE_MIN_LENGTH) {
             throw new InvalidException(Entity.JOB_ROLE,
                     "Job Role Name is less than 5 characters.");
         }

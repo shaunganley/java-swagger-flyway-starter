@@ -13,6 +13,16 @@ import java.util.List;
 
 public class JobRoleDao {
 
+    private static final int ROLE_NAME_INDEX = 1;
+    private static final int DESCRIPTION_INDEX = 2;
+    private static final int SHAREPOINT_URL_INDEX = 3;
+    private static final int RESPONSIBILITIES_INDEX = 4;
+    private static final int NUMBER_OF_OPEN_POSITIONS_INDEX = 5;
+    private static final int LOCATION_INDEX = 6;
+    private static final int CLOSING_DATE_INDEX = 7;
+    private static final int CAPABILITY_ID_INDEX = 8;
+    private static final int BAND_ID_INDEX = 9;
+
     public List<JobRole> getOpenJobRoles()
             throws SQLException {
         List<JobRole> jobRoles = new ArrayList<>();
@@ -110,36 +120,26 @@ public class JobRoleDao {
                         + "capabilityId, bandId, statusId) "
                         + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 1)";
 
-        final int roleNameIndex = 1;
-        final int descriptionIndex = 2;
-        final int sharepointUrlIndex = 3;
-        final int responsibilitiesIndex = 4;
-        final int numberOfOpenPositionsIndex = 5;
-        final int locationIndex = 6;
-        final int closingDateIndex = 7;
-        final int capabilityIdIndex = 8;
-        final int bandIdIndex = 9;
-
         PreparedStatement preparedStatement =
                 connection.prepareStatement(insertStatement,
                         Statement.RETURN_GENERATED_KEYS);
-        preparedStatement.setString(roleNameIndex,
+        preparedStatement.setString(ROLE_NAME_INDEX,
                 jobRole.getRoleName());
-        preparedStatement.setString(descriptionIndex,
+        preparedStatement.setString(DESCRIPTION_INDEX,
                 jobRole.getDescription());
-        preparedStatement.setString(sharepointUrlIndex,
+        preparedStatement.setString(SHAREPOINT_URL_INDEX,
                 jobRole.getSharepointUrl());
-        preparedStatement.setString(responsibilitiesIndex,
+        preparedStatement.setString(RESPONSIBILITIES_INDEX,
                 jobRole.getResponsibilities());
-        preparedStatement.setInt(numberOfOpenPositionsIndex,
+        preparedStatement.setInt(NUMBER_OF_OPEN_POSITIONS_INDEX,
                 jobRole.getNumberOfOpenPositions());
-        preparedStatement.setString(locationIndex,
+        preparedStatement.setString(LOCATION_INDEX,
                 jobRole.getLocation());
-        preparedStatement.setDate(closingDateIndex,
+        preparedStatement.setDate(CLOSING_DATE_INDEX,
                 jobRole.getClosingDate());
-        preparedStatement.setInt(capabilityIdIndex,
+        preparedStatement.setInt(CAPABILITY_ID_INDEX,
                 jobRole.getCapabilityId());
-        preparedStatement.setInt(bandIdIndex,
+        preparedStatement.setInt(BAND_ID_INDEX,
                 jobRole.getBandId());
 
 
