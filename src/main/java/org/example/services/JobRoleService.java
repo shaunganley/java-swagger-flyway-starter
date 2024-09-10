@@ -45,7 +45,7 @@ public class JobRoleService {
             throws SQLException, DoesNotExistException {
         List<JobRoleApplication> jobRoleApplications = jobRoleDao.getUserJobRoleApplications(email);
         if (jobRoleApplications.isEmpty()) {
-            throw new DoesNotExistException(Entity.USER);
+            throw new DoesNotExistException(Entity.APPLICATION);
         }
         return jobRoleApplications;
     }
@@ -55,7 +55,7 @@ public class JobRoleService {
         List<JobRoleResponse> jobRoleResponses =
                 JobRoleMapper.toResponse(jobRoleDao.getFilteredJobRoles(jobRoleFilteredRequest));
         if (jobRoleResponses.isEmpty()) {
-            throw new DoesNotExistException(Entity.APPLICATION);
+            throw new DoesNotExistException(Entity.USER);
         }
         return jobRoleResponses;
     }
