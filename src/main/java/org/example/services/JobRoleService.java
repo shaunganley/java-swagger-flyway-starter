@@ -72,6 +72,7 @@ public class JobRoleService {
         ObjectMetadata metadata = new ObjectMetadata();
         metadata.addUserMetadata("jobRoleId", String.valueOf(jobRoleId));
         metadata.addUserMetadata("userEmail", userEmail);
+        metadata.setContentType("application/pdf");
 
         byte[] fileBytes = JobApplicationValidator.validateAndProduceByteArray(jobRoleDao,
                 jobApplicationDao,
@@ -79,6 +80,7 @@ public class JobRoleService {
                 userEmail,
                 fileInputStream,
                 metadata);
+        metadata.setContentLength(fileBytes.length);
         return jobApplicationDao.applyForRole(jobRoleId, userEmail, fileBytes, metadata);
     }
 
