@@ -104,8 +104,10 @@ public class JobRoleDao {
         Connection connection = DatabaseConnector.getConnection();
 
         String insertStatement =
-                "INSERT INTO job_roles (roleName, description, sharepointUrl, responsibilities, numberOfOpenPositions, "
-                        + "location, closingDate, capabilityId, bandId, statusId) "
+                "INSERT INTO job_roles (roleName, description, sharepointUrl, "
+                        + "responsibilities, numberOfOpenPositions, "
+                        + "location, closingDate, "
+                        + "capabilityId, bandId, statusId) "
                         + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 1)";
 
         final int roleNameIndex = 1;
