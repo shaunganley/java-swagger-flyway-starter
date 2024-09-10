@@ -4,6 +4,7 @@ import org.example.exceptions.DoesNotExistException;
 import org.example.models.JobRole;
 import org.example.models.JobRoleDetailedResponse;
 import org.example.models.JobRoleResponse;
+import org.example.validators.JobRoleValidator;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -23,8 +24,9 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class JobRoleServiceTest {
 
     JobRoleDao jobRoleDao = Mockito.mock(JobRoleDao.class);
+    JobRoleValidator jobRoleValidator = Mockito.mock(JobRoleValidator.class);
 
-    JobRoleService jobRoleService = new JobRoleService(jobRoleDao);
+    JobRoleService jobRoleService = new JobRoleService(jobRoleDao, jobRoleValidator);
 
     @Test
     public void getAllJobRoles_shouldReturnJobRoleResponseList() throws SQLException {

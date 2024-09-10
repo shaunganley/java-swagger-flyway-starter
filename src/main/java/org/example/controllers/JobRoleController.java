@@ -3,6 +3,7 @@ package org.example.controllers;
 import io.swagger.annotations.Api;
 import org.eclipse.jetty.http.HttpStatus;
 import org.example.exceptions.DoesNotExistException;
+import org.example.exceptions.InvalidException;
 import org.example.models.JobRoleRequest;
 import org.example.services.JobRoleService;
 
@@ -62,6 +63,9 @@ public class JobRoleController {
                     .build();
         } catch (SQLException e) {
             return Response.serverError().build();
+        } catch (InvalidException e) {
+            return Response.status(
+                    Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
         }
     }
 }
