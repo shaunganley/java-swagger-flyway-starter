@@ -4,6 +4,7 @@ import org.example.daos.AuthDao;
 import org.example.exceptions.InvalidException;
 import org.example.models.LoginRequest;
 import org.example.models.User;
+import org.example.validators.AuthValidator;
 import org.junit.jupiter.api.Test;
 import org.mindrot.jbcrypt.BCrypt;
 import org.mockito.Mockito;
@@ -14,7 +15,8 @@ import static org.mockito.Mockito.*;
 public class AuthServiceTest {
 
     AuthDao authDao = Mockito.mock(AuthDao.class);
-    AuthService authService = new AuthService(authDao);
+    AuthValidator authValidator = Mockito.mock(AuthValidator.class);
+    AuthService authService = new AuthService(authDao, authValidator);
 
     @Test
     public void login_GivenValidLoginRequest_WhenDaoReturnsNullUser_ShouldThrowInvalidException() throws SQLException {

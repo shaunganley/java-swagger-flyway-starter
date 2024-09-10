@@ -32,10 +32,10 @@ class JobRoleControllerIT {
 
     @Test
     public void authorization_givenUserRole_whenJobRolesGET_shouldReturnStatus200(){
-        String adminToken = generateToken("email@example.com", 2);
-        JwtUtils.validateToken(adminToken);
+        String userToken = generateToken("email@example.com", 2);
+        JwtUtils.validateToken(userToken);
         Integer result = APP.client().target("http://localhost:8080/api/job-roles").request()
-                .header("Authorization" , ("Bearer " + adminToken)).get().getStatus();
+                .header("Authorization" , ("Bearer " + userToken)).get().getStatus();
         assertEquals(200, result);
     }
 
