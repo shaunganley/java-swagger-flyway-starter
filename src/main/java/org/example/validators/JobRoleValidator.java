@@ -77,9 +77,10 @@ public class JobRoleValidator {
                     "Closing date cannot be in the past.");
         }
 
+        /*
         // Validate band name
-        if (jobRoleRequest.getBandName() == null
-                || jobRoleRequest.getBandName().isEmpty()) {
+        if (jobRoleRequest.getBandId() == 0
+                || jobRoleRequest.getBandId().isEmpty()) {
             throw new InvalidException(Entity.JOB_ROLE,
                     "Band Name is required.");
         }
@@ -90,6 +91,9 @@ public class JobRoleValidator {
             throw new InvalidException(Entity.JOB_ROLE,
                     "Capability Name is required.");
         }
+    }
+
+         */
     }
 
     // Method to validate the URL format
