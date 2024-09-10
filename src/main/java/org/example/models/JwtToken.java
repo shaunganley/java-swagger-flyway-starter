@@ -1,15 +1,14 @@
 package org.example.models;
 
-import javax.security.auth.Subject;
 import java.security.Principal;
+import javax.security.auth.Subject;
 
 public class JwtToken implements Principal {
 
     private UserRole userRole;
     private String userEmail;
 
-    public JwtToken(final UserRole userRole,
-                    final String userEmail) {
+    public JwtToken(final UserRole userRole, final String userEmail) {
         setUserRole(userRole);
         setUserEmail(userEmail);
     }
@@ -32,12 +31,11 @@ public class JwtToken implements Principal {
         this.userRole = userRole;
     }
 
-    public void setUserEmail(String userEmail) {
+    public void setUserEmail(final String userEmail) {
         this.userEmail = userEmail;
     }
 
     public String getUserEmail() {
         return userEmail;
     }
-
 }

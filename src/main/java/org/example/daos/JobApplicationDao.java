@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import org.example.models.ApplicationStatusId;
 
 public class JobApplicationDao {
     private static final String BUCKET_NAME = "good-day-org-recruitment";
@@ -28,7 +29,7 @@ public class JobApplicationDao {
         addJobApplication(jobRoleId, userEmail);
     }
 
-    private String createKey(int jobRoleId, String userEmail) {
+    private String createKey(final int jobRoleId, final String userEmail) {
         String timestamp = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
         return "applications/" + jobRoleId + "/" + userEmail + "-resume" + timestamp + ".pdf";
     }
@@ -37,11 +38,12 @@ public class JobApplicationDao {
                                           final byte[] fileBytes,
                                           final ObjectMetadata metadata) {
 
+
         AmazonS3 amazonS3Client = AmazonS3Connector.getAmazonS3Client();
         amazonS3Client.putObject(BUCKET_NAME, key, new ByteArrayInputStream(fileBytes), metadata);
     }
 
-    public boolean existsByIdAndUserEmail(int jobRoleId, String userEmail) throws SQLException {
+    public boolean existsByIdAndUserEmail(final int jobRoleId, final String userEmail) throws SQLException {
         try (Connection connection = DatabaseConnector.getConnection()) {
 
             String query = "SELECT * FROM job_application WHERE Email = ? AND jobRoleId = ?";
@@ -54,8 +56,7 @@ public class JobApplicationDao {
         }
     }
 
-    public void addJobApplication(final int jobRoleId,
-                                  final String userEmail) throws SQLException {
+    public void addJobApplication(final int jobRoleId, final String userEmail) throws SQLException {
         try (Connection connection = DatabaseConnector.getConnection()) {
             String query = "INSERT INTO job_application (Email, jobRoleId, statusApplicationId) VALUES (?,?,"
                     + ApplicationStatusId.IN_PROGRESS.getStatusId() + ")";

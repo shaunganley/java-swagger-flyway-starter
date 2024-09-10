@@ -7,7 +7,7 @@ public enum ApplicationStatusId {
 
     private final int statusId;
 
-    ApplicationStatusId(int statusId) {
+    ApplicationStatusId(final int statusId) {
         this.statusId = statusId;
     }
 

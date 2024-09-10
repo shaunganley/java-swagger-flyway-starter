@@ -5,13 +5,10 @@ import io.swagger.annotations.ApiModelProperty;
 
 @ApiModel(value = "Role Application Response", description = "Informs if application has been sent successfully")
 public class RoleApplicationResponse {
-    @ApiModelProperty(
-            value = "Success or failure",
-            required = true,
-            example = "Application sent successfully")
+    @ApiModelProperty(value = "Success or failure", required = true, example = "Application sent successfully")
     private String message;
 
-    public RoleApplicationResponse(String message) {
+    public RoleApplicationResponse(final String message) {
         this.message = message;
     }
 
@@ -19,7 +16,7 @@ public class RoleApplicationResponse {
         return message;
     }
 
-    public void setMessage(String message) {
+    public void setMessage(final String message) {
         this.message = message;
     }
 }

@@ -12,11 +12,18 @@ import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import io.swagger.annotations.Authorization;
+<<<<<<< HEAD
 
+=======
+import java.io.IOException;
+import java.io.InputStream;
+>>>>>>> 60dbda0 (US050: AWS S3 file uploading working. Started writing tests)
 import java.sql.SQLException;
 import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.BeanParam;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -40,12 +47,10 @@ import org.example.models.RoleApplicationResponse;
 import org.example.models.UserRole;
 import org.example.services.JobRoleService;
 import org.glassfish.jersey.media.multipart.FormDataParam;
-
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import java.io.IOException;
 import java.io.InputStream;
-
 
 @Api("Job Role API")
 @Path("/api/job-roles")
@@ -162,36 +167,42 @@ public class JobRoleController {
             response = RoleApplicationResponse.class,
             produces = "application/json")
     @Path("/{jobRoleId}/applications")
-    public Response applyForRole(@PathParam("jobRoleId") final int jobRoleId,
-                                 @FormDataParam("file") final InputStream fileInputStream,
-                                 @ApiParam(hidden = true) @Auth final JwtToken token) {
+    public Response applyForRole(
+            @PathParam("jobRoleId") final int jobRoleId,
+            @FormDataParam("file") final InputStream fileInputStream,
+            @ApiParam(hidden = true) @Auth final JwtToken token) {
         String userEmail = token.getUserEmail();
 
         try {
             LOGGER.info("Job Application Request Received");
             jobRoleService.applyForRole(jobRoleId, userEmail, fileInputStream);
-            return Response.ok().entity(new RoleApplicationResponse("File uploaded successfully")).build();
+            return Response.ok()
+                    .entity(new RoleApplicationResponse("File uploaded successfully"))
+                    .build();
         } catch (DoesNotExistException e) {
-            e.printStackTrace();
             LOGGER.error("applyForRole failed, role does not exist\n{}", e.getMessage());
-            return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity(e.getMessage())
+                    .build();
         } catch (FileTooBigException e) {
-            e.printStackTrace();
             LOGGER.error("applyForRole failed, file exceeds maximum size\n{}", e.getMessage());
-            return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity(e.getMessage())
+                    .build();
         } catch (AlreadyExistsException e) {
-            e.printStackTrace();
             LOGGER.error("applyForRole failed, application for this this role already exists\n{}", e.getMessage());
-            return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity(e.getMessage())
+                    .build();
         } catch (FileNeededException e) {
-            e.printStackTrace();
             LOGGER.error("applyForRole failed, CV file is empty\n{}", e.getMessage());
-            return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity(e.getMessage())
+                    .build();
         } catch (SQLException | IOException | FileUploadException | SdkClientException e) {
             LOGGER.error("applyForRole failed\n{}", e.getMessage());
             return Response.serverError().build();
         }
-
     }
 
 }

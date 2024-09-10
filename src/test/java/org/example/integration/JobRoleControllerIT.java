@@ -17,24 +17,28 @@ import javax.ws.rs.core.MediaType;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 
+
 import static org.example.utils.JwtUtils.generateToken;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
 
 @ExtendWith(DropwizardExtensionsSupport.class)
 class JobRoleControllerIT {
 
-
-    static final DropwizardAppExtension<TestConfiguration> APP = new DropwizardAppExtension<>(
-            TestApplication.class, null,
-            new ResourceConfigurationSourceProvider()
-    );
+    static final DropwizardAppExtension<TestConfiguration> APP =
+            new DropwizardAppExtension<>(TestApplication.class, null, new ResourceConfigurationSourceProvider());
 
     @Test
     public void authorization_givenAdminRole_whenJobRolesGET_shouldReturnStatus200() {
         String adminToken = generateToken("email@example.com", 1);
         JwtUtils.validateToken(adminToken);
-        Integer result = APP.client().target("http://localhost:8080/api/job-roles").request()
-                .header("Authorization", ("Bearer " + adminToken)).get().getStatus();
+
+        Integer result = APP.client()
+                .target("http://localhost:8080/api/job-roles")
+                .request()
+                .header("Authorization", ("Bearer " + adminToken))
+                .get()
+                .getStatus();
         assertEquals(200, result);
     }
 
@@ -42,21 +46,34 @@ class JobRoleControllerIT {
     public void authorization_givenUserRole_whenJobRolesGET_shouldReturnStatus200() {
         String userToken = generateToken("email@example.com", 2);
         JwtUtils.validateToken(userToken);
-        Integer result = APP.client().target("http://localhost:8080/api/job-roles").request()
-                .header("Authorization", ("Bearer " + userToken)).get().getStatus();
+
+        Integer result = APP.client()
+                .target("http://localhost:8080/api/job-roles")
+                .request()
+                .header("Authorization", ("Bearer " + userToken))
+                .get()
+                .getStatus();
         assertEquals(200, result);
     }
 
     @Test
     public void authorization_givenNotAuthenticatedUser_whenJobRolesGET_shouldReturnStatus401() {
-        Integer result = APP.client().target("http://localhost:8080/api/job-roles").request().get().getStatus();
+        Integer result = APP.client()
+                .target("http://localhost:8080/api/job-roles")
+                .request()
+                .get()
+                .getStatus();
         assertEquals(401, result);
     }
 
     @Test
     public void applyForRole_givenNonAuthenticatedUser_shouldReturnStatus401() {
-        Integer result = APP.client().target("http://localhost:8080/api/job-roles/1/applications").request().post(
-                Entity.entity(null, MediaType.MULTIPART_FORM_DATA)).getStatus();
+
+        Integer result = APP.client()
+                .target("http://localhost:8080/api/job-roles/1/applications")
+                .request()
+                .post(Entity.entity(null, MediaType.MULTIPART_FORM_DATA))
+                .getStatus();
         assertEquals(401, result);
     }
 
@@ -81,5 +98,5 @@ class JobRoleControllerIT {
 
         assertEquals(200, result);
     }
-
 }
+

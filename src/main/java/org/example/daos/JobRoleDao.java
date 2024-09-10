@@ -1,8 +1,5 @@
 package org.example.daos;
 
-import org.example.exceptions.ResultSetException;
-import org.example.models.JobRole;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,6 +8,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import org.example.exceptions.ResultSetException;
+import org.example.models.JobRole;
 import org.example.models.JobRoleDetails;
 import org.example.models.JobRoleFilteredRequest;
 
