@@ -6,6 +6,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -21,6 +23,8 @@ import org.example.models.JobRoleDetails;
 import org.example.models.JobRoleFilteredRequest;
 import org.example.models.JobRoleResponse;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
@@ -133,5 +137,17 @@ class JobRoleServicesTest {
                 3, "test", "Belfast", "testCapability", "testBand", Date.valueOf("2000-10-10"), "open"));
         var result = jobRoleService.getFilteredJobRoles(jobRoleFilteredRequest);
         assertEqualLists(expected, result);
+    }
+
+    @Nested
+    @DisplayName("applyForRole")
+    class ApplyForRole{
+        @Test
+        public void applyForRole_givenValidInput_shouldCallJobApplicationDaoWithCorrectArguments(){
+            int jobRoleInt = 1;
+            String userEmail = "user@example.com";
+            InputStream inputStream = new ByteArrayInputStream("mockContent".getBytes());
+
+        }
     }
 }

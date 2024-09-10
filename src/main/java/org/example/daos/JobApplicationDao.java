@@ -2,7 +2,6 @@ package org.example.daos;
 
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.ObjectMetadata;
-import com.amazonaws.services.s3.model.PutObjectResult;
 import org.example.models.ApplicationStatusId;
 
 import java.io.ByteArrayInputStream;
@@ -17,7 +16,7 @@ import java.util.Date;
 public class JobApplicationDao {
     private static final String BUCKET_NAME = "good-day-org-recruitment";
 
-    public PutObjectResult applyForRole(final int jobRoleId,
+    public void applyForRole(final int jobRoleId,
                                         final String userEmail,
                                         final byte[] fileBytes,
                                         final ObjectMetadata metadata)
@@ -25,9 +24,8 @@ public class JobApplicationDao {
 
         String key = createKey(jobRoleId, userEmail);
         System.out.println("key: " + key);
-        PutObjectResult putObjectResult = uploadFileToS3(key, fileBytes, metadata);
+        uploadFileToS3(key, fileBytes, metadata);
         addJobApplication(jobRoleId, userEmail);
-        return putObjectResult;
     }
 
     private String createKey(int jobRoleId, String userEmail) {
@@ -35,26 +33,12 @@ public class JobApplicationDao {
         return "applications/" + jobRoleId + "/" + userEmail + "-resume" + timestamp + ".pdf";
     }
 
-    public PutObjectResult uploadFileToS3(final String key,
+    public void uploadFileToS3(final String key,
                                           final byte[] fileBytes,
                                           final ObjectMetadata metadata) {
 
-
-        AmazonS3 amazonS3Client = null;
-        try {
-            amazonS3Client = AmazonS3Connector.getAmazonS3Client();
-        } catch (Exception e) {
-            System.out.println("Failed to get S# client");
-            System.out.println(e.getMessage());
-        }
-        System.out.println("file len in bytes[] " + fileBytes.length);
-
-        PutObjectResult putObjectResult;
-
-        putObjectResult = amazonS3Client.putObject(BUCKET_NAME, key, new ByteArrayInputStream(fileBytes), metadata);
-
-
-        return putObjectResult;
+        AmazonS3 amazonS3Client = AmazonS3Connector.getAmazonS3Client();
+        amazonS3Client.putObject(BUCKET_NAME, key, new ByteArrayInputStream(fileBytes), metadata);
     }
 
     public boolean existsByIdAndUserEmail(int jobRoleId, String userEmail) throws SQLException {

@@ -12,6 +12,7 @@ import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import io.swagger.annotations.Authorization;
+
 import java.sql.SQLException;
 import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.BeanParam;
@@ -22,6 +23,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.example.exceptions.AlreadyExistsException;
@@ -38,6 +40,7 @@ import org.example.models.RoleApplicationResponse;
 import org.example.models.UserRole;
 import org.example.services.JobRoleService;
 import org.glassfish.jersey.media.multipart.FormDataParam;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import java.io.IOException;
@@ -65,9 +68,9 @@ public class JobRoleController {
             responseContainer = "List",
             produces = "application/json")
     @ApiResponses({
-        @ApiResponse(code = OK, message = "Job roles listed successfully", response = JobRole.class),
-        @ApiResponse(code = INTERNAL_SERVER_ERROR, message = "getting all job roles failed due to SQL Exception"),
-        @ApiResponse(code = NOT_FOUND, message = "getting all job roles failed due to DoesNotExistException")
+            @ApiResponse(code = OK, message = "Job roles listed successfully", response = JobRole.class),
+            @ApiResponse(code = INTERNAL_SERVER_ERROR, message = "getting all job roles failed due to SQL Exception"),
+            @ApiResponse(code = NOT_FOUND, message = "getting all job roles failed due to DoesNotExistException")
     })
     public Response getAllJobRoles() {
         LOGGER.info("Get all job roles request received");
@@ -96,9 +99,9 @@ public class JobRoleController {
             responseContainer = "Filtered list",
             produces = "application/json")
     @ApiResponses({
-        @ApiResponse(code = OK, message = "Job roles listed successfully", response = JobRole.class),
-        @ApiResponse(code = INTERNAL_SERVER_ERROR, message = "getting filtered job roles failed due to SQL exception"),
-        @ApiResponse(code = NOT_FOUND, message = "getting filtered job roles failed due to DoesNotExistException")
+            @ApiResponse(code = OK, message = "Job roles listed successfully", response = JobRole.class),
+            @ApiResponse(code = INTERNAL_SERVER_ERROR, message = "getting filtered job roles failed due to SQL exception"),
+            @ApiResponse(code = NOT_FOUND, message = "getting filtered job roles failed due to DoesNotExistException")
     })
     @RolesAllowed({UserRole.ADMIN, UserRole.USER})
     @Path("/filter")
@@ -154,7 +157,7 @@ public class JobRoleController {
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @RolesAllowed({UserRole.ADMIN, UserRole.USER})
     @ApiOperation(
-            value = "Inform user if cv was sent successfully",
+            value = "Sends CV pdf to S3 bucket and application information in the database",
             authorizations = @Authorization(value = HttpHeaders.AUTHORIZATION),
             response = RoleApplicationResponse.class,
             produces = "application/json")
@@ -166,10 +169,23 @@ public class JobRoleController {
 
         try {
             LOGGER.info("Job Application Request Received");
-            return Response.ok().entity(jobRoleService.applyForRole(jobRoleId, userEmail, fileInputStream)).build();
-            //return Response.ok().entity(new RoleApplicationResponse("File uploaded successfully")).build();
-        } catch (DoesNotExistException | FileTooBigException | AlreadyExistsException | FileNeededException e) {
-            LOGGER.error("applyForRole failed\n{}", e.getMessage());
+            jobRoleService.applyForRole(jobRoleId, userEmail, fileInputStream);
+            return Response.ok().entity(new RoleApplicationResponse("File uploaded successfully")).build();
+        } catch (DoesNotExistException e) {
+            e.printStackTrace();
+            LOGGER.error("applyForRole failed, role does not exist\n{}", e.getMessage());
+            return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
+        } catch (FileTooBigException e) {
+            e.printStackTrace();
+            LOGGER.error("applyForRole failed, file exceeds maximum size\n{}", e.getMessage());
+            return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
+        } catch (AlreadyExistsException e) {
+            e.printStackTrace();
+            LOGGER.error("applyForRole failed, application for this this role already exists\n{}", e.getMessage());
+            return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
+        } catch (FileNeededException e) {
+            e.printStackTrace();
+            LOGGER.error("applyForRole failed, CV file is empty\n{}", e.getMessage());
             return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
         } catch (SQLException | IOException | FileUploadException | SdkClientException e) {
             LOGGER.error("applyForRole failed\n{}", e.getMessage());
@@ -177,4 +193,5 @@ public class JobRoleController {
         }
 
     }
+
 }

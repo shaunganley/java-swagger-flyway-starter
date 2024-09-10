@@ -1,10 +1,11 @@
 package org.example.services;
 
 import com.amazonaws.services.s3.model.ObjectMetadata;
-import com.amazonaws.services.s3.model.PutObjectResult;
 import org.example.daos.JobApplicationDao;
+
 import java.sql.SQLException;
 import java.util.List;
+
 import org.example.daos.JobRoleDao;
 import org.example.exceptions.AlreadyExistsException;
 import org.example.exceptions.DoesNotExistException;
@@ -64,10 +65,10 @@ public class JobRoleService {
         return jobRoleResponses;
     }
 
-    public PutObjectResult applyForRole(final int jobRoleId,
-                                        final String userEmail,
-                                        final InputStream fileInputStream
-                             ) throws DoesNotExistException, SQLException, FileTooBigException,
+    public void applyForRole(final int jobRoleId,
+                             final String userEmail,
+                             final InputStream fileInputStream
+    ) throws DoesNotExistException, SQLException, FileTooBigException,
             AlreadyExistsException, FileNeededException, IOException, FileUploadException {
         ObjectMetadata metadata = new ObjectMetadata();
         metadata.addUserMetadata("jobRoleId", String.valueOf(jobRoleId));
@@ -81,8 +82,7 @@ public class JobRoleService {
                 fileInputStream,
                 metadata);
         metadata.setContentLength(fileBytes.length);
-        return jobApplicationDao.applyForRole(jobRoleId, userEmail, fileBytes, metadata);
+        jobApplicationDao.applyForRole(jobRoleId, userEmail, fileBytes, metadata);
     }
-
 
 }
