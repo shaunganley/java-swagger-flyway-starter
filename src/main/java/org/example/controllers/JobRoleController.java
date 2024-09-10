@@ -4,6 +4,7 @@ import static org.example.utils.HttpStatus.INTERNAL_SERVER_ERROR;
 import static org.example.utils.HttpStatus.NOT_FOUND;
 import static org.example.utils.HttpStatus.OK;
 
+import com.amazonaws.SdkClientException;
 import io.dropwizard.auth.Auth;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -165,12 +166,14 @@ public class JobRoleController {
 
         try {
             LOGGER.info("Job Application Request Received");
-            jobRoleService.applyForRole(jobRoleId, userEmail, fileInputStream);
+            return Response.ok().entity(jobRoleService.applyForRole(jobRoleId, userEmail, fileInputStream)).build();
+            //return Response.ok().entity(new RoleApplicationResponse("File uploaded successfully")).build();
         } catch (DoesNotExistException | FileTooBigException | AlreadyExistsException | FileNeededException e) {
             return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
-        } catch (SQLException | IOException | FileUploadException e) {
+        } catch (SQLException | IOException | FileUploadException | SdkClientException e) {
+            e.printStackTrace();
             return Response.serverError().build();
         }
-        return Response.ok().entity(new RoleApplicationResponse("File uploaded successfully")).build();
+
     }
 }
