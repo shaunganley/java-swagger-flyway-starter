@@ -14,9 +14,8 @@ public class JobRoleRequest {
     private int numberOfOpenPositions;
     private String location;
     private Date closingDate;
-    private String capabilityName;
     private int capabilityId;
-    private String bandName;
+    private int bandId;
 
     public String getRoleName() {
         return roleName;
@@ -74,20 +73,20 @@ public class JobRoleRequest {
         this.closingDate = closingDate;
     }
 
-    public String getCapabilityName() {
-        return capabilityName;
+    public int getCapabilityId() {
+        return capabilityId;
     }
 
-    public void setCapabilityName(final String capabilityName) {
-        this.capabilityName = capabilityName;
+    public void setCapabilityId(final int capabilityId) {
+        this.capabilityId = capabilityId;
     }
 
-    public String getBandName() {
-        return bandName;
+    public int getBandId() {
+        return bandId;
     }
 
-    public void setBandName(final String bandName) {
-        this.bandName = bandName;
+    public void setBandId(final int bandId) {
+        this.bandId = bandId;
     }
 
     @JsonCreator

@@ -117,8 +117,8 @@ public class JobRoleDao {
         final int numberOfOpenPositionsIndex = 5;
         final int locationIndex = 6;
         final int closingDateIndex = 7;
-        final int capabilityNameIndex = 8;
-        final int bandNameIndex = 9;
+        final int capabilityIdIndex = 8;
+        final int bandIdIndex = 9;
 
         PreparedStatement preparedStatement =
                 connection.prepareStatement(insertStatement,
@@ -137,10 +137,10 @@ public class JobRoleDao {
                 jobRole.getLocation());
         preparedStatement.setDate(closingDateIndex,
                 jobRole.getClosingDate());
-        preparedStatement.setString(capabilityNameIndex,
-                jobRole.getCapabilityName());
-        preparedStatement.setString(bandNameIndex,
-                jobRole.getBandName());
+        preparedStatement.setInt(capabilityIdIndex,
+                jobRole.getCapabilityId());
+        preparedStatement.setInt(bandIdIndex,
+                jobRole.getBandId());
 
 
         preparedStatement.executeUpdate();
