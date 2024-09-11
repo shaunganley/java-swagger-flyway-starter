@@ -7,6 +7,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.SQLException;
+
 import org.example.daos.JobApplicationDao;
 import org.example.daos.JobRoleDao;
 import org.example.exceptions.AlreadyExistsException;
@@ -24,80 +25,78 @@ public class JobApplicationValidatorTest {
     JobApplicationDao jobApplicationDao = mock(JobApplicationDao.class);
     JobApplicationValidator jobApplicationValidator = new JobApplicationValidator(jobRoleDao, jobApplicationDao);
 
-    @Nested
-    class ValidateAndProduceByteArrayTests {
 
-        int jobRoleId = 1;
-        String userEmail = "user@example.com";
+    int jobRoleId = 1;
+    String userEmail = "user@example.com";
 
-        @Test
-        public void validateAndProduceByteArray_givenValidData_shouldReturnCorrectByteArray()
-                throws FileTooBigException, IOException, DoesNotExistException, AlreadyExistsException,
-                        FileNeededException, SQLException {
+    @Test
+    public void validateAndProduceByteArray_givenValidData_shouldReturnCorrectByteArray()
+            throws FileTooBigException, IOException, DoesNotExistException, AlreadyExistsException,
+            FileNeededException, SQLException {
 
-            byte[] expectedByteContent = "valid content".getBytes();
-            InputStream inputStream = new ByteArrayInputStream(expectedByteContent);
+        byte[] expectedByteContent = "valid content".getBytes();
+        InputStream inputStream = new ByteArrayInputStream(expectedByteContent);
 
-            when(jobRoleDao.existsOpenById(jobRoleId)).thenReturn(true);
-            when(jobApplicationDao.existsByIdAndUserEmail(jobRoleId, userEmail)).thenReturn(false);
+        when(jobRoleDao.existsOpenById(jobRoleId)).thenReturn(true);
+        when(jobApplicationDao.existsByIdAndUserEmail(jobRoleId, userEmail)).thenReturn(false);
 
-            byte[] result = jobApplicationValidator.validateAndProduceByteArray(jobRoleId, userEmail, inputStream);
+        byte[] result = jobApplicationValidator.validateAndProduceByteArray(jobRoleId, userEmail, inputStream);
 
-            assertArrayEquals(expectedByteContent, result);
-        }
-
-        @Test
-        public void validateAndProduceByteArray_givenFileTooBig_shouldThrowFileTooBigException() {
-
-            byte[] largeFileContent = new byte[MAX_FILE_SIZE_BYTES + 1];
-            InputStream inputStream = new ByteArrayInputStream(largeFileContent);
-
-            FileTooBigException exception = assertThrows(
-                    FileTooBigException.class,
-                    () -> jobApplicationValidator.validateAndProduceByteArray(jobRoleId, userEmail, inputStream));
-            assertEquals("File should not exceed 5MB", exception.getMessage());
-        }
-
-        @Test
-        public void validateAndProduceByteArray_givenEmptyFile_shouldThrowFileNeededException() {
-            byte[] emptyFileContent = new byte[0];
-            InputStream inputStream = new ByteArrayInputStream(emptyFileContent);
-
-            FileNeededException exception = assertThrows(
-                    FileNeededException.class,
-                    () -> jobApplicationValidator.validateAndProduceByteArray(jobRoleId, userEmail, inputStream));
-            assertEquals("File is needed", exception.getMessage());
-        }
-
-        @Test
-        public void validateAndProduceByteArray_whenJobRoleDoesNotExist_shouldThrowDoesNotExistException()
-                throws SQLException {
-            byte[] fileContent = "valid content".getBytes();
-            InputStream inputStream = new ByteArrayInputStream(fileContent);
-
-            when(jobRoleDao.existsOpenById(jobRoleId)).thenReturn(false);
-
-            DoesNotExistException exception = assertThrows(
-                    DoesNotExistException.class,
-                    () -> jobApplicationValidator.validateAndProduceByteArray(jobRoleId, userEmail, inputStream));
-
-            assertEquals("Job Role does not exist", exception.getMessage());
-        }
-
-        @Test
-        public void validateAndProduceByteArray_whenJobApplicationExists_shouldThrowAlreadyExistsException()
-                throws SQLException {
-            byte[] fileContent = "valid content".getBytes();
-            InputStream inputStream = new ByteArrayInputStream(fileContent);
-
-            when(jobRoleDao.existsOpenById(jobRoleId)).thenReturn(true);
-            when(jobApplicationDao.existsByIdAndUserEmail(jobRoleId, userEmail)).thenReturn(true);
-
-            AlreadyExistsException exception = assertThrows(
-                    AlreadyExistsException.class,
-                    () -> jobApplicationValidator.validateAndProduceByteArray(jobRoleId, userEmail, inputStream));
-
-            assertEquals("Job Application already exists", exception.getMessage());
-        }
+        assertArrayEquals(expectedByteContent, result);
     }
+
+    @Test
+    public void validateAndProduceByteArray_givenFileTooBig_shouldThrowFileTooBigException() {
+
+        byte[] largeFileContent = new byte[MAX_FILE_SIZE_BYTES + 1];
+        InputStream inputStream = new ByteArrayInputStream(largeFileContent);
+
+        FileTooBigException exception = assertThrows(
+                FileTooBigException.class,
+                () -> jobApplicationValidator.validateAndProduceByteArray(jobRoleId, userEmail, inputStream));
+        assertEquals("File should not exceed 5MB", exception.getMessage());
+    }
+
+    @Test
+    public void validateAndProduceByteArray_givenEmptyFile_shouldThrowFileNeededException() {
+        byte[] emptyFileContent = new byte[0];
+        InputStream inputStream = new ByteArrayInputStream(emptyFileContent);
+
+        FileNeededException exception = assertThrows(
+                FileNeededException.class,
+                () -> jobApplicationValidator.validateAndProduceByteArray(jobRoleId, userEmail, inputStream));
+        assertEquals("File is needed", exception.getMessage());
+    }
+
+    @Test
+    public void validateAndProduceByteArray_whenJobRoleDoesNotExist_shouldThrowDoesNotExistException()
+            throws SQLException {
+        byte[] fileContent = "valid content".getBytes();
+        InputStream inputStream = new ByteArrayInputStream(fileContent);
+
+        when(jobRoleDao.existsOpenById(jobRoleId)).thenReturn(false);
+
+        DoesNotExistException exception = assertThrows(
+                DoesNotExistException.class,
+                () -> jobApplicationValidator.validateAndProduceByteArray(jobRoleId, userEmail, inputStream));
+
+        assertEquals("Job Role does not exist", exception.getMessage());
+    }
+
+    @Test
+    public void validateAndProduceByteArray_whenJobApplicationExists_shouldThrowAlreadyExistsException()
+            throws SQLException {
+        byte[] fileContent = "valid content".getBytes();
+        InputStream inputStream = new ByteArrayInputStream(fileContent);
+
+        when(jobRoleDao.existsOpenById(jobRoleId)).thenReturn(true);
+        when(jobApplicationDao.existsByIdAndUserEmail(jobRoleId, userEmail)).thenReturn(true);
+
+        AlreadyExistsException exception = assertThrows(
+                AlreadyExistsException.class,
+                () -> jobApplicationValidator.validateAndProduceByteArray(jobRoleId, userEmail, inputStream));
+
+        assertEquals("Job Application already exists", exception.getMessage());
+    }
+
 }
