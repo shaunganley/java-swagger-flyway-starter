@@ -1,5 +1,7 @@
 package org.example.controllers;
 
+import org.example.enums.Direction;
+import org.example.enums.JobRoleColumn;
 import org.example.exceptions.DoesNotExistException;
 import org.example.models.JobRoleDetailedResponse;
 import org.example.models.JobRoleResponse;
@@ -14,10 +16,34 @@ import javax.ws.rs.core.Response;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class JobRoleControllerTest {
+
+    JobRoleResponse jobRole1 = new JobRoleResponse(
+            101,
+            "Software Engineer",
+            "Belfast",
+            "Engineering",
+            "Senior",
+            new Date(2024 - 1900, 11, 30)
+    );
+
+    // Hard-coded JobRoleResponse 2
+    JobRoleResponse jobRole2 = new JobRoleResponse(
+            102,
+            "Data Analyst",
+            "London",
+            "Data & Insights",
+            "Mid-Level",
+            new Date(2024 - 1900, 10, 15)
+    );;
 
     JobRoleService jobRoleService = Mockito.mock(JobRoleService.class);
 
@@ -39,7 +65,7 @@ public class JobRoleControllerTest {
         Response expectedResponse =
                 Response.ok().entity(jobRoleResponses).build();
 
-        Mockito.when(jobRoleService.getOpenJobRoles(null, null))
+        when(jobRoleService.getOpenJobRoles(null, null))
                 .thenReturn(jobRoleResponses);
 
         Response actualResponse =
@@ -55,7 +81,7 @@ public class JobRoleControllerTest {
     @Test
     public void getJobRoles_shouldReturnResponseCode500_whenServiceThrowsSqlException()
             throws SQLException {
-        Mockito.when(jobRoleService.getOpenJobRoles(null, null))
+        when(jobRoleService.getOpenJobRoles(null, null))
                 .thenThrow(SQLException.class);
 
         Response response = jobRoleController.getJobRoles(null, null);
@@ -77,7 +103,7 @@ public class JobRoleControllerTest {
                 "https://sharepoint.com/job/software-engineer", "New York",
                 "Software Development", "Senior", closingDate, "Open", 1);
 
-        Mockito.when(jobRoleService.getJobRoleById(jobRoleId))
+        when(jobRoleService.getJobRoleById(jobRoleId))
                 .thenReturn(expectedJobRole);
 
         Response response = jobRoleController.getJobRoleById(jobRoleId);
@@ -91,7 +117,7 @@ public class JobRoleControllerTest {
 
         int jobRoleId = 1;
 
-        Mockito.when(jobRoleService.getJobRoleById(jobRoleId)).thenThrow(SQLException.class);
+        when(jobRoleService.getJobRoleById(jobRoleId)).thenThrow(SQLException.class);
 
         Response response = jobRoleController.getJobRoleById(jobRoleId);
 
@@ -103,10 +129,27 @@ public class JobRoleControllerTest {
 
         int jobRoleId = 1;
 
-        Mockito.when(jobRoleService.getJobRoleById(jobRoleId)).thenThrow(DoesNotExistException.class);
+        when(jobRoleService.getJobRoleById(jobRoleId)).thenThrow(DoesNotExistException.class);
 
         Response response = jobRoleController.getJobRoleById(jobRoleId);
 
         Assert.assertEquals(Response.Status.NOT_FOUND.getStatusCode(), response.getStatus());
     }
+    @Test
+    public void getAllJobRoles_withOrdering_shouldReturnOrderedJobRoles() throws SQLException{
+        List<JobRoleResponse> roles = Arrays.asList(jobRole1, jobRole2);
+        when(jobRoleService.getOpenJobRoles(JobRoleColumn.ROLENAME.getColumnName(), Direction.ASC.getDirectionName())).thenReturn(roles);
+        Response response = jobRoleController.getJobRoles(JobRoleColumn.ROLENAME.getColumnName(), Direction.ASC.getDirectionName());
+        assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
+        assertFalse(((List<JobRoleResponse>) response.getEntity()).isEmpty());
+        assertEquals(roles, response.getEntity());
+    }
+
+    @Test
+    public void getAllJobRoles_withOrdering_shouldReturnInternalServerError_whenSQLExceptionThrown() throws SQLException{
+        when(jobRoleService.getOpenJobRoles(JobRoleColumn.ROLENAME.getColumnName(), Direction.ASC.getDirectionName())).thenThrow(SQLException.class);
+        Response response = jobRoleController.getJobRoles(JobRoleColumn.ROLENAME.getColumnName(), Direction.ASC.getDirectionName());
+        assertEquals(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode(), response.getStatus());
+    }
+
 }

@@ -24,7 +24,7 @@ import java.util.List;
 @Api("Kainos Job Application - Job Roles API")
 @Path("/api")
 public class JobRoleController {
-    private JobRoleService jobRoleService;
+    private final JobRoleService jobRoleService;
 
     public JobRoleController(final JobRoleService jobRoleService) {
         this.jobRoleService = jobRoleService;
