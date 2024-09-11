@@ -70,7 +70,12 @@ public class JobRoleController {
 
     @POST
     @Path("/job-roles")
+    @RolesAllowed({UserRole.ADMIN})
     @Produces(MediaType.APPLICATION_JSON)
+    @ApiOperation(
+            value = "Create a job role - admin only",
+            authorizations = @Authorization(value = HttpHeaders.AUTHORIZATION),
+            response = JobRoleResponse.class)
     public Response createJobRole(final JobRoleRequest jobRoleRequest) {
         try {
             return Response
