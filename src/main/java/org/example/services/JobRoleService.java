@@ -14,7 +14,6 @@ import java.util.List;
 public class JobRoleService {
 
     JobRoleDao jobRoleDao;
-    DatabaseConnector databaseConnector;
 
     public JobRoleService(final JobRoleDao jobRoleDao) {
         this.jobRoleDao = jobRoleDao;
