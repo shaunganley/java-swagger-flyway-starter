@@ -80,6 +80,8 @@ Configure checkstyle in Intellij:
 ```
 export "VALID_TEST_EMAIL"="user@email.com"
 export "VALID_TEST_PASSWORD"="regularU\$er123"
+export "VALID_ADMIN_EMAIL"="admin@email.com"
+export VALID_ADMIN_PASSWORD="admin!Pa\$\$word123"
  
 ```
 
