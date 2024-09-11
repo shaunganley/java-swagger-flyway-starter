@@ -29,32 +29,32 @@ public class JobRoleController {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getJobRoles(final @QueryParam("sort") String sort)
             throws SQLException {
-        if (sort == null) {
             try {
-                return Response.ok().entity(
-                        jobRoleService.getOpenJobRoles()).build();
-            } catch (SQLException e) {
-                return Response.serverError().build();
-            }
-        } else {
-            try {
-                String[] sortParts = sort.split(":");
-                String field = sortParts[0];
-                String direction = sortParts[1];
-                direction = direction.toUpperCase();
-                if (direction.equals("DESC") || direction.equals("ASC")) {
-                    System.out.println(
-                            "Field = " + field + " Direction= " + direction);
+                String field = null;
+                String direction = null;
+                if (sort == null) {
                     return Response.ok().entity(
-                            jobRoleService.getSortedOpenJobRoles(
+                            jobRoleService.getOpenJobRoles(
                                     field, direction)).build();
                 } else {
-                    throw new BadRequestException("incorrect query param");
+                    String[] sortParts = sort.split(":");
+                    field = sortParts[0];
+                    direction = sortParts[1];
+                    direction = direction.toUpperCase();
+                    if (direction.equals("DESC") || direction.equals("ASC")) {
+                        System.out.println(
+                                "Field = " + field + " Direction= "
+                                        + direction);
+                        return Response.ok().entity(
+                                jobRoleService.getOpenJobRoles(
+                                        field, direction)).build();
+                    } else {
+                        throw new BadRequestException("incorrect query param");
+                    }
                 }
             } catch (SQLException e) {
                 return Response.serverError().build();
-        }
-        }
+            }
     }
 
     @GET

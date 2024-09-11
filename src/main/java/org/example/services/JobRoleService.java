@@ -20,9 +20,10 @@ public class JobRoleService {
         this.jobRoleDao = jobRoleDao;
     }
 
-    public List<JobRoleResponse> getOpenJobRoles() throws SQLException {
+    public List<JobRoleResponse> getOpenJobRoles(
+            final String field, final String direction) throws SQLException {
         return JobRoleMapper.mapJobRolesListToJobRoleResponseList(
-                jobRoleDao.getOpenJobRoles());
+                jobRoleDao.getOpenJobRoles(field, direction));
     }
 
     public JobRoleDetailedResponse getJobRoleById(final int id)
@@ -32,11 +33,5 @@ public class JobRoleService {
             throw new DoesNotExistException();
         }
         return JobRoleMapper.mapJobRoleToJobRoleDetailedResponse(jobRole);
-    }
-
-    public List<JobRoleResponse> getSortedOpenJobRoles(
-            final String field, final String direction) throws SQLException {
-        return JobRoleMapper.mapJobRolesListToJobRoleResponseList(
-                jobRoleDao.getSortedOpenJobRoles(field, direction));
     }
 }
