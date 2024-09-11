@@ -126,5 +126,4 @@ public class JobRoleDao {
         }
         return false;
     }
-
 }
