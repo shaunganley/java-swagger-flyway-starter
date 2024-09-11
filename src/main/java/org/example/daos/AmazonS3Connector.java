@@ -39,14 +39,21 @@ public final class AmazonS3Connector {
         String accessKeyId = System.getenv("AWS_SECRET_KEY_ID");
         String secretAccessKey = System.getenv("AWS_SECRET_ACCESS_KEY");
 
-        AWSCredentials credentials = new BasicAWSCredentials(accessKeyId, secretAccessKey);
+        AWSCredentials credentials = null;
+        if (accessKeyId != null && !accessKeyId.isEmpty() && secretAccessKey != null && !secretAccessKey.isEmpty()) {
+            credentials = new BasicAWSCredentials(accessKeyId, secretAccessKey);
+        }
 
-        return AmazonS3ClientBuilder.standard()
-                .withCredentials(new AWSStaticCredentialsProvider(credentials))
+        AmazonS3ClientBuilder builder = AmazonS3ClientBuilder.standard()
                 .withPathStyleAccessEnabled(true)
                 .withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration(ENDPOINT_URL, REGION))
-                .withClientConfiguration(new ClientConfiguration().withProtocol(Protocol.HTTP))
-                .build();
+                .withClientConfiguration(new ClientConfiguration().withProtocol(Protocol.HTTP));
+
+        if (credentials != null) {
+            builder = builder.withCredentials(new AWSStaticCredentialsProvider(credentials));
+        }
+
+        return builder.build();
     }
 
     private static AmazonS3 getAwsClientWithProfileCredentials() {
