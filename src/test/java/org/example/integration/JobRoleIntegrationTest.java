@@ -14,6 +14,7 @@ import javax.validation.constraints.Null;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.StreamingOutput;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -28,6 +29,7 @@ public class JobRoleIntegrationTest {
             new DropwizardAppExtension<>(KainosJobWebApplication.class);
 
     private String loginAndGetToken() {
+        System.out.println();
         Client client = APP.client();
         Response response =
                 client.target("http://localhost:8080/api/auth/login")

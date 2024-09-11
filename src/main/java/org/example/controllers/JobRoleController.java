@@ -14,10 +14,12 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.sql.SQLException;
+import java.util.List;
 
 @Api("Kainos Job Application - Job Roles API")
 @Path("/api")
@@ -36,10 +38,14 @@ public class JobRoleController {
             value = "Returns all job roles with status open",
             authorizations = @Authorization(value = HttpHeaders.AUTHORIZATION),
             response = JobRoleResponse.class)
-    public Response getJobRoles() throws SQLException {
+    public Response getJobRoles(final @QueryParam("orderBy") String orderBy,
+                                final @QueryParam(
+                                        "direction") String direction)
+            throws SQLException {
         try {
-            return Response.ok().entity(
-                    jobRoleService.getOpenJobRoles()).build();
+            List<JobRoleResponse> roles =
+                    jobRoleService.getOpenJobRoles(orderBy, direction);
+            return Response.ok().entity(roles).build();
         } catch (SQLException e) {
             return Response.serverError().build();
         }
