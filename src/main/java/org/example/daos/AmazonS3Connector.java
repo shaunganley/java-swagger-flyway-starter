@@ -17,6 +17,7 @@ public final class AmazonS3Connector {
     private static final String ENDPOINT_URL = System.getenv("ENDPOINT_URL");
 
     private AmazonS3Connector() {
+        throw new UnsupportedOperationException("This is a utility class and cannot be instantiated");
     }
 
     public static AmazonS3 getAmazonS3Client() {

@@ -154,7 +154,7 @@ public class JobRoleController {
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @RolesAllowed({UserRole.ADMIN, UserRole.USER})
     @ApiOperation(
-            value = "Sends CV pdf to S3 bucket and application information in the database",
+            value = "Sends CV pdf to S3 bucket and saves application information in the database",
             authorizations = @Authorization(value = HttpHeaders.AUTHORIZATION),
             response = RoleApplicationResponse.class,
             produces = "application/json")
