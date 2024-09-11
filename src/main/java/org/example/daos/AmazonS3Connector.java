@@ -16,7 +16,8 @@ public final class AmazonS3Connector {
     private static AmazonS3 amazonS3Client;
     private static final String ENDPOINT_URL = System.getenv("ENDPOINT_URL");
 
-    private AmazonS3Connector() {}
+    private AmazonS3Connector() {
+    }
 
     public static AmazonS3 getAmazonS3Client() {
 

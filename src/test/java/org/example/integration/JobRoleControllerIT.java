@@ -98,7 +98,7 @@ class JobRoleControllerIT {
 
     @Test
     public void getUserAllJobApplications_givenAdminRole_shouldReturn200() {
-        String adminToken = generateToken("admin", 1);
+        String adminToken = generateToken("admin@example.com", 1);
         JwtUtils.validateToken(adminToken);
         Integer result = APP.client()
                 .target("http://localhost:8080/api/job-roles/my-job-applications")
