@@ -1,6 +1,5 @@
 package org.example.services;
 
-import org.example.daos.DatabaseConnector;
 import org.example.daos.JobRoleDao;
 import org.example.exceptions.DoesNotExistException;
 import org.example.mappers.JobRoleMapper;
