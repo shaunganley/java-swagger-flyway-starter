@@ -4,7 +4,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.SQLException;
-
 import org.example.daos.JobApplicationDao;
 import org.example.daos.JobRoleDao;
 import org.example.exceptions.AlreadyExistsException;
@@ -30,7 +29,7 @@ public class JobApplicationValidator {
     public byte[] validateAndProduceByteArray(
             final int jobRoleId, final String userEmail, final InputStream fileInputStream)
             throws FileTooBigException, SQLException, DoesNotExistException, IOException, AlreadyExistsException,
-            FileNeededException {
+                    FileNeededException {
 
         byte[] fileBytes = readInputStream(fileInputStream);
 

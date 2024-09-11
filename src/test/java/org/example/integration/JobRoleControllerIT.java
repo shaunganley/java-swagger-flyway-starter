@@ -1,8 +1,15 @@
 package org.example.integration;
 
+import static org.example.utils.JwtUtils.generateToken;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import io.dropwizard.configuration.ResourceConfigurationSourceProvider;
 import io.dropwizard.testing.junit5.DropwizardAppExtension;
 import io.dropwizard.testing.junit5.DropwizardExtensionsSupport;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.core.MediaType;
 import org.example.TestApplication;
 import org.example.TestConfiguration;
 import org.example.utils.JwtUtils;
@@ -11,16 +18,6 @@ import org.glassfish.jersey.media.multipart.MultiPartFeature;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-
-import javax.ws.rs.client.Entity;
-import javax.ws.rs.core.MediaType;
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
-
-
-import static org.example.utils.JwtUtils.generateToken;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 
 @ExtendWith(DropwizardExtensionsSupport.class)
 class JobRoleControllerIT {
@@ -89,7 +86,7 @@ class JobRoleControllerIT {
         multipart.field("file", mockFileInputStream, MediaType.APPLICATION_OCTET_STREAM_TYPE);
 
         Integer result = APP.client()
-                .register(MultiPartFeature.class)  // Register the MultiPartFeature
+                .register(MultiPartFeature.class) // Register the MultiPartFeature
                 .target("http://localhost:8080/api/job-roles/1/applications")
                 .request()
                 .header("Authorization", "Bearer " + userToken)
@@ -99,4 +96,3 @@ class JobRoleControllerIT {
         assertEquals(200, result);
     }
 }
-

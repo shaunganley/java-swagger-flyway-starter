@@ -2,8 +2,6 @@ package org.example.daos;
 
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.ObjectMetadata;
-import org.example.models.ApplicationStatusId;
-
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.sql.Connection;
@@ -17,10 +15,8 @@ import org.example.models.ApplicationStatusId;
 public class JobApplicationDao {
     private static final String BUCKET_NAME = "good-day-org-recruitment";
 
-    public void applyForRole(final int jobRoleId,
-                                        final String userEmail,
-                                        final byte[] fileBytes,
-                                        final ObjectMetadata metadata)
+    public void applyForRole(
+            final int jobRoleId, final String userEmail, final byte[] fileBytes, final ObjectMetadata metadata)
             throws SQLException, IOException {
 
         String key = createKey(jobRoleId, userEmail);
@@ -34,10 +30,7 @@ public class JobApplicationDao {
         return "applications/" + jobRoleId + "/" + userEmail + "-resume" + timestamp + ".pdf";
     }
 
-    public void uploadFileToS3(final String key,
-                                          final byte[] fileBytes,
-                                          final ObjectMetadata metadata) {
-
+    public void uploadFileToS3(final String key, final byte[] fileBytes, final ObjectMetadata metadata) {
 
         AmazonS3 amazonS3Client = AmazonS3Connector.getAmazonS3Client();
         amazonS3Client.putObject(BUCKET_NAME, key, new ByteArrayInputStream(fileBytes), metadata);
