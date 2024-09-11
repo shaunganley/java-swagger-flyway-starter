@@ -30,10 +30,6 @@ public class JobRoleIntegrationTest {
             new DropwizardAppExtension<>(KainosJobWebApplication.class);
 
     private String loginAndGetToken() {
-        String email = System.getenv("VALID_ADMIN_EMAIL");
-        String password = System.getenv("VALID_ADMIN_PASSWORD");
-        System.out.println("Email: " + email);
-        System.out.println("Password: " + password);
         Client client = APP.client();
         Response response =
                 client.target("http://localhost:8080/api/auth/login")
