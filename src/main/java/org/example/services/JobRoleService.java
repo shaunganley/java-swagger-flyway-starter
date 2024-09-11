@@ -27,7 +27,7 @@ public class JobRoleService {
     }
 
     public JobRoleDetailedResponse getJobRoleById(final int id)
-        throws SQLException, DoesNotExistException {
+            throws SQLException, DoesNotExistException {
         JobRole jobRole = jobRoleDao.getJobRoleById(id);
         if (jobRole == null) {
             throw new DoesNotExistException();
