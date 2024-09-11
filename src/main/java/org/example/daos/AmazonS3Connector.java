@@ -30,8 +30,6 @@ public final class AmazonS3Connector {
     }
 
     private static AmazonS3 getAwsClient() {
-        String accessKeyId = System.getenv("AWS_SECRET_KEY_ID");
-        String secretAccessKey = System.getenv("AWS_SECRET_ACCESS_KEY");
         String endpointUrl = System.getenv("ENDPOINT_URL");
 
         AmazonS3ClientBuilder builder = AmazonS3ClientBuilder.standard()
@@ -45,12 +43,7 @@ public final class AmazonS3Connector {
             builder = builder.withRegion(REGION);
         }
 
-        if (accessKeyId != null && !accessKeyId.isEmpty() && secretAccessKey != null && !secretAccessKey.isEmpty()) {
-            AWSCredentials credentials = new BasicAWSCredentials(accessKeyId, secretAccessKey);
-            builder = builder.withCredentials(new AWSStaticCredentialsProvider(credentials));
-        } else {
-            builder = builder.withCredentials(DefaultAWSCredentialsProviderChain.getInstance());
-        }
+        builder = builder.withCredentials(DefaultAWSCredentialsProviderChain.getInstance());
 
         return builder.build();
     }
