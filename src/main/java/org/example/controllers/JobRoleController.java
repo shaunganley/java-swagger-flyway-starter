@@ -1,19 +1,25 @@
 package org.example.controllers;
 
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.Authorization;
+import org.example.models.JobRoleResponse;
+import org.example.models.UserRole;
 import org.eclipse.jetty.http.HttpStatus;
 import org.example.exceptions.DoesNotExistException;
 import org.example.services.JobRoleService;
 
-import javax.ws.rs.BadRequestException;
+import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.sql.SQLException;
+import java.util.List;
 
 @Api("Kainos Job Application - Job Roles API")
 @Path("/api")
@@ -27,39 +33,32 @@ public class JobRoleController {
     @GET
     @Path("/job-roles")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getJobRoles(final @QueryParam("sort") String sort)
+    @RolesAllowed({UserRole.ADMIN, UserRole.USER})
+    @ApiOperation(
+            value = "Returns all job roles with status open",
+            authorizations = @Authorization(value = HttpHeaders.AUTHORIZATION),
+            response = JobRoleResponse.class)
+    public Response getJobRoles(final @QueryParam("orderBy") String orderBy,
+                                final @QueryParam(
+                                        "direction") String direction)
             throws SQLException {
-            try {
-                String field = null;
-                String direction = null;
-                if (sort == null) {
-                    return Response.ok().entity(
-                            jobRoleService.getOpenJobRoles(
-                                    field, direction)).build();
-                } else {
-                    String[] sortParts = sort.split(":");
-                    field = sortParts[0];
-                    direction = sortParts[1];
-                    direction = direction.toUpperCase();
-                    if (direction.equals("DESC") || direction.equals("ASC")) {
-                        System.out.println(
-                                "Field = " + field + " Direction= "
-                                        + direction);
-                        return Response.ok().entity(
-                                jobRoleService.getOpenJobRoles(
-                                        field, direction)).build();
-                    } else {
-                        throw new BadRequestException("incorrect query param");
-                    }
-                }
-            } catch (SQLException e) {
-                return Response.serverError().build();
-            }
+        try {
+            List<JobRoleResponse> roles =
+                    jobRoleService.getOpenJobRoles(orderBy, direction);
+            return Response.ok().entity(roles).build();
+        } catch (SQLException e) {
+            return Response.serverError().build();
+        }
     }
 
     @GET
     @Path("/job-roles/{id}")
     @Produces(MediaType.APPLICATION_JSON)
+    @RolesAllowed({UserRole.ADMIN, UserRole.USER})
+    @ApiOperation(
+            value = "Returns job role by id",
+            authorizations = @Authorization(value = HttpHeaders.AUTHORIZATION),
+            response = JobRoleResponse.class)
     public Response getJobRoleById(final @PathParam("id") int id)
             throws SQLException {
         try {

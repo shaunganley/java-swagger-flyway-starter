@@ -1,5 +1,7 @@
 package org.example.daos;
 
+import org.example.enums.Direction;
+import org.example.enums.JobRoleColumn;
 import org.example.models.JobRole;
 
 import java.sql.Connection;
@@ -11,15 +13,27 @@ import java.util.List;
 
 public class JobRoleDao {
 
-    public List<JobRole> getOpenJobRoles(
-            final String field, final String direction)
+    public List<JobRole> getOpenJobRoles(final String orderBy,
+                                         final String direction)
             throws SQLException {
         List<JobRole> jobRoles = new ArrayList<>();
+
+        if (orderBy != null && direction != null) {
+            boolean isValidColumn = isValidEnumValue(
+                    JobRoleColumn.class, orderBy);
+            boolean isValidDirection = isValidEnumValue(
+                    Direction.class, direction);
+
+            if (!isValidColumn || !isValidDirection) {
+                throw new IllegalArgumentException(
+                        "Invalid order by or direction");
+            }
+        }
 
         try (Connection connection = DatabaseConnector.getConnection()) {
 
             String query =
-                    "select job_roles.jobRoleId, job_roles.roleName, "
+                    "select DISTINCT job_roles.jobRoleId, job_roles.roleName, "
                             + "job_roles.location, "
                             + "capability.capabilityName, band.bandName, "
                             + "job_roles.closingDate "
@@ -28,11 +42,12 @@ public class JobRoleDao {
                             + "capability.capabilityId "
                             + "join band on job_roles.bandId = band.nameId "
                             + "join status on status.statusId "
-                            + "where job_roles.statusId = 1 "
-                            + "group by job_roles.jobRoleId";
-            if (field != null && direction != null) {
-                query += " ORDER BY " + field + " " + direction + ";";
+                            + "where job_roles.statusId = 1 ";
+
+            if (orderBy != null && direction != null) {
+                query += String.format("ORDER BY %s %s", orderBy, direction);
             }
+
             PreparedStatement statement =
                     connection.prepareStatement(query);
             ResultSet resultSet = statement.executeQuery();
@@ -100,5 +115,15 @@ public class JobRoleDao {
 
             return null;
         }
+    }
+
+    private static <T extends Enum<T>> boolean isValidEnumValue(
+            final Class<T> enumClass, final String value) {
+        for (T enumValue : enumClass.getEnumConstants()) {
+            if (enumValue.name().equalsIgnoreCase(value)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
