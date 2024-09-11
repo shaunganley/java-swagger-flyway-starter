@@ -21,45 +21,37 @@ public final class AmazonS3Connector {
     }
 
     public static AmazonS3 getAmazonS3Client() {
-
         if (amazonS3Client != null) {
             return amazonS3Client;
         }
 
-        if (ENDPOINT_URL != null) {
-            amazonS3Client = getAwsClientWithLocalEnvVariables();
-        } else {
-            amazonS3Client = getAwsClientWithProfileCredentials();
-        }
-
+        amazonS3Client = getAwsClient();
         return amazonS3Client;
     }
 
-    private static AmazonS3 getAwsClientWithLocalEnvVariables() {
+    private static AmazonS3 getAwsClient() {
         String accessKeyId = System.getenv("AWS_SECRET_KEY_ID");
         String secretAccessKey = System.getenv("AWS_SECRET_ACCESS_KEY");
-
-        AWSCredentials credentials = null;
-        if (accessKeyId != null && !accessKeyId.isEmpty() && secretAccessKey != null && !secretAccessKey.isEmpty()) {
-            credentials = new BasicAWSCredentials(accessKeyId, secretAccessKey);
-        }
+        String endpointUrl = System.getenv("ENDPOINT_URL");
 
         AmazonS3ClientBuilder builder = AmazonS3ClientBuilder.standard()
                 .withPathStyleAccessEnabled(true)
-                .withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration(ENDPOINT_URL, REGION))
                 .withClientConfiguration(new ClientConfiguration().withProtocol(Protocol.HTTP));
 
-        if (credentials != null) {
+        if (endpointUrl != null && !endpointUrl.isEmpty()) {
+            builder =
+                    builder.withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration(endpointUrl, REGION));
+        } else {
+            builder = builder.withRegion(REGION);
+        }
+
+        if (accessKeyId != null && !accessKeyId.isEmpty() && secretAccessKey != null && !secretAccessKey.isEmpty()) {
+            AWSCredentials credentials = new BasicAWSCredentials(accessKeyId, secretAccessKey);
             builder = builder.withCredentials(new AWSStaticCredentialsProvider(credentials));
+        } else {
+            builder = builder.withCredentials(DefaultAWSCredentialsProviderChain.getInstance());
         }
 
         return builder.build();
-    }
-
-    private static AmazonS3 getAwsClientWithProfileCredentials() {
-        return AmazonS3ClientBuilder.standard()
-                .withCredentials(DefaultAWSCredentialsProviderChain.getInstance())
-                .withRegion(REGION)
-                .build();
     }
 }
