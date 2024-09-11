@@ -31,11 +31,11 @@ public class JwtToken implements Principal {
         this.userRole = userRole;
     }
 
-    public void setUserEmail(final String userEmail) {
-        this.userEmail = userEmail;
-    }
-
     public String getUserEmail() {
         return userEmail;
+    }
+
+    public void setUserEmail(final String userEmail) {
+        this.userEmail = userEmail;
     }
 }

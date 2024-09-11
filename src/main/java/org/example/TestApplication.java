@@ -16,17 +16,17 @@ import org.example.controllers.JobRoleController;
 import org.example.daos.AuthDao;
 import org.example.daos.JobApplicationDao;
 import org.example.daos.JobRoleDao;
-import org.example.exceptions.FileUploadException;
 import org.example.models.JwtToken;
 import org.example.services.AuthService;
 import org.example.services.JobRoleService;
 import org.example.utils.JwtUtils;
+import org.example.validators.AuthValidator;
 import org.example.validators.JobApplicationValidator;
 import org.glassfish.jersey.media.multipart.MultiPartFeature;
 import org.glassfish.jersey.server.filter.RolesAllowedDynamicFeature;
 
 public class TestApplication extends Application<TestConfiguration> {
-    public static void main(final String[] args) throws Exception, FileUploadException {
+    public static void main(final String[] args) throws Exception {
         new TestApplication().run(args);
     }
 
@@ -60,7 +60,7 @@ public class TestApplication extends Application<TestConfiguration> {
         environment.jersey().register(RolesAllowedDynamicFeature.class);
         environment.jersey().register(new AuthValueFactoryProvider.Binder<>(JwtToken.class));
 
-        environment.jersey().register(new AuthController(new AuthService(new AuthDao())));
+        environment.jersey().register(new AuthController(new AuthService(new AuthDao(), new AuthValidator())));
 
         JobRoleDao jobRoleDao = new JobRoleDao();
         JobApplicationDao jobApplicationDao = new JobApplicationDao();

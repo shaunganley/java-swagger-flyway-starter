@@ -35,6 +35,7 @@ import org.example.exceptions.FileTooBigException;
 import org.example.exceptions.FileUploadException;
 import org.example.exceptions.ResultSetException;
 import org.example.models.JobRole;
+import org.example.models.JobRoleApplication;
 import org.example.models.JobRoleFilteredRequest;
 import org.example.models.JobRoleResponse;
 import org.example.models.JwtToken;
@@ -96,9 +97,7 @@ public class JobRoleController {
             produces = "application/json")
     @ApiResponses({
         @ApiResponse(code = OK, message = "Job roles listed successfully", response = JobRole.class),
-        @ApiResponse(
-                code = INTERNAL_SERVER_ERROR,
-                message = "getting " + "filtered job roles failed due to SQL exception"),
+        @ApiResponse(code = INTERNAL_SERVER_ERROR, message = "getting filtered job roles failed due to SQL exception"),
         @ApiResponse(code = NOT_FOUND, message = "getting filtered job roles failed due to DoesNotExistException")
     })
     @RolesAllowed({UserRole.ADMIN, UserRole.USER})
@@ -195,6 +194,43 @@ public class JobRoleController {
         } catch (SQLException | IOException | FileUploadException | SdkClientException e) {
             LOGGER.error("applyForRole failed\n{}", e.getMessage());
             return Response.serverError().build();
+        }
+    }
+
+    @GET
+    @Path("/my-job-applications")
+    @RolesAllowed({UserRole.ADMIN, UserRole.USER})
+    @Produces(MediaType.APPLICATION_JSON)
+    @ApiOperation(
+            value = "Returns a list of user's applications",
+            authorizations = @Authorization(value = HttpHeaders.AUTHORIZATION),
+            response = JobRoleApplication.class,
+            responseContainer = "List",
+            produces = "application/json")
+    @ApiResponses({
+        @ApiResponse(
+                code = OK,
+                message = "User's job applications listed successfully",
+                response = JobRoleApplication.class),
+        @ApiResponse(code = INTERNAL_SERVER_ERROR, message = "getUserAllJobApplications failed, SQL Exception"),
+        @ApiResponse(code = NOT_FOUND, message = "getUserAllJobApplications failed, DoesNotExistException")
+    })
+    public Response getUserAllJobApplications(@ApiParam(hidden = true) @Auth final JwtToken token) {
+        LOGGER.info("Get all user job applications request received");
+        String email = token.getUserEmail();
+        System.out.println(email);
+        try {
+            return Response.ok()
+                    .entity(jobRoleService.getAllUserApplications(email))
+                    .build();
+        } catch (SQLException e) {
+            LOGGER.error("Receiving job applications failed due to SQLException\n" + e.getMessage());
+            return Response.serverError().build();
+        } catch (DoesNotExistException e) {
+            LOGGER.error("Receiving job applications failed due to DoesNotExistException\n" + e.getMessage());
+            return Response.status(Response.Status.NOT_FOUND)
+                    .entity(e.getMessage())
+                    .build();
         }
     }
 }

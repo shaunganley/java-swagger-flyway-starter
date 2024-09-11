@@ -28,6 +28,7 @@ import org.example.exceptions.FileTooBigException;
 import org.example.exceptions.FileUploadException;
 import org.example.exceptions.ResultSetException;
 import org.example.models.JobRole;
+import org.example.models.JobRoleApplication;
 import org.example.models.JobRoleDetails;
 import org.example.models.JobRoleFilteredRequest;
 import org.example.models.JobRoleResponse;
@@ -38,7 +39,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
 
-class JobRoleServicesTest {
+class JobRoleServiceTest {
     List<JobRole> jobRoles;
     JobRoleDao jobRoleDao = Mockito.mock(JobRoleDao.class);
     JobApplicationDao jobApplicationDao = Mockito.mock(JobApplicationDao.class);
@@ -242,5 +243,27 @@ class JobRoleServicesTest {
             assertThrows(
                     AlreadyExistsException.class, () -> jobRoleService.applyForRole(jobRoleId, userEmail, inputStream));
         }
+    }
+
+    @Test
+    public void getAllUserApplications_shouldReturnJobListForGivenUser() throws SQLException, DoesNotExistException {
+        String email = "admin";
+
+        List<JobRoleApplication> expectedJobRoleApplications = new ArrayList<>();
+        expectedJobRoleApplications.add(new JobRoleApplication(1, "Engineer", "hired"));
+        expectedJobRoleApplications.add(new JobRoleApplication(2, "Trainee", "rejected"));
+
+        Mockito.when(jobRoleDao.getUserJobRoleApplications(email)).thenReturn(expectedJobRoleApplications);
+
+        List<JobRoleApplication> resultJobRoleApplications = jobRoleService.getAllUserApplications(email);
+        assertEqualLists(expectedJobRoleApplications, resultJobRoleApplications);
+    }
+
+    @Test
+    public void getAllUserApplication_shouldThrowExpection_whenListIsEmpty()
+            throws DoesNotExistException, SQLException {
+        String email = "email";
+        when(jobRoleDao.getUserJobRoleApplications(email)).thenReturn(Collections.emptyList());
+        assertThrows(DoesNotExistException.class, () -> jobRoleService.getAllUserApplications(email));
     }
 }

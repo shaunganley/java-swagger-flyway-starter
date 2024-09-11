@@ -4,11 +4,10 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import io.jsonwebtoken.security.SignatureException;
-
-import javax.crypto.SecretKey;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import javax.crypto.SecretKey;
 
 public final class JwtUtils {
     private static final SecretKey SECRET_KEY = Keys.secretKeyFor(SignatureAlgorithm.HS256);
@@ -38,10 +37,7 @@ public final class JwtUtils {
 
     public static boolean validateToken(final String token) {
         try {
-            Jwts.parser()
-                    .setSigningKey(SECRET_KEY)
-                    .build()
-                    .parseClaimsJws(token);
+            Jwts.parser().setSigningKey(SECRET_KEY).build().parseClaimsJws(token);
             return true;
         } catch (SignatureException | SecurityException e) {
             throw new IllegalArgumentException("Invalid JWT signature: " + e.getMessage(), e);
@@ -56,4 +52,3 @@ public final class JwtUtils {
         }
     }
 }
-

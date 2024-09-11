@@ -1,6 +1,7 @@
 package org.example.daos;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,6 +11,7 @@ import java.util.Collections;
 import java.util.List;
 import org.example.exceptions.ResultSetException;
 import org.example.models.JobRole;
+import org.example.models.JobRoleApplication;
 import org.example.models.JobRoleDetails;
 import org.example.models.JobRoleFilteredRequest;
 
@@ -54,58 +56,98 @@ public class JobRoleDao {
                 + "WHERE statusName = 'open'";
     }
 
-    private void applyFiltersToQuery(
-            final JobRoleFilteredRequest jobRequest, final StringBuilder query, final List<Object> parameters) {
-        if (jobRequest.getRoleName() != null && !jobRequest.getRoleName().isBlank()) {
-            query.append(" AND roleName LIKE ?");
-            parameters.add(jobRequest.getLikeRoleName());
-        }
-        applyFilter(jobRequest.getJobRoleLocation(), "location", query, parameters);
-        applyFilter(jobRequest.getCapabilityName(), "capabilityName", query, parameters);
-        applyFilter(jobRequest.getBandName(), "bandName", query, parameters);
-        if (jobRequest.getClosingDate() != null) {
-            query.append(" AND closingDate < ?");
-            parameters.add(jobRequest.getClosingDate());
-        }
-
-        query.append(";");
-    }
-
     private void executeFilteredJobQuery(
             final StringBuilder query, final List<Object> parameters, final List<JobRole> jobRoles)
             throws SQLException, ResultSetException {
-        try (Connection connection = DatabaseConnector.getConnection()) {
-            assert connection != null;
-            try (PreparedStatement statement = connection.prepareStatement(query.toString())) {
-                for (int i = 0; i < parameters.size(); i++) {
-                    if (parameters.get(i) instanceof String) {
-                        statement.setString(i + 1, (String) parameters.get(i));
-                    } else if (parameters.get(i) instanceof Integer) {
-                        statement.setInt(i + 1, (Integer) parameters.get(i));
-                    } else if (parameters.get(i) instanceof java.sql.Date) {
-                        statement.setDate(i + 1, (java.sql.Date) parameters.get(i));
-                    } else {
-                        throw new IllegalArgumentException();
-                    }
-                }
-                System.out.println(statement);
-                ResultSet resultSet = statement.executeQuery();
+        try (Connection connection = DatabaseConnector.getConnection();
+                PreparedStatement statement = connection.prepareStatement(query.toString())) {
 
-                while (resultSet.next()) {
-                    addJobRoleFromResultSet(jobRoles, resultSet);
-                }
+            setParameters(statement, parameters);
+            System.out.println(statement);
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                addJobRoleFromResultSet(jobRoles, resultSet);
             }
         }
     }
 
-    private <T> void applyFilter(
-            final List<T> values, final String key, final StringBuilder query, final List<Object> parameters) {
-        if (isPresent(values)) {
-            query.append(" AND ").append(key).append(" IN (");
-            query.append(String.join(", ", Collections.nCopies(values.size(), "?")));
-            query.append(")");
-            parameters.addAll(values);
+    private void setParameters(final PreparedStatement statement, final List<Object> parameters) throws SQLException {
+        for (int i = 0; i < parameters.size(); i++) {
+            Object param = parameters.get(i);
+            if (param instanceof String) {
+                statement.setString(i + 1, (String) param);
+            } else if (param instanceof Integer) {
+                statement.setInt(i + 1, (Integer) param);
+            } else if (param instanceof Date) {
+                statement.setDate(i + 1, (Date) param);
+            } else {
+                throw new IllegalArgumentException(
+                        "Unsupported parameter type: " + param.getClass().getName());
+            }
         }
+    }
+
+    private boolean isNullOrEmpty(final Object value) {
+        return value == null || value.toString().isBlank();
+    }
+
+    private boolean isClosingDate(final String key, final Object value) {
+        return "closingDate".equals(key) && value instanceof Date;
+    }
+
+    private void handleClosingDate(
+            final StringBuilder query, final List<Object> parameters, final String key, final Object value) {
+        query.append(" AND ").append(key).append(" < ?");
+        parameters.add(value);
+    }
+
+    private boolean isCommaSeparatedString(final Object value) {
+        return value instanceof String && ((String) value).contains(",");
+    }
+
+    private void handleSingleValue(
+            final StringBuilder query, final List<Object> parameters, final String key, final Object value) {
+        query.append(" AND ").append(key).append(" LIKE ?");
+        parameters.add(value);
+    }
+
+    private void handleCommaSeparatedValues(
+            final StringBuilder query, final List<Object> parameters, final String key, final String value) {
+        String[] values = value.split(",");
+        query.append(" AND ").append(key).append(" IN (");
+        query.append(String.join(", ", Collections.nCopies(values.length, "?")));
+        query.append(")");
+
+        for (String val : values) {
+            parameters.add(val.trim());
+        }
+    }
+
+    private void appendFilter(
+            final StringBuilder query, final List<Object> parameters, final String key, final Object value) {
+        if (isNullOrEmpty(value)) {
+            return;
+        }
+
+        if (isClosingDate(key, value)) {
+            handleClosingDate(query, parameters, key, value);
+        } else if (isCommaSeparatedString(value)) {
+            handleCommaSeparatedValues(query, parameters, key, (String) value);
+        } else {
+            handleSingleValue(query, parameters, key, value);
+        }
+    }
+
+    private void applyFiltersToQuery(
+            final JobRoleFilteredRequest jobRequest, final StringBuilder query, final List<Object> parameters) {
+        appendFilter(query, parameters, "roleName", jobRequest.getLikeRoleName());
+        appendFilter(query, parameters, "location", jobRequest.getJobRoleLocation());
+        appendFilter(query, parameters, "capabilityName", jobRequest.getCapabilityName());
+        appendFilter(query, parameters, "bandName", jobRequest.getBandName());
+        appendFilter(query, parameters, "closingDate", jobRequest.getClosingDate());
+
+        query.append(";");
     }
 
     private <E> boolean isPresent(final List<E> list) {
@@ -176,5 +218,32 @@ public class JobRoleDao {
 
             return resultSet.next();
         }
+    }
+
+    public List<JobRoleApplication> getUserJobRoleApplications(final String email) throws SQLException {
+        List<JobRoleApplication> jobRoleApplications = new ArrayList<>();
+
+        try (Connection connection = DatabaseConnector.getConnection()) {
+            Statement statement = connection.createStatement();
+
+            String query = "SELECT jr.jobRoleId, jr.roleName, aps.statusApplicationName\n"
+                    + "FROM job_application ja\n"
+                    + "INNER JOIN application_status aps ON ja.statusApplicationId = aps.statusApplicationId\n"
+                    + "INNER JOIN job_roles jr ON ja.jobRoleId = jr.jobRoleId\n"
+                    + "INNER JOIN User u ON ja.Email = u.Email\n"
+                    + "WHERE u.Email = '" + email + "';";
+            System.out.println(query);
+            ResultSet resultSet = statement.executeQuery(query);
+
+            while (resultSet.next()) {
+                JobRoleApplication jobRoleApplication = new JobRoleApplication(
+                        resultSet.getInt("jobRoleId"),
+                        resultSet.getString("roleName"),
+                        resultSet.getString("statusApplicationName"));
+
+                jobRoleApplications.add(jobRoleApplication);
+            }
+        }
+        return jobRoleApplications;
     }
 }
