@@ -1,9 +1,13 @@
 package org.example.services;
 import org.example.daos.JobRoleDao;
 import org.example.exceptions.DoesNotExistException;
+import org.example.exceptions.Entity;
+import org.example.exceptions.InvalidException;
 import org.example.models.JobRole;
 import org.example.models.JobRoleDetailedResponse;
+import org.example.models.JobRoleRequest;
 import org.example.models.JobRoleResponse;
+import org.example.validators.JobRoleValidator;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -23,8 +27,9 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class JobRoleServiceTest {
 
     JobRoleDao jobRoleDao = Mockito.mock(JobRoleDao.class);
+    JobRoleValidator jobRoleValidator = Mockito.mock(JobRoleValidator.class);
 
-    JobRoleService jobRoleService = new JobRoleService(jobRoleDao);
+    JobRoleService jobRoleService = new JobRoleService(jobRoleDao, jobRoleValidator);
 
     @Test
     public void getAllJobRoles_shouldReturnJobRoleResponseList() throws SQLException {
@@ -126,5 +131,83 @@ public class JobRoleServiceTest {
                 () -> jobRoleService.getJobRoleById(nonExistentJobRoleId));
 
     }
+
+    @Test
+    public void createJobRole_shouldReturnJobRoleId_whenJobRoleCreatedSuccessfully()
+            throws SQLException, InvalidException {
+
+        long millis = System.currentTimeMillis();
+        Date closingDate = new Date(millis);
+
+        JobRoleRequest jobRoleRequest = new JobRoleRequest(
+                "Valid Role Name",
+                "Some description",
+                "https://valid.url",
+                "Some responsibilities",
+                1,
+                "Some location",
+                closingDate,
+                1,
+                3
+        );
+
+        int expectedJobRoleId = 1;
+
+        Mockito.doNothing().when(jobRoleValidator).validateJobRole(jobRoleRequest);
+        Mockito.when(jobRoleDao.createJobRole(jobRoleRequest)).thenReturn(expectedJobRoleId);
+
+        int actualJobRoleId = jobRoleService.createJobRole(jobRoleRequest);
+
+        assertEquals(expectedJobRoleId, actualJobRoleId);
+    }
+
+    @Test
+    public void createJobRole_shouldThrowSQLException_whenDaoThrowsSQLException() throws SQLException, InvalidException {
+
+        long millis = System.currentTimeMillis();
+        Date closingDate = new Date(millis);
+
+        JobRoleRequest jobRoleRequest = new JobRoleRequest(
+                "Valid Role Name",
+                "Some description",
+                "https://valid.url",
+                "Some responsibilities",
+                1,
+                "Some location",
+                closingDate,
+                1,
+                3
+        );
+
+        Mockito.doNothing().when(jobRoleValidator).validateJobRole(jobRoleRequest);
+        Mockito.when(jobRoleDao.createJobRole(jobRoleRequest)).thenThrow(SQLException.class);
+
+        assertThrows(SQLException.class, () -> jobRoleService.createJobRole(jobRoleRequest));
+    }
+
+    @Test
+    public void createJobRole_shouldThrowInvalidException_whenValidationFails() throws InvalidException {
+
+        long millis = System.currentTimeMillis();
+        Date closingDate = new Date(millis);
+
+        JobRoleRequest jobRoleRequest = new JobRoleRequest(
+                "Invalid Role Name",
+                "",
+                "https://invalid.url",
+                "",
+                0,
+                "",
+                closingDate,
+                0,
+                0
+        );
+
+        Mockito.doThrow(new InvalidException(Entity.JOB_ROLE, "Invalid Job Role Request"))
+                .when(jobRoleValidator).validateJobRole(jobRoleRequest);
+
+        assertThrows(InvalidException.class, () -> jobRoleService.createJobRole(jobRoleRequest));
+    }
+
 
 }

@@ -21,6 +21,7 @@ import java.security.Key;
 
 import org.example.controllers.JobRoleController;
 import org.example.daos.JobRoleDao;
+import org.example.validators.JobRoleValidator;
 import org.glassfish.jersey.server.filter.RolesAllowedDynamicFeature;
 
 
@@ -64,6 +65,6 @@ public class KainosJobWebApplication extends
         environment.jersey().register(new AuthController(
                 new AuthService(new AuthDao(), jwtKey)));
         environment.jersey().register(new JobRoleController(
-                new JobRoleService(new JobRoleDao())));
+                new JobRoleService(new JobRoleDao(), new JobRoleValidator())));
     }
 }
