@@ -38,6 +38,8 @@ jobs:
           DB_NAME: ${{ secrets.TEST_DB_NAME }}
           VALID_TEST_EMAIL: ${{ secrets.VALID_TEST_EMAIL }}
           VALID_TEST_PASSWORD: ${{ secrets.VALID_TEST_PASSWORD }}
+          VALID_ADMIN_EMAIL: ${{ secrets.VALID_ADMIN_EMAIL}}
+          VALID_ADMIN_PASSWORD: ${{ secrets.VALID_ADMIN_PASSWORD}}
 
         run: mvn clean integration-test
 
