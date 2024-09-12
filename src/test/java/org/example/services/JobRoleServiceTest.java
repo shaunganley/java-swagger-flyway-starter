@@ -131,7 +131,7 @@ public class JobRoleServiceTest {
 
     }
     @Test
-    public void getAllJobRoles_shouldThrowSQLException_whenDaoThrowsSQLExceptionWithOrdering()
+    public void getOpenJobRoles_shouldThrowSQLException_whenDaoThrowsSQLExceptionWithOrdering()
             throws SQLException{
         when(jobRoleDao.getOpenJobRoles(JobRoleColumn.ROLENAME.getColumnName(), Direction.ASC.getDirectionName())).thenThrow(SQLException.class);
 

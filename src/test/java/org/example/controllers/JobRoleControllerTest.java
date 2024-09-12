@@ -136,7 +136,7 @@ public class JobRoleControllerTest {
         Assert.assertEquals(Response.Status.NOT_FOUND.getStatusCode(), response.getStatus());
     }
     @Test
-    public void getAllJobRoles_withOrdering_shouldReturnOrderedJobRoles() throws SQLException{
+    public void getJobRoles_withOrdering_shouldReturnOrderedJobRoles() throws SQLException{
         List<JobRoleResponse> roles = Arrays.asList(jobRole1, jobRole2);
         when(jobRoleService.getOpenJobRoles(JobRoleColumn.ROLENAME.getColumnName(), Direction.ASC.getDirectionName())).thenReturn(roles);
         Response response = jobRoleController.getJobRoles(JobRoleColumn.ROLENAME.getColumnName(), Direction.ASC.getDirectionName());
@@ -146,7 +146,7 @@ public class JobRoleControllerTest {
     }
 
     @Test
-    public void getAllJobRoles_withOrdering_shouldReturnInternalServerError_whenSQLExceptionThrown() throws SQLException{
+    public void getJobRoles_withOrdering_shouldReturnInternalServerError_whenSQLExceptionThrown() throws SQLException{
         when(jobRoleService.getOpenJobRoles(JobRoleColumn.ROLENAME.getColumnName(), Direction.ASC.getDirectionName())).thenThrow(SQLException.class);
         Response response = jobRoleController.getJobRoles(JobRoleColumn.ROLENAME.getColumnName(), Direction.ASC.getDirectionName());
         assertEquals(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode(), response.getStatus());

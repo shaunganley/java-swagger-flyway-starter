@@ -59,7 +59,7 @@ public class JobRoleIntegrationTest {
     }
 
     @Test
-    public void getAllJobRoles_shouldReturn401WhenNoTokenProvided() {
+    public void getJobRoles_shouldReturn401WhenNoTokenProvided() {
         Client client = APP.client();
 
         Response response = client.target("http://localhost:8080/api/job-roles")
