@@ -7,5 +7,6 @@ CREATE TABLE project (
     clientId int,
     salesEmployeeID int,
     startDate DateTime,
-    finishDate DateTime
+    finishDate DateTime,
+    PRIMARY KEY(projectId)
 );
