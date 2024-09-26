@@ -1,5 +1,5 @@
 CREATE TABLE project (
-    projectId int NOT NULL,
+    projectId int NOT NULL AUTO_INCREMENT,
     `name` varchar(50),
     `value` decimal(9, 2),
     technologyId int,
