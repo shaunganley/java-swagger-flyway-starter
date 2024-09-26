@@ -7,7 +7,7 @@ CREATE TABLE `client` (
     street2 nvarchar(50),
     town nvarchar(50),
     city nvarchar(50),
-    zip nvarchar(10) NOT NULL,
+    postcode nvarchar(10) NOT NULL,
     country char(2) NOT NULL
 
     phone varchar(15)
