@@ -1,1 +1,0 @@
-ALTER TABLE client MODIFY clientId int NOT NULL PRIMARY KEY;
