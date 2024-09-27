@@ -6,6 +6,6 @@ CREATE TABLE `client` (
     town nvarchar(50),
     city nvarchar(50),
     postcode nvarchar(10),
-    country char(2) NOT NULL
+    country char(2) NOT NULL,
     phone varchar(15)
 )
