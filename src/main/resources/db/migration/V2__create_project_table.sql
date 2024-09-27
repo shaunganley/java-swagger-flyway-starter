@@ -5,7 +5,7 @@ CREATE TABLE project (
     technologyId int,
     techLeadId int,
     clientId int,
-    salesEmployeeID int,
+    salesEmployeeId int,
     startDate DateTime,
     finishDate DateTime,
     commissionRate decimal(3, 2),
