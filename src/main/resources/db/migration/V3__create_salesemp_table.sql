@@ -5,5 +5,5 @@ CREATE TABLE salesEmployees (
     salary decimal(10,2) NOT NULL,
     currency char(3) NOT NULL,
     bankAccountNo varchar(34) NOT NULL,
-    nationalInsuranceNo char(9),
+    nationalInsuranceNo char(9)
 )
