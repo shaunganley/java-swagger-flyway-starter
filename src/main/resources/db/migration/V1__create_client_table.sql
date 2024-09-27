@@ -1,5 +1,5 @@
 CREATE TABLE `client` (
-    clientId int AUTO_INCREMENT NOT NULL,
+    clientId int AUTO_INCREMENT NOT NULL PRIMARY KEY,
     name nvarchar(50) NOT NULL,
     addressLine1 nvarchar(50) NOT NULL,
     addressLine2 nvarchar(50),
