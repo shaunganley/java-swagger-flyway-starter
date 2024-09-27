@@ -8,5 +8,6 @@ CREATE TABLE `client` (
     postcode varchar(10),
     country char(2) NOT NULL,
     phone varchar(15),
-    email varchar(50)
+    email varchar(50),
+    CONSTRAINT chk_must_have_one_contact CHECK(not (phone is null and email is null))
 )
