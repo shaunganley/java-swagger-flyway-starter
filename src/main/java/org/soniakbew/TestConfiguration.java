@@ -1,4 +1,4 @@
-package org.example;
+package org.soniakbew;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.dropwizard.Configuration;

@@ -1,13 +1,13 @@
-package org.example;
+package org.soniakbew;
 
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import io.federecio.dropwizard.swagger.SwaggerBundle;
 import io.federecio.dropwizard.swagger.SwaggerBundleConfiguration;
-import org.example.controllers.TestController;
-import org.example.daos.TestDao;
-import org.example.services.TestService;
+import org.soniakbew.controllers.TestController;
+import org.soniakbew.daos.TestDao;
+import org.soniakbew.services.TestService;
 
 public class TestApplication extends Application<TestConfiguration> {
     public static void main(final String[] args) throws Exception {
