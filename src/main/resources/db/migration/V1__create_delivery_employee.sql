@@ -6,4 +6,3 @@ CREATE TABLE deliveryEmployee (
 	nationalInsuranceNumber VARCHAR(9),
 	PRIMARY KEY(deliveryEmployeeId)
 );
-
