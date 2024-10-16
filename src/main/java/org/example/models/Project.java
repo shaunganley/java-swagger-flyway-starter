@@ -26,7 +26,6 @@ public class Project {
         this.projectProperties = projectProperties;
     }
 
-
     public int getProjectId() {
         return projectId;
     }
