@@ -45,21 +45,39 @@ public class DeliveryEmployeeDao {
     public int createDeliveryEmployee(DeliveryEmployeeRequest deliveryEmployee) throws SQLException {
         Connection conn = DatabaseConnector.getConnection();
 
-        String insertStatement = "INSERT INTO deliveryEmployee (deliveryEmployeeId, `name`, salary, bankAccountNumber, nationalInsuranceNumber) VALUES (?,?,?,?,?);";
+        String insertStatement = "INSERT INTO deliveryEmployee (`name`, salary, bankAccountNumber, nationalInsuranceNumber) VALUES (?,?,?,?);";
 
         PreparedStatement pst = conn.prepareStatement(insertStatement, Statement.RETURN_GENERATED_KEYS);
-        pst.setInt(1, DeliveryEmployeeRequest.getCustomerId());
-        pst.setDate(2, order.getOrderDate());
+        pst.setString(1, deliveryEmployee.getName());
+        pst.setDouble(2, deliveryEmployee.getSalary());
+        pst.setString(3, deliveryEmployee.getBankAccountNumber()),
+        pst.setString(4, deliveryEmployee.getNationalInsuranceNumber());
 
         pst.executeUpdate();
 
         ResultSet res = pst.getGeneratedKeys();
+
         if (res.next()) {
             return res.getInt(1);
         }
 
         return -1;
     }
+
+    public void updateDeliveryEmployee(int id, DeliveryEmployeeRequest deliveryEmployee) throws SQLException {
+        Connection conn = DatabaseConnector.getConnection();
+
+        String statement = "UPDATE deliveryEmployee SET `name`=?, salary=?, bankAccountNumber=?, nationalInsuranceNumber=? WHERE ProductID = ?;";
+        PreparedStatement pst = conn.prepareStatement(statement);
+
+        pst.setString(1, deliveryEmployee.getName());
+        pst.setDouble(2, deliveryEmployee.getSalary());
+        pst.setString(3, deliveryEmployee.getBankAccountNumber());
+        pst.setInt(4, id);
+
+        pst.executeUpdate();
+    }
+
 
 }
 
