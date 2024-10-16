@@ -2,6 +2,6 @@ package org.soniakbew.exceptions;
 
 public class DoesNotExistException extends RuntimeException {
     public DoesNotExistException(final Entity entity) {
-        super(entity.name() + " does not exist");
+        super(entity.getName() + " does not exist");
     }
 }

@@ -12,7 +12,7 @@ public enum Entity {
         this.entity = entity;
     }
 
-    public String getEntity() {
-        return this.entity;
+    public String getName() {
+        return this.name();
     }
 }
