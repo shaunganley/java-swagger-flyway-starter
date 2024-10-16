@@ -1,7 +1,7 @@
 package org.soniakbew.exceptions;
 
 public class InvalidException extends RuntimeException {
-  public InvalidException(String message) {
-    super(message);
-  }
+    public InvalidException(final Entity entity) {
+        super(entity.name() + " could not be created.");
+    }
 }

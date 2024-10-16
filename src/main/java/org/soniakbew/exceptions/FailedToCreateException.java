@@ -1,7 +1,7 @@
 package org.soniakbew.exceptions;
 
 public class FailedToCreateException extends RuntimeException {
-  public FailedToCreateException(String message) {
-    super(message);
-  }
+    public FailedToCreateException(final Entity entity) {
+        super(entity.name() + " could not be created.");
+    }
 }
