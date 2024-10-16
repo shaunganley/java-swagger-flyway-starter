@@ -1,20 +1,11 @@
 package org.soniakbew.models;
 
-@SuppressWarnings("checkstyle:LineLength")
 public class DeliveryEmployee {
     private int deliveryEmployeeId;
     private String name;
     private Double salary;
     private String bankAccountNumber;
     private String nationalInsuranceNumber;
-
-    public DeliveryEmployee(final int deliveryEmployeeId, final String name, final Double salary, final String bankAccountNumber, final String nationalInsuranceNumber) {
-        this.deliveryEmployeeId = deliveryEmployeeId;
-        this.name = name;
-        this.salary = salary;
-        this.bankAccountNumber = bankAccountNumber;
-        this.nationalInsuranceNumber = nationalInsuranceNumber;
-    }
 
     public int getDeliveryEmployeeId() {
         return deliveryEmployeeId;
@@ -52,7 +43,9 @@ public class DeliveryEmployee {
         return nationalInsuranceNumber;
     }
 
-    public void setNationalInsuranceNumber(final String nationalInsuranceNumber) {
+    public void setNationalInsuranceNumber(
+            final String nationalInsuranceNumber
+    ) {
         this.nationalInsuranceNumber = nationalInsuranceNumber;
     }
 }
