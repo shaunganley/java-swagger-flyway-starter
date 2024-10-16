@@ -10,6 +10,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ClientDao {
+    private Client clientFromResultsSet(
+            final ResultSet resultSet
+    ) throws SQLException {
+        return new Client(
+                resultSet.getInt("clientId"),
+                resultSet.getString("name")
+        );
+    }
+
     public List<Client> getAllClients() throws SQLException {
         List<Client> clients = new ArrayList<>();
 
@@ -21,11 +30,7 @@ public class ClientDao {
             );
 
             while (resultSet.next()) {
-                Client client = new Client(
-                        resultSet.getInt("clientId"),
-                        resultSet.getString("name")
-                );
-                clients.add(client);
+                clients.add(clientFromResultsSet(resultSet));
             }
         }
         return clients;
@@ -40,10 +45,7 @@ public class ClientDao {
 
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
-                return new Client(
-                        resultSet.getInt("clientId"),
-                        resultSet.getString("name")
-                );
+                return clientFromResultsSet(resultSet);
             }
         }
         return null;
