@@ -24,7 +24,6 @@ public class ClientController {
         try {
             return Response.ok().entity(clientService.getAllClients()).build();
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
             return Response.status(
                     Response.Status.INTERNAL_SERVER_ERROR
             ).build();
