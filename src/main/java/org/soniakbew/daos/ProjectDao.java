@@ -27,7 +27,8 @@ public class ProjectDao {
                 resultSet.getDate("finishDate"),
                 resultSet.getFloat("commissionRate"),
                 resultSet.getDouble("value")
-                ));
+                )
+        );
     }
 
     public List<Project> getAllProjects() throws SQLException {
@@ -37,8 +38,8 @@ public class ProjectDao {
             Statement statement = connection.createStatement();
 
             ResultSet resultSet = statement.executeQuery(
-"SELECT projectId, name, technologyId, techLeadId, clientId, " +
-"salesEmployeeId, startDate, finishDate, commissionRate, value FROM project"
+"SELECT projectId, name, technologyId, techLeadId, clientId, "
++ "salesEmployeeId, startDate, finishDate, commissionRate, value FROM project"
             );
             while (resultSet.next()) {
                 projects.add(projectFromResultSet(resultSet));
