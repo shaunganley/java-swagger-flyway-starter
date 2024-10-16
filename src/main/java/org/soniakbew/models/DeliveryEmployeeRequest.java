@@ -24,7 +24,3 @@ public class DeliveryEmployeeRequest {
         this.nationalInsuranceNumber = nationalInsuranceNumber;
     }
 }
-
-
-
-
