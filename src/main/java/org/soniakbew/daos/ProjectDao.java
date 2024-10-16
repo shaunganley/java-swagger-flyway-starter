@@ -2,7 +2,6 @@ package org.soniakbew.daos;
 
 import org.soniakbew.models.Project;
 import org.soniakbew.models.ProjectProperties;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -44,6 +43,7 @@ public class ProjectDao {
             while (resultSet.next()) {
                 projects.add(projectFromResultSet(resultSet));
             }
+            connection.close();
         }
         return projects;
     }
