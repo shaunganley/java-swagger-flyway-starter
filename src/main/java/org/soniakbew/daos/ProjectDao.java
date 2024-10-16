@@ -37,10 +37,11 @@ public class ProjectDao {
             Statement statement = connection.createStatement();
 
             ResultSet resultSet = statement.executeQuery(
-                    "SELECT projectId, name, technologyId, clientId, salesEmployeeId, projectProperties"
+"SELECT projectId, name, technologyId, techLeadId, clientId, " +
+"salesEmployeeId, startDate, finishDate, commissionRate, value FROM project"
             );
             while (resultSet.next()) {
-                projects.add(projectFromResultsSet(resultSet));
+                projects.add(projectFromResultSet(resultSet));
             }
         }
         return projects;
@@ -54,7 +55,7 @@ public class ProjectDao {
 
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
-                return projectFromResultsSet(resultSet);
+                return projectFromResultSet(resultSet);
             }
         }
         return null;
