@@ -55,7 +55,8 @@ public class Project {
         return projectProperties;
     }
 
-    public void setProjectProperties(final ProjectProperties projectProperties) {
+    public void setProjectProperties(
+            final ProjectProperties projectProperties) {
         this.projectProperties = projectProperties;
     }
 
