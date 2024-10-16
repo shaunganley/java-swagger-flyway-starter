@@ -4,13 +4,13 @@ import org.joda.time.DateTime;
 public class ProjectProperties {
     private DateTime startDate;
     private DateTime finishDate;
-    private double commissionRate;
+    private float commissionRate;
     private double value;
 
     public ProjectProperties(
             final DateTime startDate,
             final DateTime finishDate,
-            final double commissionRate,
+            final float commissionRate,
             final double value
     ) {
         this.startDate = startDate;
@@ -39,7 +39,7 @@ public class ProjectProperties {
         return commissionRate;
     }
 
-    public void setCommissionRate(final double commissionRate) {
+    public void setCommissionRate(final float commissionRate) {
         this.commissionRate = commissionRate;
     }
 
