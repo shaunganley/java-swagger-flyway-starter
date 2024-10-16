@@ -7,7 +7,8 @@ public class Project {
     private int techLeadId;
     private int clientId;
     private int salesEmployeeId;
-    private ProjectProperties projProps;
+    private ProjectProperties projectProperties;
+    
     public Project(
             final int projectId,
             final String name,
@@ -15,7 +16,7 @@ public class Project {
             final int techLeadId,
             final int clientId,
             final int salesEmployeeId,
-            final ProjectProperties projProps
+            final ProjectProperties projectProperties
     ) {
         this.projectId = projectId;
         this.name = name;
@@ -23,7 +24,7 @@ public class Project {
         this.techLeadId = techLeadId;
         this.clientId = clientId;
         this.salesEmployeeId = salesEmployeeId;
-        this.projProps = projProps;
+        this.projectProperties = projectProperties;
     }
 
 
@@ -51,12 +52,12 @@ public class Project {
         this.technologyId = technologyId;
     }
 
-    public ProjectProperties getProjProps() {
-        return projProps;
+    public ProjectProperties getProjectProperties() {
+        return projectProperties;
     }
 
-    public void setProjProps(final ProjectProperties projProps) {
-        this.projProps = projProps;
+    public void setProjectProperties(final ProjectProperties projectProperties) {
+        this.projectProperties = projectProperties;
     }
 
     public int getTechLeadId() {
