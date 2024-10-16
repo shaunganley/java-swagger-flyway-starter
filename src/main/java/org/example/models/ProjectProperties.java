@@ -1,8 +1,5 @@
 package org.example.models;
-
-
 import org.joda.time.DateTime;
-
 
 public class ProjectProperties {
     private DateTime startDate;
