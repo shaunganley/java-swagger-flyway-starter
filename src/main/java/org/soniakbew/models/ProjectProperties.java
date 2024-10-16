@@ -1,16 +1,16 @@
 package org.soniakbew.models;
-import org.joda.time.DateTime;
+import java.sql.Date;
 
 public class ProjectProperties {
-    private DateTime startDate;
-    private DateTime finishDate;
-    private double commissionRate;
+    private Date startDate;
+    private Date finishDate;
+    private float commissionRate;
     private double value;
 
     public ProjectProperties(
-            final DateTime startDate,
-            final DateTime finishDate,
-            final double commissionRate,
+            final Date startDate,
+            final Date finishDate,
+            final float commissionRate,
             final double value
     ) {
         this.startDate = startDate;
@@ -19,19 +19,19 @@ public class ProjectProperties {
         this.value = value;
     }
 
-    public DateTime getStartDate() {
+    public Date getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(final DateTime startDate) {
+    public void setStartDate(final Date startDate) {
         this.startDate = startDate;
     }
 
-    public DateTime getFinishDate() {
+    public Date getFinishDate() {
         return finishDate;
     }
 
-    public void setFinishDate(final DateTime finishDate) {
+    public void setFinishDate(final Date finishDate) {
         this.finishDate = finishDate;
     }
 
@@ -39,7 +39,7 @@ public class ProjectProperties {
         return commissionRate;
     }
 
-    public void setCommissionRate(final double commissionRate) {
+    public void setCommissionRate(final float commissionRate) {
         this.commissionRate = commissionRate;
     }
 
