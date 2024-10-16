@@ -41,7 +41,6 @@ public class DeliveryEmployeeDao {
         return deliveryEmployees;
     }
 
-
     public int createDeliveryEmployee(DeliveryEmployeeRequest deliveryEmployee) throws SQLException {
         Connection conn = DatabaseConnector.getConnection();
 
@@ -67,18 +66,25 @@ public class DeliveryEmployeeDao {
     public void updateDeliveryEmployee(int id, DeliveryEmployeeRequest deliveryEmployee) throws SQLException {
         Connection conn = DatabaseConnector.getConnection();
 
-        String statement = "UPDATE deliveryEmployee SET `name`=?, salary=?, bankAccountNumber=?, nationalInsuranceNumber=? WHERE ProductID = ?;";
+        String statement = "UPDATE deliveryEmployee SET `name`=?, salary=?, bankAccountNumber=?, nationalInsuranceNumber=? WHERE deliveryEmployeeId = ?;";
         PreparedStatement pst = conn.prepareStatement(statement);
 
         pst.setString(1, deliveryEmployee.getName());
         pst.setDouble(2, deliveryEmployee.getSalary());
         pst.setString(3, deliveryEmployee.getBankAccountNumber());
-        pst.setInt(4, id);
+        pst.setString(4, deliveryEmployee.getNationalInsuranceNumber());
+        pst.setInt(5, id);
 
         pst.executeUpdate();
     }
 
-
+    public void deleteDeliveryEmployee(int id) throws SQLException {
+        Connection conn = DatabaseConnector.getConnection();
+        String statement = "DELETE FROM deliveryEmployee WHERE deliveryEmployeeId = ?;";
+        PreparedStatement pst = conn.prepareStatement(statement);
+        pst.setInt(1, id);
+        pst.executeUpdate();
+    }
 }
 
 
