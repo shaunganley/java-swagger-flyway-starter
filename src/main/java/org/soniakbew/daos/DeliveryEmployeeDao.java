@@ -21,7 +21,8 @@ public class DeliveryEmployeeDao {
             Statement statement = connection.createStatement();
 
             ResultSet resultSet = statement.executeQuery(
-                    "SELECT deliveryEmployeeId, `name`, salary, bankAccountNumber, nationalInsuranceNumber FROM deliveryEmployee;"
+"SELECT deliveryEmployeeId, `name`, salary, bankAccountNumber, "
++ "nationalInsuranceNumber FROM deliveryEmployee;"
             );
 
             while (resultSet.next()) {
@@ -41,16 +42,32 @@ public class DeliveryEmployeeDao {
         return deliveryEmployees;
     }
 
-    public int createDeliveryEmployee(DeliveryEmployeeRequest deliveryEmployee) throws SQLException {
+    public int createDeliveryEmployee(
+            final DeliveryEmployeeRequest deliveryEmployee
+    ) throws SQLException {
         Connection conn = DatabaseConnector.getConnection();
 
-        String insertStatement = "INSERT INTO deliveryEmployee (`name`, salary, bankAccountNumber, nationalInsuranceNumber) VALUES (?,?,?,?);";
+        String insertStatement = "INSERT INTO deliveryEmployee "
++ "(`name`, salary, bankAccountNumber, "
++ "nationalInsuranceNumber) VALUES (?,?,?,?);";
 
-        PreparedStatement pst = conn.prepareStatement(insertStatement, Statement.RETURN_GENERATED_KEYS);
-        pst.setString(1, deliveryEmployee.getName());
-        pst.setDouble(2, deliveryEmployee.getSalary());
-        pst.setString(3, deliveryEmployee.getBankAccountNumber()),
-        pst.setString(4, deliveryEmployee.getNationalInsuranceNumber());
+        PreparedStatement pst = conn.prepareStatement(
+                insertStatement, Statement.RETURN_GENERATED_KEYS
+        );
+
+        final int nameIndex = 1;
+        final int salaryIndex = 2;
+        final int bankAccountNumberIndex = 3;
+        final int nationalInsuranceNumberIndex = 4;
+
+        pst.setString(nameIndex, deliveryEmployee.getName());
+        pst.setDouble(salaryIndex, deliveryEmployee.getSalary());
+        pst.setString(
+                bankAccountNumberIndex, deliveryEmployee.getBankAccountNumber()
+        );
+        pst.setString(nationalInsuranceNumberIndex,
+deliveryEmployee.getNationalInsuranceNumber()
+        );
 
         pst.executeUpdate();
 
@@ -63,24 +80,39 @@ public class DeliveryEmployeeDao {
         return -1;
     }
 
-    public void updateDeliveryEmployee(int id, DeliveryEmployeeRequest deliveryEmployee) throws SQLException {
+    public void updateDeliveryEmployee(
+            final int id, final DeliveryEmployeeRequest deliveryEmployee
+    ) throws SQLException {
         Connection conn = DatabaseConnector.getConnection();
 
-        String statement = "UPDATE deliveryEmployee SET `name`=?, salary=?, bankAccountNumber=?, nationalInsuranceNumber=? WHERE deliveryEmployeeId = ?;";
+        String statement = "UPDATE deliveryEmployee SET "
+    + "`name`=?, salary=?, bankAccountNumber=?,"
+    + " nationalInsuranceNumber=? WHERE deliveryEmployeeId = ?;";
         PreparedStatement pst = conn.prepareStatement(statement);
 
-        pst.setString(1, deliveryEmployee.getName());
-        pst.setDouble(2, deliveryEmployee.getSalary());
-        pst.setString(3, deliveryEmployee.getBankAccountNumber());
-        pst.setString(4, deliveryEmployee.getNationalInsuranceNumber());
-        pst.setInt(5, id);
+        final int nameIndex = 1;
+        final int salaryIndex = 2;
+        final int bankAccountNumberIndex = 3;
+        final int nationalInsuranceNumberIndex = 4;
+        final int lastInt = 5;
+        pst.setString(nameIndex, deliveryEmployee.getName());
+        pst.setDouble(salaryIndex, deliveryEmployee.getSalary());
+        pst.setString(
+                bankAccountNumberIndex, deliveryEmployee.getBankAccountNumber()
+        );
+        pst.setString(
+                nationalInsuranceNumberIndex,
+                deliveryEmployee.getNationalInsuranceNumber()
+        );
+        pst.setInt(lastInt, id);
 
         pst.executeUpdate();
     }
 
-    public void deleteDeliveryEmployee(int id) throws SQLException {
+    public void deleteDeliveryEmployee(final int id) throws SQLException {
         Connection conn = DatabaseConnector.getConnection();
-        String statement = "DELETE FROM deliveryEmployee WHERE deliveryEmployeeId = ?;";
+        String statement = "DELETE FROM deliveryEmployee "
+                + "WHERE deliveryEmployeeId = ?;";
         PreparedStatement pst = conn.prepareStatement(statement);
         pst.setInt(1, id);
         pst.executeUpdate();
