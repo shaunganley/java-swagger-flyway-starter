@@ -1,4 +1,4 @@
-CREATE TABLE projectDeliveryEmployees (
+CREATE TABLE projectDeliveryEmployee (
     projectId INT NOT NULL,
     deliveryEmployeeId INT NOT NULL,
     PRIMARY KEY(projectId, deliveryEmployeeId),
