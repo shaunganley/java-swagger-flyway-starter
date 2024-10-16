@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class ClientService {
-    ClientDao clientDao;
+    private final ClientDao clientDao;
     public ClientService(final ClientDao clientDao) {
         this.clientDao = clientDao;
     }
