@@ -1,6 +1,6 @@
-package org.example.services;
+package org.soniakbew.services;
 
-import org.example.daos.TestDao;
+import org.soniakbew.daos.TestDao;
 
 import java.sql.SQLException;
 import java.util.List;
