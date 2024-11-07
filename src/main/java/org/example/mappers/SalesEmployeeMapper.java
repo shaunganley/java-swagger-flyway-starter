@@ -1,20 +1,26 @@
-package org.example;
+package org.example.mappers;
 
 import org.example.models.SalesEmployee;
 import org.example.models.SalesEmployeeResponse;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
-public class mappers {
+public final class SalesEmployeeMapper {
+    private SalesEmployeeMapper() { }
     public static List<SalesEmployeeResponse>
-    mapSalesEmployeeListToSalesEmployeeResponseList
-            (List<SalesEmployee> salesEmployees) {
+    mapSalesEmployeeListToSalesEmployeeResponseList(
+            final List<SalesEmployee> salesEmployees) {
         return salesEmployees
                 .stream()
                 .map(salesEmployee -> new SalesEmployeeResponse(
                         salesEmployee.getEmployeeId(),
                         salesEmployee.getFirstName(),
                         salesEmployee.getLastName(),
-                        salesEmployee.getCommissionRate()));
+                        salesEmployee.getSalary(),
+                        salesEmployee.getBankAccountNumber(),
+                        salesEmployee.getNationalInsuranceNumber(),
+                        salesEmployee.getCommissionRate()))
+                .collect(Collectors.toList());
     }
 }
